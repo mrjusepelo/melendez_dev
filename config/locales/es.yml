@@ -1,0 +1,596 @@
+es:
+  comments: "Comentarios"
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: ! '%d/%m/%Y'
+      long: ! '%A, %d de %B de %Y'
+      short: ! '%d de %b'
+    month_names:
+    - none
+    - enero
+    - febrero
+    - marzo
+    - abril
+    - mayo
+    - junio
+    - julio
+    - agosto
+    - septiembre
+    - octubre
+    - noviembre
+    - diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: cerca de 1 hora
+        other: cerca de %{count} horas
+      about_x_months:
+        one: cerca de 1 mes
+        other: cerca de %{count} meses
+      about_x_years:
+        one: cerca de 1 año
+        other: cerca de %{count} años
+      almost_x_years:
+        one: casi 1 año
+        other: casi %{count} años
+      half_a_minute: medio minuto
+      less_than_x_minutes:
+        one: menos de 1 minuto
+        other: menos de %{count} minutos
+      less_than_x_seconds:
+        one: menos de 1 segundo
+        other: menos de %{count} segundos
+      over_x_years:
+        one: más de 1 año
+        other: más de %{count} años
+      x_days:
+        one: 1 día
+        other: ! '%{count} días'
+      x_minutes:
+        one: 1 minuto
+        other: ! '%{count} minutos'
+      x_months:
+        one: 1 mes
+        other: ! '%{count} meses'
+      x_seconds:
+        one: 1 segundo
+        other: ! '%{count} segundos'
+    prompts:
+      day: Día
+      hour: Hora
+      minute: Minuto
+      month: Mes
+      second: Segundos
+      year: Año
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: debe ser aceptado
+      blank: no puede estar en blanco
+      confirmation: no coincide con la confirmación
+      empty: no puede estar vacío
+      equal_to: debe ser igual a %{count}
+      even: debe ser un número par
+      exclusion: está reservado
+      greater_than: debe ser mayor que %{count}
+      greater_than_or_equal_to: debe ser mayor o igual que %{count}
+      inclusion: no está incluído en la lista
+      invalid: es inválido
+      less_than: debe ser menor que %{count}
+      less_than_or_equal_to: debe ser menor o igual que %{count}
+      not_a_number: no es un número
+      not_an_integer: debe ser un entero
+      odd: debe ser un número impar
+      record_invalid: ! 'La validación falló: %{errors}'
+      taken: ya ha sido tomado
+      too_long:
+        one: es demasiado largo (máximo 1 caracter)
+        other: es demasiado largo (máximo %{count} caracteres)
+      too_short:
+        one: es demasiado corto (mínimo 1 caracter)
+        other: es demasiado corto (mínimo %{count} caracteres)
+      wrong_length:
+        one: longitud errónea (debe ser de 1 caracter)
+        other: longitud errónea (debe ser de %{count} caracteres)
+    template:
+      body: ! 'Revise que los siguientes campos sean válidos:'
+      header:
+        one: ! '%{model} no pudo guardarse debido a 1 error'
+        other: ! '%{model} no pudo guardarse debido a %{count} errores'
+  helpers:
+    select:
+      prompt: Por favor selecciona
+    submit:
+      create: Crear %{model}
+      submit: Guardar %{model}
+      update: Actualizar %{model}
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 0
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: $
+    format:
+      delimiter: ! ','
+      precision: 2
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: mil millones
+          million: millón
+          quadrillion: mil billones
+          thousand: mil
+          trillion: billón
+          unit: ''
+      format:
+        delimiter: ! ','
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ! ','
+    precision:
+      format:
+        delimiter: ! ','
+  support:
+    array:
+      last_word_connector: ! ' y '
+      two_words_connector: ! ' y '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%a, %d de %b de %Y a las %H:%M:%S %Z'
+      long: ! '%A, %d de %B de %Y a las %I:%M %p'
+      short: ! '%d de %b a las %H:%M hrs'
+    pm: pm
+
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+    
+  activerecord:
+    errors:
+      <<: *errors
+    models:
+       comments:
+          one: Comentario
+          other: Comentarios
+       supplier:
+          one: Proveedor
+          other: Proveedores
+       product_category:
+          one: Producto de Categoría
+          other: Productos de Categorías 
+       image:
+          one: Imágen
+          other: Imágenes
+       inventory:
+          one: Inventario
+          other: Inventarios
+       user:
+          one: Usuario
+          other: Usuarios   
+       brand:
+         one: Marca
+         other: Marcas
+       city:
+         one: Ciudad
+         other: Ciudades
+       category:
+         one: Categoría
+         other: Categorías
+       department:
+         one: Departamento
+         other: Departamentos
+       product:
+         one: Producto
+         other: Productos
+       reference_image:
+         one: Imagen de Referencia
+         other: Imagenes de Referencia
+       reference:
+         one: Referencia
+         other: Referencias
+       size:
+         one: Talla
+         other: Tallas
+       color:
+         one: Color
+         other: Colores
+       admin_user:
+         one: Administrador
+         other: Administradores
+       setup:
+         one: Configuración
+         other: Configuraciones
+       level:
+         one: Nivel
+         other: Niveles
+       state:
+         one: Estados de pedido
+         other: Estados de pedidos
+       order:
+         one: Pedido
+         other: Pedidos
+       budget:
+        one: Presupuesto
+        other: Presupuestos
+       personal_budget:
+        one: Presupuesto Personal
+        other: Presupuestos Personales
+       collection:
+        one: Colección
+        other: Colecciones
+       catalog:
+        one: Catálogo
+        other: Catálogos
+       page:
+        one: Página de catálogo
+        other: Páginas de catálogo
+       payment_type:
+        one: Medios de pago
+        other: Medios de pago
+       transporter:
+        one: Empresa transportadora
+        other: Empresas transportadoras
+       product_did_not_sold:
+        one: Producto que se dejo de vender
+        other: Productos que se dejaron de vender
+       product_reserve:
+        one: Reserva de producto
+        other: Reservas de productos
+       report:
+        one: Reporte
+        other: Reportes
+       notification:
+        one: Notificación
+        other: Notificaciones
+         
+    attributes:
+      order:
+        id: id
+        total_pvp: PVP total
+        earnings: Ganancias
+        shipping: Envío
+        total: Total
+        created_at: Creado el
+        updated_at: Actualizado el
+        approval_number: Numero de aprovación
+        payment_date: Fecha de pago
+        register_number: Numero de factura
+        register_date: Fecha de facturación
+        guide_number: Numero de guía
+        shipping_date: Fecha de envío
+        canceled_date: Fecha de cancelación
+        cancellation_description: Descripción de cancelación
+        transporter: Transportadora
+        payment_type: Medio de pago
+        transporter_id: Transportadora
+        payment_type_id: Medio de pago
+        user: Usuario
+        user_id: Usuario
+        actual_state: Estado Actual
+        buyer_comments: Comentarios del Comprador
+        admin_comments: Comentarios de Adminsitradores
+        percent_applied: Porcentaje Aplicado
+        is_in_efecty: Subido a efecty
+        catalog_id: Catálogo
+        catalog: Catálogo
+        catalog_price: Precio del catálogo
+        catalog_units: Unides de catálogo
+      level:
+        id: id
+        priority: Prioridad
+        porcent: Porcentaje de Ganancia
+        active: Activo
+        created_at: Creado el
+        updated_at: Actualizado el
+      state:
+         id: id
+         name: Nombre
+         description: Descripción
+         calculate: Calcula
+         email_to_user: Manda email al usuario
+         email_to_user_content: Contenido del email al usuario
+         alert_to_admin: Manda alerta al administrador
+         alert_to_admin_content: Contenido de la alerta al administrador
+         notification_to_parents: Manda notificación al director
+         notification_to_parents_content: Contenido de la notificación al director
+         notification_to_user: Manda notificación al usuario
+         notification_to_user_content: Contentido de la notificación al usuario.
+         priority: Prioridad/Orden
+         active: Activo 
+         created_at: Creado el
+         updated_at: Actualizado el
+      setup:
+         id: id
+         pvp_porcent: Porcentaje PVP
+         discount_porcent: Porcentaje Descuento
+         shipping: Envío
+         active: Activo
+         earnings_porcent: Porcentaje Ganancias
+         min_pvp: PVP mínimo 
+         min_product: Mínimo de productos
+         time_limit: Tiempo limite
+         created_at: Creado el
+         updated_at: Actualizado el
+      user: 
+        id: id
+        name: Nombre
+        email: Email
+        shipping_address: Dirección de Envío
+        home_address: Dirección de Residencia
+        phone: Teléfono
+        cellphone: Móvil
+        identification: Cédula
+        last_names: Apellidos
+        birth_day: Fecha de cumpleaños
+        neighborhood: Barrio
+        password: Contraseña
+        password_confirmation: Confirma la contraseña
+        current_password: Contraseña Actual
+        created_at: Creado el
+        image: Foto
+        updated_at: Actualizado el
+        remember_me: Recordarme
+        user: Director
+        user_id: Director
+        city: Ciudad
+        city_id: Ciudad
+        first_order: Primer Pedido
+        country: Pais
+      brand:
+        id: id
+        name: Nombre
+        image: Imagen
+        created_at: Creado el
+        updated_at: Actualizado el
+        description: Descripción
+      category:
+        id: id
+        name: Nombre
+        image: Imagen
+        created_at: Creado el
+        updated_at: Actualizado el
+        description: Descripción
+      color:
+        id: id
+        name: Nombre
+        sample: Muestra
+        created_at: Creado el
+        updated_at: Actualizado el
+      size:
+        id: id
+        name: Nombre
+        created_at: Creado el
+        updated_at: Actualizado el
+      reference_image:
+        id: id
+        image: Imagen
+        description: Descripción
+        created_at: Creado el
+        updated_at: Actualizado el
+      department:
+        id: id
+        name: Nombre
+        created_at: Creado el
+        updated_at: Actualizado el
+      city:
+        id: id
+        name: Nombre
+        department: Departamento
+        created_at: Creado el
+        updated_at: Actualizado el
+        shipping: Envío
+        shipping_days: Días de Envío
+      product:
+        id: id
+        reference: Referencia
+        units: Unidades
+        color: Color
+        size: Talla
+        created_at: Creado el
+        updated_at: Actualizado el
+        active: Activo para vender
+        visible: Visible en busquedas
+        color_id: Color
+        size_id: Talla
+        reference_id: Referencia
+        reference_code: Código de referencia
+        comming_soon: Vuelve a ventas el
+      reference:
+        id: id
+        name: Nombre
+        code: Código
+        pvp_standar: PVP
+        description: Descripción
+        benefits: Beneficios
+        brand: Marca
+        category: Categoría
+        color: Color
+        size: Talla
+        created_at: Creado el
+        updated_at: Actualizado el
+      admin_user:
+        id: id
+        email: Email
+        current_sign_in_at: inició sesión actualmente en
+        last_sign_in_at: Última vez que inició sesión
+        sign_in_count: Veces que ha iniciado sesión
+      collection:
+        id: id
+        name: Nombre
+        created_at: Creado el
+        updated_at: Actualizado el
+        end_date: Fecha de fin
+        init_date: Fecha de inicio
+        description: Descripción
+        active: Activo
+      catalog:
+        id: id
+        front_page: Portada
+        created_at: Creado el
+        updated_at: Actualizado el
+        back_page: Contraportada
+        price: Precio
+        visible: Visible
+        active: Activo
+      page:
+       id: id
+       page_number: Numero de página
+       created_at: Creado el
+       updated_at: Actualizado el
+       image: Imagen
+       catalog: Catálogo
+       catalog_id: Catálogo
+      transporter:
+       id: id
+       name: Nombre
+       created_at: Creado el
+       updated_at: Actualizado el
+       description: Descripción
+      payment_type:
+        id: id
+        name: Nombre
+        created_at: Creado el
+        updated_at: Actualizado el
+        description: Descripción
+        active: Activo
+      product_did_not_sold:
+        id: id
+        product: Producto
+        product_id: Producto
+        units: Unidades
+        user: Usuario
+        user_id: Usuario
+        created_at: Creado el
+        updated_at: Actualizado el
+        description: Descripción 
+      product_reserve:
+        id: id
+        product: Producto
+        product_id: Producto
+        units: Unidades
+        user: Usuario
+        user_id: Usuario
+        created_at: Creado el
+        updated_at: Actualizado el
+        description: Descripción
+      report:
+       id: id
+       name: Nombre
+       created_at: Creado el
+       updated_at: Actualizado el
+       description: Descripción
+      notification:
+       id: id
+       body: Mensaje
+       created_at: Creado el
+       updated_at: Actualizado el
+       subject: Asunto
+      budget:
+       id: id
+       first_orders: Primeros Pedidos
+       created_at: Creado el
+       updated_at: Actualizado el
+       enrolled: Inscritos
+       kind: Asociado/Director
+       user: Usuario
+       user_id: Usuario
+       collection: Colección
+       collection_id: Colleción
+       active: Activo
+      personal_budget:
+       id: id
+       first_orders: Primeros Pedidos
+       created_at: Creado el
+       updated_at: Actualizado el
+       enrolled: Inscritos
+       kind: Asociado/Director
+       user: Usuario
+       user_id: Usuario
+       collection: Colección
+       collection_id: Colleción
+       active: Activo
+      image:
+       id: id
+       route: Ruta
+       priority: Prioridad
+       created_at: Creaddo el
+       updated_at: Actualizado el
+      inventory:
+       product_category: Productos de categoria
+       image: Imagen
+       supplier: Proveedor
+       barcode: Codigo de Barras
+       vale_buy: Precio a Comprador
+       vale_sale: Precio de Venta
+       warranty: Garantía
+       date_in: 'Fecha de Ingreso'
+       date_out: 'Fecha de Venta'
+      product_category:
+       id: id
+       code: Codigo
+       created_at: Creaddo el
+       updated_at: Actualizado el
+      supplier:
+        name: Nombre
+        email: Email
+        phone: Teléfono
+
+
+
