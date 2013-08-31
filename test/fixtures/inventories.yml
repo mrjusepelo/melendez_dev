@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_category_id: 
+  image_id: 
+  supplier_id: 
+  barcode: 1
+  vale_buy: 1
+  vale_sale: 1
+  warranty: 1
+  date_in: 2013-08-30
+  date_out: 2013-08-30
+
+two:
+  product_category_id: 
+  image_id: 
+  supplier_id: 
+  barcode: 1
+  vale_buy: 1
+  vale_sale: 1
+  warranty: 1
+  date_in: 2013-08-30
+  date_out: 2013-08-30
