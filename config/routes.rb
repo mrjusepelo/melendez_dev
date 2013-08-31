@@ -17,6 +17,12 @@ Pencil::Application.routes.draw do
   get "products/create"
   get "products/update"
   get "products/destroy"
+
+    # resources :users
+    # root :to => 'users#index'
+    # resources :admin
+    root to: "admin/dashboard#index"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
