@@ -31,11 +31,9 @@ a[href^="tel:"] {
   height: 100%;
   z-index: 9999;
   background: url(/assets/spinner.gif) 50% 50% no-repeat #000000;
-  /*background: url(../img/spinner.gif) 50% 50% no-repeat #000000;*/
 }
 .preloader {
   background: url(/assets/loader.gif) center center no-repeat;
-  /*background: url(../img/loader.gif) center center no-repeat;*/
 }
 .clear {
   clear: both;
