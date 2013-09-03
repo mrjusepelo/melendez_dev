@@ -1,27 +1,28 @@
 Pencil::Application.routes.draw do
-  get "categories/index"
-  get "categories/show"
-  get "categories/new"
-  get "categories/create"
-  get "categories/update"
-  get "categories/destroy"
-  get "images/index"
-  get "images/show"
-  get "images/new"
-  get "images/create"
-  get "images/update"
-  get "images/destroy"
-  get "products/index"
-  get "products/show"
-  get "products/new"
-  get "products/create"
-  get "products/update"
-  get "products/destroy"
+  # get "categories/index"
+  # get "categories/show"
+  # get "categories/new"
+  # get "categories/create"
+  # get "categories/update"
+  # get "categories/destroy"
+  # get "images/index"
+  # get "images/show"
+  # get "images/new"
+  # get "images/create"
+  # get "images/update"
+  # get "images/destroy"
+  # get "products/index"
+  # get "products/show"
+  # get "products/new"
+  # get "products/create"
+  # get "products/update"
+  # get "products/destroy"
 
     # resources :users
     # root :to => 'users#index'
     # resources :admin
-    root to: "admin/dashboard#index"
+    # root to: "admin/dashboard#index"
+    root to: "products#index"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
