@@ -1,6 +1,5 @@
 ActiveAdmin.register Inventory do
 
-<<<<<<< HEAD
 # form do |f|
 #     f.inputs "Categories" do
 #       # f.input :product_category_id
@@ -25,7 +24,6 @@ ActiveAdmin.register Inventory do
 
 # 	    end
 #  end
-=======
 form do |f|
     f.inputs "Categories" do
       # f.input :product_category_id
@@ -50,5 +48,4 @@ controller do
 
 	    end
  end
->>>>>>> b9243ff58e78d4856e36e4192d28beaab34e3018
 end
