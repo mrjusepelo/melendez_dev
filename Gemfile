@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
+<<<<<<< HEAD
+=======
 #comentario2 agregado desde el github
+>>>>>>> b9243ff58e78d4856e36e4192d28beaab34e3018
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
 

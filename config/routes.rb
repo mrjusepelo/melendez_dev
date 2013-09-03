@@ -1,4 +1,17 @@
 Pencil::Application.routes.draw do
+<<<<<<< HEAD
+  get "publics/index"
+  get "publics/show"
+  get "publics/new"
+  get "publics/create"
+  get "publics/destroy"
+  get "publics/update"
+  get "publics/service"
+  get "publics/folio"
+  get "publics/blog"
+  get "publics/contact"
+=======
+>>>>>>> b9243ff58e78d4856e36e4192d28beaab34e3018
   # get "categories/index"
   # get "categories/show"
   # get "categories/new"
@@ -17,12 +30,19 @@ Pencil::Application.routes.draw do
   # get "products/create"
   # get "products/update"
   # get "products/destroy"
+<<<<<<< HEAD
+  root :to => 'publics#index'
+=======
 
+>>>>>>> b9243ff58e78d4856e36e4192d28beaab34e3018
     # resources :users
     # root :to => 'users#index'
     # resources :admin
     # root to: "admin/dashboard#index"
+<<<<<<< HEAD
+=======
     root to: "products#index"
+>>>>>>> b9243ff58e78d4856e36e4192d28beaab34e3018
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -35,7 +55,12 @@ Pencil::Application.routes.draw do
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
+<<<<<<< HEAD
+  # Example of named r
+  #oute that can be invoked with purchase_url(id: product.id)
+=======
   # Example of named route that can be invoked with purchase_url(id: product.id)
+>>>>>>> b9243ff58e78d4856e36e4192d28beaab34e3018
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
