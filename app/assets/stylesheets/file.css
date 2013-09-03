@@ -1,4 +1,6 @@
-/*body{
-	background : blue; 
-
-}*/
+.imgProducto{
+	width: 133px; 
+	height: 133px; 
+	display: block; 
+	margin: 0 auto;
+}
