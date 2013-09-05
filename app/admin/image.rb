@@ -1,8 +1,10 @@
 ActiveAdmin.register Image do
-	controller do
-	    def permitted_params
-	      params.permit image: [:route, :priority]
-	    end
-	 end
 
+
+controller do
+      before_filter :protected_attributes
+      def protected_attributes
+        params.permit!
+      end
+  end
 end

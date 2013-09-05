@@ -3,8 +3,9 @@ class ProductsController < ApplicationController
   #     params.permit product: [:name, :description]
   #   end
 
-  def index
-  end
+ def index
+@products = Product.all
+end
 
   def show
   end

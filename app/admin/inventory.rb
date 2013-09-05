@@ -1,51 +1,92 @@
 ActiveAdmin.register Inventory do
-
-# form do |f|
-#     f.inputs "Categories" do
-#       # f.input :product_category_id
-#       # f.input :product_category_id, :as => :select, :collection => ProductCategory.all
-#       # f.input :product_category_id, :as => :select, :collection => Hash[ProductCategory.all.map{|b| [b.Product.name+"-"+b.Category.name,b.id]}]
-#       		f.input :product_category, :as => "select", :include_blank => "Seleccione", :collection => Hash[ProductCategory.all.map{|s| [s.Product.name+"-"+s.Category.name,s.id]}]
-#       		# f.input :schedule, :as => "select", :include_blank => "Seleccione", :collection => Hash[Schedule.all.map{|s| [s.Day.name+"-"+s.Hour.name,s.id]}]
-
-#       # f.input :product_category_id, :as => :select, :collection => Hash[ProductCategory.all.map{|b| [b.name, b.id]} ]
-# 	  	# product.input :size, :include_blank => "Selecciona", :as => :select, :collection => Size.all, :input_html => {:class => "required select-size", :name => "reference[products_attributes][1][size_id]" }
-#     end
-#     f.actions
-#   end
-# # f.input :product_category_id, :as => :select, :collection => Hash[Product.all.map{|b| [b.name, b.id]} ]
+  actions :all, :except => [:destroy]
 
 
-# controller do
-# 	    def permitted_params
-# 	      params.permit inventory: [:product_category_id, :image_id, :supplier_id, :barcode_id, :vale_buy, :vale_sale, :warranty, :date_in, :date_out]
-# 	      params.permit product: [:name, :description]
-# 	      # params.permit category: [:category_id, :name, :tags]
+# define routes for "autocomplete :admin_user, :email"
+# collection_action :autocomplete_products, :method => :get
+# collection_action :autocomplete_admin_user_email, :method => :get
+# collection_action :autocomplete_product_name, :method => :get
+# collection_action :autocomplete_product_name, :method => :get
+# resources :products do
+#   get :autocomplete_name, :on => :collection
+# end
 
-# 	    end
-#  end
-form do |f|
-    f.inputs "Categories" do
-      # f.input :product_category_id
-      # f.input :product_category_id, :as => :select, :collection => ProductCategory.all
-      # f.input :product_category_id, :as => :select, :collection => Hash[ProductCategory.all.map{|b| [b.Product.name+"-"+b.Category.name,b.id]}]
-      		f.input :product_category, :as => "select", :include_blank => "Seleccione", :collection => Hash[ProductCategory.all.map{|s| [s.Product.name+"-"+s.Category.name,s.id]}]
-      		# f.input :schedule, :as => "select", :include_blank => "Seleccione", :collection => Hash[Schedule.all.map{|s| [s.Day.name+"-"+s.Hour.name,s.id]}]
 
-      # f.input :product_category_id, :as => :select, :collection => Hash[ProductCategory.all.map{|b| [b.name, b.id]} ]
-	  	# product.input :size, :include_blank => "Selecciona", :as => :select, :collection => Size.all, :input_html => {:class => "required select-size", :name => "reference[products_attributes][1][size_id]" }
-    end
-    f.actions
+
+  form do |f|
+      within @head do
+           # script :src => javascript_path('1.js'), :type => "text/javascript"
+           # script :src => javascript_path('autocomplete-rails.js'), :type => "text/javascript"
+           # javascript_include_tag "autocomplete-rails.js"
+            # link :href => stylesheet_path('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css'), :media => "screen", :rel => "stylesheet", :type => "text/css"
+           script :src => javascript_path('http://code.jquery.com/jquery-1.9.1.js'), :type => "text/javascript"
+           script :src => javascript_path('http://code.jquery.com/ui/1.10.3/jquery-ui.js'), :type => "text/javascript"
+           script :src => javascript_path('admin_autocomplete.js'), :type => "text/javascript"
+
+      end
+  f.inputs "Datos del Producto" do
+
+      f.input :product, :as => "string", :input_html => {:id => "product_admin"}
+      # f.input :product, :as => :autocomplete, :url => autocomplete_products_path
+      # f.input :email, :as => :autocomplete, :url => autocomplete_admin_user_email_admin_admin_users_path
+      # f.input :product, :as => :autocomplete, :url => autocomplete_product_name_admin_products_path
+      # f.autocomplete_field :product_name, autocomplete_name_products_path
+      # f.autocomplete_field :brand_name, autocomplete_brand_name_products_path
+      f.input :supplier
+      f.input :barcode
+      f.input :vale_buy
+      f.input :vale_buy
+      f.input :vale_sale
+      f.input :warranty
+      f.input :date_in,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
+      # f.input :date_in,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => DateTime.now.to_i}
+      f.input :date_out,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => "click aqui"}
+      # f.input :comming_soon
+      # image_tag("/icons/icon.gif", :height => '32', :width => '32') # =>
+
   end
-# f.input :product_category_id, :as => :select, :collection => Hash[Product.all.map{|b| [b.name, b.id]} ]
+  f.actions
+end    
+
+
+
+# rails g model inventory product:references supplier:references barcode:integer vale_buy:integer 
+# vale_sale:integer warranty:integer date_in:date date_out:date
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 controller do
-	    def permitted_params
-	      params.permit inventory: [:product_category_id, :image_id, :supplier_id, :barcode_id, :vale_buy, :vale_sale, :warranty, :date_in, :date_out]
-	      params.permit product: [:name, :description]
-	      # params.permit category: [:category_id, :name, :tags]
+      before_filter :protected_attributes
+      	def protected_attributes
+        	params.permit!
+      	end
+  	  end
+  # autocomplete :product, :name
 
-	    end
- end
 end

@@ -1,11 +1,9 @@
 ActiveAdmin.register Supplier do
 
-
-	controller do
-		    def permitted_params
-		      params.permit supplier: [:name, :email, :phone]
-
-		    end
-	 end
-
+controller do
+      before_filter :protected_attributes
+      def protected_attributes
+        params.permit!
+      end
+  end
 end

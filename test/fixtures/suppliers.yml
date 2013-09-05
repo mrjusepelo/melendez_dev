@@ -2,10 +2,12 @@
 
 one:
   name: MyString
-  phone: 
+  phone: MyString
   email: MyString
+  city_id: 
 
 two:
   name: MyString
-  phone: 
+  phone: MyString
   email: MyString
+  city_id: 

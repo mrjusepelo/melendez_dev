@@ -2,8 +2,14 @@
 
 one:
   name: MyString
+  amount: 1
   description: MyText
+  brand_id: 
+  image_id: 
 
 two:
   name: MyString
+  amount: 1
   description: MyText
+  brand_id: 
+  image_id: 

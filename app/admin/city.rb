@@ -1,4 +1,4 @@
-ActiveAdmin.register Category do
+ActiveAdmin.register City do
 
 controller do
       before_filter :protected_attributes
