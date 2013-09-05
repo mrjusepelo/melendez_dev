@@ -101,6 +101,9 @@ html[xmlns] .slides {
 .flexslider .slides img {
 	display: block;
 	max-width: 770px;
+	width: 755px;
+	height: 451px;
+max-height: 451px;
 }
 .flexslider .hover-img {
 	position:absolute;

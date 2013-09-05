@@ -4,6 +4,13 @@
 	display: block; 
 	margin: 0 auto;
 }
+.imgCategoriaIndex{
+	/*width: 220px; */
+	height: 220px; 
+	display: block; 
+	margin: 0 auto;
+}
+
 body{
 	background: red;
 }
