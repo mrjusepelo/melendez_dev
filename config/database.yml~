@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: pencil_development
   pool: 5
-  username: chevy
+  username: postgres
   password: 123456
 
 test:
@@ -12,7 +12,7 @@ test:
   database: pencil_test
   pool: 5
   username: chevy
-  password: 123456
+  password: postgres
 
 production:
   adapter: postgresql
@@ -20,4 +20,4 @@ production:
   database: pencil_production
   pool: 5
   username: chevy
-  password: 123456
+  password: postgres
