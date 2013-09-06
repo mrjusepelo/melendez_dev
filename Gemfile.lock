@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: 72a9c30cef47b3f38c38039de021aaa3194c188b
+  revision: ac4918ef99cf0272eb5f744b7e3f3fc7cde5811f
   branch: rails4
   specs:
     activeadmin (0.6.0)
@@ -60,10 +60,11 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    devise (3.0.3)
+    devise (3.1.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.0.1)
@@ -98,7 +99,7 @@ GEM
     multi_json (1.7.9)
     orm_adapter (0.4.0)
     pg (0.16.0)
-    polyamorous (0.6.3)
+    polyamorous (0.6.4)
       activerecord (>= 3.0)
     polyglot (0.3.3)
     rack (1.5.2)

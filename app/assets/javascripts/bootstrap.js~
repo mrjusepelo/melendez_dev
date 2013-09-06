@@ -2030,7 +2030,14 @@
 $(document).ready(function(){
 $('head').prepend('<link rel="stylesheet" href="/assets/docs.css" type="text/css" media="screen">');
 // $('head').prepend('<link rel="stylesheet" href="css/docs.css" type="text/css" media="screen">');
-$('body').prepend('<div id="panel"><div class="navbar navbar-inverse navbar-fixed-top" id="advanced"><span class="trigger"><strong></strong><em></em></span><div class="navbar-inner"><div class="container"><button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-top-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="brand" href="index.html">Créditos Melendez</a><div class="nav-collapse collapse nav-top-collapse"><ul class="nav"><li class="home"><a href="index.html"><img class="imgMenuTop" src="/assets/tm/tm_home.png"></a></li><li class="divider-vertical"></li><li><a style="margin-top: 10px;" href="/publics/contact">Siguenos en ... </a></li><li><a href="index.html"><img class="imgMenuTop" src="/assets/contacto/fb_icon.png"></a></li><li><a href="assets/components.html"><img class="imgMenuTop" src="/assets/contacto/twt_icon.png"></a></li><li><a href="/publics/contact"><img class="imgMenuTop" src="/assets/contacto/email-white-hi.png"></a></li><li class="divider-vertical"></li></ul></div></div></div></div></div>');
+$('body').prepend('<div id="panel"><div class="navbar navbar-inverse navbar-fixed-top" id="advanced"><span class="trigger"><strong></strong><em></em></span><div class="navbar-inner"><div class="container"><button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-top-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="brand" href="index.html">Créditos Melendez</a><div class="nav-collapse collapse nav-top-collapse"><ul class="nav">
+<li class="home"><a href="index.html"><img class="imgMenuTop" src="/assets/tm/tm_home.png"></a></li>
+<li class="divider-vertical"></li>
+<li><a style="margin-top: 10px;" href="/publics/contact">Siguenos en ... </a></li>
+<li><a href="index.html"><img class="imgMenuTop" src="/assets/contacto/fb_icon.png"></a></li>
+<li><a href="assets/components.html"><img class="imgMenuTop" src="/assets/contacto/twt_icon.png"></a></li>
+<li><a href="/publics/contact"><img class="imgMenuTop" src="/assets/contacto/email-white-hi.png"></a></li>
+<li class="divider-vertical"></li></ul></div></div></div></div></div>');
 }); 
  $(window).scroll(function(){if ($(this).scrollTop() > 0) {$("#advanced").css({position:'fixed'});} else {$("#advanced").css({position:'relative'});}});  
 $(function(){  

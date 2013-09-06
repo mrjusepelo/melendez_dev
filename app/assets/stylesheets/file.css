@@ -27,3 +27,16 @@
 	display: block; 
 	margin: 0 auto;
 }
+
+ul.nav {
+	text-transform: none;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	font-weight: 300;
+
+}
+.imgMenuTop{
+	height: 32px; 
+	display: block; 
+	margin: 0 auto;
+}
