@@ -20,3 +20,10 @@
 .textCategoriaservice{
 	text-align: justify;
 }
+
+.divCategoriaBlog{
+	width: 270px;
+	height: 220px; 
+	display: block; 
+	margin: 0 auto;
+}
