@@ -5,11 +5,21 @@ ActiveAdmin.register Product do
 #       link_to "View", admin_product_path(product)
 #     end
 
+
+
 	form do |f|
-	    f.inputs "Categories" do
+      within @head do
+           # script :src => javascript_path('1.js'), :type => "text/javascript"
+      end
+
+      f.inputs "Categories" do
 
 			f.input :categories, :as => :check_boxes, :collection => Category.all
 			f.input :name
+      # f.input :product, input_html: {id: "product", name: "product_aux"}
+      # f.input :product_id, input_html: {id: "product", name: "product_aux"}
+      # f.input :product_id, as: :hidden
+
 			f.input :description
 			f.input :amount
 			f.input :brand
@@ -36,7 +46,7 @@ ActiveAdmin.register Product do
     # end
     actions do |product|
       # link_to "Agregar a Inventario", admin_inventories_path(), :class => "member_link"
-      link_to "Agregar a Inventario", new_admin_inventory_path(id), :class => "member_link"
+      link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
     end
   end
 

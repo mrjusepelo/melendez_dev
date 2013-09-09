@@ -10,24 +10,11 @@ Pencil::Application.routes.draw do
   get "publics/blog"
   get "publics/contact"
 
-  # get "categories/index"
-  # get "categories/show"
-  # get "categories/new"
-  # get "categories/create"
-  # get "categories/update"
-  # get "categories/destroy"
-  # get "images/index"
-  # get "images/show"
-  # get "images/new"
-  # get "images/create"
-  # get "images/update"
-  # get "images/destroy"
-  # get "products/index"
-  # get "products/show"
-  # get "products/new"
-  # get "products/create"
-  # get "products/update"
-  # get "products/destroy"
+  resources :products do 
+    collection do 
+      get "autocomplete"
+    end
+  end
   root :to => 'publics#index'
 
     # resources :users
