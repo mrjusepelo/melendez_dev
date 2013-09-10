@@ -7,45 +7,45 @@ ActiveAdmin.register Product do
 
 
 
-	form do |f|
+# 	form do |f|
 
-      f.inputs "Categories" do
+#       f.inputs "Categories" do
 
-			f.input :categories, :as => :check_boxes, :collection => Category.all
-			f.input :name
-      # f.input :product, input_html: {id: "product", name: "product_aux"}
-      # f.input :product_id, input_html: {id: "product", name: "product_aux"}
-      # f.input :product_id, as: :hidden
+# 			f.input :categories, :as => :check_boxes, :collection => Category.all
+# 			f.input :name
+#       # f.input :product, input_html: {id: "product", name: "product_aux"}
+#       # f.input :product_id, input_html: {id: "product", name: "product_aux"}
+#       # f.input :product_id, as: :hidden
 
-			f.input :description
-			f.input :amount
-			f.input :brand
-			f.input :image
+# 			f.input :description
+# 			f.input :amount
+# 			f.input :brand
+# 			f.input :image
 
-# rails g model product name:string amount:integer description:text brand:references image:references
+# # rails g model product name:string amount:integer description:text brand:references image:references
 
-		end
-		    f.actions
-	end
+# 		end
+# 		    f.actions
+# 	end
 
-  index do 
-    column :id
-    column :name
-    column :description
-    column :amount
-    column :brand
-    # column :user
-    column :created_at
-    column :updated_at
-    # default_actions
-    # actions do |product|
-    #   link_to "Agregar a Inventario", admin_product_path(product)
-    # end
-    actions do |product|
-      # link_to "Agregar a Inventario", admin_inventories_path(), :class => "member_link"
-      link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
-    end
-  end
+  # index do 
+  #   column :id
+  #   column :name
+  #   column :description
+  #   column :amount
+  #   column :brand
+  #   # column :user
+  #   column :created_at
+  #   column :updated_at
+  #   # default_actions
+  #   # actions do |product|
+  #   #   link_to "Agregar a Inventario", admin_product_path(product)
+  #   # end
+  #   actions do |product|
+  #     # link_to "Agregar a Inventario", admin_inventories_path(), :class => "member_link"
+  #     link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
+  #   end
+  # end
 
 
 
