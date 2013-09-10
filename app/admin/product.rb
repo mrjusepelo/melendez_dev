@@ -8,9 +8,6 @@ ActiveAdmin.register Product do
 
 
 	form do |f|
-      within @head do
-           # script :src => javascript_path('1.js'), :type => "text/javascript"
-      end
 
       f.inputs "Categories" do
 
