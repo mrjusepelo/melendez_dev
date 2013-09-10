@@ -72,7 +72,7 @@ ActiveAdmin.register Product do
 
 
 controller do
-      before_filter :protected_attributes
+  before_filter :protected_attributes
       def protected_attributes
         params.permit!
       end
