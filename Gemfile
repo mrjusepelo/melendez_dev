@@ -43,3 +43,4 @@ gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 # gem 'formtastic',          github: 'justinfrench/formtastic'
 gem 'rabl'
 # gem "rails3-jquery-autocomplete"
+gem 'rails_12factor', group: :production
