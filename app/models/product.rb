@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   has_many :product_categories
   has_many :categories, :through => :product_categories  
 
-  # def self.autocomplete(search)
+  def self.autocomplete(search)
     
 
     # find(:all, :conditions => ['(name LIKE ? or id LIKE ?)', "%#{search}%",  "%#{search}%"], :limit => 20)
@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
     # where("name like ?", "%#{search}%")
     
 
-    # select(:name, :amount).where("name like ?", "%pro%")
+    select(:name, :amount).where("name like ?", "%pro%")
   	
 
     # where("name like ?", "%pro%")
@@ -25,6 +25,6 @@ class Product < ActiveRecord::Base
   	# Product.where("name like ?", "%#{params[:query]}%").to_sql
   	# Client.where("first_name LIKE '%#{params[:first_name]}%'")
   	# where(name: search)
-  # end
+  end
 
 end

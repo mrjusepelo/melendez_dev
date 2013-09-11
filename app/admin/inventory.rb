@@ -30,8 +30,8 @@ ActiveAdmin.register Inventory do
   # f.input :product_id, as: :hidden
 
 
-      f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
-      # f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
+      # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
+      f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
       # f.input :product_id, as: :hidden
 
 
