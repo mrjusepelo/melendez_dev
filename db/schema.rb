@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130911001003) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20130903231906) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -108,9 +105,6 @@ ActiveRecord::Schema.define(version: 20130911001003) do
     t.integer  "image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "razon_social"
-    t.string   "product"
-    t.integer  "product_id"
   end
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree

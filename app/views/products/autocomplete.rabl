@@ -3,5 +3,5 @@
 	attributes :id => :id
 
 	node :value do |p|
-	 [p.name, p.amount].join(' ')
+	 [p.name, p.amount].join('-')
 	end

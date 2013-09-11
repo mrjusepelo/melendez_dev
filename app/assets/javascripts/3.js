@@ -1,6 +1,5 @@
 $(function() {
     $( "#datepi" ).datepicker();
-
 });
 function mensaje(){
 	// var nodo = document.getElementById( "product" );
@@ -33,7 +32,6 @@ a = mensaje().style;
 
 
 var styleTags = document.getElementsByTagName('style');
-alert(styleTags.length);
 
 // for (var i = 0; il = styleTags.length;  i++) {
 // 	// if (i == styleTags.length) {
@@ -48,19 +46,6 @@ for (var i = 0; i < styleTags.length;  i++) {
 	styleTags[i].innerHTML = "";
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 	$("html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td").css({ 
 	// content .ui-state-default, .ui-widget-header .ui-state-default {
 	// 	border: 1px solid #d3d3d3;}
@@ -100,4 +85,7 @@ for (var i = 0; i < styleTags.length;  i++) {
 // document.write( "Número de hijos: ", nodo.childNodes.length, "<br/>" )
 // document.write( "Primer hijo: ", nodo.firstChild.nodeName, "<br/>" )
 // document.write( "Último hijo: ", nodo.lastChild.nodeName, "<br/>" )
+	var str=$("#product").val();
+	var n=str.split("-");
+	console.log(n[1]);
 }
