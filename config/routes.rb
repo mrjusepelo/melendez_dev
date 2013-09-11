@@ -10,12 +10,9 @@ Pencil::Application.routes.draw do
   get "publics/blog"
   get "publics/contact"
 
-  resources :products do 
-    collection do 
-      get "autocomplete"
-    end
-  end
-  root :to => 'publics#index'
+
+  # root :to => 'publics#index'
+  root to: 'admin/products#index'
 
     # resources :users
     # root :to => 'users#index'
@@ -25,7 +22,13 @@ Pencil::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  # The priority is based upon order of creation: first created -> highest priority.
+
+
+  resources :products do 
+    collection do 
+      get "autocomplete"
+    end
+  end  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
