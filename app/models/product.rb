@@ -17,7 +17,7 @@ class Product < ActiveRecord::Base
     # where("name like ?", "%#{search}%")
     
 
-    select(:name, :amount).where("name like ?", "%pro%")
+    select(:name, :amount).where("name like ?", "%#{search}%")
   	
 
     # where("name like ?", "%pro%")
