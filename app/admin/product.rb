@@ -13,16 +13,18 @@ ActiveAdmin.register Product do
 
 			f.input :categories, :as => :check_boxes, :collection => Category.all
 			f.input :name
-      # f.input :product, input_html: {id: "product", name: "product_aux"}
-      # f.input :product_id, input_html: {id: "product", name: "product_aux"}
-      # f.input :product_id, as: :hidden
-
 			f.input :description
 			f.input :amount
 			f.input :brand
-			f.input :image
+			# f.input :image
 
-# rails g model product name:string amount:integer description:text brand:references image:references
+      f.has_many :images do |im|
+        im.inputs 'Imagenes' do 
+          im.input :route
+          im.input :priority
+        end
+      # f.actions
+      end
 
 		end
 		    f.actions
@@ -46,6 +48,8 @@ ActiveAdmin.register Product do
       link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
     end
   end
+
+
 
 
 

@@ -44,3 +44,7 @@ gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 gem 'rabl'
 # gem "rails3-jquery-autocomplete"
 gem 'rails_12factor', group: :production
+
+# gems for manager images
+gem 'carrierwave'
+gem "fog", "~> 1.3.1"
