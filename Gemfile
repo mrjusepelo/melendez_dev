@@ -48,3 +48,6 @@ gem 'rails_12factor', group: :production
 # gems for manager images
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
+
+#manejo alternativo de imagenes
+gem "paperclip", "~> 3.5.1"

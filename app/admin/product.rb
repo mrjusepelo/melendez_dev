@@ -7,6 +7,7 @@ ActiveAdmin.register Product do
 
 
 
+  # form :html => { :enctype => "multipart/form-data" } do |f|
 	form do |f|
 
       f.inputs "Categories" do
@@ -18,9 +19,13 @@ ActiveAdmin.register Product do
 			f.input :brand
 			# f.input :image
 
+      # f.has_many :images do |im|
       f.has_many :images do |im|
         im.inputs 'Imagenes' do 
           im.input :route
+
+  # end
+          
           im.input :priority
         end
       # f.actions
