@@ -11,8 +11,8 @@ Pencil::Application.routes.draw do
   get "publics/contact"
 
 
-  # root :to => 'publics#index'
-  root to: 'admin/products#index'
+  root :to => 'publics#index'
+  # root to: 'admin/products#index'
 
     # resources :users
     # root :to => 'users#index'

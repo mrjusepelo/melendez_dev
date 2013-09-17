@@ -28,17 +28,15 @@
         <!--============================== slider =================================-->
         <div class="flexslider">
           <ul class="slides">
-            <li> <%= image_tag("https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-prn2/q71/s720x720/970191_358277107628322_924580546_n.jpg" ) %> </li>
-             
-             <li><%= image_tag("https://fbcdn-sphotos-g-a.akamaihd.net/hphotos-ak-prn1/q71/s720x720/526457_396112437178122_286328035_n.jpg") %></li>
 
-            <li> <%= image_tag("http://www.promodescuentos.com/sites/default/files/pictures/ofertas/liverpool27ene.jpg" ) %> </li>
-        
-            <li> <%= image_tag("http://www.samsung.com/co/system/news/content/2008/10/30/11250/maraton_large.jpg" ) %> </li>
 
-            <li> <%= image_tag("http://www.coomultrasan.com.co/imagenes//uploads/noti_883dd4c458c2a4c021f0855ef1e09c9c.jpg" ) %> </li>
+          <% @imagenes.each do |catalog| %>
+                <li>                
+                  <%= image_tag(catalog.route) %>
+                  <%#= link_to image_tag(catalog.route, :class => "cover"), catalog %>
+                </li>
+          <% end %>
 
-            <li> <%= image_tag("https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-ash4/s720x720/404970_107621162693919_918678229_n.jpg" ) %> </li>
           </ul>
             </div>
         <span id="responsiveFlag"></span>
