@@ -49,5 +49,6 @@ gem 'rails_12factor', group: :production
 gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
+gem 'carrierwave-google_drive'
 #manejo alternativo de imagenes
-gem "paperclip", "~> 3.5.1"
+# gem "paperclip", "~> 3.5.1"
