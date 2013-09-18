@@ -4,9 +4,7 @@ class RouteUploader < CarrierWave::Uploader::GoogleDrive
 
 # class ImageUploader < CarrierWave::Uploader::GoogleDrive
 
-  # google_login    'jperezlondono@gmail.com'
   google_login     'creditos.melendez.ptyo@gmail.com' 
-  # google_password 'sebastian14'
     google_password 'creditos.melendez.ptyo123456'  
 
 

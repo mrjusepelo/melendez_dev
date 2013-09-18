@@ -23,6 +23,7 @@ ActiveAdmin.register Product do
       f.has_many :images do |im|
         im.inputs 'Imagenes' do 
           im.input :route
+          im.input :remote_route_url
 
   # end
           
