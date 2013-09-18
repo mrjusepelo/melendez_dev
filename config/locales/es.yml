@@ -569,7 +569,7 @@ es:
       image:
        id: id
        route: Ruta
-       priority: Prioridad
+       priority: Mostrar en vista principal
        created_at: Creaddo el
        updated_at: Actualizado el
       inventory:
