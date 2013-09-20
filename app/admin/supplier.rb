@@ -1,4 +1,5 @@
 ActiveAdmin.register Supplier do
+  menu :parent => "Referencias"
 
 controller do
       before_filter :protected_attributes

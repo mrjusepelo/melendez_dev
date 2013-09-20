@@ -1,4 +1,7 @@
 ActiveAdmin.register Product do
+  menu :parent => "Inventario"
+
+  
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy, :show]
 
 # actions :defaults => false do |product|
@@ -15,7 +18,7 @@ ActiveAdmin.register Product do
 			f.input :categories, :as => :check_boxes, :collection => Category.all
 			f.input :name
 			f.input :description
-			f.input :amount
+			f.input :amount, :input_html => {:style => "width: 60px;"}
 			f.input :brand
 			# f.input :image
 
@@ -45,14 +48,10 @@ ActiveAdmin.register Product do
     # column :user
     column :created_at
     column :updated_at
-    # default_actions
     # actions do |product|
-    #   link_to "Agregar a Inventario", admin_product_path(product)
+      # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
     # end
-    actions do |product|
-      # link_to "Agregar a Inventario", admin_inventories_path(), :class => "member_link"
-      link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
-    end
+    default_actions
   end
 
 

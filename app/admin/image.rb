@@ -1,4 +1,7 @@
 ActiveAdmin.register Image do
+  menu :parent => "Datos de Producto"
+
+
 form do |f|
 
       f.inputs "Imagenes" do

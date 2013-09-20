@@ -1,4 +1,6 @@
 ActiveAdmin.register Inventory do
+  menu :parent => "Inventario"
+  
   # actions :all, :except => [:destroy]
   # actions :all, :except => [:destroy]
 
