@@ -10,6 +10,7 @@ Pencil::Application.routes.draw do
   get "publics/blog"
   get "publics/contact"
   get "products/search"
+  get "publics/view_product"
 
 
   root :to => 'publics#index'
