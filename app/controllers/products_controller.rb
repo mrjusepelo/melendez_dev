@@ -13,8 +13,24 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+
+      @products = Product.search(params[:searchbox])
+      respond_to do |format|
+      format.html # index.html.erb
   end
 
+  def search
+    # where("name like ?", "%#{search}%")
+    # Product.select(:id, :name, :amount).where("name like ?", "%#{search}%")
+
+
+    end
+
+
+  end
+
+
+    
   def show
   end
 

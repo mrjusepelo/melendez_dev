@@ -34,6 +34,12 @@ class PublicsController < ApplicationController
   end
   
   def blog
+    if params[:search]
+        @products = Product.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
+        # @products = Product.find(:all, :conditions => ['name LIKE ?', "%prod%"])
+    else
+        # @products = Product.find(:all)
+    end
   end
 
   def contact

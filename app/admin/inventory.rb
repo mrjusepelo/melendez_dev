@@ -61,7 +61,29 @@ ActiveAdmin.register Inventory do
   end
 
   f.actions
-end    
+end
+
+
+
+  index do 
+    column :id
+    column :barcode
+    column :vale_buy
+    column :vale_sale
+    column :warranty
+    column :date_in
+    column :date_out
+    # column :user
+    column :created_at
+    column :updated_at
+    
+    # column "Imprimir Codigo", :as => "string"
+
+    # actions do |product|
+      # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
+    # end
+    default_actions
+  end    
 
 
 
