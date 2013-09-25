@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
   def search
     # where("name like ?", "%#{search}%")
     # Product.select(:id, :name, :amount).where("name like ?", "%#{search}%")
-    end
+    # end
   end
   def show
   end
