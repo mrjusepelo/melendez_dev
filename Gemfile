@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "1.9.3"
 #comentario2 agregado desde el github
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
