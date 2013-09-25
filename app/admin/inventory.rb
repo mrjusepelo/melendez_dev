@@ -54,7 +54,7 @@ end
 
   index do 
     column :id
-    column "Codigo de barras", :barcode
+    column :barcode
      # column "My Custom Title", :barcode
     column "Nombre" do |inventory|
        inventory.product.name
