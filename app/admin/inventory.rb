@@ -56,12 +56,12 @@ end
     column :id
     column :barcode
      # column "My Custom Title", :barcode
-    column "Nombre" do |inventory|
-       inventory.product.name
-     end
-    column "Marca" do |inventory|
-       marca = inventory.product.brand.name
-     end         
+    # column "Nombre" do |inventory|
+    #    inventory.product.name
+    #  end
+    # column "Marca" do |inventory|
+    #    marca = inventory.product.brand.name
+    #  end         
     column :vale_buy
     column :vale_sale
     column :warranty
