@@ -16,7 +16,8 @@ class ProductsController < ApplicationController
 
       @products = Product.search(params[:searchbox])
       respond_to do |format|
-      format.html # index.html.erb
+        format.html # index.html.erb
+      end
   end
 
   def search
@@ -24,16 +25,22 @@ class ProductsController < ApplicationController
     # Product.select(:id, :name, :amount).where("name like ?", "%#{search}%")
     # end
   end
+
   def show
   end
+  
   def new
   end
+  
   def create
   end
+  
   def update
   end
+  
   def destroy
   end
+  
   def view_product
     # @products = Product.find(id = params[:id_product])
     # @images = Image.find(product_id = @products.id)
@@ -43,6 +50,4 @@ class ProductsController < ApplicationController
     #   render "blog"
     # end
   end
-
-
 end
