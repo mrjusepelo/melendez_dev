@@ -46,20 +46,20 @@
 	    	<div class="container">
 	        	<div class="row">
 	        		<article class="span12">
-	        			<h4><%=@products.name.capitalize%></h4>
+	        			<h4><%#=@products.name.capitalize%></h4>
 	         		</article>
 	        		<div class="clear"></div>
 	         		<div class="row">
 						<div class="span5 offset1" >
 							<%#= image_tag(@products.images.route)%>
-							<%= image_tag(@images.route)%>
+							<%#= image_tag(@images.route)%>
 						</div>
 						<div class="span6">
-							<h3>Cantidad:</h3> <b><%=@products.amount%></b></br>
-							<h3>Marca:</h3> <b><%=@products.brand_id%></b></br>
-							<h3>Garantia:</h3> <b><%=@inventories.warranty%> Meses</b></br>
-							<h3>Precio:</h3> <b>$<%=@inventories.vale_sale%></b></br>
-							<h3>Descripcion:</h3> <b><%=@products.description%></b>
+							<h3>Cantidad:</h3> <b><%#=@products.amount%></b></br>
+							<h3>Marca:</h3> <b><%#=@products.brand_id%></b></br>
+							<h3>Garantia:</h3> <b><%#=@inventories.warranty%> Meses</b></br>
+							<h3>Precio:</h3> <b>$<%#=@inventories.vale_sale%></b></br>
+							<h3>Descripcion:</h3> <b><%#=@products.description%></b>
 						</div>
 	      			</div>
 	        	</div>
