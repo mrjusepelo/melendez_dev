@@ -68,18 +68,6 @@ ActiveAdmin.register Product do
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 controller do
   before_filter :protected_attributes
       def protected_attributes
