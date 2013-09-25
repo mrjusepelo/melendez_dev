@@ -45,36 +45,78 @@
         <article class="span8">
               <h3>Contactanos</h3>
               <div class="inner-1">
-            <form id="contact-form">
-                  <div class="success"> Despues del formulario enviado! <strong>Nos pondremos en contacto en breve.</strong> </div>
-                  <fieldset>
-                <div>
+           	<%= form_tag({controller: "publics", action: "create_message"}, method: "get") do %>
+            <!--form id="contact-form"-->
+                  <!--div class="success"> Despues del formulario enviado! <strong>Nos pondremos en contacto en breve.</strong> </div-->
+                  <!--fieldset-->
+                <!--div>
                     <label class="name">
-                    <input type="text" value="Your name">
+                    <input type="text" value="Nombre">
                   <br>
                     <span class="error">*Esto no es un nombre válido.</span> <span class="empty">*Este campo es requerido.</span> </label>
-                    </div>
-                  <div>
+                </div-->
+                <div class="control-group">
+    				<%#= f.label :name, :class => 'control-label' %>
+    				<%= label_tag(:name, "Nombre:") %>
+    				<div class="controls">
+      					<%#= f.text_field :name, :class => 'text_field' %>
+  						<%= text_field_tag(:name) %>
+    				</div>
+  				</div>
+                <div class="control-group">
+    				<%= label_tag(:phone, "Teléfono:") %>
+    				<div class="controls">
+  						<%= number_field_tag(:phone) %>
+    				</div>
+  				</div>
+                <div class="control-group">
+    				<%= label_tag(:email, "Correo Electrónico:") %>
+    				<div class="controls">
+  						<%= text_field_tag(:email) %>
+    				</div>
+  				</div>
+                <div class="control-group">
+    				<%= label_tag(:reason, "Motivo:") %>
+    				<div class="controls">
+  						<%= text_field_tag(:reason) %>
+    				</div>
+  				</div>
+                <div class="control-group">
+    				<%= label_tag(:message, "Mensaje:") %>
+    				<div class="controls">
+  						<%= text_area_tag(:message, "", size: "40x6") %>
+    				</div>
+  				</div>
+                  <!--div>
                     <label class="phone">
-                    <input type="tel" value="Telephone">
+                    <input type="tel" value="Tel&eacute;fono">
                     <br>
                     <span class="error">*Esto no es un numero de telefono válido.</span> <span class="empty">*Este campo es requerido.</span> </label>
                     </div>
                 <div>
                     <label class="email">
-                    <input type="email" value="Email">
+                    <input type="email" value="Correo Electr&oacute;nico">
                     <br>
                     <span class="error">*Esto no es un correo electronico válido.</span> <span class="empty">*Este campo es requerido.</span> </label>
-                    </div>
+                </div>
+                <div>
+                    <label class="reason">
+                    <input type="reason" value="Motivo">
+                    <br>
+                    <span class="error">*Esto no es un Motivo válido.</span> <span class="empty">*Este campo es requerido.</span> </label>
+                </div>
                 <div>
                     <label class="message">
                     <textarea>Mensaje</textarea>
                     <br>
                     <span class="error">*Este mensaje es demasiado corto.</span> <span class="empty">*Este campo es requerido.</span> </label>
-                    </div>
-                <div class="buttons-wrapper"> <a class="btn btn-1" data-type="reset">Limpiar</a> <a class="btn btn-1" data-type="submit">Enviar</a></div>
-              </fieldset>
-                </form>
+                    </div-->
+                <div class="" align="left">
+					<%= submit_tag("Enviar") %>
+				</div>
+              <!--/fieldset-->
+                <!--/form-->
+                <% end %>
           </div>
             </article>
         <article class="span4">
