@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   has_many :product_categories
   has_many :categories, :through => :product_categories  
 
-  # has_many :inventories
+  has_many :inventories
 
    accepts_nested_attributes_for :images
 

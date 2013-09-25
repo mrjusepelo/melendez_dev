@@ -1,7 +1,7 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
 
- filter :barcode, :as => :string 
+ # filter :barcode, :as => :string 
   # filter :barcode, :as => :string, :collection => lambda{ Inventory.barcodes }
   # filter :author, :as => :select, :collection => lambda{ Product.authors }
    
