@@ -44,5 +44,13 @@ class PublicsController < ApplicationController
 
   def contact
   end
-
+  def view_product
+    @products = Product.find(id = params[:id_product])
+    @images = Image.find(product_id = @products.id)
+    if defined?(@products)
+      render "view_product"
+    else
+      render "blog"
+    end
+  end
 end
