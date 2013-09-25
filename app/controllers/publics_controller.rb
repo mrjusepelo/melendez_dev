@@ -1,6 +1,6 @@
 class PublicsController < ApplicationController
   def index
-    @imagenes = Image.select(:id, :route).where(priority: 'true')
+    # @imagenes = Image.select(:id, :route).where(priority: 'true')
 
     # Images.where(priority: 'true').take
     # Client.where(first_name: 'Lifo').take

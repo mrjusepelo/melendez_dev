@@ -13,13 +13,13 @@ Pencil::Application.routes.draw do
   get "publics/view_product"
 
 
-  # root :to => 'publics#index'
+  root :to => 'publics#index'
   # root to: 'admin/products#index'
 
     # resources :users
     # root :to => 'users#index'
     # resources :admin
-    root to: "admin/dashboard#index"
+    # root to: "admin/dashboard#index"
     # root to: "products#index"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
