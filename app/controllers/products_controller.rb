@@ -12,12 +12,12 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    # @products = Product.all
 
-      @products = Product.search(params[:searchbox])
-      respond_to do |format|
-        format.html # index.html.erb
-      end
+      # @products = Product.search(params[:searchbox])
+      # respond_to do |format|
+      #   format.html # index.html.erb
+      # end
   end
 
   def search
