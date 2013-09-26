@@ -1,6 +1,6 @@
 class PublicsController < ApplicationController
   def index
-    # @imagenes = Image.select(:id, :route).where(priority: 'true')
+    @imagenes = Image.select(:id, :route).where(priority: 'true')
 
     # Images.where(priority: 'true').take
     # Client.where(first_name: 'Lifo').take
@@ -34,7 +34,6 @@ class PublicsController < ApplicationController
   def blog
     if params[:search]
         @products = Product.find(:all, :conditions => ['name LIKE ?', "%#{params[:search]}%"])
-        # @products = Product.find(:all, :conditions => ['name LIKE ?', "%prod%"])
     else
         @products = Product.find(:all)
     end
@@ -43,13 +42,13 @@ class PublicsController < ApplicationController
   def contact
   end
   def view_product
-    # @products = Product.find(id = params[:id_product])
-    # @images = Image.find_by product_id: @products.id
-    # @inventories = Inventory.find_by product_id: @products.id
-    # if defined?(@products)
-    #   render "view_product"
-    # else
-    #   render "blog"
-    # end
+    @products = Product.find(id = params[:id_product])
+    @images = Image.find_by product_id: @products.id
+    @inventories = Inventory.find_by product_id: @products.id
+    if defined?(@products)
+      render "view_product"
+    else
+      render "blog"
+    end
   end
 end

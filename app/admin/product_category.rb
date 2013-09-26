@@ -1,4 +1,4 @@
 ActiveAdmin.register ProductCategory do
-# menu false
+menu false
 
 end
