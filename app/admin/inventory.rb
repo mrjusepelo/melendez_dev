@@ -1,7 +1,9 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
 
+
  # filter :barcode, :as => :string 
+
   # filter :barcode, :as => :string, :collection => lambda{ Inventory.barcodes }
   # filter :author, :as => :select, :collection => lambda{ Product.authors }
    
@@ -54,7 +56,9 @@ end
 
   index do 
     column :id
+
     column :barcode
+    #column "Codigo de barras", :barcode
      # column "My Custom Title", :barcode
     column "Nombre" do |inventory|
        inventory.product.name

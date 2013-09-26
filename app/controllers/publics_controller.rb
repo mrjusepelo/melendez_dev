@@ -54,10 +54,19 @@ class PublicsController < ApplicationController
     end
   end
   def create_message
-    @message = Message.create :name => params[:name], :phone => params[:phone], :email => params[:email], :reason => params[:reason], :message => params[:message]
+#    @message = Message.create :name => params[:name], :phone => params[:phone], :email => params[:email], :reason => params[:reason], :message => params[:message]
+    
+#    if @message.save
+#      render "contact", :notice => "Tu Mensaje se ha enviado"
+#    else
+#      render "contact"
+#    end
+#  end
+    params.permit!
+    @message = Message.new(params[:message])
     
     if @message.save
-      render "contact", :notice => "Tu Mensaje se ha enviado"
+      redirect_to publics_contact_path, :notice => "Tu Mensaje se ha enviado"
     else
       render "contact"
     end
