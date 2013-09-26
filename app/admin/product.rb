@@ -2,6 +2,9 @@ ActiveAdmin.register Product do
  # menu :label => "Lista de Productos"
   menu :parent => "Inventario"
   
+  filter :name
+  # filter :barcode, :as => :string, :collection => lambda{ Inventory.barcodes }
+  # filter :author, :as => :select, :collection => lambda{ Product.authors }
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy, :show]
 
 # actions :defaults => false do |product|
@@ -53,18 +56,6 @@ ActiveAdmin.register Product do
     # end
     default_actions
   end
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

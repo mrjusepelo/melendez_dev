@@ -1,7 +1,10 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
-  
-  # actions :all, :except => [:destroy]
+
+ # filter :barcode, :as => :string 
+  # filter :barcode, :as => :string, :collection => lambda{ Inventory.barcodes }
+  # filter :author, :as => :select, :collection => lambda{ Product.authors }
+   
   # actions :all, :except => [:destroy]
 
 
@@ -10,24 +13,9 @@ ActiveAdmin.register Inventory do
            script :src => javascript_path('1.js'), :type => "text/javascript"
            # script :src => javascript_path('2.js'), :type => "text/javascript"
            script :src => javascript_path('3.js'), :type => "text/javascript"
-            # link :href => stylesheet_path('jquery-ui-1.10.3.custom.css'), :media => "screen", :rel => "stylesheet", :type => "text/css"
-           # script :src => javascript_path('autocomplete-rails.js'), :type => "text/javascript"
-           # javascript_include_tag "autocomplete-rails.js"
-            # link :href => stylesheet_path('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css'), :media => "screen", :rel => "stylesheet", :type => "text/css"
-           # script :src => javascript_path('jquery-1.9.1.js'), :type => "text/javascript"
-           # script :src => javascript_path('jquery-ui-1.10.3.custom.js'), :type => "text/javascript"
-           # script :src => javascript_path('admin_autocomplete.js'), :type => "text/javascript"
 
       end
   f.inputs "Datos del Producto" do
-      # @post = Product.find(params[:id])
-      # @post = Product.find(1)
-      # @page_title = "#{@post.name}: Comments" # Set the page title
-
-      # puts "NOMBRE DE PRODUCTO**********************"+@page_title
-
-  # f.input :product, input_html: {id: "product", name: "product_aux"}
-  # f.input :product_id, as: :hidden
 
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
@@ -37,7 +25,6 @@ ActiveAdmin.register Inventory do
 # $num = 4
 # while $i < $num  do
 #    # puts("*********************Inside the loop i = #$i" )
-
 
     
      # f.input :barcode,  :as => "string", :input_html => { :value => "#$i", id: "", :style => "background-color: #E6E6E6; width: 60px;"}
@@ -68,6 +55,13 @@ end
   index do 
     column :id
     column :barcode
+     # column "My Custom Title", :barcode
+    column "Nombre" do |inventory|
+       inventory.product.name
+     end
+    column "Marca" do |inventory|
+       marca = inventory.product.brand.name
+     end         
     column :vale_buy
     column :vale_sale
     column :warranty
@@ -76,9 +70,6 @@ end
     # column :user
     column :created_at
     column :updated_at
-    
-    # column "Imprimir Codigo", :as => "string"
-
     # actions do |product|
       # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
     # end
@@ -91,6 +82,8 @@ controller do
 
   def create
     timestamp = (DateTime.now.to_i).to_s
+    # Convert number of seconds into Time object.
+    # Time.at(time)
 
     (1..params[:amount].to_i).each do |i|
       Inventory.create(
