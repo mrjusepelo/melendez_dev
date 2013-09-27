@@ -2,7 +2,9 @@ ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
   
   batch_action :Imprimir_codigos do |selection|
-    do_something
+    # do_something
+    # puts "************************ "selection.id
+
   end
 
 
