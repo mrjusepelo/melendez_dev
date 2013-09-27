@@ -1,5 +1,9 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
+  
+  batch_action :Imprimir_codigos do |selection|
+    do_something
+  end
 
 
  # filter :barcode, :as => :string 
@@ -55,8 +59,8 @@ end
 
 
   index do 
+    selectable_column
     column :id
-
     column :barcode
     #column "Codigo de barras", :barcode
      # column "My Custom Title", :barcode

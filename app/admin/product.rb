@@ -43,6 +43,7 @@ ActiveAdmin.register Product do
 	end
 
   index do 
+    selectable_column
     column :id
     column :name
     column :description
