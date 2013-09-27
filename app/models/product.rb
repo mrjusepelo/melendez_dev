@@ -19,7 +19,7 @@ class Product < ActiveRecord::Base
 
   def self.autocomplete(search)
     # find(:all, :conditions => ['(name LIKE ? or id LIKE ?)', "%#{search}%",  "%#{search}%"], :limit => 20)
-    where("name like ?", "%#{search}%")
+    where("lower(name) like ?", "%#{(search).downcase}%")
     # select(:id, :name, :amount).where("name like ?", "%#{search}%")
   end
 
