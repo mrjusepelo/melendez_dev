@@ -1,7 +1,7 @@
 class PublicsController < ApplicationController
   def index
     @imagenes = Image.select(:id, :route).where(priority: 'true')
-
+    @categories = Category.all
     # Images.where(priority: 'true').take
     # Client.where(first_name: 'Lifo').take
     # select(:id, :name, :amount).where("name like ?", "%#{search}%")
@@ -9,29 +9,35 @@ class PublicsController < ApplicationController
   end
 
   def show
-
+    @categories = Category.all
   end
 
   def new
-
+    @categories = Category.all
   end
 
   def create
+    @categories = Category.all
   end
 
   def destroy
+    @categories = Category.all
   end
 
   def update
+    @categories = Category.all
   end
   
   def service
+    @categories = Category.all
   end
 
   def folio
+    @categories = Category.all
   end
   
   def blog
+    @categories = Category.all
     if params[:search]
         @products = Product.find(:all, :conditions => ['lower(name) LIKE ?', "%#{(params[:search]).downcase}%"])
   else
@@ -40,9 +46,11 @@ class PublicsController < ApplicationController
   end
 
   def contact
+    @categories = Category.all
     @message = Message.new
   end
   def view_product
+    @categories = Category.all
     @products = Product.find(id = params[:id_product])
     @images = Image.find_by product_id: @products.id
     @inventories = Inventory.find_by product_id: @products.id
@@ -54,6 +62,7 @@ class PublicsController < ApplicationController
     end
   end
   def create_message
+
 #    @message = Message.create :name => params[:name], :phone => params[:phone], :email => params[:email], :reason => params[:reason], :message => params[:message]
     
 #    if @message.save
@@ -70,5 +79,9 @@ class PublicsController < ApplicationController
     else
       render "contact"
     end
+  end
+  def category
+    @category = Category.find(id = params[:id_category])
+    @categories = Category.all
   end
 end

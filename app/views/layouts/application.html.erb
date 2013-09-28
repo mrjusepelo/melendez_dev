@@ -95,31 +95,11 @@
                 					<li>
                 						<%= link_to "Productos", publics_blog_path() %>
                 						<ul>
-                    						<li>
-                    							<a href="#">
-                    								Electrodomesticos
-                    							</a>
-                    						</li>
-                    						<li>
-                    							<a href="#">
-                    								Bicicletas
-                    							</a>
-                    						</li>
-                    						<li>
-                    							<a href="#">
-                    								Creditos
-                    							</a>
-                    						</li>
-                    						<li>
-                    							<a href="#">
-                    								Portatiles
-                    							</a>
-                    						</li>
-                    						<li>
-                    							<a href="#">
-                    								Muebleria
-                    							</a>
-                    						</li>
+                    						<% @categories.each do |category| %>
+                    							<li>
+	                    							<%= link_to category.name, publics_category_path(id_category: category.id) %>
+                    							</li>
+                    						<% end %>
                   						</ul>
                 					</li>
                 					<li>
