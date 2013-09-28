@@ -11,6 +11,7 @@
 		<% end %>
 
 		<%= content_for :extra_css do %>
+  			<%= stylesheet_link_tag 'styles_view_product.css' %>
   			<%= stylesheet_link_tag 'bootstrap.css' %>
   			<%= stylesheet_link_tag 'responsive.css' %>  
   			<%= stylesheet_link_tag 'style.css' %>
@@ -46,23 +47,23 @@
 	    	<div class="container">
 	        	<div class="row">
 	        		<article class="span12">
-	        			<h4><%=@products.name.capitalize%></h4>
+	        			<h1 style="color: #E85356;"><%=@products.name.capitalize%></h1>
 	         		</article>
 	        		<div class="clear"></div>
 	         		<div class="row">
-						<div class="span5 offset1" >
+						<div class="span5 offset1" align="center">
 							<%#= image_tag(@products.images.route)%>
 							<%# @images.each do |image| %>
 								<%= image_tag(@images.route)%>
+								<br>
+							<b style="text-align: center; color: #E85356; font-size:40px;"><%= number_to_currency(@inventories.vale_sale)%></b>
 							<%# end %>
 						</div>
 						<div class="span6">
-							<h3>Cantidad:</h3> <b><%=@products.amount%></b></br>
-							<h3>Marca:</h3> <b><%=@brand.name%></b></br>
-							<h3>Garantia:</h3> <b><%=@inventories.warranty%> Meses</b></br>
-							<h3>Precio:</h3> <b>$<%=@inventories.vale_sale%> Pesos</b></br>
-							<h3>Descripcion:</h3> <b><%=@products.description%></b>
-								<%= @images%>
+							<h5 style="color: #E85356; font-size:20px;">Garantia:</h5> <b style="color: white; font-size:15px;"><%=@inventories.warranty%> Meses</b>
+							<h5 style="color: #E85356; font-size:20px;">Marca:</h5> <b style="color: white; font-size:15px;"><%=@brand.name%></b>
+							<h5 style="color: #E85356; font-size:20px;">Cantidad:</h5> <b style="color: white; font-size:15px;"><%=@products.amount%> Unidades</b>
+							<h5 style="color: #E85356; font-size:20px;">Descripcion:</h5> <b style="color: white; font-size:15px;"><%=@products.description%></b>
 						</div>
 	      			</div>
 	        	</div>
