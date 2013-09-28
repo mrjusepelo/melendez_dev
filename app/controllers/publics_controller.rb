@@ -81,6 +81,7 @@ class PublicsController < ApplicationController
     end
   end
   def category
+    @Product_category = ProductCategory.find(:all, :conditions => { :category_id => params[:id_category]})
     @category = Category.find(id = params[:id_category])
     @categories = Category.all
   end
