@@ -303,6 +303,7 @@ es:
     attributes:
       order:
         id: id
+        date_billed: Fecha factura
         total_pvp: PVP total
         earnings: Ganancias
         shipping: Envío

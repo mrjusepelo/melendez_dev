@@ -3,10 +3,15 @@ class Product < ActiveRecord::Base
   has_many :images
   has_many :product_categories
   has_many :categories, :through => :product_categories  
+  belongs_to :order
 
   # has_many :inventories
 
+  validates_presence_of :brand
+
    accepts_nested_attributes_for :images
+
+
 
   # def self.search(search)
   #   if search

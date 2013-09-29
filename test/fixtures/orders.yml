@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date_billed: 2013-09-29
+  date_arrival: 2013-09-29
+  date_limit_pay: 2013-09-29
+  date_pay_real: 2013-09-29
+  val_real: MyString
+
+two:
+  date_billed: 2013-09-29
+  date_arrival: 2013-09-29
+  date_limit_pay: 2013-09-29
+  date_pay_real: 2013-09-29
+  val_real: MyString

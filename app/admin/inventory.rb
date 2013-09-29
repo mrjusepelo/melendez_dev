@@ -1,6 +1,12 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
   
+# batch_action :flag do |selection|
+#       Post.find(selection).each do |post|
+#         post.flag! :hot
+#       end
+# end
+
   batch_action :Imprimir_codigos do |selection|
     # do_something
     # puts "************************ "selection.id
@@ -70,7 +76,11 @@ end
        inventory.product.name
      end
     column "Marca" do |inventory|
-       marca = inventory.product.brand.name
+        if defined?(inventory.product.brand.name)
+         marca = inventory.product.brand.name
+        else
+          marca = "Sin asignar"
+        end
      end         
     column :vale_buy
     column :vale_sale
@@ -108,8 +118,8 @@ controller do
     # 'admin/products#index'
   end
       before_filter :protected_attributes
-      	def protected_attributes
-        	params.permit!
-      	end
-  	  end
+        def protected_attributes
+          params.permit!
+        end
+      end
 end

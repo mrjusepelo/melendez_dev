@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130927000209) do
+ActiveRecord::Schema.define(version: 20130929200300) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,16 @@ ActiveRecord::Schema.define(version: 20130927000209) do
     t.datetime "updated_at"
   end
 
+  create_table "orders", force: true do |t|
+    t.date     "date_billed"
+    t.date     "date_arrival"
+    t.date     "date_limit_pay"
+    t.date     "date_pay_real"
+    t.string   "val_real"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "product_categories", force: true do |t|
     t.integer  "product_id"
     t.integer  "category_id"
@@ -120,9 +130,11 @@ ActiveRecord::Schema.define(version: 20130927000209) do
     t.integer  "brand_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "order_id"
   end
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree
+  add_index "products", ["order_id"], name: "index_products_on_order_id", using: :btree
 
   create_table "suppliers", force: true do |t|
     t.string   "name"
