@@ -52,7 +52,7 @@ class PublicsController < ApplicationController
   def view_product
     @categories = Category.all
     @products = Product.find(id = params[:id_product])
-    @images = Image.find_by product_id: @products.id
+    @images = Image.find(:all, :conditions => { :product_id => @products.id })
     @inventories = Inventory.find_by product_id: @products.id
     @brand = Brand.find(@products.brand_id)
     if defined?(@products)
