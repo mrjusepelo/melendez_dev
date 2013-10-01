@@ -29,7 +29,7 @@
   			<%= javascript_include_tag 'jquery-ui-1.10.3.custom.js' %>
   			<%= javascript_include_tag '4.js' %>
 		<% end %>
-
+		<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 
 		<%= image_tag("/assets/favicon.ico" ) %>
 		<!--[if lt IE 8]>
@@ -81,82 +81,33 @@
 
 <!--       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
       f.input :product_id, as: :hidden -->
+					<div id="accordion" class="container">
+						<% @categories.each do |category| %>
+							<h3><%=category.name.capitalize%></h3>
+					  		<%@Product_category = ProductCategory.find(:all, :conditions => { :category_id => category.id})%>
+					        	<div class="row">
+	         						<ul class="portfolio clearfix">           
+										<% @Product_category.each do |product_categories| %>
+											<% @Product = Product.find(id = product_categories.product_id)%>
+											<% @Product_image = Image.find(:all, :conditions => { :product_id => product_categories.product_id}) 
+											@Product_image.each do |images_products|							
+											%>
+		          								<li class="box" align="left">
+													<%= image_tag(images_products.route, :size => "170x170")%>
+		          							<%end%>
+	          								<b><%= link_to (truncate @Product.name, length:20), publics_view_product_path(id_product: @Product.id) %></b></br>
+	          									</li> 
+                    					<% end %>
+                    				</ul>
+	        					</div>
 
-
-
-
-	        		<article class="span12">
-	        			<h3>Electrodomesticos</h3>
-	         		</article>
-
-	        		<div class="clear"></div>
-	         		<ul class="portfolio clearfix">           
-	          			<li class="box" align="left">
-	          				<b><%= link_to "Nevecon Lg 567 Litros", publics_view_product_path(id_product: "1") %></b></br>
-	          				<a href="img/image-blank.png"><b>Licuadoras</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Lavadoras</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Aire Acondicionado</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Microondas</b></a> </br>
-	          			</li> 
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Televisores</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Reproductores de audio</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Reproductores de vídeo</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Cadena de música</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Reproductor de DVD</b></a> </br>
-	          			</li> 
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Celulares</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Videojuegos</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Computadoras personales</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Cámaras fotográficas y de video</b></a> </br>
-	          			</li> 
-	            	</ul> 
-	        		<article class="span12">
-	        			<h3>Bicicletas</h3>
-	         		</article>
-	        		<div class="clear"></div>
-	         		<ul class="portfolio clearfix">           
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Rines</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Frenos</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Pedales</b></a> </br>
-	          			</li> 
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Marcos</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Accesorios</b></a> </br>
-	          			</li> 
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Llantas</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Cascos</b></a> </br>
-	          			</li> 
-	            	</ul>
-	        		<article class="span12">
-	        			<h3>Portatiles</h3>
-	         		</article>
-	        		<div class="clear"></div>
-	         		<ul class="portfolio clearfix">           
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Acer</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Dell</b></a> </br>
-	          				<a href="img/image-blank.png"><b>HP</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Samsung</b></a> </br>
-	          			</li> 
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Applet</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Fujitsu</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Lenovo</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Sony</b></a> </br>
-	          			</li> 
-	          			<li class="box" align="left">
-	          				<a href="img/image-blank.png"><b>Asus</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Gateway</b></a> </br>
-	          				<a href="img/image-blank.png"><b>MSI</b></a> </br>
-	          				<a href="img/image-blank.png"><b>Toshiba</b></a> </br>
-	          			</li> 
-	            	</ul>
+						<% end %>
+					</div>
+ 	        		
 	      		</div>
 	        </div>
 	  	</div>
 	</div>
-
+<script>
+$( "#accordion" ).accordion({ heightStyle: "content" });
+</script>
