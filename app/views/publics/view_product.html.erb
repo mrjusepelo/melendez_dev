@@ -6,17 +6,19 @@
 		<meta name="description" content="Your description">
 		<meta name="keywords" content="Your keywords">
 		<meta name="author" content="Your name">
-		<%= content_for :extra_js do %>
-  			<%#= javascript_include_tag '1.js' %>
-		<% end %>
-
 		<%= content_for :extra_css do %>
+  			<%= stylesheet_link_tag 'style_wowslider.css' %>
   			<%= stylesheet_link_tag 'bootstrap.css' %>
   			<%= stylesheet_link_tag 'responsive.css' %>  
   			<%= stylesheet_link_tag 'style.css' %>
   			<%= stylesheet_link_tag 'touchTouch.css' %>
   			<%= stylesheet_link_tag 'file.css' %>
   			<%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,300' %>
+		<% end %>
+		<%= content_for :extra_js do %>
+  			<%= javascript_include_tag 'jquery_wowslider.js' %>
+  			<%= javascript_include_tag 'wowslider.js' %>
+  			<%= javascript_include_tag 'script_wowslider.js' %>
 		<% end %>
 		<%= image_tag("/assets/favicon.ico" ) %>
 	</head>
@@ -33,12 +35,52 @@
 	        		<div class="clear"></div>
 	         		<div class="row">
 						<div class="span5 offset1" align="center">
-							<%#= image_tag(@products.images.route)%>
-							<%# @images.each do |image| %>
-								<%= image_tag(@images.route)%>
-								<br>
+							<div id="wowslider-container1">
+								<div class="ws_images">
+									<ul>
+										<%# if @images.count > 1 %>
+											<% @images.each do |image| %> 
+												<li><img src="<%=image.route%>" alt="<%=image.id%>" title="<%=image.id%>" id="<%=image.id%>"/></li>
+											<%# else %>
+												<!--<li><img src="<%#=@images.first.route%>"/></li>-->												
+											<%# end %>
+										<% end %>
+									</ul>
+								</div>
+								<div class="ws_bullets">
+									<div>
+										<% if @images.count > 1%>
+											<% @images.each do |image| %>
+												<a href="#" title="<%=image.id%>"><%=image.id%></a>
+											<% end %>
+										<% end %>
+									</div>
+								</div>
+								<div class="ws_shadow"></div>
+							</div>
+							<!--<div id="wowslider-container1">
+								<div class="ws_images">
+									<ul>
+										<li><img src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7VnhtMDcwaHNkWVU" alt="Desert" title="Desert" id="wows1_0"/></li>
+										<li><img src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7M2pDYkFaVm00cTA" alt="Chrysanthemum" title="Chrysanthemum" id="wows1_1"/></li>
+										<li><img src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7ZjdkSkFLSnlhLTg" alt="Hydrangeas" title="Hydrangeas" id="wows1_2"/></li>
+										<li><img src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7SUpjaWk3eS1Rb2s" alt="Jellyfish" title="Jellyfish" id="wows1_3"/></li>
+										<li><img src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7MkdiNkFlamNTVjg" alt="Koala" title="Koala" id="wows1_4"/></li>
+									</ul>
+								</div>
+								<div class="ws_bullets">
+									<div>
+										<a href="#" title="Desert">1</a>
+										<a href="#" title="Chrysanthemum">2</a>
+										<a href="#" title="Hydrangeas">3</a>
+										<a href="#" title="Jellyfish">4</a>
+										<a href="#" title="Koala">5</a>
+									</div>
+								</div>
+								<div class="ws_shadow"></div>
+							</div>-->
+							<br>
 							<b style="text-align: center; color: #E85356; font-size:40px;"><%= number_to_currency(@inventories.vale_sale)%></b>
-							<%# end %>
 						</div>
 						<div class="span6">
 							<h5 style="color: #E85356; font-size:20px;">Garantia:</h5> <b style="color: white; font-size:15px;"><%=@inventories.warranty%> Meses</b>
