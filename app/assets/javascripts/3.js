@@ -1,7 +1,27 @@
 $(function() {
     $( "#datepi" ).datepicker();
+    	// autocompletar();
 });
+
+
+
 function mensaje(){
+
+$( "#product" ).autocomplete({
+      source: location.protocol + '//' + location.host + "/products/autocomplete.json",
+      minLength: 2,
+      select: function( event, ui ) {
+      	// alert(ui.item.id);
+        $("#inventory_product_id").val(ui.item.id);
+      }
+    });
+
+
+
+
+
+
+
 	// var nodo = document.getElementById( "product" );
 	// document.write( "El padre del nodo: ", nodo.parentNode.nodeName, "<br/>" )
 	// alert("El padre del nodo: ",nodo.parentNode.nodeName);

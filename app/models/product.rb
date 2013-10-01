@@ -3,7 +3,8 @@ class Product < ActiveRecord::Base
   has_many :images
   has_many :product_categories
   has_many :categories, :through => :product_categories  
-  belongs_to :order
+  has_many :order_products
+  
 
   # has_many :inventories
 
