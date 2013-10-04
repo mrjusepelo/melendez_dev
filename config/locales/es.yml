@@ -304,6 +304,10 @@ es:
       order:
         id: id
         date_billed: Fecha factura
+        date_arrival: Fecha llegada
+        date_limit_pay: Fecha limete de pago
+        date_pay_real: Fecha de pago real
+        val_real: Total
         total_pvp: PVP total
         earnings: Ganancias
         shipping: Envío

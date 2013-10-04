@@ -32,7 +32,45 @@ Pencil::Application.routes.draw do
     collection do 
       get "autocomplete"
     end
-  end  # The priority is based upon order of creation: first created -> highest priority.
+  end  
+
+# map.resources :orders, :member = { :id => :get }  
+# map.resources :products, :member = { :detailed => :get }  
+# namespace :admin do
+#   resources :order do
+#     get 'id', :on => :member
+#     post 'id', :on => :member
+#   end
+# end
+
+
+    # resources :orders do
+    #   member do 
+    #     get "all"
+    #   end
+    #   resources :order_products 
+        
+    # end
+
+    # resource :partners, :controller => :users do 
+    #   member do 
+    #     get "all"
+    #   end
+      
+    #   collection do 
+    #     get "autocomplete"
+    #     get "new_local"
+    #   end
+    # end
+
+
+
+
+
+
+
+
+  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"

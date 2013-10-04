@@ -1,34 +1,33 @@
 $(document).ready(function(){
 
-
 });
-
-
-function auto(){
-  $( "#product" ).autocomplete({
-      source: location.protocol + '//' + location.host + "/products/autocomplete.json",
-      minLength: 2,
-      select: function( event, ui ) {
-        // alert(ui.item.id);
-        $("#inventory_product_id").val(ui.item.id);
-      }
-    });
-
-}
 
 
 function fondo(elemento){
 
+     var i = 0;
+    // i = $(elemento).length;
+    i = document.getElementsByClassName('idprod').length
+    // i = document.getElementsByClass('idprod').count
     $(elemento).css({'color':'black','font-size':'1.3em','background':'rgb(231, 231, 231)', 'font-weight': 'bold'});
+
       $(elemento).autocomplete({
       source: location.protocol + '//' + location.host + "/products/autocomplete.json",
       minLength: 2,
       select: function( event, ui ) {
         // alert(ui.item.id);
-        $("#inventory_product_id").val(ui.item.id);
+        // var id = ui.item.id
+        $(elemento).parent().parent().find("#product_id").val(ui.item.id);
+        // $(elemento).click(function(){
+        //   alert(1);
+        //     $(elemento).after( "<input name = 'order[order_products_attributes][" + i + "][product_id]' class = 'idprod' type = 'text' id = 'idproduct' value = '" + ui.item.id + "' />"+ i );
+        // });
+    // $(elemento).after( "<input name = 'order[order_products_attributes][" + i + "][product_id]' class = 'idprod' type = 'text' id = 'idproduct' value = " + ui.item.id + " style = 'display:none;'></input>" );
+    // $(elemento).after( "<input name = 'order[order_products_attributes][0][product_id]' class = 'idprod' type = 'text' id = 'idproduct' value = " + ui.item.id + " ></input>" );
       }
+
     });
-    // $(this).css({'color':'red','font-size':'1.3em','background':'yellow'});
+
 
   var style = document.createElement('style');
   style.type = 'text/css';
@@ -41,7 +40,15 @@ return style;
 }
 
 
+
 function salida(elemento){
+
+ // $( "#inventory_product_id" ).focus( {
+ //        alert( "Handler " );
+ //  });
+
+    // $("#inventory_product_id").css({'color':'black','font-size':'1.3em','background':'rgb(231, 231, 231)', 'font-weight': 'bold'});
+
 $('.ui-helper-hidden-accessible').css({'display': 'none'});
   var a;
   // a = mensaje().style;
@@ -60,4 +67,8 @@ $('.ui-helper-hidden-accessible').css({'display': 'none'});
   var str=$(elemento).val();
   var n=str.split("-");
   console.log(n[1]);
+
+// document.getElementById("inventory_product_id").focus().innerHTML='Escrito por JS'
+// document.getElementById("inventory_product_id").focus().html('nuevo texto para el tercer elemento h3');
+  // $("#inventory_product_id").focus();
 }

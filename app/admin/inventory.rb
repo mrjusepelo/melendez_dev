@@ -34,7 +34,7 @@ ActiveAdmin.register Inventory do
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
-      f.input :product_id, as: :hidden
+      f.input :product_id #, as: :hidden
 # $i = 0
 # $num = 4
 # while $i < $num  do
@@ -98,28 +98,29 @@ end
 
 
 
-controller do
+    controller do
 
-  def create
-    timestamp = (DateTime.now.to_i).to_s
-    # Convert number of seconds into Time object.
-    # Time.at(time)
+        def create
+            timestamp = (DateTime.now.to_i).to_s
+            # Convert number of seconds into Time object.
+            # Time.at(time)
 
-    (1..params[:amount].to_i).each do |i|
-      Inventory.create(
-        :product_id => params[:inventory][:product_id], :barcode => timestamp+""+i.to_s,
-         :supplier => params[:inventory][:supplier],
-         :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
-         :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
-         :date_out => params[:inventory][:date_out]
-        )
-    end
-    redirect_to :action => :index
-    # 'admin/products#index'
-  end
-      before_filter :protected_attributes
-        def protected_attributes
-          params.permit!
+                (1..params[:amount].to_i).each do |i|
+                  Inventory.create(
+                    :product_id => params[:inventory][:product_id], :barcode => timestamp+""+i.to_s,
+                     :supplier => params[:inventory][:supplier],
+                     :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
+                     :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
+                     :date_out => params[:inventory][:date_out]
+                    )
+                end
+
+            redirect_to :action => :index
+            # 'admin/products#index'
         end
-      end
+          before_filter :protected_attributes
+            def protected_attributes
+              params.permit!
+            end
+    end
 end
