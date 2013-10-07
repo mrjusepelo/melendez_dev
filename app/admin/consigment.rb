@@ -1,5 +1,8 @@
 ActiveAdmin.register Consigment do
-  actions :all, :except => [:new, :create, :edit, :upadate, :destroy, :show]
+  menu :parent => "Compra Proveedores"
+  
+  # actions :all, :except => [:new, :create, :edit, :upadate, :destroy, :show]
+  actions :all, :except => [:new, :create, :edit, :upadate, :destroy]
 
 	controller do
 		

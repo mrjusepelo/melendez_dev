@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  payment_mode_id: 
+  state_id: 
+  total: 1
+  description: MyText
+
+two:
+  payment_mode_id: 
+  state_id: 
+  total: 1
+  description: MyText

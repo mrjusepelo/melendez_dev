@@ -1,4 +1,5 @@
 ActiveAdmin.register Order do
+  menu :parent => "Compra Proveedores"
 
 	form do |f|
 

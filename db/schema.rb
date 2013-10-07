@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131001173719) do
+ActiveRecord::Schema.define(version: 20131007163540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,23 @@ ActiveRecord::Schema.define(version: 20131001173719) do
     t.datetime "updated_at"
   end
 
+  create_table "clients", force: true do |t|
+    t.string   "name"
+    t.string   "document"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "neihborhood"
+    t.integer  "city_id"
+    t.boolean  "buyer"
+    t.boolean  "bondsman"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "credit_id"
+  end
+
+  add_index "clients", ["city_id"], name: "index_clients_on_city_id", using: :btree
+  add_index "clients", ["credit_id"], name: "index_clients_on_credit_id", using: :btree
+
   create_table "consigments", force: true do |t|
     t.integer  "value"
     t.date     "date"
@@ -76,6 +93,32 @@ ActiveRecord::Schema.define(version: 20131001173719) do
   end
 
   add_index "consigments", ["order_id"], name: "index_consigments_on_order_id", using: :btree
+
+  create_table "credit_products", force: true do |t|
+    t.integer  "product_id"
+    t.integer  "credit_id"
+    t.string   "amount"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credit_products", ["credit_id"], name: "index_credit_products_on_credit_id", using: :btree
+  add_index "credit_products", ["product_id"], name: "index_credit_products_on_product_id", using: :btree
+
+  create_table "credits", force: true do |t|
+    t.integer  "payment_mode_id"
+    t.integer  "state_id"
+    t.integer  "total"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "date"
+    t.integer  "sum_payments"
+  end
+
+  add_index "credits", ["payment_mode_id"], name: "index_credits_on_payment_mode_id", using: :btree
+  add_index "credits", ["state_id"], name: "index_credits_on_state_id", using: :btree
 
   create_table "images", force: true do |t|
     t.string   "route"
@@ -138,6 +181,23 @@ ActiveRecord::Schema.define(version: 20131001173719) do
 
   add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id", using: :btree
 
+  create_table "payment_modes", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments_credits", force: true do |t|
+    t.date     "date"
+    t.integer  "value"
+    t.integer  "credit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "description"
+  end
+
+  add_index "payments_credits", ["credit_id"], name: "index_payments_credits_on_credit_id", using: :btree
+
   create_table "product_categories", force: true do |t|
     t.integer  "product_id"
     t.integer  "category_id"
@@ -159,6 +219,12 @@ ActiveRecord::Schema.define(version: 20131001173719) do
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree
 
+  create_table "states", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "suppliers", force: true do |t|
     t.string   "name"
     t.string   "phone"
@@ -169,5 +235,15 @@ ActiveRecord::Schema.define(version: 20131001173719) do
   end
 
   add_index "suppliers", ["city_id"], name: "index_suppliers_on_city_id", using: :btree
+
+  create_table "support_documents", force: true do |t|
+    t.string   "name"
+    t.string   "route"
+    t.integer  "credit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "support_documents", ["credit_id"], name: "index_support_documents_on_credit_id", using: :btree
 
 end
