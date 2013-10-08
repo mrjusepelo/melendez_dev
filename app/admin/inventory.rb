@@ -7,6 +7,28 @@ ActiveAdmin.register Inventory do
 #       end
 # end
 
+    show do |inventory|
+      attributes_table do
+        row :id
+        row :product_id
+        product = Product.where(id: inventory.product_id).first
+        brand = Brand.where(id: product.brand_id).first
+        row "Marca" do
+          brand.name
+        end
+        row :supplier_id
+        row :barcode
+        row :vale_buy
+        row :vale_sale
+        row :warranty
+        row :date_in
+        row :date_out
+        row :created_at
+        row :updated_at
+      end
+    end
+  
+  
   batch_action :Imprimir_codigos do |selection|
     # do_something
     # puts "************************ "selection.id
@@ -28,7 +50,7 @@ ActiveAdmin.register Inventory do
            # script :src => javascript_path('2.js'), :type => "text/javascript"
            script :src => javascript_path('3.js'), :type => "text/javascript"
 
-      end
+  end
   f.inputs "Datos del Producto" do
 
 
