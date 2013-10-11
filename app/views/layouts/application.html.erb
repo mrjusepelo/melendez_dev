@@ -65,8 +65,7 @@
             				<div class="nav-collapse nav-collapse_  collapse">
                   				<ul class="nav sf-menu">
                 					<li class="active">
-                						<a href="index.html">
-                							Inicio
+                						<%= link_to "Inicio", publics_index_path() %>
                 						</a>
                 					</li>
                 					<li class="sub-menu">
@@ -93,7 +92,7 @@
                 						<%= link_to "Contrato", publics_folio_path() %>
                 					</li>
                 					<li>
-                						<%= link_to "Productos", publics_blog_path() %>
+                						<%= link_to "Productos", publics_product_path() %>
                 						<ul>
                     						<% @categories.each do |category| %>
                     							<li>

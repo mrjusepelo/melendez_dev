@@ -7,7 +7,7 @@ Pencil::Application.routes.draw do
   get "publics/update"
   get "publics/service"
   get "publics/folio"
-  get "publics/blog"
+  get "publics/product"
   get "publics/contact"
   get "products/search"
   get "publics/view_product"
