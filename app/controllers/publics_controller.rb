@@ -36,7 +36,7 @@ class PublicsController < ApplicationController
     @categories = Category.all
   end
   
-  def blog
+  def product
     @categories = Category.all
     if params[:search]
         @products = Product.find(:all, :conditions => ['lower(name) LIKE ?', "%#{(params[:search]).downcase}%"])
