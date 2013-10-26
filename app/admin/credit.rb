@@ -247,8 +247,11 @@ end
             client.inputs 'Rol' do |r|
 
             # client.input :buyer, :as => :radio, :input_html => {:checked => "true", onclick: "if (1 < 3){alert(this.nodeName)} else {alert('falso')}"}
-            client.input :buyer,  :input_html => {:name => 'comprador', onclick: "if ($(this).is (':checked')){$('#fiador').prop('checked', false);} "}
-            client.input :bondsman, :input_html => {:name => 'comprador', id:'fiador'}
+            # client.input :buyer,  :input_html => {:name => 'comprador', onclick: "if ($(this).is (':checked')){$('#fiador').prop('checked', false);} "}
+            client.input :buyer,  :input_html => {id:'comprador', onclick: "if ($(this).is (':checked')){$(this).parent().parent().parent().find('#fiador').prop('checked', false);} "}
+            
+            # $(valor).parent().parent().find("#amount").val();
+            client.input :bondsman, :input_html => {id:'fiador', onclick: "if ($(this).is (':checked')){$(this).parent().parent().parent().find('#comprador').prop('checked', false);} "}
             end
 
           end
