@@ -62,8 +62,10 @@ class PublicsController < ApplicationController
     end
   end
   def create_message
-  
-   PublicMailer.send_email(params[:name], params[:phone], params[:email], params[:reason], params[:message]).deliver
+   if params[:name1] == "" && params[:email_p] == "" && params[:message_r] == ""
+     PublicMailer.send_email(params[:name], params[:phone], params[:email], params[:reason], params[:message]).deliver
+   end  
+
    # params.permit!
    # @message = Message.new(params[:message])
     

@@ -51,6 +51,7 @@
 		    						<%= label_tag "Nombre: "%>
 		    						<div class="controls">
 		      							<%= text_field_tag "name"%>
+		      							<input name="name1" type="hidden" value=""/>
 		    						</div>
 		    					</div>	
 		  						<div class="control-group">
@@ -63,6 +64,7 @@
 		    						<%= label_tag "Correo Electrónico: "%>
 		    						<div class="controls">
 		      							<%= email_field_tag "email"%>
+		      							<input name="email_p" type="hidden" value=""/>
 		    						</div>
 		    					</div>
 				  				<div class="control-group">
@@ -75,6 +77,7 @@
 		    						<%= label_tag "Mensaje: "%>
 		    						<div class="controls">
 		      							<%= text_area_tag "message" , nil, size: "25x10"%>
+		      							<input name="message_r" type="hidden" value=""/>
 		    						</div>
 		    					</div>
 				    			<div align="left">
