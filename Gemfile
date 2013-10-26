@@ -50,5 +50,7 @@ gem 'carrierwave'
 gem "fog", "~> 1.3.1"
 
 gem 'carrierwave-google_drive'
+
+#gem "galetahub-simple_captcha", :require => "simple_captcha"
 #manejo alternativo de imagenes
 # gem "paperclip", "~> 3.5.1"
