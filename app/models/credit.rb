@@ -11,5 +11,12 @@ class Credit < ActiveRecord::Base
   accepts_nested_attributes_for :payments_credits
   accepts_nested_attributes_for :support_documents
 
+  validates_presence_of :payday
+  validates_presence_of :description
+  validates_presence_of :state_id
+  validates_presence_of :total
+  validates_presence_of :date
+  validates_presence_of :payment_mode_id
+  validates_presence_of :number_payments
 
 end
