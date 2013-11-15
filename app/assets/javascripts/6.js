@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 });
-
+// js de creditos
 function sumavalorcredito(total){
     var sum = 0;
     $('.val_product').each(function() {
