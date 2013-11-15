@@ -84,18 +84,13 @@
 					<div id="accordion" class="container">
 						<% @categories.each do |category| %>
 							<h3><%=category.name.capitalize%></h3>
-					  		<%@Product_category = ProductCategory.find(:all, :conditions => { :category_id => category.id})%>
 					        	<div class="row">
 	         						<ul class="portfolio clearfix">           
-										<% @Product_category.each do |product_categories| %>
-											<% @Product = Product.find(id = product_categories.product_id)%>
-											<% @Product_image = Image.find(:all, :conditions => { :product_id => product_categories.product_id}) 
-											@Product_image.each do |images_products|							
-											%>
+										<% category.products.each do |product| %>
 		          								<li class="box" align="left">
-													<%= image_tag(images_products.route, :size => "170x170")%>
-		          							<%end%>
-	          								<b><%= link_to (truncate @Product.name, length:20), publics_view_product_path(id_product: @Product.id) %></b></br>
+													<%= image_tag(product.images.first.route, :size => "170x170")%>
+		          							
+	          								<b><%= link_to (truncate product.name, length:20), publics_view_product_path(id_product: product.id) %></b></br>
 	          									</li> 
                     					<% end %>
                     				</ul>
