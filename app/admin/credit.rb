@@ -54,8 +54,7 @@ end
 numPagos = pagosIdeal(must_pay, tipoPago)[0]
 pagosAlDia =  numPagos * credit.value_payments
 
-# numPagos
-# pagosAlDia
+
 # # def comprobacionPagos(id, modoPago, diaPago, ultimoPago, sumaPagos, pagosAlDia, estado )
 #  # if diaPago < Date.today
 # #     if ultimoPago < Date.today
@@ -219,7 +218,7 @@ end
           
         order.inputs 'Productos' do 
         order.input :product, :as => "string",  input_html: {onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        order.input :product_id,   input_html: {id: "product_id"}
+        order.input :product_id, as: :hidden,  input_html: {id: "product_id"}
         order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
         order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
@@ -244,16 +243,12 @@ end
             client.input :neihborhood  #, :input_html => {:name => "value", :style => "width: 60px;"}
             client.input :address #, :input_html => {:name => "value", :style => "width: 60px;"}
 
-            client.inputs 'Rol' do |r|
-
-            # client.input :buyer, :as => :radio, :input_html => {:checked => "true", onclick: "if (1 < 3){alert(this.nodeName)} else {alert('falso')}"}
-            # client.input :buyer,  :input_html => {:name => 'comprador', onclick: "if ($(this).is (':checked')){$('#fiador').prop('checked', false);} "}
-            client.input :buyer,  :input_html => {id:'comprador', onclick: "if ($(this).is (':checked')){$(this).parent().parent().parent().find('#fiador').prop('checked', false);} "}
-            
-            # $(valor).parent().parent().find("#amount").val();
-            client.input :bondsman, :input_html => {id:'fiador', onclick: "if ($(this).is (':checked')){$(this).parent().parent().parent().find('#comprador').prop('checked', false);} "}
-            end
-
+            # client.input :buyer, :as => :radio, :input_html => {onclick: "javascript:eleccionComprador(this)"}        
+            # client.input :bondsman, :as => :radio, :input_html => {onclick: "javascript:eleccionFiador(this)"}
+            client.input :buyer, :input_html => {onclick: "javascript:eleccionComprador(this)"}        
+            client.input :bondsman,  :input_html => {onclick: "javascript:eleccionFiador(this)"}      
+            # client.input :buyer
+            # client.input :bondsman
           end
       end
 

@@ -27,3 +27,30 @@ function calcularPagos(valor){
     $(valor).val(valorCuotas);
     console.log( valorCuotas );
 }
+
+function eleccionComprador(rol){
+   console.log( $(rol).parent().prop("nodeName"));
+
+    $(rol).parent().removeAttr("onClick");
+
+    if ($(rol).is (':checked')){
+    //     $(rol).prop('checked', true);
+        $(rol).parent().parent().parent().find($("input[id$='bondsman']")).prop('checked', false);
+
+    } 
+}
+function eleccionFiador(rol){
+   console.log( $(rol).parent().prop("nodeName"));
+    $(rol).parent().removeAttr("onClick");
+    
+    if ($(rol).is (':checked')){
+    //     $(rol).prop('checked', true);
+        // $(rol).parent().parent().parent().find($("input[id$='buyer']").prop('checked', false));
+        $(rol).parent().parent().parent().find($("input[id$='buyer']")).prop('checked', false);
+    } 
+}
+// $("[id|='myValue']")
+// $("[id$='txtTitle']")
+// console.log(($("[id$='ount']").val())) // imperesion por consola el valor del id terminado en ount
+// $("[id$='buyer']").prop('checked', true) //selecciona el id terminado en buyer 
+// $("element[id$='txtTitle']")
