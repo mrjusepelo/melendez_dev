@@ -2,7 +2,14 @@ class Credit < ActiveRecord::Base
   belongs_to :payment_mode
   belongs_to :state
   has_many :clients
+
+# lineas agregadas
   has_many :credit_products
+  has_many :products, :through => :credit_products
+
+
+
+  # has_many :credit_products
   has_many :payments_credits
   has_many :support_documents
 

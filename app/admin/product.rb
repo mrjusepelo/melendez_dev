@@ -47,7 +47,6 @@ ActiveAdmin.register Product do
     column :id
     column :name
     column :description
-    column :amount
     column :brand
     # column :user
     column :created_at

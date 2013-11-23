@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+require 'pdfkit'
+
+
 module Pencil
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -17,6 +20,7 @@ module Pencil
     # config.time_zone = 'Central Time (US & Canada)'
     config.time_zone = "America/Bogota"
     
+    config.middleware.use "PDFKit::Middleware", :print_media_type => true
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]

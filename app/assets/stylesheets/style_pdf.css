@@ -1,0 +1,28 @@
+body{
+	/*background: blue;*/
+  font-family: sans-serif;
+
+}
+#header{
+	/*background-color: green;*/
+	height: 200px;
+	border-style: solid;
+
+}
+#img_header{
+	background-image: url('../assets/logo_2.png'); 
+/*background-image: url('/home/juan/melendez_dev/app/assets/images/logo_2.png');*/
+	height: 200px;
+	width: 600px;
+	background-color: yellow;
+	background-repeat: no-repeat;
+}
+ul.menu {
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  /*width: 180px;*/
+  font-size: 1.3em;
+  /*font-family: sans-serif;*/
+}

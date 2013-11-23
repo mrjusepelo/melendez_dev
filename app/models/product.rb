@@ -1,4 +1,15 @@
 class Product < ActiveRecord::Base
+  
+
+# Lineas agregadas
+  has_many :credit_products
+  has_many :credits, :through => :credit_products
+
+
+
+
+
+
   belongs_to :brand
   has_many :images
   has_many :product_categories

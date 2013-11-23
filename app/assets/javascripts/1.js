@@ -8,3 +8,4 @@ $(document).ready(function(){
       }
     });
 });
+	 // [p.name, ' MARCA:', p.brand.name,  ' CANTIDAD:', p.amount, ' DESCRIPCION:', p.description].join('') 

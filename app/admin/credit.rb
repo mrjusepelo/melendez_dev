@@ -182,10 +182,12 @@ end
     # column :sum_payments => price
     column :created_at
     column :updated_at
-    # actions do |product|
+    actions do |credit|
+      link_to "Generar Contrato",  credits_show_path(id: credit), :class => "member_link"
+      # link_to "Agregar a Inventario", credit_show_path(id: credit.id), :class => "member_link"
       # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
-    # end
-    default_actions
+    end
+    # default_actions
   end    
 
 
@@ -215,10 +217,27 @@ end
       f.input :description,   input_html: {:size => '3'}
 
       f.has_many :credit_products do |order|
-          
-        order.inputs 'Productos' do 
-        order.input :product, :as => "string",  input_html: {onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        order.input :product_id, as: :hidden,  input_html: {id: "product_id"}
+
+          # if order
+              # puts "***********************************"+order.id.to_s
+          #     order.input :product, :as => "string", input_html: {value: order.product.name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
+
+          # else
+          #     # order.input :product, :as => "string", input_html: {value: product.name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
+
+          # end
+
+        order.inputs "Productos "+ (params[:id]).to_s do 
+
+          # if order.nil?
+
+
+        # order.input :product, :as => "string", input_html: {:value => Product.find(params[:id]).name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
+        # order.input :product, :as => "string", input_html: {value: Product.find(order.product_id).name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
+        order.input :product, :as => "string", input_html: { onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
+        
+        # order.input :product_id,  input_html: {:value => Product.find(params[:id]).id, id: "product_id"}
+        order.input :product_id,  input_html: {id: "product_id", class: "product_id"}
         order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
         order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
@@ -226,6 +245,7 @@ end
                script :src => javascript_path('1.js'), :type => "text/javascript"
                script :src => javascript_path('5.js'), :type => "text/javascript"
                script :src => javascript_path('6.js'), :type => "text/javascript"
+               script :src => javascript_path('7.js'), :type => "text/javascript"
 
           end                 
 

@@ -1,5 +1,5 @@
 ActiveAdmin.register SupportDocument do
-
+  menu :parent => "Creditos"
   show do |document|
       attributes_table do
       row :id

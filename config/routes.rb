@@ -1,4 +1,13 @@
 Pencil::Application.routes.draw do
+
+  get "credits/new"
+  get "credits/create"
+  get "credits/update"
+  get "credits/index"
+  get "credits/show"
+  get "credits/edit"
+  get "credits/delete"
+  get "credits/to_pdf"
   get "publics/index"
   get "publics/show"
   get "publics/new"
