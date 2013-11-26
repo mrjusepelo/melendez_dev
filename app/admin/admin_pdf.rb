@@ -1,9 +1,6 @@
   ActiveAdmin.register_page "admin_pdf" do
-<<<<<<< Updated upstream
      # @credit  = Credit.find(id = 12)
-=======
     # @credit = Credit.find(id = 12)
->>>>>>> Stashed changes
     
     content do
       para "Hello World"
