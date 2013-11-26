@@ -1,5 +1,5 @@
   ActiveAdmin.register_page "admin_pdf" do
-     @credit = Credit.find(id = 12)
+     # @credit  = Credit.find(id = 12)
     
     content do
       para "Hello World"

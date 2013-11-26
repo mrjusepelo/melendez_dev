@@ -23,7 +23,6 @@ Pencil::Application.routes.draw do
   get "publics/category"
   post "publics/create_message"
 
-
   root :to => 'publics#index'
   # root to: 'admin/products#index'
 

@@ -5,11 +5,13 @@ body{
 }
 #header{
 	/*background-color: green;*/
-	height: 200px;
+	height: 150px;
 	border-style: solid;
 
 }
+
 #img_header{
+	/*background-image: url('/home/juan/melendez_dev/app/assets/images/logo_2.png'); */
 	background-image: url('../assets/logo_2.png'); 
 /*background-image: url('/home/juan/melendez_dev/app/assets/images/logo_2.png');*/
 	height: 200px;
@@ -23,6 +25,32 @@ ul.menu {
   margin: 0;
   padding: 0;
   /*width: 180px;*/
-  font-size: 1.3em;
+  font-size: 0.8em;
   /*font-family: sans-serif;*/
+}
+
+
+
+table#mitabla {
+    border-collapse: collapse;
+    border: 1px solid #CCC;
+    font-size: 12px;
+    text-align: center;
+}
+ 
+table#mitabla th {
+    font-weight: bold;
+    background-color: #E1E1E1;
+    padding:5px;
+}
+ 
+table#mitabla tbody tr:hover td {
+    background-color: #F3F3F3;
+}
+ 
+table#mitabla td {
+    padding: 5px 10px;
+}
+tr#fila_par {
+	background: rgb(240, 237, 237);
 }

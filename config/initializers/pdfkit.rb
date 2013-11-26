@@ -20,6 +20,18 @@ PDFKit.configure do |config|
 end
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 # PDFKit.configure do |config|
 #   config.default_options[:ignore_load_errors] = true
 # end
