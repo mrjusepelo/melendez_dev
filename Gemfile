@@ -39,7 +39,7 @@ end
 # gem 'responders',          github: 'plataformatec/responders'
 # gem 'inherited_resources', github: 'josevalim/inherited_resources'
 # gem 'ransack'
-gem "activeadmin", github: "gregbell/active_admin", ref: "82ff48d51525bdf55c96e50d8650d45f2a6716ed"# gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
+gem 'activeadmin',         github: 'gregbell/active_admin', branch: 'rails4'
 # gem 'formtastic',          github: 'justinfrench/formtastic'
 gem 'rabl'
 # gem "rails3-jquery-autocomplete"
