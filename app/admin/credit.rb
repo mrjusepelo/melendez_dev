@@ -210,6 +210,7 @@ end
 
       # if @order.id.nil?
       f.inputs "Creditos" do
+        f.input :date, as: :string, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
       f.input :payment_mode
 	  f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :state
@@ -234,10 +235,11 @@ end
 
         # order.input :product, :as => "string", input_html: {:value => Product.find(params[:id]).name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
         # order.input :product, :as => "string", input_html: {value: Product.find(order.product_id).name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
+        # order.input :product, :as => "string", input_html: {value: credit.date, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
         order.input :product, :as => "string", input_html: { onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
         
         # order.input :product_id,  input_html: {:value => Product.find(params[:id]).id, id: "product_id"}
-        order.input :product_id,  input_html: {id: "product_id", class: "product_id"}
+        order.input :product_id,  input_html: {id: "product_id", class: "creadit_product_id"}
         order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
         order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}

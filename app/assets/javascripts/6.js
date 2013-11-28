@@ -1,6 +1,20 @@
 $(document).ready(function(){
-
+    llenar_autocompletar();
 });
+
+function llenar_autocompletar(){
+    productsCredit = $.parseJSON($('#credit_json').val());
+    $("input.creadit_product_id").each(function(){
+        var input = $(this);
+        for (var i = 0; i < productsCredit.length; i ++){
+            var product = productsCredit[i];
+            if (parseInt(input.val()) == parseInt(product.id)){
+                input.parent().parent().find("input#product").val(product.name);
+                break;
+            }
+        }
+    });
+}
 // js de creditos + prueba
 function sumavalorcredito(total){
     var sum = 0;
@@ -49,6 +63,7 @@ function eleccionFiador(rol){
         $(rol).parent().parent().parent().find($("input[id$='buyer']")).prop('checked', false);
     } 
 }
+
 // $("[id|='myValue']")
 // $("[id$='txtTitle']")
 // console.log(($("[id$='ount']").val())) // imperesion por consola el valor del id terminado en ount
