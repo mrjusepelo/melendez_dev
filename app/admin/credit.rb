@@ -183,7 +183,8 @@ end
     column :created_at
     column :updated_at
     actions do |credit|
-      link_to "Generar Contrato",  admin_credit_path(credit), :class => "member_link"
+      link_to("Generar Contrato",  admin_credit_path(credit), :class => "member_link") + "  " + 
+      link_to("Pagos",  admin_credit_payments_credits_path(credit), :class => "member_link")
       # link_to "Agregar a Inventario", credit_show_path(id: credit.id), :class => "member_link"
       # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
     end
@@ -208,9 +209,8 @@ end
 
 	form do |f|
 
-      # if @order.id.nil?
       f.inputs "Creditos" do
-        f.input :date, as: :string, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
+        f.input :date, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
       f.input :payment_mode
 	  f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :state
@@ -219,23 +219,8 @@ end
 
       f.has_many :credit_products do |order|
 
-          # if order
-              # puts "***********************************"+order.id.to_s
-          #     order.input :product, :as => "string", input_html: {value: order.product.name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-
-          # else
-          #     # order.input :product, :as => "string", input_html: {value: product.name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-
-          # end
-
         order.inputs "Productos "+ (params[:id]).to_s do 
 
-          # if order.nil?
-
-
-        # order.input :product, :as => "string", input_html: {:value => Product.find(params[:id]).name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        # order.input :product, :as => "string", input_html: {value: Product.find(order.product_id).name, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        # order.input :product, :as => "string", input_html: {value: credit.date, onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
         order.input :product, :as => "string", input_html: { onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
         
         # order.input :product_id,  input_html: {:value => Product.find(params[:id]).id, id: "product_id"}
@@ -247,7 +232,6 @@ end
                script :src => javascript_path('1.js'), :type => "text/javascript"
                script :src => javascript_path('5.js'), :type => "text/javascript"
                script :src => javascript_path('6.js'), :type => "text/javascript"
-               script :src => javascript_path('7.js'), :type => "text/javascript"
 
           end                 
 
@@ -299,19 +283,6 @@ end
 		end
 		    f.actions
 	end
-
-
-# member_action :credits_show, :method => :get do
-#      @credit = Credit.find(id = params[:id])
-
-#      html = render_to_string(:action => "show.html.erb", :layout => false)
-#       kit = PDFKit.new(html)
-#       kit.stylesheets << 'vendor/assets/stylesheets/style.css'
-#     send_data(kit.to_pdf, :filename => 'report.pdf', :type => 'application/pdf', :disposition => 'inline')
-
-# end
-
-
 
 
 

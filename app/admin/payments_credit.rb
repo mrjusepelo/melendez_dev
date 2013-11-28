@@ -1,6 +1,6 @@
 ActiveAdmin.register PaymentsCredit do
   menu :parent => "Creditos"
-	
+  belongs_to :credit
 
   index do 
     selectable_column
