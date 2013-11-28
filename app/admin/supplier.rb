@@ -9,6 +9,7 @@ form do |f|
 				f.input :email
 				f.input :city
 				f.input :frecuence_notification
+				f.input :state
 
 			end
 			f.actions

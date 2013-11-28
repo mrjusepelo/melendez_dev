@@ -1,5 +1,6 @@
 ActiveAdmin.register PaymentsCredit do
-  menu :parent => "Creditos"
+  # menu :parent => "Creditos"
+  # menu false
   belongs_to :credit
 
   index do 
@@ -7,7 +8,7 @@ ActiveAdmin.register PaymentsCredit do
     column :id
     column :date
     column :value
-    column "Pedido" do |payment|
+    column "Credito" do |payment|
       if defined?(payment.credit.id)
         payment.credit.id
       else
@@ -18,8 +19,6 @@ ActiveAdmin.register PaymentsCredit do
     column :updated_at
         default_actions
   end 
-
-
 
 
 

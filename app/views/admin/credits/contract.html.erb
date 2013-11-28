@@ -1,0 +1,242 @@
+<head>
+		<title>Servicios</title>
+		<meta charset="utf-8">
+		<meta name="description" content="Your description">
+		<meta name="keywords" content="Your keywords">
+		<meta name="pactel_ingenieria" content="Your name">
+		<%= content_for :extra_js do %>
+  			<%#= javascript_include_tag '1.js' %>
+		<% end %>
+
+		<%= content_for :extra_css do %>
+  			<%= stylesheet_link_tag 'style_pdf.css' %>
+		
+		<% end %>
+		<%#= image_tag("/assets/favicon.ico" ) %>
+
+</head>
+
+
+<div id="contenedorGeneral" style="border-style:solid; padding:35px;">
+
+	<div id="header">
+	         <!-- <img style="float:left; margin-top: 33px;margin-left: 15px;" src="/assets/logo_2.png" /> -->
+	         <img id="imagen" style="float:left; margin-top: 33px;margin-left: 15px;" src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7cU1HLVo1T0p1Ujg" width="300"/>
+			<div style="float: right; text-align: center; margin-right: 50px;margin-top: 20px;">
+					<ul class="menu">
+						<li type="none">Carrera 6. No. 3B-25 B/ La Amistad</li>
+						<li type="none">Nit. 98240005-2</li>
+						<li type="none">La Hormiga Putumayo</li>
+						<li type="none">Contrato N°. <%= @credit.id %></li>
+						<li type="none">Fecha: <%= @credit.date %></li>
+					</ul>
+			</div>
+
+	</div>
+
+	<% reg_client = @credit.clients.where(credit_id: @credit.id, :buyer => "true").first %>
+
+	<!-- <div id="datosCliente" style=" background-color: red; border-bottom-style: solid; "> -->
+	<div id="datosCliente" style=" border-bottom-style: solid; ">
+	 
+		<div id="comprador" style="border-style:solid;">
+			<h3> Datos Comprador</h3>
+			<div style=" width:320px;border-style: solid; display: inline-block;">
+				<ul>
+					<li type="none" style=""><b>Nombre: </b> <%= reg_client.name %> .</li>
+					<li type="none"><b>Telefono:</b> <%= reg_client.phone %></li>
+					<li type="none"><b>C.C:</b> <%= reg_client.document %></li>
+				</ul>
+
+			</div>
+			<div style=" width:320px;border-style: solid;display: inline-block;">
+				<ul>
+					<li type="none"><b>Ciudad:</b>  <%= reg_client.city.name %></li>
+					<li type="none"><b>Barrio:</b>  <%= reg_client.neihborhood %></li>
+					<li type="none"><b>Direccion:</b> <%= reg_client.address %></li>
+				</ul>
+
+			</div>			
+
+		</div><!--cierre div de comprador --> 
+		<div id="Fiador">
+			<h3>Datos Fiador</h3>
+			<%      reg_client_f = @credit.clients.where(credit_id: @credit.id, :bondsman => "true").first 
+					if defined?(reg_client_f.id)
+			%>			
+			<div style=" width:320px;border-style: solid; display: inline-block;">
+				<ul>
+					<li type="none" style=""><b>Nombre: </b> <%= reg_client_f.name %> .</li>
+					<li type="none"><b>Telefono:</b> <%= reg_client_f.phone %></li>
+					<li type="none"><b>C.C:</b> <%= reg_client_f.document %></li>
+				</ul>
+			</div>	
+			<div style="width:320px; border-style: solid; display: inline-block;">
+				<ul>
+					<li type="none"><b>Ciudad:</b>  <%= reg_client_f.city.name %></li>
+					<li type="none"><b>Barrio:</b>  <%= reg_client_f.neihborhood %></li>
+					<li type="none"><b>Direccion:</b> <%= reg_client_f.address %></li>
+				</ul>
+			</div>			
+		<%  else %>
+			<h5> Crédito Personal </h5>			
+		<% end %>  			
+
+		</div>
+
+
+	</div> <!--cierre div datos cliente arriba de comprador --> 
+
+	<div id="datosCredito" style="">
+		<h3>Datos de Crédito</h3>
+			<div style=" width:320px;border-style: solid; display: inline-block;">
+				<ul>
+					<li type="none" style="display:inline;"><b>Valor total $: </b> <%= @credit.total  %> </li>
+					<li type="none"><b>Cuota Inicial $: </b> <%= @credit.payments_credits.first.value %></li>
+					<li type="none"><b>Modo de Pago: </b> <%= 'Mensual' %></li>
+				</ul>
+			</div>
+			<div style=" width:320px;border-style: solid; display: inline-block;">
+				<ul>
+					<li type="none"><b>No. Cuotas: </b>  <%= '10' %></li>
+					<li type="none"><b>Valor Cuota $: </b>  <%= '300.000' %></li>
+					<li type="none"><b>Fecha Inicio de Pagos: </b> <%= '12/11/2013' %></li>
+				</ul>
+			</div>			
+	</div>	
+
+
+
+		
+
+<BR>
+<BR>
+
+
+<div>
+	<h3 style="text-align:center;">CLAUSULAS CONTRACTUALES</h3>
+	<p>
+		LUIS GERARDO QUINTANA A: Propieatario de CRÉDITOS MELÉNDEZ Q.  a quien se conoce como el VENDEDOR  y <font style="text-decoration: underline; font-weight:bold;"> <%= reg_client.name %></font>  a quien se le conoce como COMPRADOR , hemos acordado obligarnos en los siguientes términos:
+	</p> 
+	<p>
+		<b>PRIMERO:</b> EL VENDEDOR se obliga a vender, al COMPRADOR los siguientes artículos y este a su vez se obliga a comprar el bien (los bienes) que se describe(n) a continuación :
+	</p>
+
+</div>
+
+
+
+
+<br><br>
+
+<table border="1" id="mitabla" valign="middle">
+	<tr>
+		<th>Nombre Producto</th>
+		<th>Cantidad</th>
+		<th>Valor Unitario</th>
+		<th>Valor Total Producto </th>
+	</tr>
+	</th>
+	<tbody>
+
+
+<% 
+i=0
+@credit.credit_products.each do |product| 
+                # los atributos de productos que tengan este pedido
+	%>
+	
+	<% 
+		i +=1
+
+		if i % 2 == 0
+	%>
+		<tr id="fila_par">
+			<td><%= product.product.name %></td>
+			<td><%= product.amount %></td>
+			<td><%= product.value %></td>
+			<td><%= product.value.to_i * product.amount.to_i %></td>
+		</tr>
+
+		<%#= "Es par" %>
+	<% else %>
+	<%#= "Es Impar" %>
+		<tr id="fila_impar">
+			<td><%= product.product.name %></td>
+			<td><%= product.amount %></td>
+			<td><%= product.value %></td>
+			<td><%= product.value.to_i * product.amount.to_i %></td>
+		</tr>	
+	<% end	 %>
+
+<% end %>
+	</tbody>
+</table>
+
+
+<BR><BR>
+<!-- <p style=""></p> -->
+<BR><BR>
+
+
+<div id="terminosUlt">
+
+	<p>
+		<b>SEGUNDA:</b> el precio del bien (de los bienes) objeto de venta es de $ <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.total %></font> moneda legal, suma que el comprador pagará al venvedor así: <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payment_mode.name %></font> pagos a partir del día  <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payday.day %></font> del mes de <font style="text-decoration: underline; font-weight:bold;"> <%= l @credit.payday, format: :only_month %></font> del año  <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payday.year %></font>  en la ciudad de la Hormiga Putumayo, a la orden del vendedor ____________(Quien?)_________________
+
+	</p>
+
+	<p>
+		<b>TERCERO:</b> Todo artículo se entregará con la cuota inicial la cula aparecerá en el encabezado de este contrato y firmado el pagaré por el comprador y su codeudor respaldando la deuda. 
+
+	</p> 
+	<p>
+		<b>CUARTO:</b>  El vendedor se reserca el dominio de la propiedad de los artículos vendidos en este contrato hasta tanto no haya sido cancelada la deuda en su totatilidad por parte del comprador.
+	</p> 
+	<p>
+		<b>QUINTO:</b> El vendedor podrá exigir restitución de los articulos vendidos en este contrato o la cancellación total de este mas los interéses de ley  a que hubiere lugar, cuando haya existido mora en el pago de las cuotas pactadas (Art.952 de C.C.) 
+	</p> 	
+	<p>
+		<b>SEXTO:</b> El (comprador) podrá exigir la devolución de su mercancía con la cancelación total de ese contrato, pero si no cumpliese la obligación de cancelar el saldo del contrato, los articulos restituidos al vendedor los perderá a favor del vendedor a titulo de pena.
+	</p> 		
+	<p>
+		<b>SEPTIMO:</b> EL comprador no podrá vender total o parcialmente los articulos mencionados en este contrato, hasta tanto el mismo no este cancelado en su totalidad y tenga dominio de los mismos, si lo hiciere se contituirá un delito de abuso de confianza (Art. 358 de CP.).
+	</p> 		
+	<p>
+		<b>OCTAVO:</b>  EL vendedor aceptará pagarés como garantía de la deuda contraida. Y el comprador debrá notificar al vendedor cualquier cambio de residencia. 
+	</p> 		
+	<p>
+		<b>NOVENO:</b> No serán validos los pagos efectuados a personas no autorizadas por el vendedor, ni pagos efectuados fuera del establecimiento.
+	</p> 	
+
+
+
+
+
+
+
+
+</div> <!-- div Cierre de ultimos terminos-->
+
+
+
+
+<BR><BR><BR>
+
+
+<p> Se Firma en ____________________________</p>  
+<p> A los  __________  dias del mes de   ______________   del año   _______ </p>
+
+<BR><BR><BR>
+
+<!-- &nbsp; -->
+<!-- <div> -->
+	<p style=" text-align: center; width: 200px; border-top-style: solid; display: inline-block;">Firma <b>Vendedor</b> </p>
+	<p style=" text-align: center; width: 200px; border-top-style: solid; display: inline-block;">Firma <b>Comprador</b> </p>
+	<p style=" text-align: center; width: 200px; border-top-style: solid; display: inline-block;">Firma <b>Codeudor</b> </p>
+<!-- </div> -->
+
+<BR><BR><BR>
+
+
+</div> <!-- Cierre div contenedor general-->

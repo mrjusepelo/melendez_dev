@@ -183,7 +183,7 @@ end
     column :created_at
     column :updated_at
     actions do |credit|
-      link_to("Generar Contrato",  admin_credit_path(credit), :class => "member_link") + "  " + 
+      link_to("Generar Contrato",  contract_admin_credit_path(credit), :class => "member_link") + "  " + 
       link_to("Pagos",  admin_credit_payments_credits_path(credit), :class => "member_link")
       # link_to "Agregar a Inventario", credit_show_path(id: credit.id), :class => "member_link"
       # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
@@ -192,7 +192,14 @@ end
   end    
 
 
+member_action :contract, :method => :get do
+@credit = Credit.find(id = params[:id])
 
+     html = render_to_string(:action => "contract.html.erb", :layout => false)
+      kit = PDFKit.new(html)
+      kit.stylesheets << 'vendor/assets/stylesheets/style.css'
+    send_data(kit.to_pdf, :filename => 'report.pdf', :type => 'application/pdf', :disposition => 'inline')
+end
 
 
 
@@ -295,12 +302,7 @@ end
   controller do
 
     def show
-      @credit = Credit.find(id = params[:id])
-
-     html = render_to_string(:action => "show.html.erb", :layout => false)
-      kit = PDFKit.new(html)
-      kit.stylesheets << 'vendor/assets/stylesheets/style.css'
-    send_data(kit.to_pdf, :filename => 'report.pdf', :type => 'application/pdf', :disposition => 'inline')     
+           
     end
 
 

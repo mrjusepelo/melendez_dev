@@ -80,4 +80,11 @@ class PublicsController < ApplicationController
     @category = Category.find(id = params[:id_category])
     @categories = Category.all
   end
+
+def refresh_alerts
+    @suppliers = Supplier.where(state: 'true')
+  
+end
+
+
 end
