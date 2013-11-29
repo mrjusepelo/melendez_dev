@@ -1,5 +1,5 @@
 ActiveAdmin.register_page "Dashboard" do
-menu false
+# menu false
   menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
@@ -9,6 +9,27 @@ menu false
         small I18n.t("active_admin.dashboard_welcome.call_to_action")
       end
     end
+
+
+
+section "Recent Productos" do
+    table_for Product.order("created_at desc").limit(5) do |t| 
+         # table_for current_admin_user.tasks.where('due_date > ? and due_date < ?', Time.now, 1.week.from_now) do |t|   
+    # table_for Product.brand.limit(5) do
+    t.column :name do |product|
+        link_to product.name, admin_product_path(product)
+    end 
+    t.column :created_at 
+# t.column("Status") { |task| status_tag (task.is_done ? "Done" : "Pending"), (task.is_done ? :ok : :error) }
+    end
+    strong { link_to "View All Products", admin_products_path }
+end
+
+
+
+
+
+
 
     # Here is an example of a simple dashboard with columns and panels.
     #

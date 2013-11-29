@@ -4,6 +4,7 @@ class Inventory < ActiveRecord::Base
   
   # validates_presence_of :barcode
   # validates_uniqueness_of :barcode
+  validates_presence_of :serial
   
    # validates_each :barcode do |record,model, attr, value|
     # puts("**********************codigo de barras"+ value.to_s)

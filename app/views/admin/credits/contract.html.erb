@@ -182,7 +182,7 @@ i=0
 <div id="terminosUlt">
 
 	<p>
-		<b>SEGUNDA:</b> el precio del bien (de los bienes) objeto de venta es de $ <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.total %></font> moneda legal, suma que el comprador pagará al venvedor así: <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payment_mode.name %></font> pagos a partir del día  <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payday.day %></font> del mes de <font style="text-decoration: underline; font-weight:bold;"> <%= l @credit.payday, format: :only_month %></font> del año  <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payday.year %></font>  en la ciudad de la Hormiga Putumayo, a la orden del vendedor ____________(Quien?)_________________
+		<b>SEGUNDA:</b> el precio del bien (de los bienes) objeto de venta es de $ <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.total %></font> moneda legal, suma que el comprador pagará al venvedor así: <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payment_mode.name %></font> pagos a partir del día  <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payday.day %></font> del mes de <font style="text-decoration: underline; font-weight:bold;"> <%= l @credit.payday, format: :only_month %></font> del año  <font style="text-decoration: underline; font-weight:bold;"> <%= @credit.payday.year %></font>  en la ciudad de la Hormiga Putumayo, a la orden del vendedor <font style="text-decoration: underline; font-weight:bold;"> <%= @nameUser %></font>
 
 	</p>
 

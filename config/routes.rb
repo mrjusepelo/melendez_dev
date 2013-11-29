@@ -42,6 +42,12 @@ Pencil::Application.routes.draw do
     end
   end  
 
+  resources :credits do 
+    collection do 
+      get "autocomplete"
+    end
+  end    
+
 # map.resources :orders, :member = { :id => :get }  
 # map.resources :products, :member = { :detailed => :get }  
 # namespace :admin do

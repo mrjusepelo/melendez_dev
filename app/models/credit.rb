@@ -26,4 +26,17 @@ class Credit < ActiveRecord::Base
   validates_presence_of :payment_mode_id
   validates_presence_of :number_payments
 
+
+  def self.autocomplete(search)
+    # find(:all, :conditions => ['(name LIKE ? or id LIKE ?)', "%#{search}%",  "%#{search}%"], :limit => 20)
+    # where("lower(name) like ?", "%#{(search).downcase}%")
+    # where("id IN (SELECT product_id FROM inventories ) AND lower(name) like ?", "%#{(params[:term]).downcase}%" )
+    # where("lower(name) like ? IN (SELECT product_id FROM inventories WHERE id = id)", "%#{(params[:term]).downcase}%" )
+    # select(:id, :name, :amount).where("name like ?", "%#{search}% IN (SELECT product_id FROM inventories WHERE id == id)")
+    # where('id IN (SELECT product_id FROM inventories WHERE lower(name) like ?)', '%#{(params[:term]).downcase}%')
+
+    # select(:id, :name, :amount).where("name like ?", "%#{search}%")
+  end
+
+
 end

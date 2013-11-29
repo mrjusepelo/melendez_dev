@@ -1,8 +1,18 @@
 $(function() {
     $( "#datepi" ).datepicker();
-    	// autocompletar();
+    	llenar_autocompletar();
 });
 
+function llenar_autocompletar(){
+    productsInventory = $.parseJSON($('#inventory_json').val());
+
+    $("input.inventory_product_id").each(function(){
+        var input = $(this);
+   		if (parseInt(input.val()) == parseInt(productsInventory.id)){
+                input.parent().parent().find("input#product").val(productsInventory.name);
+        }
+    });
+}
 
 
 function mensaje(){

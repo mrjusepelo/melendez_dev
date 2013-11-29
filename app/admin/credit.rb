@@ -5,6 +5,7 @@ ActiveAdmin.register Credit do
   index do 
     selectable_column
     column :id
+    column :admin_id
 
  column "Estado           " do |credit|
 
@@ -194,7 +195,8 @@ end
 
 member_action :contract, :method => :get do
 @credit = Credit.find(id = params[:id])
-
+@nameUser = current_admin_user.name
+# vista creada en views/admin/credits/contract
      html = render_to_string(:action => "contract.html.erb", :layout => false)
       kit = PDFKit.new(html)
       kit.stylesheets << 'vendor/assets/stylesheets/style.css'
@@ -218,6 +220,7 @@ end
 
       f.inputs "Creditos" do
         f.input :date, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
+      f.input :admin_id, input_html: {value: current_admin_user.id}
       f.input :payment_mode
 	  f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :state
@@ -226,18 +229,16 @@ end
 
       f.has_many :credit_products do |order|
 
-        order.inputs "Productos "+ (params[:id]).to_s do 
+        order.inputs "Productos " do 
 
         order.input :product, :as => "string", input_html: { onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        
-        # order.input :product_id,  input_html: {:value => Product.find(params[:id]).id, id: "product_id"}
         order.input :product_id,  input_html: {id: "product_id", class: "creadit_product_id"}
         order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
         order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
           within @head do
-               script :src => javascript_path('1.js'), :type => "text/javascript"
-               script :src => javascript_path('5.js'), :type => "text/javascript"
+               script :src => javascript_path('7.js'), :type => "text/javascript"
+               # script :src => javascript_path('5.js'), :type => "text/javascript"
                script :src => javascript_path('6.js'), :type => "text/javascript"
 
           end                 
@@ -290,6 +291,136 @@ end
 		end
 		    f.actions
 	end
+
+
+
+
+
+
+
+
+
+
+
+  #  show do |product|
+  #     attributes_table do
+        
+  #       row :id
+  #       row :color_id do
+  #         span :class => "colors", :style => "background-color: #{product.color.sample}; border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px; color:#F5F5F5;" do 
+  #           product.color.name
+  #         end
+
+  #       end
+
+  #       row :size_id
+  #       row :created_at
+  #       row :updated_at
+  #       row :comming_soon
+
+  #     end
+  # end
+    show do |credit|
+
+    within @head do
+         script :src => javascript_path('7.js'), :type => "text/javascript"
+
+    end        
+      attributes_table do
+        row :id
+        row :payment_mode
+        row :state
+        row :total
+        row :description
+        row :created_at
+        row :updated_at
+        row :date
+        row :sum_payments
+        row :payday
+        row :number_payments
+        row :value_payments
+        # row :image do
+        #   image_tag(ad.image.url)
+        # end
+
+        row  "Productos " do
+          table do 
+            
+            tr do 
+              td :style => "width: 200px; background-color: rgb(221, 221, 221); " do
+          span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+
+                "Nombre"
+          end      
+              end
+              td id: "Marca", :style => "background-color: rgb(221, 221, 221); " do
+          span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+            "Marca"
+          end
+
+
+
+
+
+              end              
+            end
+
+
+           credit.products.each do |p|
+              tr do 
+                td do 
+                  p.name
+                  # "La nombre del productos mas largo q piudiera umatginar"
+                end
+                td do 
+                  p.brand.name
+                end
+              end
+           end
+
+
+
+          end
+        end
+      end
+      active_admin_comments
+
+  # table_for credit.products do
+  #   column "Nombre" { |credit| credit.product.name }
+  #   # column "Payment Type" { |payment| payment.payment_type.titleize }
+  #   # column "Received On", :created_at
+  #   # column "Payment Details & Notes", :payment_details
+  #   # column "Amount" { |payment| payment.amount_in_dollars }
+  # end
+
+
+
+# attributes_table do
+
+#     table_for Product.order("created_at desc").limit(5) do |t| 
+#       t.column :name do |product|
+#         link_to product.name, admin_product_path(product)
+#       end 
+#       t.column :created_at 
+#     end
+
+# end
+
+
+
+
+
+    end
+
+
+
+
+
+
+
+
+
+
 
 
 

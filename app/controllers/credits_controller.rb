@@ -1,4 +1,34 @@
 class CreditsController < ApplicationController
+
+  respond_to :html, :json
+
+  def autocomplete 
+# a = Inventory.select(:id, :product_id).find(:all)
+# (a).each do |pro|
+#  puts pro.product.name
+# end
+
+
+
+    @products = Product.autocomplete params[:term]
+    
+    
+
+    # @products = Product.where("lower(name) like ?", "%#{(params[:term]).downcase}%")
+
+# @products = Product.where('id IN (SELECT product_id FROM inventories WHERE lower(name) like ?)', '%#{(params[:term]).downcase}%')
+ # @products = Product.where('id IN (SELECT product_id FROM inventories ) AND lower(name) like ?', '%#{(params[:term]).downcase}%' )
+
+
+# a = Inventory.select(:id, :product_id).find(:all)
+# (a).each do |pro|
+#     @products = pro.product.name
+# end
+
+    
+    respond_with @products
+  end
+
   def index
         html = render_to_string(:action => "index.html.erb")
     kit = PDFKit.new(html)

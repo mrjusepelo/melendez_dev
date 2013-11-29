@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131128181355) do
+ActiveRecord::Schema.define(version: 20131129154831) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20131128181355) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "document"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -119,8 +121,10 @@ ActiveRecord::Schema.define(version: 20131128181355) do
     t.date     "payday"
     t.integer  "number_payments"
     t.integer  "value_payments"
+    t.integer  "admin_id"
   end
 
+  add_index "credits", ["admin_id"], name: "index_credits_on_admin_id", using: :btree
   add_index "credits", ["payment_mode_id"], name: "index_credits_on_payment_mode_id", using: :btree
   add_index "credits", ["state_id"], name: "index_credits_on_state_id", using: :btree
 
@@ -145,6 +149,7 @@ ActiveRecord::Schema.define(version: 20131128181355) do
     t.date     "date_out"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "serial"
   end
 
   add_index "inventories", ["product_id"], name: "index_inventories_on_product_id", using: :btree

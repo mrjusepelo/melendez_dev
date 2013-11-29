@@ -18,6 +18,7 @@ ActiveAdmin.register Inventory do
         end
         row :supplier_id
         row :barcode
+        row :serial
         row :vale_buy
         row :vale_sale
         row :warranty
@@ -52,26 +53,18 @@ ActiveAdmin.register Inventory do
 
   end
   f.inputs "Datos del Producto" do
-
+      # Campo sobre escrito momentaneo para Json de nombre del Producto
+     f.input :serial, as: :hidden, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product.to_json}
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
-      f.input :product_id #, as: :hidden
-# $i = 0
-# $num = 4
-# while $i < $num  do
-#    # puts("*********************Inside the loop i = #$i" )
+      f.input :product_id , as: :hidden,  input_html: {id: "product_id", class: "inventory_product_id"}
 
-    
-     # f.input :barcode,  :as => "string", :input_html => { :value => "#$i", id: "", :style => "background-color: #E6E6E6; width: 60px;"}
-    # Inventory.create(:barcode => barcode.value)
-#     $i +=1
-# end
 
       # f.input :product
       f.input :barcode, :label => "Cantidad", :input_html => { id: "amount", name: "amount", :style => "background-color: #E6E6E6; width: 60px;"} 
+      f.input :serial
       f.input :supplier
-      # f.input :barcode,  :as => "string", :input_html => {id: "", :style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
       f.input :vale_buy
       f.input :vale_sale
       f.input :warranty
@@ -92,6 +85,7 @@ end
     selectable_column
     column :id
     column :barcode
+    column :serial
     #column "Codigo de barras", :barcode
      # column "My Custom Title", :barcode
     column "Nombre" do |inventory|
@@ -133,7 +127,7 @@ end
                      :supplier => params[:inventory][:supplier],
                      :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
                      :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
-                     :date_out => params[:inventory][:date_out]
+                     :date_out => params[:inventory][:date_out], :serial => params[:inventory][:serial]
                     )
                 end
 
