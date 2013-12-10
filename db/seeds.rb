@@ -18,3 +18,4 @@
 # Product.create(name: "producto1", description: "producto sin iva", brand_id: 1)
 # Product.create(name: "Producto2", description: "producto con iva", brand_id: 1)
 # Product.create(name: "patines", description: "", brand_id: 1)
+AdminUser.update(1, role: "super")
