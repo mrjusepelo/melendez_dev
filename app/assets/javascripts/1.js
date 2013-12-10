@@ -9,3 +9,4 @@ $(document).ready(function(){
     });
 });
 	 // [p.name, ' MARCA:', p.brand.name,  ' CANTIDAD:', p.amount, ' DESCRIPCION:', p.description].join('') 
+	 // ['CodigoBarra:',p.barcode, ' Serial:',p.serial,' Producto:',nombre,' Marca:',marca, ' Valor:',p.vale_sale].join('')

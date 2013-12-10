@@ -56,3 +56,4 @@ gem 'carrierwave-google_drive'
 
 gem 'pdfkit'
 # gem 'wkhtmltopdf-binary'
+gem 'cancan'

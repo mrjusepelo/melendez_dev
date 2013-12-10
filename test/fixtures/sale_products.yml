@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  sale_id: 
+  product_id: 
+  value: 1
+  amount: 1
+  unit_value: 1
+
+two:
+  sale_id: 
+  product_id: 
+  value: 1
+  amount: 1
+  unit_value: 1

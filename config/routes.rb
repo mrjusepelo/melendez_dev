@@ -1,5 +1,11 @@
 Pencil::Application.routes.draw do
 
+  get "sales/index"
+  get "sales/view"
+  get "sales/edit"
+  get "sales/show"
+  get "sales/create"
+  get "sales/delete"
   get "credits/new"
   get "credits/create"
   get "credits/update"
@@ -47,6 +53,12 @@ Pencil::Application.routes.draw do
       get "autocomplete"
     end
   end    
+
+  resources :sales do 
+    collection do 
+      get "autocomplete"
+    end
+  end
 
 # map.resources :orders, :member = { :id => :get }  
 # map.resources :products, :member = { :detailed => :get }  

@@ -1,5 +1,7 @@
 class Client < ActiveRecord::Base
   belongs_to :city
+  # has_many :sales
+
   validates_presence_of :name
   validates_presence_of :document
   validates_presence_of :phone

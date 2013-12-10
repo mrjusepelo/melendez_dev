@@ -3,6 +3,7 @@ ActiveAdmin.register AdminUser do
     column :name
     column :email
     column :document
+    column :role
     column :current_sign_in_at
     column :last_sign_in_at
     column :sign_in_count
@@ -19,6 +20,22 @@ ActiveAdmin.register AdminUser do
       f.input :document
       f.input :password
       f.input :password_confirmation
+      f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Super", "Super"], ["Super Lectura", "Super Lectura"], ["Pedidos", "Pedidos"], ["Productos", "Productos"]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     end
     f.actions
   end

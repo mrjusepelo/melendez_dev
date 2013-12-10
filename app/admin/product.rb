@@ -21,18 +21,13 @@ ActiveAdmin.register Product do
 			f.input :categories, :as => :check_boxes, :collection => Category.all
 			f.input :name
 			f.input :description
-			f.input :amount, :input_html => {:style => "width: 60px;"}
+			# f.input :amount, :input_html => {:style => "width: 60px;"}
 			f.input :brand
-			# f.input :image
 
-      # f.has_many :images do |im|
       f.has_many :images do |im|
         im.inputs 'Imagenes' do 
           im.input :route
           im.input :remote_route_url
-
-  # end
-          
           im.input :priority
         end
       # f.actions

@@ -16,3 +16,5 @@
 ['CodigoBarra:',p.barcode, ' Serial:',p.serial,' Producto:',nombre,' Marca:',marca, ' Valor:',p.vale_sale].join('')
 	  
 	end
+
+

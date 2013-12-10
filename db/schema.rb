@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131129154831) do
+ActiveRecord::Schema.define(version: 20131210204420) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20131129154831) do
     t.datetime "updated_at"
     t.string   "name"
     t.string   "document"
+    t.string   "role"
   end
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
@@ -81,10 +82,12 @@ ActiveRecord::Schema.define(version: 20131129154831) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "credit_id"
+    t.integer  "sale_id"
   end
 
   add_index "clients", ["city_id"], name: "index_clients_on_city_id", using: :btree
   add_index "clients", ["credit_id"], name: "index_clients_on_credit_id", using: :btree
+  add_index "clients", ["sale_id"], name: "index_clients_on_sale_id", using: :btree
 
   create_table "consigments", force: true do |t|
     t.integer  "value"
@@ -97,17 +100,18 @@ ActiveRecord::Schema.define(version: 20131129154831) do
   add_index "consigments", ["order_id"], name: "index_consigments_on_order_id", using: :btree
 
   create_table "credit_products", force: true do |t|
-    t.integer  "product_id"
     t.integer  "credit_id"
     t.string   "amount"
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "unit_value"
+    t.integer  "inventory_id"
+    t.string   "inventory_fields"
   end
 
   add_index "credit_products", ["credit_id"], name: "index_credit_products_on_credit_id", using: :btree
-  add_index "credit_products", ["product_id"], name: "index_credit_products_on_product_id", using: :btree
+  add_index "credit_products", ["inventory_id"], name: "index_credit_products_on_inventory_id", using: :btree
 
   create_table "credits", force: true do |t|
     t.integer  "payment_mode_id"
@@ -121,10 +125,12 @@ ActiveRecord::Schema.define(version: 20131129154831) do
     t.date     "payday"
     t.integer  "number_payments"
     t.integer  "value_payments"
-    t.integer  "admin_id"
+    t.integer  "admin_user_id"
+    t.integer  "admin_creator_id"
   end
 
-  add_index "credits", ["admin_id"], name: "index_credits_on_admin_id", using: :btree
+  add_index "credits", ["admin_creator_id"], name: "index_credits_on_admin_creator_id", using: :btree
+  add_index "credits", ["admin_user_id"], name: "index_credits_on_admin_user_id", using: :btree
   add_index "credits", ["payment_mode_id"], name: "index_credits_on_payment_mode_id", using: :btree
   add_index "credits", ["state_id"], name: "index_credits_on_state_id", using: :btree
 
@@ -228,6 +234,31 @@ ActiveRecord::Schema.define(version: 20131129154831) do
   end
 
   add_index "products", ["brand_id"], name: "index_products_on_brand_id", using: :btree
+
+  create_table "sale_products", force: true do |t|
+    t.integer  "sale_id"
+    t.integer  "product_id"
+    t.integer  "value"
+    t.integer  "amount"
+    t.integer  "unit_value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sale_products", ["product_id"], name: "index_sale_products_on_product_id", using: :btree
+  add_index "sale_products", ["sale_id"], name: "index_sale_products_on_sale_id", using: :btree
+
+  create_table "sales", force: true do |t|
+    t.integer  "credit_id"
+    t.integer  "admin_user_id"
+    t.date     "date"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sales", ["admin_user_id"], name: "index_sales_on_admin_user_id", using: :btree
+  add_index "sales", ["credit_id"], name: "index_sales_on_credit_id", using: :btree
 
   create_table "states", force: true do |t|
     t.string   "name"

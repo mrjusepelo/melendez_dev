@@ -8,13 +8,17 @@ ActiveAdmin.register Inventory do
 # end
 
     show do |inventory|
-      attributes_table do
+      attributes_table do 
         row :id
         row :product_id
-        product = Product.where(id: inventory.product_id).first
-        brand = Brand.where(id: product.brand_id).first
+        # product = Product.where(id: inventory.product_id).first
+        # brand = Brand.where(id: product.brand_id).first
         row "Marca" do
-          brand.name
+          if defined?(inventory.product.brand.name)
+           marca = inventory.product.brand.name
+          else
+            marca = "Sin asignar"
+          end
         end
         row :supplier_id
         row :barcode
@@ -50,19 +54,21 @@ ActiveAdmin.register Inventory do
            script :src => javascript_path('1.js'), :type => "text/javascript"
            # script :src => javascript_path('2.js'), :type => "text/javascript"
            script :src => javascript_path('3.js'), :type => "text/javascript"
+           script :src => javascript_path('admin_inventory.js'), :type => "text/javascript"
 
   end
   f.inputs "Datos del Producto" do
       # Campo sobre escrito momentaneo para Json de nombre del Producto
-     f.input :serial, as: :hidden, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product.to_json}
+     f.input :supplier, as: :hidden, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product.to_json}
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
-      f.input :product_id , as: :hidden,  input_html: {id: "product_id", class: "inventory_product_id"}
+      f.input :product_id ,   input_html: {id: "product_id", class: "inventory_product_id"}
+      # f.input :product_id , as: :hidden,  input_html: {id: "product_id", class: "inventory_product_id"}
 
 
       # f.input :product
-      f.input :barcode, :label => "Cantidad", :input_html => { id: "amount", name: "amount", :style => "background-color: #E6E6E6; width: 60px;"} 
+      f.input :barcode, :label => "Cantidad", :input_html => {onBlur: "createSerials(this)", id: "amount", name: "amount", :style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :serial
       f.input :supplier
       f.input :vale_buy
@@ -88,8 +94,13 @@ end
     column :serial
     #column "Codigo de barras", :barcode
      # column "My Custom Title", :barcode
-    column "Nombre" do |inventory|
-       inventory.product.name
+    column "Producto" do |inventory|
+       # inventory.product.name
+        if defined?(inventory.product.name)
+         nombreP = inventory.product.name
+        else
+          nombreP = "Sin asignar"
+        end       
      end
     column "Marca" do |inventory|
         if defined?(inventory.product.brand.name)
@@ -127,13 +138,51 @@ end
                      :supplier => params[:inventory][:supplier],
                      :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
                      :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
-                     :date_out => params[:inventory][:date_out], :serial => params[:inventory][:serial]
+                     :date_out => params[:inventory][:date_out], :serial => params['serial'.to_s+i.to_s]
                     )
                 end
 
             redirect_to :action => :index
             # 'admin/products#index'
         end
+     
+     def edit
+            @inventory = Inventory.find(params[:id])
+            puts "******************************"+@inventory.id.to_s
+
+      end
+
+        def update
+            # @credit = Credit.find(params[:id])
+            @inventory = Inventory.find(params[:id])
+            puts "******************************"+@inventory.to_s
+              Inventory.update(@inventory.id, :product_id => params[:product])
+              Inventory.update(27, product_id: 2)
+
+            puts "****************************************"+params[:product].to_s
+
+              # Inventory.update(@inventory.id, :product_id => params[:inventory][:product_id], :supplier_id => params[:supplier_id],
+              #                 :barcode => params[:barcode], :vale_buy => params[:vale_buy], :vale_sale => params[:vale_sale],
+              #                 :warranty => params[:warranty], :date_in => params[:date_in], :date_out => params[:date_out],
+              #                 :updated_at => params[:updated_at], :serial => params[:serial]
+              #                 )
+              
+              # credit = Credit.find(2)
+              # credit.update_attribute(:state_id, 3)
+              # Credit.update(credit.id, :state_id => 3)
+
+        # #   @inventory = Inventory.find(params[:id])
+
+
+          update! do |format|
+        # #     # sum_payments =  @credit.payments_credits.sum(:value)
+        # #     # Credit.update(@credit.id, :sum_payments => sum_payments)
+        # #     Inventory.update(@inventory.id, :sum_payments => sum_payments)
+            format.html { redirect_to :action => :index }
+          end    
+        end
+
+
           before_filter :protected_attributes
             def protected_attributes
               params.permit!

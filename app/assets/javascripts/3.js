@@ -6,12 +6,15 @@ $(function() {
 function llenar_autocompletar(){
     productsInventory = $.parseJSON($('#inventory_json').val());
 
-    $("input.inventory_product_id").each(function(){
-        var input = $(this);
-   		if (parseInt(input.val()) == parseInt(productsInventory.id)){
-                input.parent().parent().find("input#product").val(productsInventory.name);
-        }
-    });
+	if (productsInventory != null) {
+	    $("input.inventory_product_id").each(function(){
+	        var input = $(this);
+	   		if (parseInt(input.val()) == parseInt(productsInventory.id)){
+	                input.parent().parent().find("input#product").val(productsInventory.name);
+	        }
+	    });
+	}
+	
 }
 
 
@@ -22,7 +25,8 @@ $( "#product" ).autocomplete({
       minLength: 2,
       select: function( event, ui ) {
       	// alert(ui.item.id);
-        $("#inventory_product_id").val(ui.item.id);
+        $(".inventory_product_id").val(ui.item.id);
+        // $("#product_id").val(ui.item.id);
       }
     });
 

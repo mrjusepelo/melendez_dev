@@ -1,20 +1,22 @@
 $(document).ready(function(){
-    llenar_autocompletar();
+    // llenar_autocompletar();
 });
 
-function llenar_autocompletar(){
-    productsCredit = $.parseJSON($('#credit_json').val());
-    $("input.creadit_product_id").each(function(){
-        var input = $(this);
-        for (var i = 0; i < productsCredit.length; i ++){
-            var product = productsCredit[i];
-            if (parseInt(input.val()) == parseInt(product.id)){
-                input.parent().parent().find("input#product").val(product.name);
-                break;
-            }
-        }
-    });
-}
+// function llenar_autocompletar(){
+//     productsCredit = $.parseJSON($('#credit_json').val());
+//     $("input.creadit_product_id").each(function(){
+//         var input = $(this);
+//         for (var i = 0; i < productsCredit.length; i ++){
+//             var product = productsCredit[i];
+//             if (parseInt(input.val()) == parseInt(product.id)){
+//                 input.parent().parent().find("input#product").val(product.name);
+//                 break;
+//             }
+//         }
+//     });
+// }
+
+
 // js de creditos + prueba
 function sumavalorcredito(total){
     var sum = 0;

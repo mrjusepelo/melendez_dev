@@ -5,107 +5,107 @@ ActiveAdmin.register Credit do
   index do 
     selectable_column
     column :id
-    column :admin_id
+    column :admin_user_id
 
- column "Estado           " do |credit|
+    column "Estado " do |credit|
 
-modoPago = credit.payment_mode_id
-diaPago = credit.payday
-ultimoPago = credit.payments_credits.where(credit_id: credit.id ).last
-sumaPagos =  credit.payments_credits.sum(:value)
-estado = credit.state_id
-# estado = credit.state.name
+      modoPago = credit.payment_mode_id
+      diaPago = credit.payday
+      ultimoPago = credit.payments_credits.where(credit_id: credit.id ).last
+      sumaPagos =  credit.payments_credits.sum(:value)
+      estado = credit.state_id
+      # estado = credit.state.name
 
-fechaPagoInicial = credit.payday
-must_pay = fechaPagoInicial
-tipoPago = credit.payment_mode_id
+      fechaPagoInicial = credit.payday
+      must_pay = fechaPagoInicial
+      tipoPago = credit.payment_mode_id
 
-# metodo que cuenta la cantidad de pagos ideal hasta hoy
-def pagosIdeal(must_pay, tipoPago)
-    case tipoPago
-    when 2
-      tipoPago = 7
-    when 3
-      tipoPago = 15
-    when 4
-      tipoPago = 1.months  # revizar este caso
-    end
+      # metodo que cuenta la cantidad de pagos ideal hasta hoy
+      def pagosIdeal(must_pay, tipoPago)
+          case tipoPago
+          when 2
+            tipoPago = 7
+          when 3
+            tipoPago = 15
+          when 4
+            tipoPago = 1.months  # revizar este caso
+          end
 
-            cantIdeal=1
-            while must_pay <= Date.today
-              # must_pay +=7
-              cantIdeal = cantIdeal + 1
-              must_pay = must_pay + tipoPago
-              if must_pay > Date.today then
-                must_pay = (must_pay - tipoPago)
-                cantIdeal = cantIdeal - 1
-                break
-                
+                  cantIdeal=1
+                  while must_pay <= Date.today
+                    # must_pay +=7
+                    cantIdeal = cantIdeal + 1
+                    must_pay = must_pay + tipoPago
+                    if must_pay > Date.today then
+                      must_pay = (must_pay - tipoPago)
+                      cantIdeal = cantIdeal - 1
+                      break
+                      
+                    end
+                  end  
+
+                  # if Date.today == must_pay
+                  #         Credit.update(credit.id, :payday => must_pay)
+                  # end            
+          return cantIdeal, must_pay
+      end                        
+
+
+
+      numPagos = pagosIdeal(must_pay, tipoPago)[0]
+      pagosAlDia =  numPagos * credit.value_payments
+
+
+      # # def comprobacionPagos(id, modoPago, diaPago, ultimoPago, sumaPagos, pagosAlDia, estado )
+      #  # if diaPago < Date.today
+      # #     if ultimoPago < Date.today
+
+      if diaPago > Date.today
+      # credit = Credit.find(credit.id)
+      credit.update_attribute(:state_id, 5)
+            if sumaPagos < pagosAlDia
+              if estado != 1
+                # Credit.update(6, :state_id => 1)
+                Credit.where(:id =>[credit.id]).update_all(:state_id => 1)
+
+                # Credit.update(@credit.id, :sum_payments => sum_payments)
+
+                # "estado diferente"
+
+              else
+                # estado
+                # credit.state.name
               end
-            end  
 
-            # if Date.today == must_pay
-            #         Credit.update(credit.id, :payday => must_pay)
-            # end            
-    return cantIdeal, must_pay
-end                        
+            # elsif sumaPagos == pagosAlDia
+            #   if estado != 3
+            #     Credit.update(credit.id, :state_id => 3)
+            #   else
+            #     # estado
+            #     credit.state.name
 
+            #   end     
 
+            # elsif sumaPagos > pagosAlDia
+            #     if estado != 8
+            #       Credit.update(credit.id, :state_id => 8)
+            #     else
+            #       # estado
+            #     credit.state.name
 
-numPagos = pagosIdeal(must_pay, tipoPago)[0]
-pagosAlDia =  numPagos * credit.value_payments
+            #     end
+                              
 
+            end
+      end # diaPago > hoy
 
-# # def comprobacionPagos(id, modoPago, diaPago, ultimoPago, sumaPagos, pagosAlDia, estado )
-#  # if diaPago < Date.today
-# #     if ultimoPago < Date.today
-
-if diaPago > Date.today
-# credit = Credit.find(credit.id)
-credit.update_attribute(:state_id, 5)
-      if sumaPagos < pagosAlDia
-        if estado != 1
-          # Credit.update(6, :state_id => 1)
-          Credit.where(:id =>[credit.id]).update_all(:state_id => 1)
-
-          # Credit.update(@credit.id, :sum_payments => sum_payments)
-
-          # "estado diferente"
-
-        else
-          # estado
-          # credit.state.name
+      if diaPago < Date.today 
+        if sumaPagos >= pagosAlDia 
+           credit.update_attribute(:state_id, 3)  # paogs al dia
+         elsif sumaPagos < pagosAlDia
+           credit.update_attribute(:state_id, 1) # pagos pendientes
         end
-
-      # elsif sumaPagos == pagosAlDia
-      #   if estado != 3
-      #     Credit.update(credit.id, :state_id => 3)
-      #   else
-      #     # estado
-      #     credit.state.name
-
-      #   end     
-
-      # elsif sumaPagos > pagosAlDia
-      #     if estado != 8
-      #       Credit.update(credit.id, :state_id => 8)
-      #     else
-      #       # estado
-      #     credit.state.name
-
-      #     end
-                        
-
       end
-end # diaPago > hoy
-
-if diaPago < Date.today 
-  if sumaPagos >= pagosAlDia 
-     credit.update_attribute(:state_id, 3)  # paogs al dia
-   elsif sumaPagos < pagosAlDia
-     credit.update_attribute(:state_id, 1) # pagos pendientes
-  end
-end
 
 
 
@@ -113,29 +113,29 @@ end
 
 
 
-      # " #{credit.id}   #{sumaPagos}    #{pagosAlDia}"
-      # credit.state_id
+            # " #{credit.id}   #{sumaPagos}    #{pagosAlDia}"
+            # credit.state_id
 
 
-# #     end #ultimoPago 
-    
-# #   end
-  
-# # end
-  
-                        # must_pay +
-                        # "ite #{i}"
-# "#{pagosIdeal(must_pay, 7)[0]} Este es el dia #{pagosIdeal(must_pay, 7)[1]}"
-
-
-
+      # #     end #ultimoPago 
+          
+      # #   end
+        
+      # # end
+        
+                              # must_pay +
+                              # "ite #{i}"
+      # "#{pagosIdeal(must_pay, 7)[0]} Este es el dia #{pagosIdeal(must_pay, 7)[1]}"
 
 
 
-          credit.state.name
 
 
-    end
+
+                credit.state.name
+
+
+          end
 
 
 
@@ -219,10 +219,27 @@ end
 	form do |f|
 
       f.inputs "Creditos" do
-        f.input :date, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
-      f.input :admin_id, input_html: {value: current_admin_user.id}
+        # f.input :date, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
+        # f.input :date, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: credit.products.to_json}
+      # f.input :admin_user
+    
+
+      if credit.id
+      f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {:disabled => "disable"} 
+      f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: credit.admin_creator_id, :input_html => {:disabled => "disable"} 
+     
+      puts "**************************************************"+credit.id.to_s
+      puts "**************************************************"+credit.admin_creator_id.to_s
+     else
+      puts "***********************else***************************"
+      # f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id
+      f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => { style: "display:none;"} 
+      f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {} 
+      # f.input :admin_creator_id, :as => :string, :input_html => {style: 'width:120px;', :disabled => "disable", value: current_admin_user.name }
+    
+     end
       f.input :payment_mode
-	  f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
+	    f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :state
       f.input :payday, :as => :datepicker
       f.input :description,   input_html: {:size => '3'}
@@ -231,13 +248,16 @@ end
 
         order.inputs "Productos " do 
 
-        order.input :product, :as => "string", input_html: { onBlur: "javascript:salida(this)", onclick: "javascript:fondo(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        order.input :product_id,  input_html: {id: "product_id", class: "creadit_product_id"}
+        # order.input :product, :as => "string", input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:llenar_campos(this) ", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 440px;"}
+        # order.input :product, :as => "string", input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 440px;"}
+        # order.input :inventory, :as => "string", input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 650px;"}
+        order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
+        order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
         order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
         order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
           within @head do
-               script :src => javascript_path('7.js'), :type => "text/javascript"
+               script :src => javascript_path('admin_credit.js'), :type => "text/javascript"
                # script :src => javascript_path('5.js'), :type => "text/javascript"
                script :src => javascript_path('6.js'), :type => "text/javascript"
 
@@ -328,9 +348,10 @@ end
     end        
       attributes_table do
         row :id
+        row :admin_user
+        row :admin_creator_id
         row :payment_mode
         row :state
-        row :total
         row :description
         row :created_at
         row :updated_at
@@ -339,6 +360,7 @@ end
         row :payday
         row :number_payments
         row :value_payments
+        row :total
         # row :image do
         #   image_tag(ad.image.url)
         # end
@@ -348,32 +370,38 @@ end
             
             tr do 
               td :style => "width: 200px; background-color: rgb(221, 221, 221); " do
-          span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
-
-                "Nombre"
-          end      
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                  "Nombre"
+                end      
               end
               td id: "Marca", :style => "background-color: rgb(221, 221, 221); " do
-          span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
-            "Marca"
-          end
-
-
-
-
-
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Marca"
+                end
+              end
+              td id: "Serial", :style => "background-color: rgb(221, 221, 221); " do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                  "No. Serial"
+                end
               end              
+
             end
 
 
-           credit.products.each do |p|
+           # credit.products.each do |p|
+           credit.inventories.each do |inv|
               tr do 
                 td do 
-                  p.name
+                  inv.product.name
                   # "La nombre del productos mas largo q piudiera umatginar"
                 end
                 td do 
-                  p.brand.name
+                  inv.product.brand.name
+                  # 'nombreMarca'
+                end
+                td do
+                  inv.serial
+                  # "Numero serial del producto"
                 end
               end
            end
@@ -383,7 +411,9 @@ end
           end
         end
       end
-      active_admin_comments
+
+      # desactivado desde el inicializer/config/ActiveAdmin
+      # active_admin_comments
 
   # table_for credit.products do
   #   column "Nombre" { |credit| credit.product.name }

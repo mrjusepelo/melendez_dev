@@ -1,11 +1,12 @@
 class Credit < ActiveRecord::Base
+  belongs_to :admin_user
   belongs_to :payment_mode
   belongs_to :state
   has_many :clients
 
 # lineas agregadas
   has_many :credit_products
-  has_many :products, :through => :credit_products
+  has_many :inventories, :through => :credit_products
 
 
 
@@ -18,13 +19,13 @@ class Credit < ActiveRecord::Base
   accepts_nested_attributes_for :payments_credits
   accepts_nested_attributes_for :support_documents
 
-  validates_presence_of :payday
-  validates_presence_of :description
-  validates_presence_of :state_id
-  validates_presence_of :total
-  validates_presence_of :date
-  validates_presence_of :payment_mode_id
-  validates_presence_of :number_payments
+  # validates_presence_of :payday
+  # # validates_presence_of :description
+  # validates_presence_of :state_id
+  # validates_presence_of :total
+  # validates_presence_of :date
+  # validates_presence_of :payment_mode_id
+  # validates_presence_of :number_payments
 
 
   def self.autocomplete(search)

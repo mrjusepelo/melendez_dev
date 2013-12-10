@@ -1,9 +1,7 @@
 class Product < ActiveRecord::Base
   
 
-# Lineas agregadas
-  has_many :credit_products
-  has_many :credits, :through => :credit_products
+
 
 
 
@@ -16,8 +14,10 @@ class Product < ActiveRecord::Base
   has_many :categories, :through => :product_categories  
   has_many :order_products
   
+  has_many :sale_products
+  has_many :sales, :through => :sale_products
 
-  # has_many :inventories
+  has_many :inventories
 
   validates_presence_of :brand
 

@@ -12,7 +12,7 @@ ActiveAdmin.register_page "Dashboard" do
 
 
 
-section "Recent Productos" do
+h3 section "Productos Recientes" do
     table_for Product.order("created_at desc").limit(5) do |t| 
          # table_for current_admin_user.tasks.where('due_date > ? and due_date < ?', Time.now, 1.week.from_now) do |t|   
     # table_for Product.brand.limit(5) do
