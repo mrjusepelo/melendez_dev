@@ -1,6 +1,11 @@
 class Inventory < ActiveRecord::Base
   belongs_to :product
   belongs_to :supplier
+  belongs_to :state_inventory
+
+  has_many :sale_products
+  has_many :sales, :through => :sale_products
+
 
 # lineas agregadas
   has_many :credit_products

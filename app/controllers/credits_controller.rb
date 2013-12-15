@@ -11,7 +11,10 @@ class CreditsController < ApplicationController
 
 
     # @products = Product.autocomplete params[:term]
-    @products = Inventory.where("lower(barcode) like ?", "%#{(params[:term]).downcase}%")
+    @products = Inventory.where("lower(barcode) like ? AND state_inventory_id = 1", "%#{(params[:term]).downcase}%" ) 
+    # @products = Inventory.where("lower(barcode) like ?", "%#{(params[:term]).downcase}%" ) AND :state_inventory_id = 1
+    # WHERE (LOWER(persons.name) ILIKE 'jo%') AND active_person = 1
+    # @products = Inventory.where(:state_inventory_id = 1 AND "lower(barcode) like ?", "%#{(params[:term]).downcase}%" )
     
     
 

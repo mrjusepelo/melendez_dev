@@ -204,7 +204,7 @@ member_action :contract, :method => :get do
 end
 
 
-
+# %meta{:name => 'pdfkit-footer_right', :content => "[page]"}
 
 
 
@@ -248,9 +248,6 @@ end
 
         order.inputs "Productos " do 
 
-        # order.input :product, :as => "string", input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:llenar_campos(this) ", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 440px;"}
-        # order.input :product, :as => "string", input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 440px;"}
-        # order.input :inventory, :as => "string", input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 650px;"}
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
         order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
         order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
@@ -479,7 +476,13 @@ end
 
                
                
-               @credit.credit_products.each do |product|
+               @credit.credit_products.each do |crePro|
+                  crePro.inventory.update_attribute(:state_inventory_id, 3)
+
+                  # credit = Credit.find(2)
+                  # credit.update_attribute(:state_id, 3)
+
+                  # Inventory.where(:id =>[27]).update_all(:state_inventory_id => 3)
                 # los atributos de productos que tengan este pedido
                end
 

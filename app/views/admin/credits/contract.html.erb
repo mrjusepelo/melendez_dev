@@ -13,9 +13,22 @@
 		
 		<% end %>
 		<%#= image_tag("/assets/favicon.ico" ) %>
+    <script type="text/javascript">
+      function subst() {
+        var vars={};
+        var x=document.location.search.substring(1).split('&');
+        for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = unescape(z[1]);}
+        var x=['frompage','topage','page','webpage','section','subsection','subsubsection'];
+        for(var i in x) {
+          var y = document.getElementsByClassName(x[i]);
+          for(var j=0; j<y.length; ++j) y[j].textContent = vars[x[i]];
+        }
+      }
+    </script>
 
 </head>
-
+<body style="margin: 0;" onload="subst();">
+    Page <span class="page"></span> of <span class="topage"></span>
 
 <div id="contenedorGeneral" style="border-style:solid; padding:35px;">
 
@@ -132,9 +145,9 @@
 <table border="1" id="mitabla" valign="middle">
 	<tr>
 		<th>Nombre Producto</th>
-		<th>Cantidad</th>
-		<th>Valor Unitario</th>
-		<th>Valor Total Producto </th>
+		<th>Serial</th>
+		<th>Garant&iacute;a en Meses</th>
+		<th>Valor </th>
 	</tr>
 	</th>
 	<tbody>
@@ -142,8 +155,10 @@
 
 <% 
 i=0
-@credit.credit_products.each do |product| 
-                # los atributos de productos que tengan este pedido
+# @credit.credit_products.each do |product| 
+# @credit.inventories.each do |inv| 
+@credit.credit_products.each do |crePro| 
+	# puts "**************************"+inv.product.name.to_s
 	%>
 	
 	<% 
@@ -152,20 +167,20 @@ i=0
 		if i % 2 == 0
 	%>
 		<tr id="fila_par">
-			<td><%= product.product.name %></td>
-			<td><%= product.amount %></td>
-			<td><%= product.value %></td>
-			<td><%= product.value.to_i * product.amount.to_i %></td>
+			<td><%= crePro.inventory.product.name %></td>
+			<td><%= crePro.inventory.serial %></td>
+			<td><%= crePro.inventory.warranty %> </td>
+			<td><%= crePro.value %></td>
 		</tr>
 
 		<%#= "Es par" %>
 	<% else %>
 	<%#= "Es Impar" %>
 		<tr id="fila_impar">
-			<td><%= product.product.name %></td>
-			<td><%= product.amount %></td>
-			<td><%= product.value %></td>
-			<td><%= product.value.to_i * product.amount.to_i %></td>
+			<td><%= crePro.inventory.product.name %></td>
+			<td><%= crePro.inventory.serial %></td>
+			<td><%= crePro.inventory.warranty %></td>
+			<td><%= crePro.value %></td>
 		</tr>	
 	<% end	 %>
 
@@ -240,3 +255,5 @@ i=0
 
 
 </div> <!-- Cierre div contenedor general-->
+
+</body>

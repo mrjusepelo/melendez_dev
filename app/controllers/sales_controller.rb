@@ -12,7 +12,10 @@ class SalesController < ApplicationController
 
     # @products = Product.autocomplete params[:term]
     # @products = Product.where("lower(name) like ?", "%#{(params[:term]).downcase}%")
-    @products = Inventory.where("lower(barcode) like ?", "%#{(params[:term]).downcase}%")
+    
+    @products = Inventory.where("lower(barcode) like ? AND state_inventory_id = 1", "%#{(params[:term]).downcase}%" ) 
+    # @products = Inventory.where("lower(barcode) like ?", "%#{(params[:term]).downcase}%")
+    
     # @products = Inventory.select(:id, :barcode, :serial).where("lower(barcode) like ?", "%#{(params[:term]).downcase}%")
     # @products = Inventory.select(:id, :serial).where("lower(barcode) like ?", "%1386048020%")
                 # Inventory.select(:id, :serial).where(barcode: '13860480203')

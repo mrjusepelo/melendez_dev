@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210204420) do
+ActiveRecord::Schema.define(version: 20131211210710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -156,9 +156,11 @@ ActiveRecord::Schema.define(version: 20131210204420) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "serial"
+    t.integer  "state_inventory_id"
   end
 
   add_index "inventories", ["product_id"], name: "index_inventories_on_product_id", using: :btree
+  add_index "inventories", ["state_inventory_id"], name: "index_inventories_on_state_inventory_id", using: :btree
   add_index "inventories", ["supplier_id"], name: "index_inventories_on_supplier_id", using: :btree
 
   create_table "messages", force: true do |t|
@@ -243,9 +245,11 @@ ActiveRecord::Schema.define(version: 20131210204420) do
     t.integer  "unit_value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "inventory_id"
+    t.string   "inventory_fields"
   end
 
-  add_index "sale_products", ["product_id"], name: "index_sale_products_on_product_id", using: :btree
+  add_index "sale_products", ["inventory_id"], name: "index_sale_products_on_inventory_id", using: :btree
   add_index "sale_products", ["sale_id"], name: "index_sale_products_on_sale_id", using: :btree
 
   create_table "sales", force: true do |t|
@@ -259,6 +263,12 @@ ActiveRecord::Schema.define(version: 20131210204420) do
 
   add_index "sales", ["admin_user_id"], name: "index_sales_on_admin_user_id", using: :btree
   add_index "sales", ["credit_id"], name: "index_sales_on_credit_id", using: :btree
+
+  create_table "state_inventories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "states", force: true do |t|
     t.string   "name"

@@ -65,7 +65,7 @@ function salida(elemento){
     $('.ui-helper-hidden-accessible').css({'display': 'none'});
       var a;
       // a = mensaje().style;
-      a = fondo(elemento).style;
+      // a = fondo(elemento).style;
 
 
       var styleTags = document.getElementsByTagName('style');

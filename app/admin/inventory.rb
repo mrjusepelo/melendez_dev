@@ -114,9 +114,33 @@ end
     column :warranty
     column :date_in
     column :date_out
-    # column :user
     column :created_at
-    column :updated_at
+    # column :updated_at
+    # :state_inventory_id
+    column "Estado de Producto" do |inventory|
+        if defined?(inventory.state_inventory_id)
+              if inventory.state_inventory_id.to_i == 1
+                  span :class => "", :style => " border:none; background-color: rgb(44, 145, 40); color: white;height:30px; padding: 5px;" do 
+                    estado = inventory.state_inventory.name
+                  end
+              elsif inventory.state_inventory_id.to_i == 2
+                   span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
+                      estado = inventory.state_inventory.name
+                   end               
+              elsif inventory.state_inventory_id.to_i == 3
+                  span :class => "", :style => " border:none; background-color: rgb(165, 48, 48); color: white;height:30px; padding: 5px;" do 
+                    estado = inventory.state_inventory.name
+                  end  
+
+
+
+              end
+          
+        else
+          estado = "Sin asignar"
+        end
+
+    end
     # actions do |product|
       # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
     # end

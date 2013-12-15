@@ -15,6 +15,9 @@ class Ability
         when "Productos"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
           can :manage, Product  
+        when "Ventas"
+          can :read, ActiveAdmin::Page, :name => "Dashboard"
+          can :manage, Sale
         # when "super-pedidos"
         #   # CANCAN Orders 
         #   can :read, ActiveAdmin::Page, :name => "Dashboard" 
