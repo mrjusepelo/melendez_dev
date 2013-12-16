@@ -25,6 +25,7 @@ ActiveAdmin.register Inventory do
         row :serial
         row :vale_buy
         row :vale_sale
+        row :iva
         row :warranty
         row :date_in
         row :date_out
@@ -73,6 +74,7 @@ ActiveAdmin.register Inventory do
       f.input :supplier
       f.input :vale_buy
       f.input :vale_sale
+      f.input :iva, :as => "number", :input_html => {id: "iva", :style => "background-color: #E6E6E6; width: 60px;", :value => 0}
       f.input :warranty
       f.input :date_in,  :as => "string", :input_html => {id: "datepi", :style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
       # f.input :date_in,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => DateTime.now.to_i}
@@ -111,6 +113,7 @@ end
      end         
     column :vale_buy
     column :vale_sale
+    column :iva
     column :warranty
     column :date_in
     column :date_out
@@ -162,7 +165,8 @@ end
                      :supplier => params[:inventory][:supplier],
                      :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
                      :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
-                     :date_out => params[:inventory][:date_out], :serial => params['serial'.to_s+i.to_s]
+                     :date_out => params[:inventory][:date_out], :serial => params['serial'.to_s+i.to_s], 
+                     :iva => params[:inventory][:iva]
                     )
                 end
 

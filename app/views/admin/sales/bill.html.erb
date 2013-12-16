@@ -1,0 +1,120 @@
+<div id="contenedorGeneral" style="border-style:solid; padding:35px;">
+	<div id="header">
+	         <!-- <img style="float:left; margin-top: 33px;margin-left: 15px;" src="/assets/logo_2.png" /> -->
+	         <img id="imagen" style="float:left; margin-top: 33px;margin-left: 15px;" src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7NE9YWFNLUUZuWnM" width="300"/>
+			<div style="float: right; text-align: center; margin-right: 50px;margin-top: 20px;">
+					<ul class="menu">
+						<li type="none">Carrera 6. No. 3B-25 B/ La Amistad</li>
+						<li type="none">Nit. 98240005-2</li>
+						<li type="none">La Hormiga Putumayo</li>
+						<li type="none">Factura N°. <%= @bill.id %></li>
+						<li type="none">Fecha: <%= @bill.date %></li>
+					</ul>
+			</div>
+
+	</div>
+
+	<% reg_client = @bill.clients.where(sale_id: @bill.id, :buyer => "true").first %>
+
+	<div id="comprador" style="border-style:solid;">
+			<h3> Datos Comprador</h3>
+		
+				<% @bill.clients.each do |cliSal| %>
+		
+			<div style=" width:320px;border-style: solid; display: inline-block;">
+				<ul>				
+					<li type="none" style=""><b>Nombre: </b> <%= cliSal.name %> .</li>
+					<li type="none"><b>Telefono:</b> <%= cliSal.phone %></li>
+					<li type="none"><b>C.C:</b> <%= cliSal.document %></li>
+				</ul>
+
+			</div>
+			<div style=" width:320px;border-style: solid;display: inline-block;">
+				<ul>
+					<li type="none"><b>Ciudad:</b>  <%= cliSal.city.name %></li>
+					<li type="none"><b>Barrio:</b>  <%= cliSal.neihborhood %></li>
+					<li type="none"><b>Direccion:</b> <%= cliSal.address %></li>
+				</ul>
+			</div>			
+				<% end %>
+
+		</div><!--cierre div de comprador --> 
+
+
+
+
+
+
+
+
+
+    <br><br>
+
+<table border="1" id="mitabla" valign="middle">
+	<tr>
+		<th>Nombre Producto</th>
+		<th>Serial</th>
+		<th>Garant&iacute;a en Meses</th>
+		<th>Iva </th>
+		<th>Valor </th>
+	</tr>
+	</th>
+	<tbody>
+
+
+<% 
+i=0
+# @credit.credit_products.each do |product| 
+# @credit.inventories.each do |inv| 
+@bill.sale_products.each do |crePro| 
+	# puts "**************************"+inv.product.name.to_s
+	%>
+	
+	<% 
+		i +=1
+
+		if i % 2 == 0
+	%>
+		<tr id="fila_par">
+			<td><%= crePro.inventory.product.name %></td>
+			<td><%= crePro.inventory.serial %></td>
+			<td><%= crePro.inventory.warranty %> </td>
+			<td><%= crePro.inventory.iva %></td>
+			<td><%= crePro.value %></td>
+		</tr>
+
+		<%#= "Es par" %>
+	<% else %>
+	<%#= "Es Impar" %>
+		<tr id="fila_impar">
+			<td><%= crePro.inventory.product.name %></td>
+			<td><%= crePro.inventory.serial %></td>
+			<td><%= crePro.inventory.warranty %></td>
+			<td><%= crePro.inventory.iva %></td>
+			<td><%= crePro.value %></td>
+		</tr>	
+	<% end	 %>
+
+<% end %>
+		<tr>
+			<td></td><td></td><td></td><td></td>
+		</tr>
+		<tr id="total">
+			<td></td>
+			<td></td>
+			<td></td>
+			<td><%= "Valor Compra" %></td>
+
+			<td>
+				<%= @bill.sale_products.sum(:value) %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+
+
+</div>

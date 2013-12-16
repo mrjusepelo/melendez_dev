@@ -21,9 +21,9 @@ form do |f|
 
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
         order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
-        order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
-        order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
-        order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
+        order.input :amount, :input_html => {onChange: "validarSiNumero(this.value);",id: "amount", :style => "width: 60px;"}
+        order.input :unit_value, :input_html => {onChange: "validarSiNumero(this.value);",id: 'unit_value', :style => "width: 60px;"}
+        order.input :value, :input_html => {onChange: "validarSiNumero(this.value);", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
           within @head do
                script :src => javascript_path('admin_sale.js'), :type => "text/javascript"
                # script :src => javascript_path('7.js'), :type => "text/javascript"
@@ -65,6 +65,52 @@ form do |f|
 
 
 
+
+  index do 
+    selectable_column
+    column :id
+    column :date
+    column :value
+    column :created_at
+    column :updated_at
+    actions do |p|
+      link_to "Imprimir factura",  bill_admin_sale_path(p), :class => "member_link"
+    end
+  end 
+
+member_action :bill, :method => :get do
+@bill =  Sale.find(id = params[:id])
+
+# end
+# member_action :bill, :method => :get do
+# # @bill =  PaymentsCredit.find(id = params[:id])
+# @bill =  PaymentsCredit.find(14)
+# @credit = Credit.find(@bill.credit_id)
+# @mes = @bill.date.strftime("%B")
+# @credits = PaymentsCredit.select(:id, :date, :value, :interes).where(credit_id: @bill.credit_id).order("id ASC")
+# @payment_value = PaymentsCredit.select(:id, :date, :value, :interes).where(credit_id: @bill.credit_id).last
+
+# @nameUser = current_admin_user.name
+# vista creada en views/admin/credits/contract
+     html = render_to_string(:action => "bill.html.erb", :layout => false)
+      kit = PDFKit.new(html)
+      kit.stylesheets << 'vendor/assets/stylesheets/style_bill.css'
+    send_data(kit.to_pdf, :filename => 'facturaPago.pdf', :type => 'application/pdf', :disposition => 'inline')
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   controller do
 
 
@@ -77,7 +123,9 @@ form do |f|
                  @sale.sale_products.each do |salPro|
                     salPro.inventory.update_attribute(:state_inventory_id, 2)
                  end
-
+                 @sale.clients.each do |cliSal|
+                    cliSal.update_attribute(:buyer, "true")
+                 end
               format.html{redirect_to :action => :index}
                        
             else
@@ -86,6 +134,8 @@ form do |f|
         end
 
     end
+
+
 
 
 

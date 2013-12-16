@@ -105,6 +105,16 @@ function valorproductos(valor){
 
 
 
+function validarSiNumero(numero){
+  if (!/^([0-9])*$/.test(numero.value)){
+      alert("El valor " + numero.value + " no es un número");  
+      // $(texto).val("");
+        // return "false";
+
+  }
+}
+
+
 // $("[id|='myValue']")
 // $("[id$='txtTitle']")
 // console.log(($("[id$='ount']").val())) // imperesion por consola el valor del id terminado en ount
