@@ -1,5 +1,11 @@
 Pencil::Application.routes.draw do
 
+  get "payments_credits/index"
+  get "payments_credits/show"
+  get "payments_credits/delete"
+  get "payments_credits/edit"
+  get "payments_credits/create"
+  get "payments_credits/factura"
   get "sales/index"
   get "sales/view"
   get "sales/edit"
@@ -27,6 +33,14 @@ Pencil::Application.routes.draw do
   get "products/search"
   get "publics/view_product"
   get "publics/category"
+  
+  resources :payments_credits do
+    member do 
+      get "factura"
+    end
+  end
+   # 'payments_credits#factura'
+
   post "publics/create_message"
 
   root :to => 'publics#index'

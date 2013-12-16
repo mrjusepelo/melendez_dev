@@ -21,6 +21,8 @@ ActiveAdmin.register AdminUser do
       f.input :password
       f.input :password_confirmation
       f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Super", "Super"], ["Super Lectura", "Super Lectura"], ["Pedidos", "Pedidos"], ["Productos", "Productos"]]
+      # f.input :role, :as => :select, :collection => {"Super" => "1", "Productos" => "2"}
+      # f.input :role, :as => :string
 
 
 

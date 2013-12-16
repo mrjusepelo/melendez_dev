@@ -1,0 +1,118 @@
+<div align="center">
+	<table style="border: solid black; border-collapse: separate;" width="800">
+		<tr>
+			<td><img src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7NE9YWFNLUUZuWnM" widht="140" height= "90"></td>
+			<td><b>CODIGO:</b> <%=@bill.id%></td>
+		</tr>
+		<tr height="70">
+			<td align="right"><h3>RECIBO DE PAGO</h3></td>
+		</tr>
+		<tr>
+			<td><b>FECHA:</b> <%=@bill.date%></td>
+			<td><b>C.C. :</b> <%=@bill.document%></td>
+		</tr>
+		<tr>
+	    <% inicial = 0%>
+	    <% cuota = ""%>
+	    <% @credits.each do |creditss| %>
+			<% if inicial == 0%>
+			    <% cuota = "Inicial"%>
+	   			<% inicial = inicial+1 %>
+				<%else%>
+	   			<% inicial = inicial+1 %>
+			    <% cuota = inicial%>
+			<%end%>
+		<%end%>
+			<td><b>CUOTA:</b> <%=cuota%></td>
+			<td><b>MES:</b> <%=@mes%></td>
+		</tr>
+		<tr>
+			<td><b>VALOR CREDITO:</b> $<%=@credit.total%></td>
+			<td><b>CONTRATO No.</b> <%=@credit.id%></td>
+		</tr>
+		<tr>
+			<td><b>RECIBIMOS DE:</b></td>
+			<td><b>LA SUMA DE:</b></td>
+	    </tr>
+		<tr>
+			<td><%=@bill.name%></td>
+			<td>$<%=@bill.value%></td>
+	    </tr>
+	    <tr height="50">
+	    	<td align="right"><b>DATOS DEL PAGO</b></td>
+	    </tr>
+	    <tr>
+	    	<td><b>VALOR:</b></td>
+	    	<td><b>MODO DE PAGO:</b></td>
+	    	<td><b>CUENTA:</b></td>
+	    </tr>
+	    <tr>
+	    	<td>$ <%=@payment_value.value + @payment_value.interes%></td>
+	    	<td><%=@bill.modo_pago%></td>
+	    	<td><%=@bill.cuenta%></td>
+	    </tr>
+	    <tr>
+	    	<td><b>REFERENCIA CONSIGNACION:</b></td>
+	    	<td><b>TIPO DE CUENTA:</b></td>
+	    	<td></td>
+	    </tr>
+	    <tr>
+	    	<td><%=@bill.referencia_consignacion%></td>
+	    	<td><%=@bill.tipo_cuenta%></td>
+	    	<td></td>
+	    </tr>
+	    <tr height="20">
+	    </tr>
+	    <tr>
+	    	<td><b>CONCEPTO</b></td>
+	    	<td><b>VALOR INTERES</b></td>
+	    	<td><b>VALOR</b></td>
+	    </tr>
+	    <% inicial = 0%>
+	    <% pago = 0%>
+	    <% interes_t = 0%>
+	    <% cuota = ""%>
+	    <% @credits.each do |creditss| %>
+	    	<% pago = pago + creditss.value%>
+	    	<% interes_t = interes_t + creditss.interes%>
+			<% if inicial == 0%>
+				<tr>
+			    	<td>Inicial (<%=creditss.date%>)</td>
+			    	<td>$ <%=creditss.interes%></td>
+			    	<td>$ <%=creditss.value%></td>
+			    </tr>			
+			    <% cuota = "Inicial"%>
+	   			<% inicial = inicial+1 %>
+	   			<%valor_actual = 0%>
+				<%else%>
+					<tr>
+						<td>Cuota <%=inicial%> (<%=creditss.date%>)</td>
+					    <td>$ <%=creditss.interes%></td>
+					    <td>$ <%=creditss.value%></td>
+					</tr>
+			    <% cuota = inicial%>
+	   			<% inicial = inicial+1 %>
+			<%end%>
+		<%end%>
+	    <tr>
+	    	<td><b>TOTAL PAGADO:</b></td>
+	    	<td>$ <%=interes_t%></td>
+	    	<td>$ <%=pago%></td>
+	    </tr>
+	    <tr>
+	    	<td><b>SALDO INICIAL</b></td>
+	    	<td>$ 0</td>
+	    	<td>$ <%=@credit.total%></td>
+	    </tr>
+	    <tr height="20">
+	    </tr>
+	    <tr>
+	    	<td><b>OBSERVACIONES:</b></td>
+	    	<td><b>FIRMA Y SELLO:</b></td>
+	    </tr>
+	    <tr height="100">
+	    	<td></td>
+	    	<td></td>
+	    </tr>
+	</table>
+</div>

@@ -225,9 +225,11 @@ end
     
 
       if credit.id
-      f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {:disabled => "disable"} 
-      f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: credit.admin_creator_id, :input_html => {:disabled => "disable"} 
-     
+      # f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {:disabled => "disable"} 
+      # f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: credit.admin_creator_id, :input_html => {:disabled => "disable"} 
+f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {} 
+      f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: credit.admin_creator_id, :input_html => {} 
+
       puts "**************************************************"+credit.id.to_s
       puts "**************************************************"+credit.admin_creator_id.to_s
      else
@@ -250,9 +252,9 @@ end
 
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
         order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
-        order.input :amount, :input_html => {id: "amount", :style => "width: 60px;"}
-        order.input :unit_value, :input_html => {id: 'unit_value', :style => "width: 60px;"}
-        order.input :value, :input_html => {onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
+        order.input :amount, :input_html => {onChange:"validarSiNumero(this)", id: "amount", :style => "width: 60px;"}
+        order.input :unit_value, :input_html => {onBlur:"validarSiNumero(this)", id: "unit_value", :style => "width: 60px;"}
+        order.input :value, :input_html => {onBlur:"validarSiNumero(this)", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
           within @head do
                script :src => javascript_path('admin_credit.js'), :type => "text/javascript"
                # script :src => javascript_path('5.js'), :type => "text/javascript"
@@ -287,7 +289,7 @@ end
       f.has_many :payments_credits do |payment|
             payment.inputs 'Pagos' do 
             payment.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
-            payment.input :value #, :as => :datepicker  , :input_html => {:name => "date"}
+            payment.input :value , :input_html => {onChange:"validarSiNumero(this)"}
             payment.input :description,   input_html: {:size => '3'}
             
           end
@@ -302,9 +304,9 @@ end
       end      
 
 
-      f.input :total,  input_html: {onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
-      f.input :number_payments, :input_html => {id: "number_payments", :style => "width: 60px;"}
-      f.input :value_payments, :input_html => {id: "value_payments",onclick: "javascript:calcularPagos(this)", :style => "width: 60px;"}
+      f.input :total,  input_html: {onChange:"validarSiNumero(this)", onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
+      f.input :number_payments, :input_html => {onChange:"validarSiNumero(this)", id: "number_payments", :style => "width: 60px;"}
+      f.input :value_payments, :input_html => {onChange:"validarSiNumero(this)", id: "value_payments",onclick: "javascript:calcularPagos(this)", :style => "width: 60px;"}
 		end
 		    f.actions
 	end

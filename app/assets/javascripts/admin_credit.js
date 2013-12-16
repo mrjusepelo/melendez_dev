@@ -69,8 +69,15 @@ function salida(elemento){
     var str=$(elemento).val();
     var n=str.split("-");
     console.log(n[1]);
-
 }
+
+function validarSiNumero(numero){
+  if (!/^([0-9])*$/.test(numero.value)){
+      alert("El valor " + numero.value + " no es un número");  
+      $(numero).val("");
+  }
+}
+
 
 // $("[id|='myValue']")
 // $("[id$='txtTitle']")
