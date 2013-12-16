@@ -79,7 +79,7 @@ ActiveAdmin.register Inventory do
       f.input :date_in,  :as => "string", :input_html => {id: "datepi", :style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
       # f.input :date_in,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => DateTime.now.to_i}
       f.input :date_out,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => "click aqui"}
-      f.input :state_inventory
+      f.input :state_inventory_id
       # f.input :comming_soon
       # image_tag("/icons/icon.gif", :height => '32', :width => '32') # =>
 
