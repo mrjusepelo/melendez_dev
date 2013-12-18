@@ -77,6 +77,7 @@ ActiveAdmin.register PaymentsCredit do
       row :description
       row :created_at
       row :updated_at
+
       # h3 payment.credit_id
     end
   end
@@ -93,8 +94,12 @@ form do |f|
       f.input :description
       f.input :document 
       f.input :name 
+      # f.input :new_comment
+
+      
+      #active_admin_comments 
       # f.input :interes 
-      end
+       end
       f.actions
 end    
 

@@ -1,4 +1,6 @@
 ActiveAdmin.register Brand do
+config.comments = true
+
   menu :parent => "Datos de Producto"
 form do |f|
 

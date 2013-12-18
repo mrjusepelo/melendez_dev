@@ -1,4 +1,5 @@
 ActiveAdmin.register Credit do
+# config.comments = true
   menu :parent => "Creditos"
 
 
@@ -452,7 +453,7 @@ f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: cu
 
 
 
-
+      active_admin_comments
 
     end
 
