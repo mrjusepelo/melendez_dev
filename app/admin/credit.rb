@@ -131,8 +131,23 @@ ActiveAdmin.register Credit do
 
 
 
+              if credit.state_id.to_i == 1
+                  span :class => "", :style => " border:none; background-color: rgb(165, 48, 48); color: white;height:30px; padding: 5px;" do 
+                   
+                  credit.state.name
+                  end
+              elsif credit.state_id.to_i == 2
+                   span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
+                      credit.state.name
+                  end               
+              elsif credit.state_id.to_i == 3
+                  span :class => "", :style => " border:none; background-color: rgb(44, 145, 40); color: white;height:30px; padding: 5px;" do 
+                  credit.state.name
+                  end
+              else                            
+                  credit.state.name
+              end
 
-                credit.state.name
 
 
           end
