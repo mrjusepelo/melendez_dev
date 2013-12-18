@@ -87,8 +87,8 @@ Pencil::Application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'creditosmelendezq.com',
-    user_name:            'creditos.melendez.ptyo@gmail.com',
-    password:             'creditos.melendez.ptyo123456',
+    user_name:            'creditosmelendezq@gmail.com',
+    password:             'abcd123456*',
     authentication:       :plain,
     enable_starttls_auto: true  
   }

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  pay_efective_id: 
+  sale_id: 
+
+two:
+  pay_efective_id: 
+  sale_id: 

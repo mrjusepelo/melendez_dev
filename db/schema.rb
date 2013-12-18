@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216061429) do
+ActiveRecord::Schema.define(version: 20131218200100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,44 @@ ActiveRecord::Schema.define(version: 20131216061429) do
   end
 
   add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id", using: :btree
+
+  create_table "pay_consigments", force: true do |t|
+    t.date     "date"
+    t.string   "num_register"
+    t.string   "name"
+    t.integer  "value"
+    t.string   "num_account"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sale_id"
+  end
+
+  add_index "pay_consigments", ["sale_id"], name: "index_pay_consigments_on_sale_id", using: :btree
+
+  create_table "pay_efectives", force: true do |t|
+    t.date     "date"
+    t.string   "name"
+    t.integer  "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sale_id"
+  end
+
+  add_index "pay_efectives", ["sale_id"], name: "index_pay_efectives_on_sale_id", using: :btree
+
+  create_table "pay_sales", force: true do |t|
+    t.integer  "value"
+    t.date     "date"
+    t.integer  "pay_efective_id"
+    t.integer  "pay_consigment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "sale_id"
+  end
+
+  add_index "pay_sales", ["pay_consigment_id"], name: "index_pay_sales_on_pay_consigment_id", using: :btree
+  add_index "pay_sales", ["pay_efective_id"], name: "index_pay_sales_on_pay_efective_id", using: :btree
+  add_index "pay_sales", ["sale_id"], name: "index_pay_sales_on_sale_id", using: :btree
 
   create_table "payment_modes", force: true do |t|
     t.string   "name"

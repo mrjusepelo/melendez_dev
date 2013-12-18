@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  value: 1
+  date: 2013-12-18
+  pay_efective_id: 
+  pay_consigment_id: 
+
+two:
+  value: 1
+  date: 2013-12-18
+  pay_efective_id: 
+  pay_consigment_id: 

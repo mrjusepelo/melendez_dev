@@ -50,6 +50,30 @@ form do |f|
           end
       end
 
+
+      f.has_many :pay_consigments do |payConsig|
+            payConsig.inputs 'Consignaciones' do 
+            payConsig.input :date , :as => :datepicker  , :input_html => {}
+            payConsig.input :name #, :as => :datepicker  , :input_html => {:name => "date"}
+            payConsig.input :num_register  #, :input_html => {:name => "value", :style => "width: 60px;"}
+            payConsig.input :value  #, :input_html => {:name => "value", :style => "width: 60px;"}
+            payConsig.input :num_account  #, :input_html => {:name => "value", :style => "width: 60px;"}
+
+          end
+      end
+
+      f.has_many :pay_efectives do |payEffec|
+            payEffec.inputs 'Efectivo' do 
+            payEffec.input :date , :as => :datepicker  , :input_html => {}
+            payEffec.input :name #, :as => :datepicker  , :input_html => {:name => "date"}
+            payEffec.input :value #, :input_html => {:name => "value", :style => "width: 60px;"}
+          end
+      end
+
+
+
+
+
     f.input :value,  input_html: {onclick: "javascript:sumaValorVenta(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
 
 		end
@@ -85,7 +109,7 @@ member_action :bill, :method => :get do
 # vista creada en views/admin/credits/bill
      html = render_to_string(:action => "bill.html.erb", :layout => false)
       kit = PDFKit.new(html)
-      # kit.stylesheets << 'vendor/assets/stylesheets/style_bill.css'
+      kit.stylesheets << 'vendor/assets/stylesheets/style_bill.css'
       kit.stylesheets << 'vendor/assets/stylesheets/style_bill2.css'
     send_data(kit.to_pdf, :filename => 'facturaPago.pdf', :type => 'application/pdf', :disposition => 'inline')
 end

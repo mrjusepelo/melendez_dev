@@ -1,71 +1,45 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-	<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-	
-	<title>Editable Invoice</title>
-	
-	<link rel='stylesheet' type='text/css' href='css/style.css' />
-	<link rel='stylesheet' type='text/css' href='css/print.css' media="print" />
-	<!-- // <script type='text/javascript' src='js/jquery-1.3.2.min.js'></script> -->
-	<!-- // <script type='text/javascript' src='js/example.js'></script> -->
-
-</head>
-
-<body>
+<!--  --> 
 
 	<div id="page-wrap">
 
-		<textarea id="header">INVOICE</textarea>
-		
-		<div id="identity">
-		
-            <textarea id="address">Chris Coyier
-123 Appleseed Street
-Appleville, WI 53719
+		<div id="headerTitulo">FACTURA DE VENTA</div>
+		<div id="header">
+				<!-- <h2 style="tex-align:center">Factura</h2>	 -->
+		         <img id="imagen" style="float:left; margin-top: 33px;margin-left: 15px;" src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7NE9YWFNLUUZuWnM" width="300"/>
+				<div style="float: right; text-align: center; margin-right: 50px;margin-top: 20px;">
+						<ul class="menu">
+							<li type="none">Carrera 6. No. 3B-25 B/ La Amistad</li>
+							<li type="none">Nit. 98240005-2</li>
+							<li type="none">La Hormiga Putumayo</li>
+							<li type="none">Factura N°. <%= @bill.id %></li>
+							<li type="none">Fecha: <%= @bill.date %></li>
+						</ul>
+				</div>
 
-Phone: (555) 555-5555</textarea>
-
-            <div id="logo">
-
-              <div id="logoctr">
-                <a href="javascript:;" id="change-logo" title="Change logo">Change Logo</a>
-                <a href="javascript:;" id="save-logo" title="Save changes">Save</a>
-                |
-                <a href="javascript:;" id="delete-logo" title="Delete logo">Delete Logo</a>
-                <a href="javascript:;" id="cancel-logo" title="Cancel changes">Cancel</a>
-              </div>
-
-              <div id="logohelp">
-                <input id="imageloc" type="text" size="50" value="" /><br />
-                (max width: 540px, max height: 100px)
-              </div>
-              <img id="image" src="images/logo.png" alt="logo" />
-            </div>
-		
 		</div>
+
+		<br>
+		<br>
 		
 		<div style="clear:both"></div>
 		
 		<div id="customer">
 
-            <textarea id="customer-title">Widget Corp.
-c/o Steve Widget</textarea>
+
 
             <table id="meta">
                 <tr>
-                    <td class="meta-head">Invoice #</td>
-                    <td><textarea>000123</textarea></td>
+                    <td class="meta-head">Factura #</td>
+                    <td><div><%= @bill.id %></div></td>
                 </tr>
                 <tr>
 
-                    <td class="meta-head">Date</td>
-                    <td><textarea id="date">December 15, 2009</textarea></td>
+                    <td class="meta-head">Fecha</td>
+                    <td><div id="date"><%= @bill.date %></div></td>
                 </tr>
                 <tr>
-                    <td class="meta-head">Amount Due</td>
-                    <td><div class="due">$875.00</div></td>
+                    <td class="meta-head">Total a Pagar</td>
+                    <td><div class="due">$ <%= @bill.value %></div></td>
                 </tr>
 
             </table>
@@ -75,66 +49,172 @@ c/o Steve Widget</textarea>
 		<table id="items">
 		
 		  <tr>
-		      <th>Item</th>
-		      <th>Description</th>
-		      <th>Unit Cost</th>
-		      <th>Quantity</th>
-		      <th>Price</th>
+      			<th>Nombre Producto</th>
+				<th>Serial</th>
+				<th>Garant&iacute;a en Meses</th>
+				<th>Iva </th>
+				<th>Valor </th>
 		  </tr>
 		  
-		  <tr class="item-row">
-		      <td class="item-name"><div class="delete-wpr"><textarea>Web Updates</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
-		      <td class="description"><textarea>Monthly web updates for http://widgetcorp.com (Nov. 1 - Nov. 30, 2009)</textarea></td>
-		      <td><textarea class="cost">$650.00</textarea></td>
-		      <td><textarea class="qty">1</textarea></td>
-		      <td><span class="price">$650.00</span></td>
-		  </tr>
-		  
-		  <tr class="item-row">
-		      <td class="item-name"><div class="delete-wpr"><textarea>SSL Renewals</textarea><a class="delete" href="javascript:;" title="Remove row">X</a></div></td>
+	<% @bill.sale_products.each do |crePro| %>
 
-		      <td class="description"><textarea>Yearly renewals of SSL certificates on main domain and several subdomains</textarea></td>
-		      <td><textarea class="cost">$75.00</textarea></td>
-		      <td><textarea class="qty">3</textarea></td>
-		      <td><span class="price">$225.00</span></td>
+
+
+		  <tr align="center" class="item-row">
+		      <td class="description" >
+		      		<div><%= crePro.inventory.product.name %></div>
+		      </td>
+		      <td class="item-name">
+		      	<div><%= crePro.inventory.serial %></div>
+		      </td>
+		      <td>
+		      	<div class="cost"><%= crePro.inventory.warranty %></div>
+		      </td>
+		      <td>
+		      	<div class="qty"><%= crePro.inventory.iva %></div>
+		      </td>
+		      <td>
+		      	<span class="price">$ <%= crePro.value %></span>
+		      </td>
 		  </tr>
+		  
+  	<% end %>
 		  
 		  <tr id="hiderow">
-		    <td colspan="5"><a id="addrow" href="javascript:;" title="Add a row">Add a row</a></td>
+		    <td colspan="5"><a id="addrow"  title="Add a row">Modo de Pago</a></td>
 		  </tr>
-		  
+		<% @bill.pay_consigments.each do |payConsig| %>
+  		<% #= pays_consignment = @bill.pay_consigments.sum(:value)  %>
+			
+
+		<% 
+	    	if defined?(payConsig.id)
+	
+		%>	
+
 		  <tr>
-		      <td colspan="2" class="blank"> </td>
-		      <td colspan="2" class="total-line">Subtotal</td>
-		      <td class="total-value"><div id="subtotal">$875.00</div></td>
+		      <td  class="blank">Consignacion </td>
+
 		  </tr>
 		  <tr>
 
-		      <td colspan="2" class="blank"> </td>
-		      <td colspan="2" class="total-line">Total</td>
-		      <td class="total-value"><div id="total">$875.00</div></td>
+		      <td  class="blank"> </td>
+		      <td  class="">Numero de Registro </td>
+		      <td colspan="3"  class="total-line"><%= payConsig.num_register %></td>
 		  </tr>
-		  <tr>
-		      <td colspan="2" class="blank"> </td>
-		      <td colspan="2" class="total-line">Amount Paid</td>
+<!-- 		  <tr>
 
-		      <td class="total-value"><textarea id="paid">$0.00</textarea></td>
+		      <td  class="blank"> </td>
+		      <td  class="">Tipo de Cuenta </td>
+		      <td colspan="3"  class="total-line">Corriente</td>
+		  </tr>	 -->
+		  <tr>
+		      <td  class="blank"> </td>
+		      <td  class="">Nombre Depositante </td>
+		      <td colspan="3"  class="total-line"><%= payConsig.name %></td>
 		  </tr>
 		  <tr>
-		      <td colspan="2" class="blank"> </td>
-		      <td colspan="2" class="total-line balance">Balance Due</td>
-		      <td class="total-value balance"><div class="due">$875.00</div></td>
+		      <td  class="blank"> </td>
+		      <td  class="">Fecha </td>
+		      <td colspan="3"  class="total-line"><%= payConsig.date %></td>
+		  </tr>	
+		  <tr>
+		      <td  class="blank"> </td>
+		      <td  class="">Valor </td>
+		      <td colspan="3"  class="total-line"><%= payConsig.value %></td>
+		  </tr>		  	  		  	  
+		  <tr>
+		      <td colspan="4" class="blank"> </td>
 		  </tr>
+		  <tr>
+		      <td colspan="4" class="blank"> </td>
+		  </tr>
+
+
+	<%
+
+		else
+			"Sin Pagos en consignacion"	
+		end
+
+	 end # ich de pagos en consignacion %>
+
+
+
+<!-- MOdos de pago en efectivo -->
+	<% @bill.pay_efectives.each do |payEfect| %>
+				
+		<%#= pay_effective = @bill.pay_efectives.sum(:value)  %>
+			
+
+		<% 
+	    	if defined?(payEfect.id)
+	
+		%>	
+		  <tr>
+		      <td  class="blank">Efectivo </td>
+
+		  </tr>
+		  <tr>
+
+		      <td  class="blank"> </td>
+		      <td  class="">Valor </td>
+		      <td colspan="3"  class="total-line"><%= payEfect.value %></td>
+		  </tr>
+
+		  <tr>
+		      <td  class="blank"> </td>
+		      <td  class="">Nombre Depositante </td>
+		      <td colspan="3"  class="total-line"><%= payEfect.name %></td>
+		  </tr>
+		  <tr>
+		      <td  class="blank"> </td>
+		      <td  class="">Fecha </td>
+		      <td colspan="3"  class="total-line"><%= payEfect.date %></td>
+		  </tr>	
+		  	  
+		  <tr>
+		      <td colspan="4" class="blank"> </td>
+		  </tr>
+		  <tr>
+		      <td colspan="4" class="blank"> </td>
+		  </tr>
+
+	
+
+	<%
+
+		else
+			"Sin Pagos en efectivo"	
+		end
+
+	 end # ich de pagos en efectivo %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
 		</table>
 		
 		<div id="terms">
-		  <h5>Terms</h5>
+		  <h5>Terminos</h5>
 		  <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea>
 		</div>
 	
 	</div>
 	
-</body>
-
-</html>
