@@ -127,6 +127,11 @@ ActiveAdmin.register Credit do
       end
 
 
+
+if sumaPagos >= credit.total
+           credit.update_attribute(:state_id, 6) # pagos terminados
+end
+
 # metodo para pagos al dia Diarios
 # def pagosIdealDiarios(must_pay)
 #     cantIdeal = 1
@@ -186,7 +191,11 @@ ActiveAdmin.register Credit do
                   span :class => "", :style => " border:none; background-color: rgb(44, 145, 40); color: white;height:30px; padding: 5px;" do 
                   credit.state.name
                   end
-              else                            
+              elsif credit.state_id.to_i == 6
+                  span :class => "", :style => " border:none; background-color: rgb(238, 238, 48); color: black;height:30px; padding: 5px;" do 
+                  credit.state.name
+                  end
+              else                                          
                   credit.state.name
               end
 
