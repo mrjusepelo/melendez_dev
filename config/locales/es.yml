@@ -231,6 +231,9 @@ es:
        city:
          one: Ciudad
          other: Ciudades
+       credit:
+         one: Credito   
+         other: Creditos   
        category:
          one: Categoría
          other: Categorías
@@ -443,6 +446,13 @@ es:
         updated_at: Actualizado el
         shipping: Envío
         shipping_days: Días de Envío
+      credit:
+        date: Creacion de Credito
+        payday: Fecha de Pago
+        value_payments: Valor de Pagos
+        admin_user: Credor del Credito
+        created_at: Creado el 
+        updated_at: Actualizado el  
       product:
         id: id
         reference: Referencia
