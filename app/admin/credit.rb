@@ -66,8 +66,9 @@ ActiveAdmin.register Credit do
                   #         Credit.update(credit.id, :payday => must_pay)
                   # end            
           return cantIdeal, must_pay
-      end                        
+      end
 
+                
 
 
       numPagos = pagosIdeal(must_pay, tipoPago)[0]
@@ -126,6 +127,29 @@ ActiveAdmin.register Credit do
       end
 
 
+# metodo para pagos al dia Diarios
+# def pagosIdealDiarios(must_pay)
+#     cantIdeal = 1
+#     while must_pay <= Date.today
+#         cantIdeal +=1                               
+#     end  
+#     return cantIdeal                         
+# end         
+#       numPagos = pagosIdealDiarios(must_pay)[0]
+#       pagosAlDia =  numPagos * credit.value_payments
+
+# if diaPago == Date.today
+
+#   if pagosAlDia >= sumaPagos
+#     if ultimoPago == Date.today
+#         if estado != 3
+#            credit.update_attribute(:state_id, 3) # pagos Al Dia
+#         end
+        
+#       end  
+#   end
+  
+# end
 
 
 
@@ -497,7 +521,17 @@ end
 
         respond_to do |format|
             if @credit.save
-              
+              if @credit.payday == Date.today
+                Credit.update(@credit.id, :state_id => 2) # pagara hoy
+                # credit.update_attribute(:state_id, 3)  # paogs al dia
+              end
+              if @credit.payday > Date.today
+                Credit.update(@credit.id, :state_id => 5) # aprobado
+                # credit.update_attribute(:state_id, 3)  # paogs al dia
+              end              
+
+
+
               sum_payments =  @credit.payments_credits.sum(:value)
               Credit.update(@credit.id, :sum_payments => sum_payments)
 
@@ -536,6 +570,16 @@ end
 
       sum_payments =  @credit.payments_credits.sum(:value)
       Credit.update(@credit.id, :sum_payments => sum_payments)
+
+              if @credit.payday == Date.today
+                Credit.update(@credit.id, :state_id => 2) # pagara hoy
+                # credit.update_attribute(:state_id, 3)  # paogs al dia
+              end
+              if @credit.payday > Date.today
+                Credit.update(@credit.id, :state_id => 5) # aprobado
+                # credit.update_attribute(:state_id, 3)  # paogs al dia
+              end 
+
 
       format.html { redirect_to :action => :index }
     end    
