@@ -3,10 +3,27 @@ ActiveAdmin.register Credit do
   menu :parent => "Creditos"
 
 
+
+    # member_action :comments do
+    #   @post = Post.find(params[:id])
+
+    #   # This will render app/views/admin/posts/comments.html.erb
+    # end
+
+
   index do 
     selectable_column
     column :id
-    column :admin_user_id
+    column :admin_user
+    column 'Admin Creador' do |admin|      
+      creador = AdminUser.select(:name).where(:id => admin.admin_creator_id).first
+
+      if defined? creador.name
+         creador.name
+      else
+        creador = "No definido"
+      end
+    end
 
     column "Estado " do |credit|
 
@@ -137,7 +154,7 @@ ActiveAdmin.register Credit do
                    
                   credit.state.name
                   end
-              elsif credit.state_id.to_i == 2
+              elsif credit.state_id.to_i == 2 || credit.state_id.to_i == 5
                    span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
                       credit.state.name
                   end               
@@ -192,6 +209,7 @@ ActiveAdmin.register Credit do
     end
 
     column "Suma pagos", :sortable => :sum_payments do |payments|
+      # number_to_currency payments.sum_payments
       number_to_currency payments.sum_payments
     end
 
@@ -241,25 +259,16 @@ end
     
 
       if credit.id
-      # f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {:disabled => "disable"} 
-      # f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: credit.admin_creator_id, :input_html => {:disabled => "disable"} 
-f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {} 
-      f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: credit.admin_creator_id, :input_html => {} 
-
-      puts "**************************************************"+credit.id.to_s
-      puts "**************************************************"+credit.admin_creator_id.to_s
-     else
-      puts "***********************else***************************"
-      # f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id
-      f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => { style: "display:none;"} 
-      f.input :admin_creator_id, :as => :select,  :collection => AdminUser.all, selected: current_admin_user.id, :input_html => {} 
-      # f.input :admin_creator_id, :as => :string, :input_html => {style: 'width:120px;', :disabled => "disable", value: current_admin_user.name }
-    
+           f.input :admin_user_id, :as => :hidden, :input_html => {:value => current_admin_user.id} 
+      else  
+        f.input :admin_user_id, :as => :hidden, :input_html => {:value => current_admin_user.id} 
+        f.input :admin_creator_id, :as => :hidden, :input_html => {:value => current_admin_user.id} 
+         
      end
       f.input :payment_mode
-	    f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
-      f.input :state
-      f.input :payday, :as => :datepicker
+	    f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today} 
+      # f.input :state
+      f.input :payday, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :description,   input_html: {:size => '3'}
 
       f.has_many :credit_products do |order|
@@ -483,7 +492,7 @@ f.input :admin_user, :as => :select,  :collection => AdminUser.all, selected: cu
 
 
     def create
-
+# Credit.caramelo(su,)
       @credit = Credit.new(params[:credit])
 
         respond_to do |format|

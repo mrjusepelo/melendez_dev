@@ -123,6 +123,63 @@ end
 
 
   controller do
+
+before_filter :nested_credit
+
+def nested_credit 
+    @credit = Credit.find(params[:credit_id])  
+end
+      def create
+
+          @credit = Credit.find(params[:credit_id])
+            @payments_credit = @credit.payments_credits.new(params[:payments_credit])
+          respond_to do |format|
+              if @payments_credit.save
+                  sum_payments_credit = @credit.payments_credits.sum(:value)
+                  @credit.update_attribute(:sum_payments, sum_payments_credit)
+
+                format.html{redirect_to :action => :index}
+                         
+              else
+                format.html{render "new", error: "Error"}
+              end
+          end
+
+
+
+
+      end
+
+
+
+
+              
+  #             # sum_payments =  PaymentsCredit.where(credit_id: @payment.credit_id ).sum(:value)
+              
+  #             # # sum_payments = @payment.credits.sum(:value)
+  #             # cant = 0
+  #             # @payment.credits.each do |consigment|
+  #             #   cant = cant + consigment
+  #             # end
+
+  #             # puts "**********************"+@payment.id.to_s
+  #             # puts "**********************"+@payment.credit_id.to_s
+  #             # puts "**********************"+sum_payments.to_s
+  #             # puts "**********************"+cant.to_s
+  #             # # Credit.update(@credit.id, :sum_payments => sum_payments)
+
+               
+               
+  #             #  # @credit.credit_products.each do |crePro|
+  #             #  #    crePro.inventory.update_attribute(:state_inventory_id, 3)
+  #             #  # end
+
+
+
+
+
+
+
         before_filter :protected_attributes
         def protected_attributes
           params.permit!
