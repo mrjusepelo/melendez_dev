@@ -182,34 +182,63 @@
 
 	
 
-	<%
+		<%
 
-		else
-			"Sin Pagos en efectivo"	
-		end
+			else
+				"Sin Pagos en efectivo"	
+			end
 
-	 end # ich de pagos en efectivo %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+		 end # ich de pagos en efectivo %>
 		
 		</table>
+
+
+
+
+
+
+
+	<% reg_client = @bill.clients.where(sale_id: @bill.id, :buyer => "true").first %>
+
+	<div id="comprador" style="border-style:double;">
+			<h3> Datos Comprador</h3>
+		
+				<% @bill.clients.each do |cliSal| %>
+		
+			<div style=" width:350px;border-style: double; display: inline-block;">
+				<ul>				
+					<li type="none" style=""><b>Nombre: </b> <%= cliSal.name %> .</li>
+					<li type="none"><b>Telefono:</b> <%= cliSal.phone %></li>
+					<li type="none"><b>C.C:</b> <%= cliSal.document %></li>
+				</ul>
+
+			</div>
+
+			<div style=" width:350px;border-style: double;display: inline-block;">
+				<ul>
+					<% if defined? (cliSal.city) %>
+						<li type="none"><b>Ciudad:</b>  <%= cliSal.city.name %></li>
+					<% end %>
+					<% if defined? (cliSal.neihborhood) %>
+						<li type="none"><b>Barrio:</b>  <%= cliSal.neihborhood %></li>
+					<% end %>
+					<% if defined? (cliSal.address) %>
+						<li type="none"><b>Direccion:</b> <%= cliSal.address %></li>
+					<% end %>
+				</ul>
+			</div>			
+				<% end %>
+
+		</div><!--cierre div de comprador --> 
+
+
+
+
+
+
+
+
+
 		
 		<div id="terms">
 		  <h5>Terminos</h5>

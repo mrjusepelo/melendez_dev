@@ -447,10 +447,14 @@ es:
         shipping: Envío
         shipping_days: Días de Envío
       credit:
-        date: Creacion de Credito
+        date: Creación de Credito
         payday: Fecha de Pago
         value_payments: Valor de Pagos
-        admin_user: Credor del Credito
+        admin_user_id: Credor del Credito
+        state: Estado del Credito
+        sum_payments: Suma de Pagos 
+        payment_mode: Modo de Pago
+        number_payments: Número de Pagos
         created_at: Creado el 
         updated_at: Actualizado el  
       product:
