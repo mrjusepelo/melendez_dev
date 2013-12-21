@@ -53,7 +53,6 @@ ActiveAdmin.register Inventory do
   form do |f|
       within @head do
            script :src => javascript_path('1.js'), :type => "text/javascript"
-           # script :src => javascript_path('2.js'), :type => "text/javascript"
            script :src => javascript_path('3.js'), :type => "text/javascript"
            script :src => javascript_path('admin_inventory.js'), :type => "text/javascript"
 

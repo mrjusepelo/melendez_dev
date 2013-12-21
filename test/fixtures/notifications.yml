@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  revised: false
+  order_id: 
+  nextdate: 2013-12-21
+
+two:
+  revised: false
+  order_id: 
+  nextdate: 2013-12-21

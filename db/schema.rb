@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219020832) do
+ActiveRecord::Schema.define(version: 20131221074701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,12 +174,24 @@ ActiveRecord::Schema.define(version: 20131219020832) do
     t.datetime "updated_at"
   end
 
+  create_table "notifications", force: true do |t|
+    t.boolean  "revised"
+    t.integer  "order_id"
+    t.date     "nextdate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["order_id"], name: "index_notifications_on_order_id", using: :btree
+
   create_table "order_products", force: true do |t|
     t.integer  "order_id"
     t.integer  "product_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "amount"
+    t.integer  "value"
+    t.integer  "unit_value"
   end
 
   add_index "order_products", ["order_id"], name: "index_order_products_on_order_id", using: :btree
@@ -195,8 +207,14 @@ ActiveRecord::Schema.define(version: 20131219020832) do
     t.datetime "updated_at"
     t.integer  "supplier_id"
     t.integer  "sum_payments"
+    t.integer  "payment_mode_id"
+    t.integer  "state_id"
+    t.integer  "number_payments"
+    t.integer  "value_payments"
   end
 
+  add_index "orders", ["payment_mode_id"], name: "index_orders_on_payment_mode_id", using: :btree
+  add_index "orders", ["state_id"], name: "index_orders_on_state_id", using: :btree
   add_index "orders", ["supplier_id"], name: "index_orders_on_supplier_id", using: :btree
 
   create_table "pay_consigments", force: true do |t|

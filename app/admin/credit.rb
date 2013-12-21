@@ -1,6 +1,18 @@
 ActiveAdmin.register Credit do
 # config.comments = true
   menu :parent => "Creditos"
+  # actions :all, :except => [:new, :create, :edit, :upadate, :destroy]
+actions :all, :except => [:destroy]
+# actions :index, :show, :new, :create, :update, :edit
+
+
+   # disallowed = []
+   # disallowed << :destroy unless proc{ can? :destroy, Credit }
+   # actions :all, :except => disallowed
+
+  # if condition
+    
+  # end
 
 
 
@@ -13,6 +25,11 @@ ActiveAdmin.register Credit do
 
   index do 
     selectable_column
+      @credit = Credit.new(params[:credit])
+
+    if @credit.state_id.to_i == 4
+      actions :all, :except => [:show,:new, :create, :edit, :upadate, :destroy]
+    end
     column :id
     column :admin_user
     column 'Admin Creador' do |admin|      
@@ -79,6 +96,10 @@ ActiveAdmin.register Credit do
       #  # if diaPago < Date.today
       # #     if ultimoPago < Date.today
 
+
+# credito cancelado
+if estado != 4
+  
       if diaPago > Date.today
       # credit = Credit.find(credit.id)
       credit.update_attribute(:state_id, 5)
@@ -131,6 +152,11 @@ ActiveAdmin.register Credit do
 if sumaPagos >= credit.total
            credit.update_attribute(:state_id, 6) # pagos terminados
 end
+
+
+end #estado cancelado
+
+
 
 # metodo para pagos al dia Diarios
 # def pagosIdealDiarios(must_pay)
@@ -195,6 +221,11 @@ end
                   span :class => "", :style => " border:none; background-color: rgb(238, 238, 48); color: black;height:30px; padding: 5px;" do 
                   credit.state.name
                   end
+              elsif credit.state_id.to_i == 4
+                  span :class => "", :style => " border:none; background-color: rgb(165, 165, 164); color: black;height:30px; padding: 5px;" do 
+                  credit.state.name
+                  end    
+
               else                                          
                   credit.state.name
               end
@@ -250,15 +281,45 @@ end
     # column :sum_payments => price
     column :created_at
     column :updated_at
-    actions do |credit|
-      link_to("Generar Contrato",  contract_admin_credit_path(credit), :class => "member_link") + "  " + 
-      link_to("Pagos",  admin_credit_payments_credits_path(credit), :class => "member_link")
-      # link_to "Agregar a Inventario", credit_show_path(id: credit.id), :class => "member_link"
-      # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
-    end
-    # default_actions
-  end    
 
+   
+    actions do |credit|
+
+       if credit.state_id.to_i == 4
+          link_to("Ver", admin_credit_path(credit)) + "  " + "Nada por hacer..."
+       else   
+            link_to("Generar Contrato",  contract_admin_credit_path(credit), :class => "member_link") + "  " + 
+            link_to("Pagos",  admin_credit_payments_credits_path(credit), :class => "member_link") + "  " +
+           link_to("Cancelar", cancelar_admin_credit_path(credit), :method => :put, :confirm => "Estas Seguro(a)?")
+          # default_actions
+
+      end
+    end
+ end
+
+
+
+
+
+
+
+
+
+# member_action :cancelar, :method => :get do
+member_action :cancelar, :method => :put do
+      
+  @credit = Credit.find(id = params[:id])
+      # credit.lock!
+
+      @credit.update_attribute(:state_id, 4)
+    redirect_to :action => :index, :notice => "Servicio #{@credit.id}"
+
+  #   update! do |format|
+
+  #       format.html { redirect_to :action => :index }
+  #   end    
+
+end
 
 member_action :contract, :method => :get do
 @credit = Credit.find(id = params[:id])
@@ -310,12 +371,11 @@ end
 
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
         order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
-        order.input :amount, :input_html => {onChange:"validarSiNumero(this)", id: "amount", :style => "width: 60px;"}
-        order.input :unit_value, :input_html => {onBlur:"validarSiNumero(this)", id: "unit_value", :style => "width: 60px;"}
-        order.input :value, :input_html => {onBlur:"validarSiNumero(this)", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
+        order.input :amount, :input_html => {onChange:"", id: "amount", :style => "width: 60px;"}
+        order.input :unit_value, :input_html => {onBlur:"", id: "unit_value", :style => "width: 60px;"}
+        order.input :value, :input_html => {onBlur:"", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
           within @head do
                script :src => javascript_path('admin_credit.js'), :type => "text/javascript"
-               # script :src => javascript_path('5.js'), :type => "text/javascript"
                script :src => javascript_path('6.js'), :type => "text/javascript"
 
           end                 
@@ -362,7 +422,7 @@ end
       end      
 
 
-      f.input :total,  input_html: {onChange:"validarSiNumero(this)", onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
+      f.input :total,  input_html: {onChange:"", onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
       f.input :number_payments, :input_html => {onChange:"validarSiNumero(this)", id: "number_payments", :style => "width: 60px;"}
       f.input :value_payments, :input_html => {onChange:"validarSiNumero(this)", id: "value_payments",onclick: "javascript:calcularPagos(this)", :style => "width: 60px;"}
 		end

@@ -98,9 +98,9 @@
 			</div>
 			<div style=" width:320px;border-style: solid; display: inline-block;">
 				<ul>
-					<li type="none"><b>No. Cuotas: </b>  <%= '10' %></li>
-					<li type="none"><b>Valor Cuota $: </b>  <%= '300.000' %></li>
-					<li type="none"><b>Fecha Inicio de Pagos: </b> <%= '12/11/2013' %></li>
+					<li type="none"><b>No. Cuotas: </b>  <%= @credit.number_payments  %></li>
+					<li type="none"><b>Valor Cuota $: </b>  <%= @credit.value_payments  %></li>
+					<li type="none"><b>Fecha Inicio de Pagos: </b> <%= @credit.payday  %></li>
 				</ul>
 			</div>			
 	</div>	

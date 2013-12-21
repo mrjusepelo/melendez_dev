@@ -1,18 +1,6 @@
 $(document).ready(function(){
-
+ // alert('coasd');
 });
-
-
-
-function noEnviar(e, elemento) {
-    if (e.keyCode == 13) {
-      // $('#ui-id-120').click();
-      $('ul.ui-autocomplete li.ui-menu-item a').click();  
-
-        return false;
-    }
-}
-
 
 function busquedaProducto(elemento){
 
@@ -21,11 +9,10 @@ function busquedaProducto(elemento){
     $(elemento).css({'color':'black','font-size':'1.3em','background':'rgb(231, 231, 231)', 'font-weight': 'bold'});
 
     $(elemento).autocomplete({
-      source: location.protocol + '//' + location.host + "/credits/autocomplete.json",
+      source: location.protocol + '//' + location.host + "/products/autocomplete.json",
       minLength: 2,
       select: function( event, ui ) {
         $(elemento).parent().parent().find("#product_id").val(ui.item.id);
-        $(elemento).parent().parent().find("#unit_value").val(ui.item.vale_sale);
         // debugger;
       } 
 
@@ -64,16 +51,31 @@ function salida(elemento){
     console.log(n[1]);
 }
 
-function validarSiNumero(numero){
-  if (!/^([0-9])*$/.test(numero.value)){
-      alert("El valor " + numero.value + " no es un número");  
-      $(numero).val("");
-  }
+
+
+// js de pedidos + prueba
+function sumavalorpedido(total){
+    var sum = 0;
+    $('.val_product').each(function() {
+        sum += Number($(this).val());
+    });
+    $(total).val(parseInt(sum));
+  console.log("valor factura "+ sum);
 }
 
+function valorproductos(valor){
 
-// $("[id|='myValue']")
-// $("[id$='txtTitle']")
-// console.log(($("[id$='ount']").val())) // imperesion por consola el valor del id terminado en ount
-// $("[id$='buyer']").prop('checked', true) //selecciona el id terminado en buyer 
-// $("element[id$='txtTitle']")
+    cantidad =    $(valor).parent().parent().find("#amount").val();
+    valor_unidad =    $(valor).parent().parent().find("#unit_value").val();
+    $(valor).val(parseInt(cantidad * valor_unidad));
+    console.log( cantidad * valor_unidad );
+}
+
+function calcularPagos(valor){
+
+    numPagos =    $('#number_payments').val();
+    totalCredito =    $("#total").val();
+    valorCuotas = (totalCredito / numPagos);
+    $(valor).val(parseInt(valorCuotas));
+    console.log( valorCuotas );
+}
