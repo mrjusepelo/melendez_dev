@@ -8,7 +8,7 @@ $(document).ready(function(){
 
 var f = new Date();
 
-if (f.getHours() > 2) {
+// if (f.getHours() > 2) {
 
 	$('li#current_user').before("<li id='icono_notifications'><a id='numNotify' href='dashboard' style='color: black;  vertical-align: middle; text-align: center; width: 25px;height: 25px; background:red; border-radius:14px;'></a></li>")
 	$('li#icono_notifications').before("<li id='enlace_notification'><a href='dashboard'>Notificaciones</a></li>")
@@ -20,13 +20,13 @@ if (f.getHours() > 2) {
  // $.get(location.protocol + '//' + location.host +"/orders/notification.json", function(p){
 	 $.get("/orders/notification.json", function(numNotificaciones){
 
-	          console.log(numNotificaciones)
+	          // console.log(numNotificaciones);
 			$('li#icono_notifications a').append(numNotificaciones);
 
 
 	});
 
-};
+// };
 
 
 

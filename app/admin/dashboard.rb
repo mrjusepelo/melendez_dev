@@ -3,12 +3,12 @@ ActiveAdmin.register_page "Dashboard" do
   menu :priority => 1, :label => proc{ I18n.t("active_admin.dashboard") }
 
   content :title => proc{ I18n.t("active_admin.dashboard") } do
-    div :class => "blank_slate_container", :id => "dashboard_default_message" do
-      span :class => "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
-      end
-    end
+    # div :class => "blank_slate_container", :id => "dashboard_default_message" do
+    #   span :class => "blank_slate" do
+    #     span I18n.t("active_admin.dashboard_welcome.welcome")
+    #     small I18n.t("active_admin.dashboard_welcome.call_to_action")
+    #   end
+    # end
 
 
 
@@ -35,14 +35,16 @@ h3 section "Notificaciones de Pedidos Proximos a Pagar" do
     table_for Notification.where("nextdate < ? AND revised = 'false'", Date.today).limit(5) do |t| 
          # table_for current_admin_user.tasks.where('due_date > ? and due_date < ?', Time.now, 1.week.from_now) do |t|   
     # table_for Product.brand.limit(5) do
-    t.column "Proveedor" do |prov|
-        link_to prov.order.supplier.name, admin_order_path(prov)
-    end 
-    t.column "Notificacion" do |noti|
-        link_to noti.id, admin_order_notifications_path(noti.order.id)
-        # admin_credit_payments_credits_path(credit)
-    end     
-    t.column :created_at 
+        t.column "Pedido Numero" do |prov|
+            link_to prov.order.id, admin_order_path(prov.order)
+        end
+        t.column "Proveedor" do |prov|
+            link_to prov.order.supplier.name, admin_supplier_path(prov.order.supplier)
+        end 
+        t.column "Notificacion" do |noti|
+            link_to noti.id, admin_order_notifications_path(noti.order.id)
+        end     
+        t.column :created_at 
 # t.column("Status") { |task| status_tag (task.is_done ? "Done" : "Pending"), (task.is_done ? :ok : :error) }
     end
     strong { link_to "Ver Todos los Pedidos", admin_orders_path }
@@ -53,8 +55,11 @@ end
 h3 section "Notificacion de Pagos para Hoy" do
 
     table_for Notification.where(nextdate: Date.today).limit(5) do |t| 
+        t.column "Pedido Numero" do |prov|
+            link_to prov.order.id, admin_order_path(prov)
+        end
         t.column "Proveedor" do |prov|
-            link_to prov.order.supplier.name, admin_order_path(prov)
+            link_to prov.order.supplier.name, admin_supplier_path(prov.order.supplier)
         end 
         t.column "Notificacion" do |noti|
             link_to noti.id, admin_order_notifications_path(noti.order.id)

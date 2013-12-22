@@ -5,9 +5,14 @@ class OrdersController < ApplicationController
      @products = Order.select(:date_limit_pay, :id).where(date_limit_pay: ((Date.today-5)..Date.today)).length
 
      @ultimoPago = Notification.where(nextdate: Date.today)
-    
+
     # notificaciones pasadas sin ser revizadas
      @pasadas = Notification.where("nextdate < ? AND revised = 'false'", Date.today)
+
+    # pedidos que no tengan estado cacelado o terminado
+     @vigentes = Order.where.not(:state_id => [4,6] ).count
+
+      
 
 @numNotificaciones = @ultimoPago.count.to_i + @pasadas.count.to_i
 

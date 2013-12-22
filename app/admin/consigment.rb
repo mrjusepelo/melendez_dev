@@ -1,5 +1,6 @@
 ActiveAdmin.register Consigment do
-  menu :parent => "Compra Proveedores"
+  # menu :parent => "Compra Proveedores"
+  belongs_to :order
   
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy, :show]
   actions :all, :except => [:new, :create, :edit, :upadate, :destroy]

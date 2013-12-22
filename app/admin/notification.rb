@@ -7,9 +7,21 @@ ActiveAdmin.register Notification do
   index do
     # column :name
     # row :nextdate
+    column :id
     column "Proxima Notificacion", :nextdate 
     column "Pedido", :order_id 
-    column "Revisado", :revised 
+    column "Revisado", :revised do |notification|
+        if defined?(notification.revised)
+          revision = notification.revised
+          if revision.to_s == "false"
+	          revision = "Sin Ver"
+		  elsif revision.to_s == "true"
+	          revision = "Visto"
+          end
+        else
+          revision = "Sin Revisar"
+	    end
+    end
     column :created_at
     column :updated_at 
  	# column "Title" do |notification|

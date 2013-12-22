@@ -2,8 +2,9 @@ ActiveAdmin.register Credit do
 # config.comments = true
   menu :parent => "Creditos"
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy]
-actions :all, :except => [:destroy]
+# actions :all, :except => [:destroy]
 # actions :index, :show, :new, :create, :update, :edit
+  actions :all, :except => [:destroy, :edit, :update]
 
 
    # disallowed = []
@@ -27,9 +28,6 @@ actions :all, :except => [:destroy]
     selectable_column
       @credit = Credit.new(params[:credit])
 
-    if @credit.state_id.to_i == 4
-      actions :all, :except => [:show,:new, :create, :edit, :upadate, :destroy]
-    end
     column :id
     column :admin_user
     column 'Admin Creador' do |admin|      
@@ -283,7 +281,7 @@ end #estado cancelado
     column :updated_at
 
    
-    actions do |credit|
+    column "" do |credit|
 
        if credit.state_id.to_i == 4
           link_to("Ver", admin_credit_path(credit)) + "  " + "Nada por hacer..."
