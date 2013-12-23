@@ -3,6 +3,7 @@ class Credit < ActiveRecord::Base
   belongs_to :payment_mode
   belongs_to :state
   has_many :clients
+  has_many :notification_credits
 
 # lineas agregadas
   has_many :credit_products

@@ -42,162 +42,73 @@ ActiveAdmin.register Credit do
 
     column "Estado " do |credit|
 
-      modoPago = credit.payment_mode_id
-      diaPago = credit.payday
-      ultimoPago = credit.payments_credits.where(credit_id: credit.id ).last
-      sumaPagos =  credit.payments_credits.sum(:value)
-      estado = credit.state_id
-      # estado = credit.state.name
-
-      fechaPagoInicial = credit.payday
-      must_pay = fechaPagoInicial
-      tipoPago = credit.payment_mode_id
-
-      # metodo que cuenta la cantidad de pagos ideal hasta hoy
-      def pagosIdeal(must_pay, tipoPago)
-          case tipoPago
-          when 2
-            tipoPago = 7
-          when 3
-            tipoPago = 15
-          when 4
-            tipoPago = 1.months  # revizar este caso
-          end
-
-                  cantIdeal=1
-                  while must_pay <= Date.today
-                    # must_pay +=7
-                    cantIdeal = cantIdeal + 1
-                    must_pay = must_pay + tipoPago
-                    if must_pay > Date.today then
-                      must_pay = (must_pay - tipoPago)
-                      cantIdeal = cantIdeal - 1
-                      break
-                      
-                    end
-                  end  
-
-                  # if Date.today == must_pay
-                  #         Credit.update(credit.id, :payday => must_pay)
-                  # end            
-          return cantIdeal, must_pay
-      end
-
-                
+           totalCredito = credit.total.to_i
+      sumaPagos = credit.sum_payments.to_i
+      estado = credit.state_id.to_i
+      modoPago = credit.payment_mode_id.to_i
+      inicioPago = credit.payday
 
 
-      numPagos = pagosIdeal(must_pay, tipoPago)[0]
-      pagosAlDia =  numPagos * credit.value_payments
+# if order.id == 134
+def pagosIdeal(modoPago, inicioPago)
 
+  diaspagos = 0
+  cont = 0
+  inc = 0
+# a=0
 
-      # # def comprobacionPagos(id, modoPago, diaPago, ultimoPago, sumaPagos, pagosAlDia, estado )
-      #  # if diaPago < Date.today
-      # #     if ultimoPago < Date.today
+  case modoPago
+  when 1
+    inc = 1
+  when 2
+    inc = 7
+  when 3
+    inc = 14
+  when 4
+    # obtiene fecha exacta de un mes mas
+    cantdias = (Date.today - (inicioPago)).to_i
+    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+    inc =    cantdias/cantmeses    
+  end
+       
+        inicioPago.step(Date.today, inc) do | dia |
+         cont = cont + 1
 
+          if (inicioPago > Date.today)
+           cont = cont - 1 
+           break 
+         end
+       end
+   diaspagos = cont
+   
+   return diaspagos
 
-# credito cancelado
-if estado != 4
-  
-      if diaPago > Date.today
-      # credit = Credit.find(credit.id)
-      credit.update_attribute(:state_id, 5)
-            if sumaPagos < pagosAlDia
-              if estado != 1
-                # Credit.update(6, :state_id => 1)
-                Credit.where(:id =>[credit.id]).update_all(:state_id => 1)
-
-                # Credit.update(@credit.id, :sum_payments => sum_payments)
-
-                # "estado diferente"
-
-              else
-                # estado
-                # credit.state.name
-              end
-
-            # elsif sumaPagos == pagosAlDia
-            #   if estado != 3
-            #     Credit.update(credit.id, :state_id => 3)
-            #   else
-            #     # estado
-            #     credit.state.name
-
-            #   end     
-
-            # elsif sumaPagos > pagosAlDia
-            #     if estado != 8
-            #       Credit.update(credit.id, :state_id => 8)
-            #     else
-            #       # estado
-            #     credit.state.name
-
-            #     end
-                              
-
-            end
-      end # diaPago > hoy
-
-      if diaPago < Date.today 
-        if sumaPagos >= pagosAlDia 
-           credit.update_attribute(:state_id, 3)  # paogs al dia
-         elsif sumaPagos < pagosAlDia
-           credit.update_attribute(:state_id, 1) # pagos pendientes
-        end
-      end
-
-
-
-if sumaPagos >= credit.total
-           credit.update_attribute(:state_id, 6) # pagos terminados
 end
 
+# a= pagosIdeal(modoPago, inicioPago)
+# puts "****************"+a.to_s
+# end # if registro especifico
 
-end #estado cancelado
-
-
-
-# metodo para pagos al dia Diarios
-# def pagosIdealDiarios(must_pay)
-#     cantIdeal = 1
-#     while must_pay <= Date.today
-#         cantIdeal +=1                               
-#     end  
-#     return cantIdeal                         
-# end         
-#       numPagos = pagosIdealDiarios(must_pay)[0]
-#       pagosAlDia =  numPagos * credit.value_payments
-
-# if diaPago == Date.today
-
-#   if pagosAlDia >= sumaPagos
-#     if ultimoPago == Date.today
-#         if estado != 3
-#            credit.update_attribute(:state_id, 3) # pagos Al Dia
-#         end
-        
-#       end  
-#   end
+# estados difentes de cancelado o terminado
+if (estado != 4 && estado != 6)
+  sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * credit.value_payments.to_i
   
-# end
+  if sumaPagos >= sumPagosIdeal
 
+    if sumaPagos >= totalCredito
+       credit.update_attribute(:state_id, 6)  # credito terminado
+    else  
+       credit.update_attribute(:state_id, 3)  # paogs al dia
+    end
+    
+  elsif sumaPagos >= totalCredito
+       credit.update_attribute(:state_id, 6)  # credito terminado
+  else
+     credit.update_attribute(:state_id, 1) # pagos pendientes
 
-
-
-
-            # " #{credit.id}   #{sumaPagos}    #{pagosAlDia}"
-            # credit.state_id
-
-
-      # #     end #ultimoPago 
-          
-      # #   end
-        
-      # # end
-        
-                              # must_pay +
-                              # "ite #{i}"
-      # "#{pagosIdeal(must_pay, 7)[0]} Este es el dia #{pagosIdeal(must_pay, 7)[1]}"
-
+  end
+  
+end #condicion de estado terminado o cancelado
 
 
 
@@ -275,6 +186,106 @@ end #estado cancelado
       number_to_currency payments.sum_payments
     end
 
+    column "Proximo Pago" do |credit|
+
+      totalCredito = credit.total.to_i
+      sumaPagos = credit.sum_payments.to_i
+      estado = credit.state_id.to_i
+      modoPago = credit.payment_mode_id.to_i
+      inicioPago = credit.payday
+
+
+# if order.id == 134
+def pagosIdeal(modoPago, inicioPago)
+
+  diaspagos = 0
+  cont = 0
+  inc = 0
+  proximoPago = Date
+# a=0
+
+  case modoPago
+  when 1
+    inc = 1
+  when 2
+    inc = 7
+  when 3
+    inc = 14
+  when 4
+    # obtiene fecha exacta de un mes mas
+    cantdias = (Date.today - (inicioPago)).to_i
+    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+    inc =    cantdias/cantmeses    
+  end
+       
+        inicioPago.step(Date.today, inc) do | dia |
+         cont = cont + 1
+          proximoPago = dia
+          if (inicioPago > Date.today)
+            proximoPago = proximoPago - inc
+           cont = cont - 1 
+           break 
+         end
+       end
+   diaspagos = cont
+   
+   return diaspagos, proximoPago
+
+end
+
+# a= pagosIdeal(modoPago, inicioPago)
+# puts "****************"+a.to_s
+# end # if registro especifico
+
+# estados difentes de cancelado o terminado
+if (estado != 4 && estado != 6)
+diaPago = Date
+ diaPago = pagosIdeal(modoPago, inicioPago)[1]
+ if diaPago == Date.today
+   diaPago = "Hoy"
+ else
+  diaPago
+ end
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+    end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    column "Modo de Pago" do |credit|
+        if defined?(credit.payment_mode.name)
+          modoPago = credit.payment_mode.name
+        else
+          modoPago = "Sin asignar"
+
+        end
+    end
 
     # column :sum_payments => price
     column :created_at

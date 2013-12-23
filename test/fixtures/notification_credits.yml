@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nextdate: 2013-12-23
+  credit_id: 
+  revised: false
+
+two:
+  nextdate: 2013-12-23
+  credit_id: 
+  revised: false

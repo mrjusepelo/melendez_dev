@@ -63,13 +63,14 @@ Pencil::Application.routes.draw do
 
   resources :products do 
     collection do 
-      get "autocomplete"
+      get "autocomplete"      
     end
   end  
 
   resources :credits do 
     collection do 
       get "autocomplete"
+      get "notification"
     end
   end    
 

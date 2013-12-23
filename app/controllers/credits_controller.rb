@@ -33,45 +33,112 @@ class CreditsController < ApplicationController
     respond_with @products
   end
 
-  def index
-        html = render_to_string(:action => "index.html.erb")
-    kit = PDFKit.new(html)
-    send_data(kit.to_pdf, :filename => 'report.pdf', :type => 'application/pdf', :disposition => 'inline')
+
+
+
+
+
+  def notification
+
+    #  @products = Credit.where(date_limit_pay: ((Date.today-5)..Date.today)).length
+     
+    #  @pagosPendientes = Order.select(:id).where(state_id: 1).length #pagos pendientes
+
+    #  @ultimoPago = Notification.where(nextdate: Date.today)
+
+    # # notificaciones pasadas sin ser revizadas
+    #  @pasadas = Notification.where("nextdate < ? AND revised = 'false'", Date.today)
+
+    # # pedidos que no tengan estado cacelado o terminado
+    #  @vigentes = Order.where.not(:state_id => [4,6] ).count
+
+      
+
+
+# los que son notificados hoy
+# los que son notificados antes de hoy y no estan vistos
+
+@credit = Credit.find(:all)
+
+@contador = 0
+@credit.each do |credit|
+
+  totalCredito = credit.total.to_i
+      sumaPagos = credit.sum_payments.to_i
+      estado = credit.state_id.to_i
+      modoPago = credit.payment_mode_id.to_i
+      inicioPago = credit.payday
+
+
+# if order.id == 134
+def pagosIdeal(modoPago, inicioPago)
+
+  diaspagos = 0
+  cont = 0
+  inc = 0
+  proximoPago = Date
+# a=0
+
+  case modoPago
+  when 1
+    inc = 1
+  when 2
+    inc = 7
+  when 3
+    inc = 14
+  when 4
+    # obtiene fecha exacta de un mes mas
+    cantdias = (Date.today - (inicioPago)).to_i
+    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+    inc =    cantdias/cantmeses    
   end
+       
+        inicioPago.step(Date.today, inc) do | dia |
+         cont = cont + 1
+          proximoPago = dia
+          if (inicioPago > Date.today)
+            proximoPago = proximoPago - inc
+           cont = cont - 1 
+           break 
+         end
+       end
+   diaspagos = cont
+   
+   return diaspagos, proximoPago
 
-  def admin_pdf
-    
-  end
-  def show
+end
 
-  end
-  
+# a= pagosIdeal(modoPago, inicioPago)
+# puts "****************"+a.to_s
+# end # if registro especifico
 
-  def to_pdf
-     @product = Product.find(id = params[:id])
+# estados difentes de cancelado o terminado
+if (estado != 4 && estado != 6)
+diaPago = Date
+ diaPago = pagosIdeal(modoPago, inicioPago)[1]
+ if diaPago == Date.today
+   @contador += 1
+ end
 
-    #  html = render_to_string(:action => "show.html.erb", :layout => true)
-    # kit = PDFKit.new(html)
-    # kit.stylesheets << 'vendor/assets/stylesheets/style.css'
-    # # kit.stylesheets << 'app/assets/stylesheets/products.css.scss'
-    # send_data(kit.to_pdf, :filename => 'test_report_with_table.pdf', :type => 'application/pdf')
-  end
+end
 
-  
-  def new
-  end
 
-  def create
-  end
 
-  def update
-  end
+end # fin each credit
 
-  def edit
-  end
+puts "*******************"+@contador.to_s
+@numNotificacionesCreditos =  @contador.to_i
 
-  def delete
-  end
 
-  
+
+    respond_to do |format|
+      format.json { render :json => @numNotificacionesCreditos}     
+    end
+
+
+end
+
+
+
+
 end

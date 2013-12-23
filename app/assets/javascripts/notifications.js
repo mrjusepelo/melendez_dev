@@ -26,6 +26,17 @@ var f = new Date();
 
 	});
 
+	 $.get("/credits/notification.json", function(numNotificacionesCreditos){
+
+		 cant = $('#numNotify').text();
+		 cant = parseInt(cant) + numNotificacionesCreditos;
+		$('#numNotify').text(cant);		 
+
+	});
+
+
+
+
 // };
 
 
