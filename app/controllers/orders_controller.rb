@@ -3,6 +3,8 @@ class OrdersController < ApplicationController
     # Order.select(:date_limit_pay).where(date_limit_pay: '2013-11-2').first
      # @products = Order.select(:date_limit_pay, :id).where(date_limit_pay: (Date.today-5)).first
      @products = Order.select(:date_limit_pay, :id).where(date_limit_pay: ((Date.today-5)..Date.today)).length
+     
+     @pagosPendientes = Order.select(:id).where(state_id: 1).length #pagos pendientes
 
      @ultimoPago = Notification.where(nextdate: Date.today)
 
@@ -14,7 +16,7 @@ class OrdersController < ApplicationController
 
       
 
-@numNotificaciones = @ultimoPago.count.to_i + @pasadas.count.to_i
+@numNotificaciones = @ultimoPago.count.to_i + @pasadas.count.to_i + @pagosPendientes.to_i
 
 # los que son notificados hoy
 # los que son notificados antes de hoy y no estan vistos

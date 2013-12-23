@@ -65,6 +65,39 @@ end
 
 
 controller do
+	def update
+	  @notification = Notification.find(params[:id])
+
+	  update! do |format|
+	  	if @notification.order.state_id != 6
+			
+			@order = @notification.order
+            # crea las Notificationes con 3 dias de anticipacion para cada una
+            if @order.payment_mode_id.to_i == 1
+              Notification.create(revised: 'false', :nextdate => (Date.today + 1), :order_id => @order.id)
+
+            elsif @order.payment_mode_id.to_i == 2
+              Notification.create(revised: 'false', :nextdate => (Date.today + 4), :order_id => @order.id)
+
+            elsif @order.payment_mode_id.to_i == 3
+              Notification.create(revised: 'false', :nextdate => (Date.today + 11), :order_id => @order.id)
+
+            elsif @order.payment_mode_id.to_i == 4
+              hoy = Date.today
+              mes1 = hoy + 1.month
+              mesnotify = mes1 - 3.day
+              Notification.create(revised: 'false', :nextdate => mesnotify, :order_id => @order.id)  
+
+            end
+
+	  	end
+
+	    format.html { redirect_to :action => :index }
+	  end
+	end
+
+
+
       before_filter :protected_attributes
       def protected_attributes
         params.permit!
