@@ -300,6 +300,109 @@ end #fin columna proximo
         end
     end
 
+    column :interescorriente
+    # column :interesmora
+    column "Interes Mora " do |credit|
+
+
+       totalCredito = credit.total.to_i
+      sumaPagos = credit.sum_payments.to_i
+      estado = credit.state_id.to_i
+      modoPago = credit.payment_mode_id.to_i
+      inicioPago = credit.payday
+
+
+# if order.id == 134
+def pagosIdeal(modoPago, inicioPago)
+
+  diaspagos = 0
+  cont = 0
+  inc = 0
+# a=0
+
+  case modoPago
+  when 1
+    inc = 1
+  when 2
+    inc = 7
+  when 3
+    inc = 14
+  when 4
+    # obtiene fecha exacta de un mes mas
+    cantdias = (Date.today - (inicioPago)).to_i
+    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+    inc =    cantdias/cantmeses    
+  when 5
+    inc = 7000
+  end
+       
+       if inc == 7000 
+         diaspagos = 1
+
+        else
+              inicioPago.step(Date.today, inc) do | dia |
+               cont = cont + 1
+
+                if (inicioPago > Date.today)
+                 cont = cont - 1 
+                 break 
+               end
+             end
+         diaspagos = cont
+       end
+   
+   return diaspagos
+
+end
+
+# a= pagosIdeal(modoPago, inicioPago)
+# puts "****************"+a.to_s
+# end # if registro especifico
+
+# estados difentes de cancelado o terminado con campo published false
+# if (estado != 4 && estado != 6)
+if (credit.published == true)
+
+  sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * credit.value_payments.to_i
+
+end
+
+end # fin columna interes de mora
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     # column :sum_payments => price
     column :created_at
     column :updated_at
@@ -482,7 +585,7 @@ end
         row :value_payments
         row :total
         row :interescorriente
-        row :interescompuesto
+        row :interesmora
         # row :image do
         #   image_tag(ad.image.url)
         # end
