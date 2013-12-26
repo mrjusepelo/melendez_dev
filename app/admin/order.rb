@@ -1,5 +1,6 @@
 ActiveAdmin.register Order do
   menu :parent => "Compra Proveedores"
+actions :all, :except => [:destroy]
 
 
 
@@ -17,6 +18,7 @@ index do
     column :sum_payments
     column :created_at
     column :updated_at
+    column :nextpay
     column "Estado de Pedido" do |order|
       # ultimoPago = credit.payments_credits.where(credit_id: credit.id ).last
       # sumaPagos =  credit.payments_credits.sum(:value)
@@ -105,7 +107,11 @@ end #condicion de estado terminado o cancelado
             elsif order.state_id.to_i == 6
                  span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
                     estado = order.state.name
-                 end                   
+                 end  
+            elsif order.state_id.to_i == 4
+                span :class => "", :style => " border:none; background-color: rgb(165, 165, 164); color: black;height:30px; padding: 5px;" do 
+                order.state.name
+                end                                    
             end
 
         else
@@ -122,15 +128,21 @@ end #condicion de estado terminado o cancelado
         end
     end
 
-    actions do |order|
-            # link_to("Generar Contrato",  contract_admin_credit_path(credit), :class => "member_link") + "  " + 
-            # link_to("Pagos",  admin_credit_payments_credits_path(credit), :class => "member_link") + "  " +
-           # link_to("Cancelar", cancelar_admin_credit_path(credit), :method => :put, :confirm => "Estas Seguro(a)?")
-
+    column "" do |order|
+       if order.published == false
+          link_to("Ver", admin_order_path(order)) + "  " + "Nada por hacer..."
+      else
+            link_to("Ver", admin_order_path(order), :class => "member_link") + "  " + 
+            link_to("Editar", edit_admin_order_path(order), :class => "member_link") + "  " + 
             link_to("Notificaciones" + " "+ order.id.to_s, admin_order_notifications_path(order.id), :class => "member_link") + "  " +   
-            link_to("Pagos", admin_order_consigments_path(order), :class => "member_link")
+            link_to("Pagos", admin_order_consigments_path(order), :class => "member_link") + "  " + 
+            link_to("Cancelar", cancelar_admin_order_path(order), :method => :put, :confirm => "Estas Seguro(a)?") # + " " +
+            # link_to("Generar CodBarra", codebar_admin_order_path(order), :method => :get)
+            # link_to("Generar CodBarra", new_admin_inventory_path(), :method => :get, :class => "member_link")
+
 
       # link_to "Notificaciones", new_admin_inventory_path(product), :class => "member_link"
+      end
     end
     # default_actions
   end    
@@ -143,6 +155,14 @@ end #condicion de estado terminado o cancelado
 
 
 
+member_action :cancelar, :method => :put do
+      
+  @order = Order.find(id = params[:id])
+    # @order.update_attribute(:state_id, 4)
+    @order.update(:state_id => 4, :published => false)
+    redirect_to :action => :index, :notice => "Servicio #{@order.id}"
+
+end
 
 
 
@@ -166,6 +186,7 @@ end #condicion de estado terminado o cancelado
 
       # if @order.id.nil?
       f.inputs "Pedidos" do
+        f.input :date_arrival, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: order.products.to_json}
       f.input :supplier
       f.input :payment_mode
 
@@ -180,7 +201,7 @@ end #condicion de estado terminado o cancelado
           
         order.inputs 'Productos' do 
         order.input :product, :as => "string",  input_html: {onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        order.input :product_id,   input_html: {id: "product_id"}
+        order.input :product_id,   input_html: {id: "product_id", class: "order_product_id"}
         order.input :amount, :input_html => {onChange:"", id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {onBlur:"", id: "unit_value", :style => "width: 60px;"}
         order.input :value, :input_html => {onBlur:"", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
@@ -215,6 +236,157 @@ end #condicion de estado terminado o cancelado
 		end
 		    f.actions
 	end
+
+
+
+
+
+
+ show do |order|
+  
+      attributes_table do
+        row :id
+        row :date_billed
+        row :date_arrival
+        row :date_limit_pay
+        row :date_pay_real
+        row :val_real
+        row :supplier
+        row :sum_payments
+        row :payment_mode
+        row :state
+        row :number_payments
+        row :value_payments
+        row :payday
+        row :published
+        row :created_at
+        row :updated_at
+        row :nextpay
+        # row :image do
+        #   image_tag(ad.image.url)
+        # end
+
+        row  "Productos " do
+          table do 
+            
+            tr do 
+              td :style => "width: 200px; background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                  "Nombre"
+                end      
+              end
+              td id: "Marca", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Marca"
+                end
+              end
+              td id: "cantidad", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Cantidad"
+                end
+              end           
+              td id: "valor_unidad", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Valor Unidad"
+                end
+              end
+              td id: "valor", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Valor"
+                end
+              end
+
+
+            end
+
+
+           order.order_products.each do |prod|
+              tr do 
+                td :style => "text-align: center;" do 
+                  prod.product.name
+                end
+                td :style => "text-align: center;" do 
+                  prod.product.brand.name
+                end
+                td :style => "text-align: center;" do 
+                  prod.amount
+                end
+                td :style => "text-align: center;" do 
+                  prod.unit_value
+                end 
+                td :style => "text-align: center;" do 
+                  prod.value
+                end                                                
+
+              end
+           end
+
+
+
+          end
+        end
+      end
+
+      # desactivado desde el inicializer/config/ActiveAdmin
+      # active_admin_comments
+
+  # table_for credit.products do
+  #   column "Nombre" { |credit| credit.product.name }
+  #   # column "Payment Type" { |payment| payment.payment_type.titleize }
+  #   # column "Received On", :created_at
+  #   # column "Payment Details & Notes", :payment_details
+  #   # column "Amount" { |payment| payment.amount_in_dollars }
+  # end
+
+
+
+# attributes_table do
+
+#     table_for Product.order("created_at desc").limit(5) do |t| 
+#       t.column :name do |product|
+#         link_to product.name, admin_product_path(product)
+#       end 
+#       t.column :created_at 
+#     end
+
+# end
+
+
+
+      active_admin_comments
+
+    end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -299,6 +471,54 @@ def update
   @order = Order.find(params[:id])
 
   update! do |format|
+
+            # actualizo la ultima Notificacion para el sgte dia de pago del pedido actulizado
+            if @order.payment_mode_id.to_i == 1
+              @order.update_attribute(:nextpay, (Date.today + 1))  # proximo dia de pago
+              ultNotificacion = @order.notifications.last
+              Notification.update(ultNotificacion.id, revised: 'false', :nextdate => (@order.nextpay), :order_id => @order.id)
+
+            elsif @order.payment_mode_id.to_i == 2
+              @order.update_attribute(:nextpay, (Date.today + 7))  # proximo dia de pago
+              ultNotificacion = @order.notifications.last
+              Notification.update(ultNotificacion.id, revised: 'false', :nextdate => (@order.nextpay), :order_id => @order.id)
+
+            elsif @order.payment_mode_id.to_i == 3
+              @order.update_attribute(:nextpay, (Date.today + 14))  # proximo dia de pago
+              ultNotificacion = @order.notifications.last
+              Notification.update(ultNotificacion.id, revised: 'false', :nextdate => (@order.nextpay), :order_id => @order.id)
+
+            elsif @order.payment_mode_id.to_i == 4
+              hoy = Date.today
+              mes1 = hoy + 1.month
+              @order.update_attribute(:nextpay, (mes1))  # proximo dia de pago
+              mesnotify = mes1 - 3.day
+
+              ultNotificacion = @order.notifications.last
+              Notification.update(ultNotificacion.id, revised: 'false', :nextdate => mes1, :order_id => @order.id)
+
+            end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     sum_payments =  @order.consigments.sum(:value)
     Order.update(@order.id, :sum_payments => sum_payments)

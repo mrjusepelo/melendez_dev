@@ -91,7 +91,8 @@ form do |f|
 
       f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
       f.input :value
-      f.input :description
+      f.input :description, :input_html => { :placeholder => "Describe la forma en la que hiciste este PAGO"}
+      # f.input :description, :attr, :placeholder => "placeholder text"
       f.input :document 
       f.input :name 
       # f.input :new_comment

@@ -4,7 +4,7 @@ ActiveAdmin.register Credit do
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy]
 # actions :all, :except => [:destroy]
 # actions :index, :show, :new, :create, :update, :edit
-  actions :all, :except => [:destroy, :edit, :update]
+  # actions :all, :except => [:destroy, :edit, :update]
 
 
    # disallowed = []
@@ -26,7 +26,7 @@ ActiveAdmin.register Credit do
 
   index do 
     selectable_column
-      @credit = Credit.new(params[:credit])
+      # @credit = Credit.new(params[:credit])
 
     column :id
     column :admin_user
@@ -42,7 +42,7 @@ ActiveAdmin.register Credit do
 
     column "Estado " do |credit|
 
-           totalCredito = credit.total.to_i
+       totalCredito = credit.total.to_i
       sumaPagos = credit.sum_payments.to_i
       estado = credit.state_id.to_i
       modoPago = credit.payment_mode_id.to_i
@@ -69,17 +69,24 @@ def pagosIdeal(modoPago, inicioPago)
     cantdias = (Date.today - (inicioPago)).to_i
     cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
     inc =    cantdias/cantmeses    
+  when 5
+    inc = 7000
   end
        
-        inicioPago.step(Date.today, inc) do | dia |
-         cont = cont + 1
+       if inc == 7000 
+         diaspagos = 1
 
-          if (inicioPago > Date.today)
-           cont = cont - 1 
-           break 
-         end
+        else
+              inicioPago.step(Date.today, inc) do | dia |
+               cont = cont + 1
+
+                if (inicioPago > Date.today)
+                 cont = cont - 1 
+                 break 
+               end
+             end
+         diaspagos = cont
        end
-   diaspagos = cont
    
    return diaspagos
 
@@ -89,17 +96,19 @@ end
 # puts "****************"+a.to_s
 # end # if registro especifico
 
-# estados difentes de cancelado o terminado
-if (estado != 4 && estado != 6)
+# estados difentes de cancelado o terminado con campo published false
+# if (estado != 4 && estado != 6)
+if (credit.published == true)
+
   sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * credit.value_payments.to_i
   
   if sumaPagos >= sumPagosIdeal
 
-    if sumaPagos >= totalCredito
-       credit.update_attribute(:state_id, 6)  # credito terminado
-    else  
-       credit.update_attribute(:state_id, 3)  # paogs al dia
-    end
+      if sumaPagos >= totalCredito
+         credit.update_attribute(:state_id, 6)  # credito terminado
+      else  
+         credit.update_attribute(:state_id, 3)  # paogs al dia
+      end
     
   elsif sumaPagos >= totalCredito
        credit.update_attribute(:state_id, 6)  # credito terminado
@@ -141,7 +150,7 @@ end #condicion de estado terminado o cancelado
 
 
 
-          end
+  end # fin columna de estado
 
 
 
@@ -186,6 +195,8 @@ end #condicion de estado terminado o cancelado
       number_to_currency payments.sum_payments
     end
 
+    # column :nextpay
+
     column "Proximo Pago" do |credit|
 
       totalCredito = credit.total.to_i
@@ -215,20 +226,28 @@ def pagosIdeal(modoPago, inicioPago)
     # obtiene fecha exacta de un mes mas
     cantdias = (Date.today - (inicioPago)).to_i
     cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
-    inc =    cantdias/cantmeses    
+    inc =    cantdias/cantmeses
+  when 5
+    inc = 7000
   end
        
-        inicioPago.step(Date.today, inc) do | dia |
-         cont = cont + 1
-          proximoPago = dia
-          if (inicioPago > Date.today)
-            proximoPago = proximoPago - inc
-           cont = cont - 1 
-           break 
-         end
-       end
-   diaspagos = cont
-   
+       if inc == 7000 
+         diaspagos = 1
+         proximoPago = inicioPago
+
+        else        
+       
+              inicioPago.step(Date.today, inc) do | dia |
+               cont = cont + 1
+                proximoPago = dia
+                if (inicioPago > Date.today)
+                  proximoPago = proximoPago - inc
+                 cont = cont - 1 
+                 break 
+               end
+             end
+         diaspagos = cont
+       end   
    return diaspagos, proximoPago
 
 end
@@ -238,30 +257,24 @@ end
 # end # if registro especifico
 
 # estados difentes de cancelado o terminado
-if (estado != 4 && estado != 6)
-diaPago = Date
- diaPago = pagosIdeal(modoPago, inicioPago)[1]
- if diaPago == Date.today
-   diaPago = "Hoy"
- else
-  diaPago
- end
+if (credit.published == true)
+    diaPago = Date # declaro el tipo de dato para diaPago
+     diaPago = pagosIdeal(modoPago, inicioPago)[1]
 
-end
+     if diaPago != credit.nextpay
+           credit.update_attribute(:nextpay, diaPago)  # proximo dia de pago
+     end
 
-
-
-
-
-
-
-
-
-
-
-
+     if diaPago == Date.today
+       diaPago = "Hoy"
+     else
+      diaPago
+      # Date.parse(diaPago)
+     end
 
     end
+
+end #fin columna proximo
 
 
 
@@ -297,8 +310,11 @@ end
        if credit.state_id.to_i == 4
           link_to("Ver", admin_credit_path(credit)) + "  " + "Nada por hacer..."
        else   
+            link_to("Ver",  admin_credit_path(credit), :class => "member_link") + "  " + 
+            link_to("Editar",  edit_admin_credit_path(credit), :class => "member_link") + "  " + 
             link_to("Generar Contrato",  contract_admin_credit_path(credit), :class => "member_link") + "  " + 
             link_to("Pagos",  admin_credit_payments_credits_path(credit), :class => "member_link") + "  " +
+            link_to("Notificaciones",  admin_credit_notification_credits_path(credit), :class => "member_link") + "  " +
            link_to("Cancelar", cancelar_admin_credit_path(credit), :method => :put, :confirm => "Estas Seguro(a)?")
           # default_actions
 
@@ -432,8 +448,9 @@ end
 
 
       f.input :total,  input_html: {onChange:"", onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
-      f.input :number_payments, :input_html => {onChange:"validarSiNumero(this)", id: "number_payments", :style => "width: 60px;"}
-      f.input :value_payments, :input_html => {onChange:"validarSiNumero(this)", id: "value_payments",onclick: "javascript:calcularPagos(this)", :style => "width: 60px;"}
+      f.input :number_payments, :input_html => {onChange:"", id: "number_payments", :style => "width: 60px;"}
+      f.input :value_payments, :input_html => {onChange:"", id: "value_payments",onclick: "javascript:calcularPagos(this)", :style => "width: 60px;"}
+      f.input :interescorriente, :input_html => {onChange:"", id: "interescorriente", :style => "width: 60px;"}
 		end
 		    f.actions
 	end
@@ -443,29 +460,6 @@ end
 
 
 
-
-
-
-
-
-  #  show do |product|
-  #     attributes_table do
-        
-  #       row :id
-  #       row :color_id do
-  #         span :class => "colors", :style => "background-color: #{product.color.sample}; border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px; color:#F5F5F5;" do 
-  #           product.color.name
-  #         end
-
-  #       end
-
-  #       row :size_id
-  #       row :created_at
-  #       row :updated_at
-  #       row :comming_soon
-
-  #     end
-  # end
     show do |credit|
 
     within @head do
@@ -487,6 +481,8 @@ end
         row :number_payments
         row :value_payments
         row :total
+        row :interescorriente
+        row :interescompuesto
         # row :image do
         #   image_tag(ad.image.url)
         # end
@@ -599,6 +595,34 @@ end
 
         respond_to do |format|
             if @credit.save
+
+              @credit.update_attribute(:published, true)   #pongo estado publicado el credito 
+
+            # crea las Notificationes para el sgte dia de pago y actualizo el sgt dia de pago en credito
+            if @credit.payment_mode_id.to_i == 1
+              @credit.update_attribute(:nextpay, (Date.today + 1))  # proximo dia de pago
+              NotificationCredit.create(revised: 'false', :nextdate => (@credit.nextpay), :credit_id => @credit.id)
+
+            elsif @credit.payment_mode_id.to_i == 2
+              @credit.update_attribute(:nextpay, (Date.today + 7))  # proximo dia de pago
+              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 7), :credit_id => @credit.id)
+
+            elsif @credit.payment_mode_id.to_i == 3
+              @credit.update_attribute(:nextpay, (Date.today + 14))  # proximo dia de pago
+              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 15), :credit_id => @credit.id)
+
+            elsif @credit.payment_mode_id.to_i == 4
+              hoy = Date.today
+              mes1 = hoy + 1.month
+              @credit.update_attribute(:nextpay, (mes1))  # proximo dia de pago
+              mesnotify = mes1 - 3.day
+              NotificationCredit.create(revised: 'false', :nextdate => mes1, :credit_id => @credit.id)  
+
+            end
+
+
+
+              # estados para el credito creado
               if @credit.payday == Date.today
                 Credit.update(@credit.id, :state_id => 2) # pagara hoy
                 # credit.update_attribute(:state_id, 3)  # paogs al dia
@@ -645,6 +669,46 @@ end
     @credit = Credit.find(params[:id])
 
     update! do |format|
+
+            # actualizo la ultima Notificacion para el sgte dia de pago del credito actulizado
+            if @credit.payment_mode_id.to_i == 1
+              @credit.update_attribute(:nextpay, (Date.today + 1))  # proximo dia de pago
+              ultNotificacion = @credit.notification_credits.last
+              NotificationCredit.update(ultNotificacion.id, revised: 'false', :nextdate => (@credit.nextpay), :credit_id => @credit.id)
+
+            elsif @credit.payment_mode_id.to_i == 2
+              @credit.update_attribute(:nextpay, (Date.today + 7))  # proximo dia de pago
+              ultNotificacion = @credit.notification_credits.last
+              NotificationCredit.update(ultNotificacion.id, revised: 'false', :nextdate => (@credit.nextpay), :credit_id => @credit.id)
+
+            elsif @credit.payment_mode_id.to_i == 3
+              @credit.update_attribute(:nextpay, (Date.today + 14))  # proximo dia de pago
+              ultNotificacion = @credit.notification_credits.last
+              NotificationCredit.update(ultNotificacion.id, revised: 'false', :nextdate => (@credit.nextpay), :credit_id => @credit.id)
+
+            elsif @credit.payment_mode_id.to_i == 4
+              hoy = Date.today
+              mes1 = hoy + 1.month
+              @credit.update_attribute(:nextpay, (mes1))  # proximo dia de pago
+              mesnotify = mes1 - 3.day
+
+              ultNotificacion = @credit.notification_credits.last
+              NotificationCredit.update(ultNotificacion.id, revised: 'false', :nextdate => mes1, :credit_id => @credit.id)
+
+            end
+
+
+
+
+
+
+
+
+
+
+
+
+
 
       sum_payments =  @credit.payments_credits.sum(:value)
       Credit.update(@credit.id, :sum_payments => sum_payments)

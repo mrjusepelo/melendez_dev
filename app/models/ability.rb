@@ -8,6 +8,7 @@ class Ability
         when "super"
           # CANCAN Todo
           can :manage, :all
+          can :manage, AdminUser
           can :manage, ActiveAdmin::Comment
         when "super-inscripciones"
           # CANCAN Users

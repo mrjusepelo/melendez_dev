@@ -9,7 +9,7 @@ menu :parent => "Notificaciones"
     # row :nextdate
     column :id
     column "Proxima Notificacion", :nextdate 
-    column "Pedido", :credit_id 
+    column "Credito", :credit_id 
     column "Revisado", :revised do |notification|
         if defined?(notification.revised)
           revision = notification.revised
@@ -61,16 +61,16 @@ controller do
               NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 1), :credit_id => @credit.id)
 
             elsif @credit.payment_mode_id.to_i == 2
-              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 4), :credit_id => @credit.id)
+              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 7), :credit_id => @credit.id)
 
             elsif @credit.payment_mode_id.to_i == 3
-              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 11), :credit_id => @credit.id)
+              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 14), :credit_id => @credit.id)
 
             elsif @credit.payment_mode_id.to_i == 4
               hoy = Date.today
               mes1 = hoy + 1.month
               mesnotify = mes1 - 3.day
-              NotificationCredit.create(revised: 'false', :nextdate => mesnotify, :credit_id => @credit.id)  
+              NotificationCredit.create(revised: 'false', :nextdate => mes1, :credit_id => @credit.id)  
 
             end
 

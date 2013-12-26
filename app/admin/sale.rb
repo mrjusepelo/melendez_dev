@@ -129,6 +129,123 @@ end
 
 
 
+show do |sale|
+  
+      attributes_table do
+        row :id
+        row :date
+        row :value
+        row :admin_user
+
+        row  "Productos " do
+          table do 
+            
+            tr do 
+              td :style => "width: 200px; background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                  "Nombre"
+                end      
+              end
+              td id: "Marca", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Marca"
+                end
+              end       
+              td id: "cantidad", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Cantidad"
+                end
+              end
+              td id: "valor_unidad", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Valor Unidad"
+                end
+              end
+              td id: "valor", :style => "background-color: rgb(221, 221, 221); text-align: center;" do
+                span :class => "colors", :style => " border:none; border-radius: 30px; width: 30px; height:30px; padding: 5px;" do 
+                 "Valor"
+                end
+              end              
+
+
+            end
+
+
+           # sale.sale_products.each do |prod|
+           sale.sale_products.each do |prod|
+              tr do 
+                td :style => "text-align: center;" do 
+                  prod.inventory.product.name
+                end
+                td :style => "text-align: center;" do 
+                  prod.inventory.product.brand.name
+                end
+                td :style => "text-align: center;" do 
+                  prod.amount
+                end 
+                td :style => "text-align: center;" do 
+                  prod.unit_value
+                end   
+                td :style => "text-align: center;" do 
+                  prod.value
+                end                                                                
+
+              end
+           end
+
+
+
+          end
+        end
+      end
+
+
+
+
+      active_admin_comments
+
+    end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

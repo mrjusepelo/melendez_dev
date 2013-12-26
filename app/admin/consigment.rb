@@ -3,7 +3,7 @@ ActiveAdmin.register Consigment do
   belongs_to :order
   
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy, :show]
-  actions :all, :except => [:new, :create, :edit, :upadate, :destroy]
+  actions :all, :except => [ :edit, :upadate, :destroy]
 
 	controller do
 		

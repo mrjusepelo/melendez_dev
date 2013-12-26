@@ -4,3 +4,5 @@ PEDIDOS
 si tiene pagos atrasados es necesario notificar y esta no se quitara hasta que se registren los pagos necesarios para estar al día
 
 si la notificacion es de pagos para HOY deberá editarse la notificacion presente y marcarla como vista 
+
+un pedido no se debe editar sino que se debe cancelar por las realaciones que geneara en las notificaciones

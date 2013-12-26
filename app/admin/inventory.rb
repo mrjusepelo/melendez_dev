@@ -1,11 +1,27 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
+actions :all, :except => [:destroy]
   
 # batch_action :flag do |selection|
 #       Post.find(selection).each do |post|
 #         post.flag! :hot
 #       end
 # end
+  batch_action :imprimir_codigos do |selection|
+      @codigos =  Inventory.find(selection)
+     html = render_to_string(:action => "imprimir_codigos.html.erb", :layout => false)
+      kit = PDFKit.new(html)
+      # kit.stylesheets << 'vendor/assets/stylesheets/style.css'
+    send_data(kit.to_pdf, :filename => 'codigosBarra.pdf', :type => 'application/pdf', :disposition => 'inline')    
+
+       # respond_to do |format|
+       #    # format.json {render :json => {:success => true}}
+       #   format.html { redirect_to :action => :index}
+       #  end
+
+  end
+
+
 
     show do |inventory|
       attributes_table do 
@@ -35,11 +51,7 @@ ActiveAdmin.register Inventory do
     end
   
   
-  batch_action :Imprimir_codigos do |selection|
-    # do_something
-    # puts "************************ "selection.id
 
-  end
 
 
  # filter :barcode, :as => :string 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131223073002) do
+ActiveRecord::Schema.define(version: 20131226214611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,6 +95,9 @@ ActiveRecord::Schema.define(version: 20131223073002) do
     t.integer  "order_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "document"
+    t.string   "name"
+    t.text     "description"
   end
 
   add_index "consigments", ["order_id"], name: "index_consigments_on_order_id", using: :btree
@@ -127,6 +130,10 @@ ActiveRecord::Schema.define(version: 20131223073002) do
     t.integer  "value_payments"
     t.integer  "admin_user_id"
     t.integer  "admin_creator_id"
+    t.date     "nextpay"
+    t.boolean  "published"
+    t.integer  "interescorriente"
+    t.integer  "interesmora"
   end
 
   add_index "credits", ["admin_creator_id"], name: "index_credits_on_admin_creator_id", using: :btree
@@ -222,6 +229,8 @@ ActiveRecord::Schema.define(version: 20131223073002) do
     t.integer  "number_payments"
     t.integer  "value_payments"
     t.date     "payday"
+    t.boolean  "published"
+    t.date     "nextpay"
   end
 
   add_index "orders", ["payment_mode_id"], name: "index_orders_on_payment_mode_id", using: :btree
