@@ -10,8 +10,8 @@ var f = new Date();
 
 // if (f.getHours() > 2) {
 
-	$('li#current_user').before("<li id='icono_notifications'><a id='numNotify' href='dashboard' style='color: black;  vertical-align: middle; text-align: center; width: 25px;height: 25px; background:red; border-radius:14px;'></a></li>")
-	$('li#icono_notifications').before("<li id='enlace_notification'><a href='dashboard'>Notificaciones</a></li>")
+	$('li#current_user').before("<li id='icono_notifications'><a id='numNotify' href='/admin/dashboard' style='color: black;  vertical-align: middle; text-align: center; width: 25px;height: 25px; background:red; border-radius:14px;'></a></li>")
+	$('li#icono_notifications').before("<li id='enlace_notification'><a href='/admin/dashboard'>Notificaciones</a></li>")
 
 // var f=new Date();
 // cad=f.getHours()+":"+f.getMinutes()+":"+f.getSeconds(); 

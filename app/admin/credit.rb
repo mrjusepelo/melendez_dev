@@ -49,7 +49,7 @@ ActiveAdmin.register Credit do
       inicioPago = credit.payday
 
 
-# if order.id == 134
+# if credit.id == 134
 def pagosIdeal(modoPago, inicioPago)
 
   diaspagos = 0
@@ -154,13 +154,6 @@ end #condicion de estado terminado o cancelado
 
 
 
-
-
-
-
-
-
-
     column "Cliente" do |credit|
 			reg_client = credit.clients.where(credit_id: credit.id, :buyer => "true").first
 
@@ -181,9 +174,175 @@ end #condicion de estado terminado o cancelado
   			"Sin asignar"
   		end
     end
-    column "Total", :total do |tot| 
-      number_to_currency  tot.total
-    end
+
+
+    column "subtotal", :subtotal do |credit|
+      number_to_currency  credit.subtotal
+    end #fin columna subtotal
+   
+
+
+
+    column "Total", :total do |credit| 
+
+
+
+              # # # si el credito tiene interes corriente 
+              # if credit.interescorriente > 0  
+              #   calculoInteresCorriente = (credit.interescorriente / 365.0)/100
+              #   totalCredito = (credit.total + (credit.total * calculoInteresCorriente.to_f)).to_f
+              #     puts "**************id reg con interes corriente"+credit.id.to_s
+              #     puts "**************total interescorriette"+totalCredito.to_s
+              #    credit.update_attribute(:total, totalCredito)  # actualizo el campo total si exite el interes corriente
+              #    # Credit.update(credit.id, :total => totalCredito) 
+                
+              # end
+
+
+
+
+
+
+
+
+       totalCredito = credit.total.to_i
+      sumaPagos = credit.sum_payments.to_i
+      estado = credit.state_id.to_i
+      modoPago = credit.payment_mode_id.to_i
+      inicioPago = credit.payday
+
+
+        # if credit.id == 2
+        def pagosIdeal(modoPago, inicioPago)
+
+          diaspagos = 0
+          cont = 0
+          inc = 0
+        # a=0
+
+          case modoPago
+          when 1
+            inc = 1
+          when 2
+            inc = 7
+          when 3
+            inc = 14
+          when 4
+            # obtiene fecha exacta de un mes mas
+            cantdias = (Date.today - (inicioPago)).to_i
+            cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+            inc =    cantdias/cantmeses    
+          when 5
+            inc = 7000
+          end
+               
+               if inc == 7000 
+                 diaspagos = 1
+
+                else
+                      inicioPago.step(Date.today, inc) do | dia |
+                       cont = cont + 1
+
+                        if (inicioPago > Date.today)
+                         cont = cont - 1 
+                         break 
+                       end
+                     end
+                 diaspagos = cont
+               end
+           
+           return diaspagos
+
+        end # fin metodo pagosIdeal
+
+        
+        if (credit.published == true)
+
+          sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * credit.value_payments.to_i
+          if sumaPagos >= sumPagosIdeal
+                 @totalIntereses = credit.total
+            # interescorriente = credit.interescorriente.to_i
+
+          else
+                llevaCuota = (sumaPagos / credit.value_payments).to_i
+
+                  case modoPago
+                    when 1
+                      inc = 1
+                    when 2
+                      inc = 7
+                    when 3
+                      inc = 14
+                    when 4
+                      # obtiene fecha exacta de un mes mas
+                      cantdias = (Date.today - (inicioPago)).to_i
+                      cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+                      inc =    cantdias/cantmeses    
+                    when 5
+                      inc = 7000
+                  end # fin case
+
+                  fechaLlevaCuota = inicioPago + (llevaCuota * inc)
+                  diasSinPago = (Date.today - fechaLlevaCuota).to_i
+                  interesmora = credit.interesmora
+
+            
+            # if ((credit.interesmora != nil) && (credit.interesmora != 0 ) && (credit.interesmora != ""))
+            # if defined?(interesmora)
+                calculoInteresMora = (interesmora/365.0)/100
+
+# # si el credito tiene interes corriente 
+if credit.interescorriente > 0  
+  calculoInteresCorriente = (credit.interescorriente / 365.0)/100
+  # totalCredito = (credit.total + (credit.total * calculoInteresCorriente.to_f)).to_f
+  subtotalCredito = (credit.subtotal + (credit.subtotal * calculoInteresCorriente.to_f)).to_f
+else
+  subtotalCredito = credit.subtotal
+
+end
+
+                # totalInteresCorriente = credit.total 
+                 @totalIntereses =  subtotalCredito + ( calculoInteresMora * subtotalCredito * diasSinPago.to_i).to_f
+                 # @totalIntereses =  credit.subtotal + ( calculoInteresMora * credit.subtotal * diasSinPago.to_i).to_f
+
+             # si total no tiene actualizado el valor del interes 
+                 if credit.total < @totalIntereses
+
+                    credit.update_attribute(:total, @totalIntereses)
+
+                  end
+                
+                  puts "****************"+calculoInteresMora.to_s
+                  puts "****************"+@totalIntereses.to_s
+
+                # @totalIntereses = credit.subtotal + interesmora.to_f
+
+            # else
+                # @totalIntereses = credit.total 
+              
+            # end
+
+
+          end # fin suma de pagos > sumaPagosIdeal
+        
+
+        else # si credito no tiene estado publicado
+            @totalIntereses = credit.total
+
+        end # fin credito publicado
+
+        puts "****************"+llevaCuota.to_s
+        puts "****************"+fechaLlevaCuota.to_s
+        puts "****************"+diasSinPago.to_s
+
+        # end # if registro especifico
+
+    # @totalIntereses = credit.subtotal
+
+      number_to_currency  @totalIntereses
+      # number_to_currency  credit.total
+
+    end # fin column total
     column :date
     column :payday
     column :value_payments, :sortable => :value_payments do |val|
@@ -206,7 +365,7 @@ end #condicion de estado terminado o cancelado
       inicioPago = credit.payday
 
 
-# if order.id == 134
+# if credit.id == 2
 def pagosIdeal(modoPago, inicioPago)
 
   diaspagos = 0
@@ -301,73 +460,10 @@ end #fin columna proximo
     end
 
     column :interescorriente
-    # column :interesmora
-    column "Interes Mora " do |credit|
+    column :interesmora
+    # column "Interes Mora" do |credit|
 
-
-       totalCredito = credit.total.to_i
-      sumaPagos = credit.sum_payments.to_i
-      estado = credit.state_id.to_i
-      modoPago = credit.payment_mode_id.to_i
-      inicioPago = credit.payday
-
-
-# if order.id == 134
-def pagosIdeal(modoPago, inicioPago)
-
-  diaspagos = 0
-  cont = 0
-  inc = 0
-# a=0
-
-  case modoPago
-  when 1
-    inc = 1
-  when 2
-    inc = 7
-  when 3
-    inc = 14
-  when 4
-    # obtiene fecha exacta de un mes mas
-    cantdias = (Date.today - (inicioPago)).to_i
-    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
-    inc =    cantdias/cantmeses    
-  when 5
-    inc = 7000
-  end
-       
-       if inc == 7000 
-         diaspagos = 1
-
-        else
-              inicioPago.step(Date.today, inc) do | dia |
-               cont = cont + 1
-
-                if (inicioPago > Date.today)
-                 cont = cont - 1 
-                 break 
-               end
-             end
-         diaspagos = cont
-       end
-   
-   return diaspagos
-
-end
-
-# a= pagosIdeal(modoPago, inicioPago)
-# puts "****************"+a.to_s
-# end # if registro especifico
-
-# estados difentes de cancelado o terminado con campo published false
-# if (estado != 4 && estado != 6)
-if (credit.published == true)
-
-  sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * credit.value_payments.to_i
-
-end
-
-end # fin columna interes de mora
+    # end # fin columna interes de mora
 
 
 
@@ -550,10 +646,24 @@ end
       end      
 
 
+      # f.input :subtotal,  input_html: {onChange:"", onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
       f.input :total,  input_html: {onChange:"", onclick: "javascript:sumavalorcredito(this)", id: "total", :style => "background-color: #E6E6E6; width: 260px;"}
       f.input :number_payments, :input_html => {onChange:"", id: "number_payments", :style => "width: 60px;"}
       f.input :value_payments, :input_html => {onChange:"", id: "value_payments",onclick: "javascript:calcularPagos(this)", :style => "width: 60px;"}
-      f.input :interescorriente, :input_html => {onChange:"", id: "interescorriente", :style => "width: 60px;"}
+     
+      # muestro el valor por defecto segun si se va a editar o no 
+      if credit.id
+          f.input :interescorriente, :input_html => {onChange:"", id: "interescorriente", :style => "width: 60px;"}
+          f.input :interesmora, :input_html => {onChange:"", id: "interescorriente", :style => "width: 60px;"}
+          
+      else  
+          f.input :interescorriente, :input_html => {onChange:"", id: "interescorriente", :style => "width: 60px;", :value => 0}
+         f.input :interesmora, :input_html => {onChange:"", id: "interescorriente", :style => "width: 60px;", :value => 0}
+
+     end
+
+
+
 		end
 		    f.actions
 	end
@@ -583,6 +693,7 @@ end
         row :payday
         row :number_payments
         row :value_payments
+        row :subtotal
         row :total
         row :interescorriente
         row :interesmora
@@ -700,6 +811,7 @@ end
             if @credit.save
 
               @credit.update_attribute(:published, true)   #pongo estado publicado el credito 
+              @credit.update_attribute(:subtotal, @credit.total)   #actualizo el valor con los intereses del credito 
 
             # crea las Notificationes para el sgte dia de pago y actualizo el sgt dia de pago en credito
             if @credit.payment_mode_id.to_i == 1
@@ -736,6 +848,14 @@ end
               end              
 
 
+              # si el credito tiene interes corriente 
+              if @credit.interescorriente > 0  
+                calculoInteresCorriente = (@credit.interescorriente / 365.0)/100
+                totalCredito = @credit.total + (@credit.total * calculoInteresCorriente.to_f)
+
+                  @credit.update_attribute(:total, totalCredito)  # actualizo el campo total si exite el interes corriente
+                
+              end
 
               sum_payments =  @credit.payments_credits.sum(:value)
               Credit.update(@credit.id, :sum_payments => sum_payments)
@@ -807,7 +927,15 @@ end
 
 
 
+              # si el credito tiene interes corriente 
+              if @credit.interescorriente > 0  
+                puts "*****interes coriente 3*****"+@credit.interescorriente.to_s
+                calculoInteresCorriente = (@credit.interescorriente / 365.0)/100
+                totalCredito = @credit.total + (@credit.total * calculoInteresCorriente.to_f)
 
+                  @credit.update_attribute(:total, totalCredito)  # actualizo el campo total si exite el interes corriente
+                
+              end
 
 
 

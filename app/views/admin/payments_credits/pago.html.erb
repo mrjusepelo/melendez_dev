@@ -1,0 +1,167 @@
+<!--  --> 
+
+	<div id="page-wrap">
+
+		<div id="headerTitulo">FACTURA DE VENTA</div>
+		<div id="header">
+				<!-- <h2 style="tex-align:center">Factura</h2>	 -->
+		         <img id="imagen" style="float:left; margin-top: 33px;margin-left: 15px;" src="https://docs.google.com/uc?&id=0Bxr8kQLDYNz7NE9YWFNLUUZuWnM" width="300"/>
+				<div style="float: right; text-align: center; margin-right: 50px;margin-top: 20px;">
+						<ul class="menu">
+							<li type="none">Carrera 6. No. 3B-25 B/ La Amistad</li>
+							<li type="none">Nit. 98240005-2</li>
+							<li type="none">La Hormiga Putumayo</li>
+							<li type="none">Factura N°. <%= @pago.id %></li>
+							<li type="none">Fecha: <%= @pago.date %></li>
+						</ul>
+				</div>
+
+		</div>
+
+		<br>
+		<br>
+		
+		<div style="clear:both"></div>
+		
+		<div id="customer">
+
+
+
+            <table id="meta">
+                <tr>
+                    <td class="meta-head">Factura #</td>
+                    <td><div><%= @pago.id %></div></td>
+                </tr>
+                <tr>
+
+                    <td class="meta-head">Fecha</td>
+                    <td><div id="date"><%= @pago.date %></div></td>
+                </tr>
+                <tr>
+                    <td class="meta-head">Valor de este Pago</td>
+                    <td><div class="due">$ <%= @pago.value %></div></td>
+                </tr>
+
+            </table>
+		
+		</div>
+		<BR>
+			<div class="meta-head" > Datos de Pago</div>
+		<BR>
+			<p> Recibimos de: <b><%= @pago.name %> </b> Identificada con la C.C. <b><%= @pago.document %> </b> el valor de <B>$ <%= @pago.value %> </B> para cancelar cuota del cr&eacute;dito <B># <%= @pago.credit.id %></B> que tiene un valor total de <B>$ <%= @pago.credit.total %></B> 
+			</p>
+
+		<BR>
+
+		<table id="items">
+		
+		  <tr>
+      			<th>Concepto</th>
+				<th>Fecha</th>
+				<th>Intereses</th>
+				<th>Valor </th>
+		  </tr>
+		  
+	<%  pagos = PaymentsCredit.where(credit_id: @pago.credit_id) 
+	%>
+
+          <tr align="center" class="item-row">
+				      <td class="description" >
+				      		<div><%= "Cuota Inicial" %></div>
+				      </td>
+				      <td class="item-name">
+				      	<div><%= pagos.first.date %></div>
+				      </td>
+				      <td>
+				      	<div class="cost"><%= pagos.first.interes %> %</div>
+				      </td>
+				      <td>
+				      	<span class="price">$ <%= pagos.first.value %></span>
+				      </td>
+		  </tr>
+
+
+
+
+
+
+
+
+	<% 
+	numCuota = 1
+	pagos.each do |pago|
+		if pago.id > pagos.first.id
+			
+	 %>	
+          <tr align="center" class="item-row">
+				      <td class="description" >
+				      		<div>Pago n&uacute;mero <%= numCuota %></div>
+				      </td>
+				      <td class="item-name">
+				      	<div><%= pago.date %></div>
+				      </td>
+				      <td>
+				      	<div class="cost"><%= pago.interes %> %</div>
+				      </td>
+				      <td>
+				      	<span class="price">$ <%= pago.value %></span>
+				      </td>
+		  </tr>	
+
+	<%
+		end  #fin condicional 1er pago
+		numCuota +=1
+	  end # fin each pagos
+
+	 %>	
+
+		</table>
+
+	<table id="meta">
+          <tr align="center" class="item-row">
+		        <td class="meta-head">Total Pagado </td>
+		        <td><div>$ <%= pagos.sum(:value) %></div></td>
+		  </tr>
+
+</table>
+
+<BR>
+<BR>
+
+
+	<div id="comprador" style="border-style:double;">
+			<!-- <h3> Veracidad</h3> -->
+		
+		
+			<!-- <div style="height:200px; width:350px;border-style: double; display: inline-block;"> -->
+			<div style="height:200px; width:49%;border-style: double; display: inline-block;">
+				<h3>Observaciones</h3>
+				<ul>				
+					<li type="none" style=""><%= @pago.description %> .</li>
+				</ul>
+
+			</div>
+
+			<!-- <div style="height:200px; width:350px;border-style: double;display: inline-block;"> -->
+			<div style="height:200px; width:49%;border-style: double;display: inline-block;">
+				<h3>Firma Y Sello</h3>
+				<ul>				
+					<li type="none" style=""><br></li>
+				</ul>				
+			</div>			
+
+		</div><!--cierre div de comprador --> 
+
+
+
+
+
+		
+		<div id="terms">
+		  <h5>Terminos</h5>
+		  <!-- <textarea>NET 30 Days. Finance Charge of 1.5% will be made on unpaid balances after 30 days.</textarea> -->
+		  <textarea>Terminos y condiciones de uso para claridad de aviso con los recargos por interes sobre el valor del credito.</textarea>
+		</div>
+	
+	</div>
+	

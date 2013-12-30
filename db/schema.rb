@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131226214611) do
+ActiveRecord::Schema.define(version: 20131229041741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 20131226214611) do
   create_table "credits", force: true do |t|
     t.integer  "payment_mode_id"
     t.integer  "state_id"
-    t.integer  "total"
+    t.float    "total"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -132,8 +132,9 @@ ActiveRecord::Schema.define(version: 20131226214611) do
     t.integer  "admin_creator_id"
     t.date     "nextpay"
     t.boolean  "published"
-    t.integer  "interescorriente"
-    t.integer  "interesmora"
+    t.float    "interescorriente"
+    t.float    "interesmora"
+    t.float    "subtotal"
   end
 
   add_index "credits", ["admin_creator_id"], name: "index_credits_on_admin_creator_id", using: :btree
@@ -311,6 +312,7 @@ ActiveRecord::Schema.define(version: 20131226214611) do
 
   create_table "products", force: true do |t|
     t.string   "name"
+    t.integer  "amount"
     t.text     "description"
     t.integer  "brand_id"
     t.datetime "created_at"

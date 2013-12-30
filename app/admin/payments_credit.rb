@@ -8,6 +8,8 @@ ActiveAdmin.register PaymentsCredit do
     column :id
     column :date
     column :value
+    column :name
+    column :document
     column "Credito" do |payment|
       if defined?(payment.credit.id)
         payment.credit.id
@@ -18,39 +20,26 @@ ActiveAdmin.register PaymentsCredit do
     column :created_at
     column :updated_at
     actions do |p|
-      # link_to "Agregar a Inventario", contract_admin_credit_path(p), :class => "member_link"
-      # link_to "Agregar a Inventario", admin_credit_payments_credit_factura_path(p), :class => "member_link"
-      link_to "Factura", payments_credits_factura_path(id: p), :class => "member_link"
-                         # admin/payments_credits/factura
-                                      # /admin/credits/:credit_id/payments_credits/:id/factura
-                                      # facturaPagos_admin_credit_payments_credit  
-      # link_to "Generar Contrato",  bill_admin_credit_payments_credit_path(p), :class => "member_link"
-                                   # facturaPagos_admin_credit_payments_credit   
+      link_to "Factura", pago_admin_credit_payments_credit_path(p.credit.id, id: p.id), :class => "member_link"
     end
         # default_actions
-        # puts "********************"+paymentsCredit.to_s
   end 
 
 
-# member_action :factura, :method => :get do
-# @bill =  PaymentsCredit.find(id = params[:id])
-
-# end
-# member_action :bill, :method => :get do
-# # @bill =  PaymentsCredit.find(id = params[:id])
-# @bill =  PaymentsCredit.find(14)
-# @credit = Credit.find(@bill.credit_id)
-# @mes = @bill.date.strftime("%B")
-# @credits = PaymentsCredit.select(:id, :date, :value, :interes).where(credit_id: @bill.credit_id).order("id ASC")
-# @payment_value = PaymentsCredit.select(:id, :date, :value, :interes).where(credit_id: @bill.credit_id).last
-
-# @nameUser = current_admin_user.name
-# # vista creada en views/admin/credits/contract
-#      html = render_to_string(:action => "facturaPagos.html.erb", :layout => false)
-#       kit = PDFKit.new(html)
-#     send_data(kit.to_pdf, :filename => 'facturaPago.pdf', :type => 'application/pdf', :disposition => 'inline')
 # end
 
+member_action :pago, :method => :get do
+
+@pago =  PaymentsCredit.find(id = params[:id])
+
+# vista creada en views/admin/payments_credits
+     # html = render_to_string(:action => "payments_credits/pago.html.erb", :layout => false)
+     html = render_to_string(:action => "pago.html.erb", :layout => false)
+      kit = PDFKit.new(html)
+      kit.stylesheets << 'vendor/assets/stylesheets/style_bill.css'
+      kit.stylesheets << 'vendor/assets/stylesheets/style_bill2.css'
+    send_data(kit.to_pdf, :filename => 'PagoCredito.pdf', :type => 'application/pdf', :disposition => 'inline')
+end
 
 
 
@@ -69,17 +58,23 @@ ActiveAdmin.register PaymentsCredit do
 
   show do |payment|
       attributes_table do
+      row :id
       row :date
       row :value
+      row :name
+      row :document
       row :credit do 
 			payment.credit_id
       	end
+      row :interes
       row :description
       row :created_at
       row :updated_at
 
       # h3 payment.credit_id
     end
+      active_admin_comments
+    
   end
 
 
@@ -95,6 +90,12 @@ form do |f|
       # f.input :description, :attr, :placeholder => "placeholder text"
       f.input :document 
       f.input :name 
+
+      if payments_credit.id
+
+      else 
+      f.input :interes, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
+      end
       # f.input :new_comment
 
       
@@ -140,6 +141,11 @@ end
               if @payments_credit.save
                   sum_payments_credit = @credit.payments_credits.sum(:value)
                   @credit.update_attribute(:sum_payments, sum_payments_credit)
+
+                  calculoInteres = @credit.interesmora.to_i + @credit.interescorriente.to_i
+                  @payments_credit.update_attribute(:interes, calculoInteres)
+
+
 
                 format.html{redirect_to :action => :index}
                          
