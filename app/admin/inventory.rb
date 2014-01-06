@@ -7,19 +7,30 @@ actions :all, :except => [:destroy]
 #         post.flag! :hot
 #       end
 # end
+
+
+
+
   batch_action :imprimir_codigos do |selection|
+
       @codigos =  Inventory.find(selection)
-     html = render_to_string(:action => "imprimir_codigos.html.erb", :layout => false)
-      kit = PDFKit.new(html)
+     # html = render_to_string(:action => "imprimir_codigos.html.erb", :layout => false)
+      # kit = PDFKit.new(html)
       # kit.stylesheets << 'vendor/assets/stylesheets/style.css'
-    send_data(kit.to_pdf, :filename => 'codigosBarra.pdf', :type => 'application/pdf', :disposition => 'inline')    
+      # kit.javascripts << 'vendor/assets/javascripts/1.js'
+    # send_data(kit.to_pdf, :filename => 'codigosBarra.pdf', :javascript_delay=>9000, :type => 'application/pdf', :disposition => 'inline')    
+
+
+    # render_to_string(:action => "imprimir_codigos", :layout => false)
+    
+    render :action => "imprimir_codigos"
 
        # respond_to do |format|
        #    # format.json {render :json => {:success => true}}
-       #   format.html { redirect_to :action => :index}
+       #   format.html { redirect_to :action => "imprimir_codigos.html.erb"}
        #  end
-
   end
+
 
 
 
@@ -165,6 +176,7 @@ end
 
 
     controller do
+
 
         def create
             timestamp = (DateTime.now.to_i).to_s

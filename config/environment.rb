@@ -5,5 +5,8 @@ require File.expand_path('../application', __FILE__)
 Pencil::Application.initialize!
 Mime::Type.register 'application/pdf', :pdf
 
+# barcode = Barby::Code128B.new('Nuevo Comentario  comen2')
+
+# config.gem "rmagick", :lib => "RMagick"
 
 

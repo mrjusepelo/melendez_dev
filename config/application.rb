@@ -6,8 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-require 'pdfkit'
 
+
+require 'pdfkit'
 
 module Pencil
   class Application < Rails::Application
@@ -34,3 +35,31 @@ module Pencil
 
 
 end
+
+# require 'RMagick'
+# require 'barby/outputter/rmagick_outputter'
+# require 'barby/barcode/code_128'
+# require 'barby/outputter/png_outputter' 
+
+# module Barby
+#   class CustomRmagickOutputter < RmagickOutputter
+# # config.autoload_paths += %W(#{config.root}/extras)
+   
+
+#     register :to_image_with_data
+#     def to_image_with_data
+#       #Make canvas  bigger
+#       canvas = Magick::ImageList.new
+#       canvas.new_image(full_width , full_height + 10)
+#       canvas << to_image
+#       canvas = canvas.flatten_images
+#       #Make the text
+#       text = Magick::Draw.new
+#       text.font_family = 'helvetica'
+#       text.pointsize = 14
+#       text.gravity = Magick::SouthGravity
+#       text.annotate(canvas , 0,0,0,0, barcode.data)
+#       canvas
+#     end
+#   end
+# end

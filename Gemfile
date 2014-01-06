@@ -57,3 +57,16 @@ gem 'carrierwave-google_drive'
 gem 'pdfkit'
 # gem 'wkhtmltopdf-binary'
 gem 'cancan'
+
+# generadores de codigo de barra
+gem 'chunky_png'
+gem 'barby'
+gem "rqrcode"
+# gem 'barby', :require => ['barby', 'barby/outputter/chunky_png_outputter']
+
+gem "rmagick", "~> 2.13.1"
+# gem "rmagick"
+# gem "gbarcode", "~> 0.98.1"
+
+# gem 'chunky_png'
+# gem 'barby', :require => ['barby', 'barby/outputter/chunky_png_outputter']

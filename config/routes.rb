@@ -1,5 +1,7 @@
 Pencil::Application.routes.draw do
 
+  get "inventories/index"
+  get "inventories/show"
   get "orders/index"
   get "orders/show"
   get "orders/view"
@@ -60,6 +62,13 @@ Pencil::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+
+resources :inventories 
+# resources :inventories do
+#   collection do
+#     get "batch_action"
+#   end
+# end
 
   resources :products do 
     collection do 

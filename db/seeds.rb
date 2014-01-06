@@ -8,6 +8,7 @@
 
 # PaymentMode.create([{name: 'Diario'},{name: 'Semanal'}, {name: 'Quincenal'}, {name: 'Mensual'}, {name: 'Contado'}])
 # State.create([{name: 'Pagos Pendientes'},{name: 'Pagara Hoy'}, {name: 'Al dia'}, {name: 'Cancelado'}, {name: 'Aprobado'},{name: 'No definido'}, {name: 'No tiene pagos registrados'}, {name: 'Pagos Adelantados'}])
+# StateInventory.create([{name: 'Disponible'},{name: 'Venta de Contado'}, {name: 'Venta de Credito'}])
 
 
 

@@ -15,9 +15,14 @@ PDFKit.configure do |config|
     :margin_bottom=>"0.25in",
     :margin_left=>"0.1in",
     :disable_smart_shrinking=> false,
-  }
-end
+   
 
+  }
+# config.default_options = {
+#   :javascript_delay => 5000
+# } 
+  
+end
 
 
 

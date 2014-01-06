@@ -1,0 +1,107 @@
+
+<%#= require 'codigo.rb'  %>
+<%= load 'codigo.rb' %>
+
+<%
+
+       # barcode = Barby::Code128B.new ('3123123123')
+
+# send_data gen.to_png(:height => 50), :type => "image/png", :disposition => "inline"
+
+
+
+# File.open('code128B.png', 'w'){|f|
+#   f.print barcode.to_png
+# }
+
+
+
+
+
+
+# require 'bundler/setup'
+
+# barcode = Barby::Code128B.new('Nuevo Comentario  comen4')
+# barcode.to_image_with_data.write('barcode_2_1.png')
+# barcode.to_image_with_data.write('barcode_2_1.png')
+
+# File.open("my_file.pdf","w") { |f| f.print barcode }
+
+%>
+
+<%
+# barcode = Barby::Code128B.new('Barcode Code Here')
+# barcode = Barby::Code128B.new('Nuevo Comentario  comen2')
+# barcode.to_image_with_data.write('barcode_2_1.png')
+
+
+
+
+# some code to generate the png file using 3 of 9 barcode style 
+# require 'barby' 
+# require 'barby/barcode/code_128' 
+# require 'barby/outputter/png_outputter' 
+
+
+#require 'barby/outputter/svg_outputter' 
+#require 'barby/outputter/ascii_outputter' 
+#require 'barby/outputter/pdfwriter' 
+#require 'barby/outputter/rmagick_outputter' 
+
+# require 'rubygems'
+# require 'barby'
+# require 'barby/outputter/rmagick_outputter'
+ 
+# barcode = Barby::Code128B.new('21312433423')
+# File.open('code128B.png', 'w'){|f|
+#   f.write barcode.to_png
+# }
+
+
+
+# barcode_value = "099999333"
+# full_path = "/vendor/barcode_#{barcode_value}.png"
+# barcode = Barby::Code39.new(barcode_value)
+# File.open(full_path, 'w') { |f| f.write barcode.to_png(:margin => 3, :xdim => 2, :height => 55) }
+
+
+
+# barcode = Barby::Code128B.new('saritha') 
+# File.open('exleaz.png', 'w'){|f| 
+
+#   f.write barcode.to_png(:margin => 3, :xdim => 2, :height => 55) 
+# } 
+
+def index
+	
+      @codigos.each do |registro|
+
+      	@obj = registro
+ @barcode_path = url_for( :action => "barcode", :number => @obj.barcode, :only_path => true)
+
+
+%>
+
+<%=   %>
+<%     def barcode
+          gen = Barby::Code128B.new(params[:number])
+      
+      send_data gen.to_png(:height => 50), :type => "image/png", :disposition => "inline" 
+    end #fin de metodo barcode 
+    %>
+<table style="width: 350px;border: 3px;border-style: dashed; text-align: center; float:left; margin:5px;" class="normal" summary="Tabla genérica">
+<tr>
+<td><B>Nombre:</B></td><td scope="col"><%= registro.product.name %></td></tr>
+<tr><td><B>Marca:</B></td><td scope="col"><%= registro.product.brand.name %></td></tr>
+<tr><td><B>Serial:</B></td><td scope="col"><%= registro.serial %></td></tr>
+<tr><td><B>C&oacute;digo Barra:</B></td><td scope="col"><%= registro.barcode %></td></tr>
+<tr><td><B>C&oacute;digo Barra:</B></td><td scope="col"><%#= barcode = Barby::Code128B.new(registro.barcode) %></td></tr>
+<tr><td><B>C&oacute;digo Barra:</B></td><td scope="col"><%#= barcode.to_image_with_data.write('barcode_2_1.png')  %></td></tr>
+<tr><td><B>C&oacute;digo Barra:</B></td><td scope="col"><%= image_tag(@barcode_path)  %></td></tr>
+
+</table>
+
+<% end %>
+<% end %>
+
+

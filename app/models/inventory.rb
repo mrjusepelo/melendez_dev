@@ -19,4 +19,6 @@ class Inventory < ActiveRecord::Base
     # puts("**********************codigo de barras"+ value.to_s)
   # end
   # validates_presence_of :product_id
+
+
 end
