@@ -22,8 +22,8 @@ actions :all, :except => [:destroy]
 
 
     # render_to_string(:action => "imprimir_codigos", :layout => false)
-    
-    render :action => "imprimir_codigos"
+
+    render :action => "imprimir_codigos", :layout => true
 
        # respond_to do |format|
        #    # format.json {render :json => {:success => true}}

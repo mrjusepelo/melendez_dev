@@ -3,58 +3,54 @@
 
 <html>
 <head>
+  <%= javascript_include_tag 'jquery.media.js' %>
+  <%= javascript_include_tag 'jquery-1.9.1.js' %>
+  <%= javascript_include_tag 'jquery-barcode.js' %>
+  <%= javascript_include_tag 'admin_barcodes.js' %>
+ 
+  <%#= javascript_include_tag 'http://github.com/malsup/media/raw/master/jquery.media.js?v0.92' %>
+  <%#= javascript_include_tag 'http://jquery.malsup.com/jquery.metadata.js' %>
+
         <script>
             $(document).ready(function() {
                 $('span.print').printPage();
             });
+function printTrigger(elementId) {
+    var getMyFrame = document.getElementById(elementId);
+    getMyFrame.focus();
+    getMyFrame.contentWindow.print();
+}
         </script>
+
+<style type="text/css" media="print">
+/*@media print and (orientation: landscape) {*/
+    /* landscape styles */
+/*}*/
+
+
+  /*@media print{@page {size: landscape}};*/
+  /*table {page-break-after:always}*/
+
+@media print
+{
+table {page-break-inside:avoid}
+/*@page {size: landscape}*/
+}
+
+</style>        
 </head>
 
 <!-- <body onload="load()"> -->
 <body onload="">
 
+<input type="button" value="Imprimir C&oacute;digos" onclick="window.print();" />
+<!-- <p>Intro text&hellip;<span class="print">print</span></p> -->
 
-        <div id="container">
-            <h1>jQuery Print Page Demo</h1>
-                    <p>Intro text&hellip;<span class="print">print</span></p>
-                    <div id="content">
-                <div id="content-main">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada imperdiet mauris at aliquet. Nam sit amet nibh elit, ac adipiscing nunc. Aliquam vestibulum aliquam odio, non interdum urna pellentesque a. Mauris eget sagittis arcu. Ut venenatis placerat nisi a rutrum. Suspendisse a massa ut eros consequat dapibus. Nunc ultricies commodo euismod. Suspendisse fringilla ipsum at elit ultrices lobortis. Nunc id pulvinar massa. Proin eu felis magna, in dignissim orci. Aenean vestibulum urna eget ligula gravida pretium. Sed scelerisque scelerisque elit. Quisque eget justo sit amet orci sodales aliquet eu ac urna. Mauris sed dui sit amet eros euismod venenatis et ac libero. Nullam condimentum semper ligula vitae pretium. Curabitur commodo orci eu urna volutpat dapibus. Mauris id est sed elit varius aliquam vitae et lorem. Curabitur consectetur purus eu massa posuere nec rutrum risus tincidunt.</p>
-                            <p>Nulla imperdiet suscipit molestie. Aliquam eu vestibulum magna. Donec diam tellus, volutpat ut feugiat non, tincidunt nec felis. Quisque tincidunt vestibulum velit, in luctus diam ultrices id. Sed faucibus dolor vel nibh imperdiet interdum. Duis dui felis, viverra at interdum lobortis, luctus id sapien. Aliquam augue sapien, ultrices sit amet fringilla in, facilisis eget felis. Aenean ac arcu non ipsum porttitor lobortis vitae nec ligula. Pellentesque leo dui, dignissim in aliquet sit amet, facilisis id nulla. Ut bibendum eros pharetra libero mollis iaculis.</p>
-                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam lobortis, sapien at tincidunt rutrum, odio ante tristique sapien, aliquet elementum nulla nisi sed orci. In vitae ligula odio. Fusce placerat laoreet mi, nec faucibus magna luctus eu. Etiam posuere turpis a lacus laoreet ut laoreet lacus congue. Vivamus eu odio vitae tellus tristique semper quis non nunc. Donec tellus libero, ullamcorper ac ullamcorper nec, pharetra vel nisl. Nulla vel turpis ac massa volutpat scelerisque at nec est. Fusce sit amet nisl nisi, in placerat lectus. Mauris mauris urna, ultrices vel rutrum a, lacinia eu lectus. Quisque pellentesque, metus quis consectetur pulvinar, massa mauris pulvinar lectus, in vehicula eros elit in ligula. Integer sed lectus ac magna volutpat porta sit amet sit amet ante. Integer et mi non nisl ultricies lobortis. Sed at ipsum nisl, at iaculis ligula. Curabitur purus elit, porttitor quis iaculis in, pretium nec purus. Integer diam arcu, facilisis ac pellentesque bibendum, ultrices quis turpis. Vivamus convallis iaculis bibendum. Praesent dignissim, mauris nec mattis facilisis, ligula nisi tincidunt erat, a dignissim tortor nisl sit amet lectus.</p>
-                    <p>Nullam vulputate libero dui. Sed lacinia odio non enim posuere mattis. Aenean nunc magna, commodo quis mattis eu, porta non libero. In quis augue nec urna lacinia elementum. Integer semper arcu vitae magna rutrum viverra. Nunc porttitor sagittis diam ut auctor. Donec mollis, ligula et fringilla suscipit, mi magna aliquam dui, vestibulum tempor dolor nisi eget lorem. Curabitur urna lacus, congue fermentum vehicula a, tincidunt nec nisi. Nam placerat gravida nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus et feugiat neque. Vestibulum gravida lacus ut tellus pulvinar ac lacinia purus fermentum. Duis at gravida lorem.</p>
-                </div>
-                <div id="content-sidebar">
-                    <p>Vivamus ullamcorper ante libero. Pellentesque at dui non est consequat interdum. Morbi sit amet neque dolor. In quis arcu purus. Donec ornare arcu et metus posuere id vehicula ligula porta. Phasellus id erat nisi, non ultricies urna. Duis id elit dui, nec porttitor quam. Vestibulum a tortor urna. Nunc commodo erat sodales eros volutpat a sagittis dui fermentum. Proin vel ligula velit. Pellentesque justo sapien, pulvinar et convallis quis, laoreet eu massa. Etiam vestibulum sollicitudin sagittis. Donec euismod odio vitae urna commodo et pellentesque nisl pharetra. Aliquam erat volutpat.</p>
-                </div>
-                    </div>
-        </div>
-
-
-
-
-
-
-
-
-<a class="media" href="guice.pdf">PDF File</a> 
-<a title="Descargar" href="http://www.htmlquick.com/es/">Descargar HTML</a>
+<br/>
+<br/>
 <%#= link_to "Descargar", impresion_admin_inventories_path() %>
 <%#= link_to "Descargar", impresion_admin_inventory_path() %>
-<!-- impresion_admin_inventories -->
 
-<%#= content_for :extra_js do %>
-  <%= javascript_include_tag 'jquery.media.js' %>
-  <%= javascript_include_tag 'jquery-barcode.js' %>
-  <%= javascript_include_tag 'admin_barcodes.js' %>
- 
-  <%= javascript_include_tag 'http://github.com/malsup/media/raw/master/jquery.media.js?v0.92' %>
-  <%= javascript_include_tag 'http://jquery.malsup.com/jquery.metadata.js' %>
-
-
-
-
-<% #end %>
 
 <%
 	 	
@@ -64,7 +60,7 @@
 
 
 
-<table style="width: 350px;border: 3px;border-style: dashed; text-align: center; float:left; margin:5px;" class="normal" summary="Tabla genérica">
+<table id="tablaCodes" style="width: 230px;border: 3px;border-style: dashed; text-align: center; float:left; margin:5px; font-size: 0.7em !important;" class="normal" summary="Tabla genérica">
 <tr>
 <td><B>Nombre:</B></td><td scope="col"><%= registro.product.name %></td></tr>
 <tr><td><B>Marca:</B></td><td scope="col"><%= registro.product.brand.name %></td></tr>
