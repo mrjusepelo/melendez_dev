@@ -207,7 +207,13 @@ es:
     errors:
       <<: *errors
     models:
-       comments:
+       order_product:
+          one: Pedido de Producto 
+          other: Pedido de Productos
+       active_admin_comment:
+          one: Comentario
+          other: Comentarios 
+       comment:
           one: Comentario
           other: Comentarios
        supplier:
@@ -228,6 +234,12 @@ es:
        brand:
          one: Marca
          other: Marcas
+       client:
+         one: Client 
+         other: Clientes
+       credit_product:
+         one: Producto de Credito
+         other: Productos de Credito   
        city:
          one: Ciudad
          other: Ciudades
@@ -240,6 +252,21 @@ es:
        department:
          one: Departamento
          other: Departamentos
+       pay_consigment:
+         one: Pago en Consignación de Venta
+         other: Pagos en Consignación de Venta
+       pay_efective:
+         one: Pago en Efectivo
+         other: Pagos en Efectivo
+       payments_credit:
+         one: Pago de Credito
+         other: Pagos de Credito  
+       payment_mode:
+         one: Modo de Pago
+         other: Modos de Pago
+       pay_sale:
+         one: Pago de Venta
+         other: Pagos de Venta  
        product:
          one: Producto
          other: Productos
@@ -249,6 +276,12 @@ es:
        reference:
          one: Referencia
          other: Referencias
+       sale:
+         one: Venta
+         other: Ventas   
+       sale_product:
+         one: Producto Vendido
+         other: Productos Vendidos  
        size:
          one: Talla
          other: Tallas
@@ -258,6 +291,9 @@ es:
        admin_user:
          one: Administrador
          other: Administradores
+       support_document:
+          one: Documento de Soporte   
+          other: Documentos de Soporte   
        setup:
          one: Configuración
          other: Configuraciones
@@ -265,8 +301,8 @@ es:
          one: Nivel
          other: Niveles
        state:
-         one: Estados de pedido
-         other: Estados de pedidos
+         one: Estado
+         other: Estados
        order:
          one: Pedido
          other: Pedidos
@@ -307,6 +343,15 @@ es:
     attributes:
       order:
         id: id
+        payday: Dia de Pago
+        number_payments: Número de Pagos
+        value_payments: Valor de Pagos
+        sum_payments: Suma de Pagos Actual
+        nextpay: Próximo Pago
+        supplier: Proveedor
+        payment_mode: Modo de Pago
+        state: Estado
+        published: Publicado
         date_billed: Fecha factura
         date_arrival: Fecha llegada
         date_limit_pay: Fecha limete de pago
@@ -348,6 +393,16 @@ es:
         active: Activo
         created_at: Creado el
         updated_at: Actualizado el
+      sale:
+         credit_id: Credito
+         admin_user: Editado por
+         admin_user_id: Editado por
+         date: Día 
+         value: Valor
+         admin_creator: Creador del Registro
+         admin_creator_id: Creador del Registro
+         created_at: Creado el
+         updated_at: Actualizado el            
       state:
          id: id
          name: Nombre
@@ -363,6 +418,13 @@ es:
          notification_to_user_content: Contentido de la notificación al usuario.
          priority: Prioridad/Orden
          active: Activo 
+         created_at: Creado el
+         updated_at: Actualizado el
+      support_document:
+         name: Nombre
+         route: Ruta
+         credit_id: Credito
+         credit: Credito
          created_at: Creado el
          updated_at: Actualizado el
       setup:
@@ -422,6 +484,16 @@ es:
         sample: Muestra
         created_at: Creado el
         updated_at: Actualizado el
+      sale_product:
+        sale_id: Venta
+        product_id: Producto
+        value: Valor
+        amount: Cantidad
+        unit_value: Valor Unidad
+        inventory_id: Producto de Inventario
+        inventory_fields: Producto de Inventario 
+        created_at: Creado el
+        updated_at: Actualizado el         
       size:
         id: id
         name: Nombre
@@ -456,10 +528,32 @@ es:
         payment_mode: Modo de Pago
         number_payments: Número de Pagos
         created_at: Creado el 
+        updated_at: Actualizado el
+        admin_comments: Comentarios de Adminsitradores          
+      pay_consigment:
+        date: Día de Consignación
+        num_register: Número de Registro
+        name: Nombre de Quien Consigno
+        value: Valor Consignado
+        num_account: Número de Cuenta
+        created_at: Creado el 
         updated_at: Actualizado el  
+        sale_id: Referencia de Venta
+        sale: Referencia de Venta
+      pay_efective:
+        date: Efectuado el Día  
+        name: Nombre de Quien Pago
+        value: Valor Pagado
+        sale_id: Referencia de Venta 
+        sale: Referencia de Venta 
+        created_at: Creado el 
+        updated_at: Actualizado el             
       product:
         id: id
-        reference: Referencia
+        name: Nombre
+        description: Descripción
+        brand: Marca
+        brand_id: Marca
         units: Unidades
         color: Color
         size: Talla
@@ -487,6 +581,9 @@ es:
         updated_at: Actualizado el
       admin_user:
         id: id
+        name: Nombre
+        document: Documento
+        role: Rol
         email: Email
         current_sign_in_at: inició sesión actualmente en
         last_sign_in_at: Última vez que inició sesión
@@ -523,6 +620,24 @@ es:
        created_at: Creado el
        updated_at: Actualizado el
        description: Descripción
+      payment_mode:
+        name: Nombre
+        created_at: Creado el
+        updated_at: Actualizado el
+      payments_credit:
+        date: Fecha
+        value: Valor
+        credit_id: Credito
+        description: Descripción
+        document: Número de Documento
+        name: Nombre de Quien Paga
+        interes: Interes
+        modo_pago: Modo de Pago
+        cuenta: Cuenta
+        tipo_cuenta: Tipo de Cuenta
+        referencia_consignacion: Referencia de Consignación
+        created_at: Creado el
+        updated_at: Actualizado el         
       payment_type:
         id: id
         name: Nombre
@@ -530,6 +645,14 @@ es:
         updated_at: Actualizado el
         description: Descripción
         active: Activo
+      pay_sale:
+        value: Valor de Pago
+        date: Fecha de Pago
+        pay_efective_id: Pago Efectivo
+        pay_consigment_id: Pago Consignado
+        sale_id: Referencia de Venta  
+        created_at: Creado el
+        updated_at: Actualizado el        
       product_did_not_sold:
         id: id
         product: Producto
@@ -590,27 +713,77 @@ es:
        id: id
        route: Ruta
        priority: Mostrar en vista principal
+       product_id: Producto
        created_at: Creaddo el
        updated_at: Actualizado el
       inventory:
        product_category: Productos de categoria
        image: Imagen
        supplier: Proveedor
+       supplier_id: Proveedor
+       product_id: Producto
        barcode: Codigo de Barras
        vale_buy: Precio a Comprador
        vale_sale: Precio de Venta
        warranty: Garantía
        date_in: 'Fecha de Ingreso'
        date_out: 'Fecha de Venta'
+       state_inventory_id: Estado del Producto
+       created_at: Creado el
+       updated_at: Actualizado el
       product_category:
        id: id
        code: Codigo
-       created_at: Creaddo el
+       created_at: Creado el
        updated_at: Actualizado el
       supplier:
         name: Nombre
         email: Email
         phone: Teléfono
+        city_id: Ciudad
+        frecuence_notification: Frecuencia de Notificación
+        state: Estado
+        created_at: Creado el
+        updated_at: Actualizado el                
+      client:
+        name: Nombre
+        document: Documento
+        address: Dirección
+        phone: Teléfono
+        neihborhood: Barrio
+        buyer: Comprador
+        bondsman: Fiador
+        city_id: Ciudad
+        sale_id: Venta
+        credit_id: Credito
+        created_at: Creado el
+        updated_at: Actualizado el
+      comment:
+        author_type: Autor 
+        author_type_id: Autor 
+      active_admin_comment:
+        resource_type_id: Tipo de Recurso
+      order_product:
+        order_id: Pedido
+        product_id: Producto
+        amount: Cantidad  
+        unit_value: Valor Unidad  
+        value: Valor  
+        created_at: Creaddo el
+        updated_at: Actualizado el
+      credit_product:
+        credit_id: Credito
+        amount: Cantidad
+        value: Valor
+        unit_value: Valor Unidad  
+        inventory_id: Inventario
+        inventory_fields: Descripción de Inventario
+        created_at: Creado el
+        updated_at: Actualizado el
+
+
+
+
 
 
 

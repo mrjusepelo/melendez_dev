@@ -1,5 +1,6 @@
 ActiveAdmin.register Client do
   menu :parent => "Creditos"
+actions :all, :except => [:destroy]
 
 
 

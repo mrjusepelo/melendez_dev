@@ -20,13 +20,21 @@ class Credit < ActiveRecord::Base
   accepts_nested_attributes_for :payments_credits
   accepts_nested_attributes_for :support_documents
 
-  # validates_presence_of :payday
+  validates_presence_of :payment_mode
+  validates_presence_of :payday
+  validates_presence_of :date
   # # validates_presence_of :description
   # validates_presence_of :state_id
-  # validates_presence_of :total
-  # validates_presence_of :date
-  # validates_presence_of :payment_mode_id
-  # validates_presence_of :number_payments
+  validates_presence_of :total
+  validates_presence_of :date
+  validates_presence_of :payday
+  validates_presence_of :payment_mode_id
+  validates_presence_of :number_payments
+  validates_presence_of :value_payments
+
+validates :interesmora, :interescorriente, :total, :value_payments, :number_payments, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1000000000000, :message => "solo puedes ingresar n&uacute;meros enteros positivos"}
+
+
 
 
   def self.autocomplete(search)

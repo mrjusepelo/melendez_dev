@@ -1,5 +1,9 @@
 ActiveAdmin.register State do
   menu :parent => "Creditos"
+  config.filters = false
+  # filter :name
+
+actions :all, :except => [:destroy, :edit]
 
 
 

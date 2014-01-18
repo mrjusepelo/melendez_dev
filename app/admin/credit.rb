@@ -1,6 +1,27 @@
 ActiveAdmin.register Credit do
 # config.comments = true
   menu :parent => "Creditos"
+
+  filter :payment_mode
+  filter :state, as: :select, :collection => State.find(:all, :order => "name")
+  filter :clients, :label => 'Cliente', :as => :select, :collection => Client.find(:all, :order => "name")
+  filter :payments_credits, :label => 'Autor de Pago', :as => :select, :collection => PaymentsCredit.find(:all, :order => "name")
+  filter :subtotal
+  filter :nextpay, :label => 'D&iacute;a de Pago'
+  # filter :inventories
+  # filter :inventories, :as => :select, :collection => Hash[Inventory.all.map{|e| [e.collection.name, e.id]}] 
+                                                                # City.all.map { |city| [city.name, city.id] }
+    # page.input :catalog, :as => :select, :collection => Hash[Catalog.all.map{|e| [e.collection.name, e.id]}] 
+
+  filter :total
+  filter :published, :label => 'Activo'
+  filter :created_at
+  filter :updated_at
+
+  
+  # filtres
+  # http://www.activeadmin.info/docs/3-index-pages.html
+  
   # actions :all, :except => [:new, :create, :edit, :upadate, :destroy]
 # actions :all, :except => [:destroy]
 # actions :index, :show, :new, :create, :update, :edit
@@ -50,47 +71,47 @@ ActiveAdmin.register Credit do
 
 
 # if credit.id == 134
-def pagosIdeal(modoPago, inicioPago)
+      def pagosIdeal(modoPago, inicioPago)
 
-  diaspagos = 0
-  cont = 0
-  inc = 0
-# a=0
+        diaspagos = 0
+        cont = 0
+        inc = 0
+      # a=0
 
-  case modoPago
-  when 1
-    inc = 1
-  when 2
-    inc = 7
-  when 3
-    inc = 14
-  when 4
-    # obtiene fecha exacta de un mes mas
-    cantdias = (Date.today - (inicioPago)).to_i
-    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
-    inc =    cantdias/cantmeses    
-  when 5
-    inc = 7000
-  end
-       
-       if inc == 7000 
-         diaspagos = 1
+        case modoPago
+        when 1
+          inc = 1
+        when 2
+          inc = 7
+        when 3
+          inc = 14
+        when 4
+          # obtiene fecha exacta de un mes mas
+          cantdias = (Date.today - (inicioPago)).to_i
+          cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+          inc =    cantdias/cantmeses    
+        when 5
+          inc = 7000
+        end
+             
+             if inc == 7000 
+               diaspagos = 1
 
-        else
-              inicioPago.step(Date.today, inc) do | dia |
-               cont = cont + 1
+              else
+                    inicioPago.step(Date.today, inc) do | dia |
+                     cont = cont + 1
 
-                if (inicioPago > Date.today)
-                 cont = cont - 1 
-                 break 
-               end
+                      if (inicioPago > Date.today)
+                       cont = cont - 1 
+                       break 
+                     end
+                   end
+               diaspagos = cont
              end
-         diaspagos = cont
-       end
-   
-   return diaspagos
+         
+         return diaspagos
 
-end
+      end
 
 # a= pagosIdeal(modoPago, inicioPago)
 # puts "****************"+a.to_s
@@ -535,7 +556,16 @@ member_action :cancelar, :method => :put do
   @credit = Credit.find(id = params[:id])
       # credit.lock!
 
+      @credit.update_attribute(:published, false)
       @credit.update_attribute(:state_id, 4)
+
+        @credit.credit_products.each do |pro_inventory|
+          pro_inventory.inventory.update_attribute(:state_inventory_id, 1) 
+           # Inventory.update(pro_inventory.inventory.id, :state_inventory_id => 1)
+        end
+
+
+
     redirect_to :action => :index, :notice => "Servicio #{@credit.id}"
 
   #   update! do |format|
@@ -594,7 +624,7 @@ end
         order.inputs "Productos " do 
 
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
-        order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
+        order.input :inventory_id, as: :hidden,  input_html: {id: "product_id", class: "creadit_product_id"}
         order.input :amount, :input_html => {onChange:"", id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {onBlur:"", id: "unit_value", :style => "width: 60px;"}
         order.input :value, :input_html => {onBlur:"", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
@@ -631,7 +661,9 @@ end
       f.has_many :payments_credits do |payment|
             payment.inputs 'Pagos' do 
             payment.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
-            payment.input :value , :input_html => {onChange:"validarSiNumero(this)"}
+            payment.input :value , :input_html => {onChange:""}
+            payment.input :name
+            payment.input :document
             payment.input :description,   input_html: {:size => '3'}
             
           end
@@ -746,6 +778,8 @@ end
 
           end
         end
+      active_admin_comments
+
       end
 
       # desactivado desde el inicializer/config/ActiveAdmin

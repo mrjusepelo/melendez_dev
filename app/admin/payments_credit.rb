@@ -48,14 +48,6 @@ end
 
 
 
-
-
-
-
-
-
-
-
   show do |payment|
       attributes_table do
       row :id
@@ -66,7 +58,7 @@ end
       row :credit do 
 			payment.credit_id
       	end
-      row :interes
+      # row :interes
       row :description
       row :created_at
       row :updated_at
@@ -86,7 +78,7 @@ form do |f|
 
       f.input :date, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
       f.input :value
-      f.input :description, :input_html => { :placeholder => "Describe la forma en la que hiciste este PAGO"}
+      f.input :description, :input_html => { :placeholder => "Describe la forma en la que recibiste este PAGO"}
       # f.input :description, :attr, :placeholder => "placeholder text"
       f.input :document 
       f.input :name 
@@ -94,7 +86,7 @@ form do |f|
       if payments_credit.id
 
       else 
-      f.input :interes, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
+      # f.input :interes, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
       end
       # f.input :new_comment
 
@@ -142,8 +134,9 @@ end
                   sum_payments_credit = @credit.payments_credits.sum(:value)
                   @credit.update_attribute(:sum_payments, sum_payments_credit)
 
-                  calculoInteres = @credit.interesmora.to_i + @credit.interescorriente.to_i
-                  @payments_credit.update_attribute(:interes, calculoInteres)
+                    #No se esta mostrando el campo debido a que el calculo solo esta para el valor del credito en general 
+                  # calculoInteres = @credit.interesmora.to_i + @credit.interescorriente.to_i
+                  # @payments_credit.update_attribute(:interes, calculoInteres)
 
 
 

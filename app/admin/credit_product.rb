@@ -1,5 +1,38 @@
 ActiveAdmin.register CreditProduct do
   menu :parent => "Creditos"
+actions :all, :except => [:destroy]
+
+
+
+
+
+
+  filter :inventory, label: "Producto de Inventario", :as => :select, :collection => Inventory.find(:all, :order => "id").map(&:id)
+  filter :credit, label: "Credito", :as => :select, :collection => Credit.find(:all, :order => "id").map(&:id)
+  filter :inventory_fields, as: :string
+  filter :amount
+  filter :unit_value
+  filter :value
+  filter :created_at
+  filter :updated_at
+  # filter :product, label: "Producto", :as => :select, :collection => Product.find(:all, :order => "name")
+
+
+  form do |f|
+  
+      f.inputs "Producto de Credito" do
+        f.input :inventory, :as => :select, :collection => Inventory.find(:all, :order => "id").map(&:id), :selected => credit_product.inventory_id
+        f.input :credit, :as => :select, :collection => Credit.find(:all, :order => "id").map(&:id), :selected => credit_product.credit_id
+        f.input :amount
+        f.input :unit_value
+        f.input :value
+        f.input :inventory_fields
+      end
+
+  f.actions
+end
+
+
 
     # show do |inventory|
     show do |creditProduct|

@@ -13,8 +13,8 @@ class Inventory < ActiveRecord::Base
 
   # validates_presence_of :barcode
   # validates_uniqueness_of :barcode
-  validates_presence_of :serial
-  
+  # validates_presence_of :supplier
+  # validates_presence_of :warranty
    # validates_each :barcode do |record,model, attr, value|
     # puts("**********************codigo de barras"+ value.to_s)
   # end
@@ -22,3 +22,5 @@ class Inventory < ActiveRecord::Base
 
 
 end
+
+

@@ -1,3 +1,11 @@
+  activerecord:
+  attributes:
+    active_admin_comment:
+      author_type: 'Autor' 
+      author_type_id: 'Autor'
+      resource_type: 'Tipo de recurso'
+
+
 es:
   errors:
     messages:
@@ -8,7 +16,18 @@ es:
       not_saved:
         one: "Ha habido 1 error:"
         other: "Han habido %{count} errores:"
+  active_admin:
+    comments:
+      resource_type: 'Tipo de recurso'
+      author_type: 'Autor'
 
+  active_admin:
+    comments:
+      resource_type: 'Tipo de recurso'
+      author_type: 'Tipo de Autor'        
+
+# translation missing: es.active_admin.comments.resource_type
+# translation missing: es.active_admin.comments.author_type
   devise:
     failure:
       already_authenticated: 'Ya iniciaste sesión.'
@@ -19,9 +38,13 @@ es:
       invalid_token: 'Token de autentificación inválido.'
       timeout: 'Tu sesión ha expirado. Inicia sesión nuevamente.'
       inactive: 'Tu cuenta aun no ha sido activada.'
+      admin_user:
+        unauthenticated: 'Aún no estas autenticado'      
     sessions:
       signed_in: 'Iniciaste sesión correctamente.'
       signed_out: 'Cerraste sesión correctamente.'
+        admin_user:
+          signed_in: 'Iniciaste sesión correctamente.'
     passwords:
       send_instructions: 'En unos minutos recibirás un email con instrucciones para restablecer tu contraseña'
       updated: 'Tu contraseña fue cambiada correctamente. Has iniciado sesión.'

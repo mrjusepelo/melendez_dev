@@ -48,7 +48,7 @@
 		<BR>
 			<div class="meta-head" > Datos de Pago</div>
 		<BR>
-			<p> Recibimos de: <b><%= @pago.name %> </b> Identificada con la C.C. <b><%= @pago.document %> </b> el valor de <B>$ <%= @pago.value %> </B> para cancelar cuota del cr&eacute;dito <B># <%= @pago.credit.id %></B> que tiene un valor total de <B>$ <%= @pago.credit.total %></B> 
+			<p> Recibimos de: <b><%= @pago.name %>.</b> Quien se identifica con la C.C. <b><%= @pago.document %> </b> el valor de <B>$ <%= @pago.value %> </B> para cancelar cuota del cr&eacute;dito <B># <%= @pago.credit.id %></B> que tiene un valor total de <B>$ <%= @pago.credit.total %></B> 
 			</p>
 
 		<BR>
@@ -58,7 +58,7 @@
 		  <tr>
       			<th>Concepto</th>
 				<th>Fecha</th>
-				<th>Intereses</th>
+				<!-- <th>Intereses</th> -->
 				<th>Valor </th>
 		  </tr>
 		  
@@ -72,9 +72,9 @@
 				      <td class="item-name">
 				      	<div><%= pagos.first.date %></div>
 				      </td>
-				      <td>
-				      	<div class="cost"><%= pagos.first.interes %> %</div>
-				      </td>
+				      <!-- <td> -->
+				      	<!-- <div class="cost"><%#= pagos.first.interes %> %</div> -->
+				      <!-- </td> -->
 				      <td>
 				      	<span class="price">$ <%= pagos.first.value %></span>
 				      </td>

@@ -1,4 +1,7 @@
 $(document).ready(function(){
+$( "table#index_table_comments tr th a:eq(0)" ).text( "Tipo de recurso" )
+$( "table#index_table_comments tr th a:eq(1)" ).text( "Tipo de autor" )
+
 	// alert("mensaje de notifications");
 // <ul>
 // class="header-item tabs"

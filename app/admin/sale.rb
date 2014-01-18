@@ -1,4 +1,29 @@
 ActiveAdmin.register Sale do
+  menu :label => 'Ventas', :parent => "Ventas Efectivo"
+  # menu :parent => "Ventas Efectivo" ,:priority => 1
+  # menu :parent => "Ventas Efectivo" #, url: '/admin/resque'
+
+
+# http://stackoverflow.com/questions/9620165/add-custom-items-at-header-menu-in-activeadmin
+  # admin.build_menu do |menu|
+  #   menu.add :label => 'Custom Menu' do |submenu|
+  #     submenu.add :label => 'Custom Link', :url => custom_path
+  #   end
+  # end
+
+
+
+
+  filter :sale_products, :label => 'Registro en Productos Vendidos', :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:sale_id)
+  filter :admin_user
+  filter :value
+  filter :date
+
+
+
+  filter :created_at
+  filter :updated_at
+  
 
 form do |f|
 
@@ -22,10 +47,10 @@ form do |f|
         order.inputs "Productos " do        
 
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
-        order.input :inventory_id,  input_html: {id: "product_id", class: "creadit_product_id"}
-        order.input :amount, :input_html => {onChange: "validarSiNumero(this.value);",id: "amount", :style => "width: 60px;"}
-        order.input :unit_value, :input_html => {onChange: "validarSiNumero(this.value);",id: 'unit_value', :style => "width: 60px;"}
-        order.input :value, :input_html => {onChange: "validarSiNumero(this.value);", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;"}
+        order.input :inventory_id, as: :hidden,  input_html: {id: "product_id", class: "creadit_product_id"}
+        order.input :amount, :input_html => {onChange: "",id: "amount", :style => "width: 260px;"}
+        order.input :unit_value, :input_html => {onChange: "",id: 'unit_value', :style => "width: 260px;"}
+        order.input :value, :input_html => {onChange: "", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 260px;"}
           within @head do
                script :src => javascript_path('admin_sale.js'), :type => "text/javascript"
 
@@ -255,6 +280,20 @@ show do |sale|
 
 
   controller do
+
+
+    def destroy
+      @sale = Sale.find(params[:id])
+
+        @sale.sale_products.each do |pro_inventory|
+          pro_inventory.inventory.update_attribute(:state_inventory_id, 1) 
+           # Inventory.update(pro_inventory.inventory.id, :state_inventory_id => 1)
+        end
+      @sale.destroy
+
+      redirect_to admin_sales_path()
+    end
+
 
 
     def create

@@ -1,5 +1,6 @@
 ActiveAdmin.register Supplier do
   menu :parent => "Referencias"
+actions :all, :except => [:destroy]
 
 
 form do |f|

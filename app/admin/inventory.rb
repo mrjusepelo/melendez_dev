@@ -1,7 +1,30 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
-actions :all, :except => [:destroy]
   
+  filter :product, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
+  filter :supplier, :label => 'Nombre de Proveedor', :as => :select, :collection => Supplier.find(:all, :order => "name")
+  filter :state_inventory, :as => :select, :collection => StateInventory.find(:all, :order => "name")
+  # filter :sale_products, :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:id)
+  filter :barcode
+  filter :serial
+  filter :iva
+  filter :vale_buy
+  filter :vale_sale
+  filter :warranty
+  filter :date_in
+  filter :date_out
+  filter :created_at
+  filter :updated_at
+
+# filtros pendientes
+# SALE PRODUCTS
+# SALES
+# CREDIT PRODUCTS
+# CREDITS
+
+
+
+
 # batch_action :flag do |selection|
 #       Post.find(selection).each do |post|
 #         post.flag! :hot
@@ -78,6 +101,9 @@ actions :all, :except => [:destroy]
            script :src => javascript_path('1.js'), :type => "text/javascript"
            script :src => javascript_path('3.js'), :type => "text/javascript"
            script :src => javascript_path('admin_inventory.js'), :type => "text/javascript"
+           script :src => javascript_path('validation.js'), :type => "text/javascript"
+           # script :src => javascript_path('http://livevalidation.com/javascripts/src/1.3/livevalidation_standalone.js'), :type => "text/javascript"
+           script :src => javascript_path('validation_form_inventory.js'), :type => "text/javascript"
 
   end
   f.inputs "Datos del Producto" do
@@ -86,24 +112,32 @@ actions :all, :except => [:destroy]
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
-      f.input :product_id ,   input_html: {id: "product_id", class: "inventory_product_id"}
+      f.input :product_id, :as => :hidden,   input_html: {id: "product_id", class: "inventory_product_id"}
       # f.input :product_id , as: :hidden,  input_html: {id: "product_id", class: "inventory_product_id"}
 
 
       # f.input :product
       f.input :barcode, :label => "Cantidad", :input_html => {onBlur: "createSerials(this)", id: "amount", name: "amount", :style => "background-color: #E6E6E6; width: 60px;"} 
-      f.input :serial
-      f.input :supplier
-      f.input :vale_buy
-      f.input :vale_sale
-      f.input :iva, :as => "number", :input_html => {id: "iva", :style => "background-color: #E6E6E6; width: 60px;", :value => 0}
-      f.input :warranty
+      f.input :serial, :input_html => {id: "inventory_serial"}
+      f.input :supplier, :input_html => {id: "inventory_supplier_id"}
+      f.input :vale_buy, as: :string, :input_html => {id: "inventory_vale_buy", :style => " width: 60px;"}
+      f.input :vale_sale, as: :string, :input_html => {id: "inventory_vale_sale", :style => " width: 60px;"}
+      f.input :iva, :as => "string", :input_html => {id: "inventory_iva", :style => " width: 60px;", :value => 0}
+      f.input :warranty, as: :string, :input_html => {id: "warranty", :style => "width: 60px;"}
       f.input :date_in,  :as => "string", :input_html => {id: "datepi", :style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
       # f.input :date_in,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => DateTime.now.to_i}
-      f.input :date_out,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => "click aqui"}
-      f.input :state_inventory_id, :input_html => {id: "state_inventory", :style => "background-color: #E6E6E6; width: 60px;", :value => 1}
-      # f.input :comming_soon
-      # image_tag("/icons/icon.gif", :height => '32', :width => '32') # =>
+
+
+      if inventory.id
+          f.input :date_out,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"}
+          f.input :state_inventory_id, :input_html => {id: "state_inventory", :style => "background-color: #E6E6E6; width: 60px;"}
+        else
+      # si se va a ingresar al inventario no lo muestro para que no se almacene
+      f.input :date_out,  :as => :hidden, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => "click aqui"}
+      f.input :state_inventory_id, as: :hidden, :input_html => {id: "state_inventory", :style => "background-color: #E6E6E6; width: 60px;", :value => 1}
+      end
+
+      
 
   end
 
@@ -157,8 +191,10 @@ end
                   span :class => "", :style => " border:none; background-color: rgb(165, 48, 48); color: white;height:30px; padding: 5px;" do 
                     estado = inventory.state_inventory.name
                   end  
-
-
+              elsif inventory.state_inventory_id.to_i == 4
+                  span :class => "", :style => " border:none; background-color: rgb(165, 165, 164); color: black;height:30px; padding: 5px;" do 
+                    estado = inventory.state_inventory.name
+                  end 
 
               end
           
@@ -167,11 +203,41 @@ end
         end
 
     end
-    # actions do |product|
-      # link_to "Agregar a Inventario", new_admin_inventory_path(product), :class => "member_link"
-    # end
-    default_actions
+    column "" do |inventory|
+
+       if inventory.state_inventory_id.to_i == 4
+          link_to("Ver", admin_inventory_path(inventory)) + "  " + "Nada por hacer..."
+       else   
+            link_to("Ver",  admin_inventory_path(inventory), :class => "member_link") + "  " + 
+            link_to("Editar",  edit_admin_inventory_path(inventory), :class => "member_link") + "  " + 
+           link_to("Cancelar", cancelar_admin_inventory_path(inventory), :method => :put, :confirm => "Estas Seguro(a)?")
+      end
+    end
+    # default_actions
   end    
+
+
+
+
+
+
+
+
+member_action :cancelar, :method => :put do
+  @inventory = Inventory.find(id = params[:id])
+
+      @inventory.update_attribute(:state_inventory_id, 4)
+    redirect_to :action => :index, :notice => "Servicio #{@inventory.id}"
+
+  #   update! do |format|
+
+  #       format.html { redirect_to :action => :index }
+  #   end    
+
+end
+
+
+
 
 
 
@@ -179,11 +245,12 @@ end
 
 
         def create
+            
             timestamp = (DateTime.now.to_i).to_s
             # Convert number of seconds into Time object.
             # Time.at(time)
 
-                (1..params[:amount].to_i).each do |i|
+              (1..params[:amount].to_i).each do |i|
                   Inventory.create(
                     :product_id => params[:inventory][:product_id], :barcode => timestamp+""+i.to_s,
                      :supplier => params[:inventory][:supplier],
@@ -193,10 +260,12 @@ end
                      :state_inventory_id => params[:inventory][:state_inventory_id], :iva => params[:inventory][:iva]
                     )
                 end
-
             redirect_to :action => :index
             # 'admin/products#index'
+
         end
+
+
      
      def edit
             @inventory = Inventory.find(params[:id])

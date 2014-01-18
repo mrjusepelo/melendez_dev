@@ -8,13 +8,15 @@
 
 # PaymentMode.create([{name: 'Diario'},{name: 'Semanal'}, {name: 'Quincenal'}, {name: 'Mensual'}, {name: 'Contado'}])
 # State.create([{name: 'Pagos Pendientes'},{name: 'Pagara Hoy'}, {name: 'Al dia'}, {name: 'Cancelado'}, {name: 'Aprobado'},{name: 'No definido'}, {name: 'No tiene pagos registrados'}, {name: 'Pagos Adelantados'}])
-# StateInventory.create([{name: 'Disponible'},{name: 'Venta de Contado'}, {name: 'Venta de Credito'}])
+
+# stateInventory esta oculto en el menu
+# StateInventory.create([{name: 'Disponible'},{name: 'Venta de Contado'}, {name: 'Venta de Credito'}, {name: 'Cancelado'}])
 
 
 
 
 
-# State.create([{name: 'Pagos Pendientes'},{name: 'Pagara Hoy'}, {name: 'Al dia'}, {name: 'Cancelado'}, {name: 'Aprobado'},{name: 'No definido'}, {name: 'No tiene pagos registrados'}, {name: 'Pagos Adelantados'}])
+# State.create([{name: 'Pagos Pendientes'},{name: 'Pagara Hoy'}, {name: 'Al dia'}, {name: 'Cancelado'}, {name: 'Aprobado'},{name: 'Terminado'}, {name: 'No tiene pagos registrados'}, {name: 'Pagos Adelantados'}])
 
 # Product.create(name: "producto1", description: "producto sin iva", brand_id: 1)
 # Product.create(name: "Producto2", description: "producto con iva", brand_id: 1)

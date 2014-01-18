@@ -193,7 +193,7 @@ end
       f.input :payday, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
 			f.input :date_billed, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today} 
 			f.input :date_arrival, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"}
-			f.input :date_limit_pay, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => Date.today+30} 
+			f.input :date_limit_pay, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"} 
 			f.input :date_pay_real, :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"}
 
 
@@ -201,7 +201,7 @@ end
           
         order.inputs 'Productos' do 
         order.input :product, :as => "string",  input_html: {onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 360px;"}
-        order.input :product_id,   input_html: {id: "product_id", class: "order_product_id"}
+        order.input :product_id, as: :hidden,   input_html: {id: "product_id", class: "order_product_id"}
         order.input :amount, :input_html => {onChange:"", id: "amount", :style => "width: 60px;"}
         order.input :unit_value, :input_html => {onBlur:"", id: "unit_value", :style => "width: 60px;"}
         order.input :value, :input_html => {onBlur:"", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
@@ -224,8 +224,8 @@ end
 
       f.has_many :consigments do |order|
             order.inputs 'Consignaciones' do 
-            order.input :date #, :as => :datepicker  , :input_html => {:name => "date"}
-            order.input :value  #, :input_html => {:name => "value", :style => "width: 60px;"}
+            order.input :date, :as => :datepicker # , :input_html => {:name => "date"}
+            order.input :value , :input_html => {:value => 0, :style => "width: 360px;"}
           end
       end
 

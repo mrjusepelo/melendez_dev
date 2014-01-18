@@ -1,30 +1,20 @@
 ActiveAdmin.register Brand do
-config.comments = true
-
   menu :parent => "Datos de Producto"
-form do |f|
+config.comments = true
+actions :all, :except => [:destroy]
 
-	# if @brand.id.nil?
-# if !params[:id]
-# if !params[:id].nil?
-	# if defined?(@brand)
+  filter :products, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
+  filter :name
+  filter :created_at
+  filter :updated_at  
 
-			f.inputs "Marcas" do
-
+		form do |f|
+			f.inputs "Marcas", :class => "noshow" do
 				f.input :name
 			end
-			f.actions
-	# else
-			# f.inputs "Marcas editarlas" do
+		f.actions
 
-			# 	f.input :name, :input_html => {value: "asignada",:name => "date"}
-
-			# end
-			# f.actions
-	# end
-
-
-end   
+		end   
 
 controller do
     
