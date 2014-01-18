@@ -28,6 +28,7 @@ es:
 
 # translation missing: es.active_admin.comments.resource_type
 # translation missing: es.active_admin.comments.author_type
+translation missing: es.devise.sessions.admin_user.signed_in
   devise:
     failure:
       already_authenticated: 'Ya iniciaste sesión.'
@@ -41,6 +42,9 @@ es:
       admin_user:
         unauthenticated: 'Aún no estas autenticado'      
     sessions:
+      admin_user: 
+        signed_in: Iniciaste sesión correctamente.' 
+        signed_out: 'Cerraste sesión correctamente.'
       signed_in: 'Iniciaste sesión correctamente.'
       signed_out: 'Cerraste sesión correctamente.'
         admin_user:
