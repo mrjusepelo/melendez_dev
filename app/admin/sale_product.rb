@@ -1,7 +1,7 @@
 ActiveAdmin.register SaleProduct do
+  menu :parent => "Ventas Efectivo"
 
-  menu :parent => "Ventasxxx"
-  # menu :parent => "Ventas Efectivo"
+  # menu :parent => "Ventasxxx"
 
 # menu :label => proc{ I18n.t("Ventasxxx") }
 

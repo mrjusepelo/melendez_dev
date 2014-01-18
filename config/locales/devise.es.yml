@@ -29,6 +29,7 @@ es:
 # translation missing: es.active_admin.comments.resource_type
 # translation missing: es.active_admin.comments.author_type
 # translation missing: es.devise.sessions.admin_user.signed_in
+# translation missing: es.devise.failure.admin_user.unauthenticated
   devise:
     failure:
       already_authenticated: 'Ya iniciaste sesión.'

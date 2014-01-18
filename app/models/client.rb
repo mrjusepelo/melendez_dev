@@ -1,5 +1,6 @@
 class Client < ActiveRecord::Base
   belongs_to :city
+  belongs_to :credit
   # has_many :sales
 
   validates_presence_of :name
