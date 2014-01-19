@@ -120,8 +120,8 @@ ActiveAdmin.register Inventory do
       f.input :barcode, :label => "Cantidad", :input_html => {onBlur: "createSerials(this)", id: "amount", name: "amount", :style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :serial, :input_html => {id: "inventory_serial"}
       f.input :supplier, :input_html => {id: "inventory_supplier_id"}
-      f.input :vale_buy, as: :string, :input_html => {id: "inventory_vale_buy", :style => " width: 60px;"}
-      f.input :vale_sale, as: :string, :input_html => {id: "inventory_vale_sale", :style => " width: 60px;"}
+      f.input :vale_buy, as: :string, :input_html => {id: "inventory_vale_buy", :style => " width: 260px;"}
+      f.input :vale_sale, as: :string, :input_html => {id: "inventory_vale_sale", :style => " width: 260px;"}
       f.input :iva, :as => "string", :input_html => {id: "inventory_iva", :style => " width: 60px;", :value => 0}
       f.input :warranty, as: :string, :input_html => {id: "warranty", :style => "width: 60px;"}
       f.input :date_in,  :as => "string", :input_html => {id: "datepi", :style => "background-color: #E6E6E6; width: 60px;", :value => Date.today}
@@ -243,6 +243,21 @@ end
 
     controller do
 
+
+
+    def destroy
+      @inventory = Inventory.find(params[:id])
+
+        @inventory.each do |pro_inventory|
+          # no elimina pero pone el registro en estado 4 cancelado
+          pro_inventory.update_attribute(:state_inventory_id, 4) 
+           # Inventory.update(pro_inventory.inventory.id, :state_inventory_id => 1)
+        end
+        
+      # @inventory.destroy
+
+      redirect_to admin_inventories_path()
+    end
 
         def create
             

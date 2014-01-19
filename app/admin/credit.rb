@@ -626,11 +626,13 @@ end
         order.input :inventory_fields, input_html: {onKeypress:"return noEnviar(event)", onBlur: "javascript:salida(this)", onclick: "javascript:busquedaProducto(this)", id: "product", :style => "background-color: #E6E6E6; width: 650px;"}
         order.input :inventory_id, as: :hidden,  input_html: {id: "product_id", class: "creadit_product_id"}
         order.input :amount, :input_html => {onChange:"", id: "amount", :style => "width: 60px;"}
-        order.input :unit_value, :input_html => {onBlur:"", id: "unit_value", :style => "width: 60px;"}
-        order.input :value, :input_html => {onBlur:"", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 60px;" }
+        order.input :unit_value, :input_html => {onBlur:"", id: "unit_value", :style => "width: 260px;"}
+        # <input type=”text” onkeyup=”format(this)” onchange=”format(this)”>
+        order.input :value, as: :string, :input_html => {:onchange => 'format(this)', :onkeyup => 'format(this)', onBlur:"", onclick: "javascript:valorproductos(this)",class: "val_product", id: "val_product",  :style => "width: 260px;" }
           within @head do
                script :src => javascript_path('admin_credit.js'), :type => "text/javascript"
                script :src => javascript_path('6.js'), :type => "text/javascript"
+               script :src => javascript_path('accounting.min.js'), :type => "text/javascript"
 
           end                 
 
@@ -926,6 +928,10 @@ end
     @credit = Credit.find(params[:id])
 
     update! do |format|
+
+              @credit.update_attribute(:subtotal, @credit.total)   #actualizo el valor con los intereses del credito 
+
+
 
             # actualizo la ultima Notificacion para el sgte dia de pago del credito actulizado
             if @credit.payment_mode_id.to_i == 1

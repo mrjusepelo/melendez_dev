@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	var f21 = new LiveValidation('amount');
+	f21.add( Validate.Presence, { failureMessage: "Este campo no puede ser Vacio" } );
+
 	var f21 = new LiveValidation('inventory_serial');
 	f21.add( Validate.Presence, { failureMessage: "Este campo no puede ser Vacio" } );
 

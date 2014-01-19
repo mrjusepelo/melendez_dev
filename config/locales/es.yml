@@ -723,9 +723,9 @@ es:
        supplier_id: Proveedor
        product_id: Producto
        barcode: Codigo de Barras
-       vale_buy: Precio a Comprador
+       vale_buy: Precio de Proveedor
        vale_sale: Precio de Venta
-       warranty: Garantía
+       warranty: Garantía en meses
        date_in: 'Fecha de Ingreso'
        date_out: 'Fecha de Venta'
        state_inventory_id: Estado del Producto

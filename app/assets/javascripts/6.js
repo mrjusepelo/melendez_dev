@@ -17,6 +17,25 @@ $(document).ready(function(){
 // }
 
 
+
+
+
+function Moneda(input){
+var num = input.value.replace(/\./g,”");
+if(!isNaN(num)){
+num = num.toString().split(“”).reverse().join(“”).replace(/(?=\d*\.?)(\d{3})/g,”$1.”);
+num = num.split(“”).reverse().join(“”).replace(/^[\.]/,”");
+input.value = num;
+}else{
+input.value = input.value.replace(/[^\d\.]*/g,”");
+}
+}
+
+
+
+
+
+
 // js de creditos + prueba
 function sumavalorcredito(total){
     var sum = 0;
