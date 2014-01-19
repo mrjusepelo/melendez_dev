@@ -582,7 +582,7 @@ member_action :contract, :method => :get do
      html = render_to_string(:action => "contract.html.erb", :layout => false)
       kit = PDFKit.new(html)
       kit.stylesheets << 'vendor/assets/stylesheets/style.css'
-    send_data(kit.to_pdf, :filename => 'report.pdf', :type => 'application/pdf', :disposition => 'inline')
+    send_data(kit.to_pdf, :filename => 'contratoCredito.pdf', :type => 'application/pdf', :disposition => 'inline')
 end
 
 
