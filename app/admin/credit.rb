@@ -778,7 +778,7 @@ end
 
           end
         end
-      active_admin_comments
+      # active_admin_comments
 
       end
 
@@ -858,7 +858,7 @@ end
 
             elsif @credit.payment_mode_id.to_i == 3
               @credit.update_attribute(:nextpay, (Date.today + 14))  # proximo dia de pago
-              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 15), :credit_id => @credit.id)
+              NotificationCredit.create(revised: 'false', :nextdate => (Date.today + 14), :credit_id => @credit.id)
 
             elsif @credit.payment_mode_id.to_i == 4
               hoy = Date.today
