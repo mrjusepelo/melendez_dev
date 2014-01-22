@@ -14,7 +14,7 @@ ActiveAdmin.register Sale do
 
 
 
-  filter :sale_products, :label => 'Registro en Productos Vendidos', :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:sale_id)
+  # filter :sale_products, :label => 'Registro en Productos Vendidos', :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:sale_id)
   filter :admin_user
   filter :value
   filter :date

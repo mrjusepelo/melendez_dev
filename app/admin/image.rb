@@ -3,7 +3,7 @@ ActiveAdmin.register Image do
 # actions :all, :except => [:destroy]
   
 
-  filter :product, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
+  # filter :product, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
   filter :route
   filter :priority
   filter :created_at

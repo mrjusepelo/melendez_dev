@@ -8,8 +8,8 @@ ActiveAdmin.register SaleProduct do
 actions :all, :except => [:destroy, :new]
 
 
-  filter :sale, :label => 'Referencia de venta', :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:sale_id)
-  filter :inventory, :label => 'Referencia de inventario', :as => :select, :collection => Inventory.find(:all, :order => "id").map(&:id)
+  # filter :sale, :label => 'Referencia de venta', :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:sale_id)
+  # filter :inventory, :label => 'Referencia de inventario', :as => :select, :collection => Inventory.find(:all, :order => "id").map(&:id)
   filter :inventory_fields
   filter :value
   filter :amount

@@ -20,112 +20,112 @@ index do
     column :updated_at
     column :nextpay
     column "Estado de Pedido" do |order|
-#       # ultimoPago = credit.payments_credits.where(credit_id: credit.id ).last
-#       # sumaPagos =  credit.payments_credits.sum(:value)
-#       totalCredito = order.val_real.to_i
-#       sumaPagos = order.sum_payments.to_i
-#       estado = order.state_id.to_i
-#       modoPago = order.payment_mode_id.to_i
-#       inicioPago = order.payday
+      # ultimoPago = credit.payments_credits.where(credit_id: credit.id ).last
+      # sumaPagos =  credit.payments_credits.sum(:value)
+      totalCredito = order.val_real.to_i
+      sumaPagos = order.sum_payments.to_i
+      estado = order.state_id.to_i
+      modoPago = order.payment_mode_id.to_i
+      inicioPago = order.payday
 
 
-# # if order.id == 134
-# def pagosIdeal(modoPago, inicioPago)
+# if order.id == 134
+def pagosIdeal(modoPago, inicioPago)
 
-#   diaspagos = 0
-#   cont = 0
-#   inc = 0
-# # a=0
+  diaspagos = 0
+  cont = 0
+  inc = 0
+# a=0
 
-#   case modoPago
-#   when 1
-#     inc = 1
-#   when 2
-#     inc = 7
-#   when 3
-#     inc = 14
-#   when 4
-#     # obtiene fecha exacta de un mes mas
-#     cantdias = (Date.today - (inicioPago)).to_i
-#     cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
-#     inc =    cantdias/cantmeses    
-#   end
+  case modoPago
+  when 1
+    inc = 1
+  when 2
+    inc = 7
+  when 3
+    inc = 14
+  when 4
+    # obtiene fecha exacta de un mes mas
+    cantdias = (Date.today - (inicioPago)).to_i
+    cantmeses = (Date.today.year * 12 + Date.today.month) - (inicioPago.year * 12 + inicioPago.month)  
+    inc =    cantdias/cantmeses    
+  end
        
-#         inicioPago.step(Date.today, inc) do | dia |
-#          cont = cont + 1
+        inicioPago.step(Date.today, inc) do | dia |
+         cont = cont + 1
 
-#           if (inicioPago > Date.today)
-#            cont = cont - 1 
-#            break 
-#          end
-#        end
-#    diaspagos = cont
+          if (inicioPago > Date.today)
+           cont = cont - 1 
+           break 
+         end
+       end
+   diaspagos = cont
    
-#    return diaspagos
+   return diaspagos
 
-# end
+end
 
-# # a= pagosIdeal(modoPago, inicioPago)
-# # puts "****************"+a.to_s
-# # end # if registro especifico
+# a= pagosIdeal(modoPago, inicioPago)
+# puts "****************"+a.to_s
+# end # if registro especifico
 
-# # estados difentes de cancelado o terminado
-# if (estado != 4 && estado != 6)
-#   sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * order.value_payments.to_i
+# estados difentes de cancelado o terminado
+if (estado != 4 && estado != 6)
+  sumPagosIdeal = pagosIdeal(modoPago, inicioPago).to_i * order.value_payments.to_i
   
-#   if sumaPagos >= sumPagosIdeal
+  if sumaPagos >= sumPagosIdeal
 
-#     if sumaPagos >= totalCredito
-#        order.update_attribute(:state_id, 6)  # credito terminado
-#     else  
-#        order.update_attribute(:state_id, 3)  # paogs al dia
-#     end
+    if sumaPagos >= totalCredito
+       order.update_attribute(:state_id, 6)  # credito terminado
+    else  
+       order.update_attribute(:state_id, 3)  # paogs al dia
+    end
     
-#   elsif sumaPagos >= totalCredito
-#        order.update_attribute(:state_id, 6)  # credito terminado
-#   else
-#      order.update_attribute(:state_id, 1) # pagos pendientes
+  elsif sumaPagos >= totalCredito
+       order.update_attribute(:state_id, 6)  # credito terminado
+  else
+     order.update_attribute(:state_id, 1) # pagos pendientes
 
-#   end
+  end
   
-# end #condicion de estado terminado o cancelado
+end #condicion de estado terminado o cancelado
 
 
-#         if defined?(order.state.name)
-#             if order.state_id.to_i == 1
-#                 span :class => "", :style => " border:none; background-color: rgb(165, 48, 48); color: white;height:30px; padding: 5px;" do 
-#                   estado = order.state.name
-#                 end
-#             elsif order.state_id.to_i == 2
-#                  span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
-#                     estado = order.state.name
-#                  end               
-#             elsif order.state_id.to_i == 3
-#                 span :class => "", :style => " border:none; background-color: rgb(44, 145, 40); color: white;height:30px; padding: 5px;" do 
-#                   estado = order.state.name
-#                 end  
-#             elsif order.state_id.to_i == 6
-#                  span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
-#                     estado = order.state.name
-#                  end  
-#             elsif order.state_id.to_i == 4
-#                 span :class => "", :style => " border:none; background-color: rgb(165, 165, 164); color: black;height:30px; padding: 5px;" do 
-#                 order.state.name
-#                 end                                    
-#             end
+        if defined?(order.state.name)
+            if order.state_id.to_i == 1
+                span :class => "", :style => " border:none; background-color: rgb(165, 48, 48); color: white;height:30px; padding: 5px;" do 
+                  estado = order.state.name
+                end
+            elsif order.state_id.to_i == 2
+                 span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
+                    estado = order.state.name
+                 end               
+            elsif order.state_id.to_i == 3
+                span :class => "", :style => " border:none; background-color: rgb(44, 145, 40); color: white;height:30px; padding: 5px;" do 
+                  estado = order.state.name
+                end  
+            elsif order.state_id.to_i == 6
+                 span :class => "", :style => " border:none; background-color: black; color: white;height:30px; padding: 5px;" do 
+                    estado = order.state.name
+                 end  
+            elsif order.state_id.to_i == 4
+                span :class => "", :style => " border:none; background-color: rgb(165, 165, 164); color: black;height:30px; padding: 5px;" do 
+                order.state.name
+                end                                    
+            end
 
-#         else
-#           estado = "Sin asignar"
-#         end
-#     end
+        else
+          estado = "Sin asignar"
+        end
+    end
 
-#     column "Modo de Pago" do |order|
-#         if defined?(order.payment_mode.name)
-#           modoPago = order.payment_mode.name
-#         else
-#           modoPago = "Sin asignar"
+    column "Modo de Pago" do |order|
+        if defined?(order.payment_mode.name)
+          modoPago = order.payment_mode.name
+        else
+          modoPago = "Sin asignar"
 
-#         end
+        end
     end
 
     column "" do |order|

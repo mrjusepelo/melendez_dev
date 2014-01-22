@@ -9,8 +9,11 @@ form do |f|
 				f.input :phone
 				f.input :email
 				f.input :city
-				f.input :frecuence_notification
-				f.input :state
+			
+				#quitaado por q no se esta validando
+				# f.input :frecuence_notification
+				#quitaado por q no se esta validando
+				# f.input :state 
 
 			end
 			f.actions

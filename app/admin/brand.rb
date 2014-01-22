@@ -3,7 +3,7 @@ ActiveAdmin.register Brand do
 config.comments = true
 actions :all, :except => [:destroy]
 
-  filter :products, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
+  # filter :products, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
   filter :name
   filter :created_at
   filter :updated_at  

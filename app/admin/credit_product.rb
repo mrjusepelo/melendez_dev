@@ -7,8 +7,8 @@ actions :all, :except => [:destroy]
 
 
 
-  filter :inventory, label: "Producto de Inventario", :as => :select, :collection => Inventory.find(:all, :order => "id").map(&:id)
-  filter :credit, label: "Credito", :as => :select, :collection => Credit.find(:all, :order => "id").map(&:id)
+  # filter :inventory, label: "Producto de Inventario", :as => :select, :collection => Inventory.find(:all, :order => "id").map(&:id)
+  # filter :credit, label: "Credito", :as => :select, :collection => Credit.find(:all, :order => "id").map(&:id)
   filter :inventory_fields, as: :string
   filter :amount
   filter :unit_value

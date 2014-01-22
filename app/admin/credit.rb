@@ -3,9 +3,9 @@ ActiveAdmin.register Credit do
   menu :parent => "Creditos"
 
   filter :payment_mode
-  filter :state, as: :select, :collection => State.find(:all, :order => "name")
-  filter :clients, :label => 'Cliente', :as => :select, :collection => Client.find(:all, :order => "name")
-  filter :payments_credits, :label => 'Autor de Pago', :as => :select, :collection => PaymentsCredit.find(:all, :order => "name")
+  # filter :state, as: :select, :collection => State.find(:all, :order => "name")
+  # filter :clients, :label => 'Cliente', :as => :select, :collection => Client.find(:all, :order => "name")
+  # filter :payments_credits, :label => 'Autor de Pago', :as => :select, :collection => PaymentsCredit.find(:all, :order => "name")
   filter :subtotal
   filter :nextpay, :label => 'D&iacute;a de Pago'
   # filter :inventories

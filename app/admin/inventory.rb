@@ -1,9 +1,9 @@
 ActiveAdmin.register Inventory do
   menu :parent => "Inventario"
   
-  filter :product, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
-  filter :supplier, :label => 'Nombre de Proveedor', :as => :select, :collection => Supplier.find(:all, :order => "name")
-  filter :state_inventory, :as => :select, :collection => StateInventory.find(:all, :order => "name")
+  # filter :product, :label => 'Nombre de Producto', :as => :select, :collection => Product.find(:all, :order => "name")
+  # filter :supplier, :label => 'Nombre de Proveedor', :as => :select, :collection => Supplier.find(:all, :order => "name")
+  # filter :state_inventory, :as => :select, :collection => StateInventory.find(:all, :order => "name")
   # filter :sale_products, :as => :select, :collection => SaleProduct.find(:all, :order => "id").map(&:id)
   filter :barcode
   filter :serial
@@ -130,7 +130,10 @@ ActiveAdmin.register Inventory do
 
       if inventory.id
           f.input :date_out,  :as => :datepicker, :input_html => {:style => "background-color: #E6E6E6; width: 60px;"}
-          f.input :state_inventory_id, :input_html => {id: "state_inventory", :style => "background-color: #E6E6E6; width: 60px;"}
+          f.input :state_inventory_id,  :as => :select, :include_blank => false, :collection => StateInventory.where('id < 4'), :input_html => {id: "state_inventory", :style => ""}
+      # f.input :profile, as: :select, :collection => Profile.where.not('id < 3')
+           # f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Super", "Super"], ["Super Lectura", "Super Lectura"], ["Pedidos", "Pedidos"], ["Productos", "Productos"]]
+     
         else
       # si se va a ingresar al inventario no lo muestro para que no se almacene
       f.input :date_out,  :as => :hidden, :input_html => {:style => "background-color: #E6E6E6; width: 60px;", :value => "click aqui"}

@@ -3,8 +3,8 @@ ActiveAdmin.register OrderProduct do
 
   # filter :payment_mode
   # filter :order, :as => :select, :collection => Order.select(:id).all
-  filter :order, label: "Pedido", :as => :select, :collection => Order.find(:all, :order => "id").map(&:id)
-  filter :product, label: "Producto", :as => :select, :collection => Product.find(:all, :order => "name")
+  # filter :order, label: "Pedido", :as => :select, :collection => Order.find(:all, :order => "id").map(&:id)
+  # filter :product, label: "Producto", :as => :select, :collection => Product.find(:all, :order => "name")
   filter :amount
   filter :unit_value
   filter :value

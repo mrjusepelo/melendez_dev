@@ -7,7 +7,8 @@ class OrderProduct < ActiveRecord::Base
   validates_presence_of :unit_value
   validates_presence_of :value
 
-validates_numericality_of :amount, :value, :unit_value =>true, :greater_than_or_equal_to =>0, :message => "solo puedes ingresar n&uacute;meros enteros positivos"
+# validates_numericality_of :amount, :value, :unit_value =>true, :greater_than_or_equal_to =>0, :message => "solo puedes ingresar n&uacute;meros enteros positivos"
+validates :amount, :value, :unit_value, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 1000000000000, :message => "solo puedes ingresar n&uacute;meros enteros positivos"}
 
 # def product_name
 #   product.name if product
