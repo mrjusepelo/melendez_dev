@@ -24,36 +24,36 @@ class ImagesController < ApplicationController
 
 
 
-  def new
-   @image = Image.new
+  # def new
+  #  @image = Image.new
 
-   # @novelty.build_image
-   # @novelty.images.build
+  #  # @novelty.build_image
+  #  # @novelty.images.build
 
-  end
+  # end
 
-  def create
-    @image = Image.new(image_params)
-    if @image.save
-      redirect_to images_path, :notice => "Imagen Creada!"
-    else
-    # render "new"
-      redirect_to novelties_new_path
-    end
-  end
+  # def create
+  #   @image = Image.new(image_params)
+  #   if @image.save
+  #     redirect_to images_path, :notice => "Imagen Creada!"
+  #   else
+  #   # render "new"
+  #     redirect_to novelties_new_path
+  #   end
+  # end
 
 
 
-  private
+  # private
 
-  def image_params
-    params.require(:image).permit(
-      :id,
-      :route,
-      :novelty_id
-      ]
-    )
-  end
+  # def image_params
+  #   params.require(:image).permit(
+  #     :id,
+  #     :route,
+  #     :novelty_id
+  #     ]
+  #   )
+  # end
 
 
 
