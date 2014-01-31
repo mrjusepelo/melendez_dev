@@ -6,6 +6,6 @@ class PublicMailer < ActionMailer::Base
     @email = email
     @reason = reason
     @messages = messages
-    mail(to: "creditos.melendez.ptyo@gmail.com", subject: @reason)
+    mail(to: "creditos.melendez.ptyo@gmail.com, creditosmelendezq@hotmail.com", subject: @reason)
   end
 end
