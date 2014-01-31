@@ -2,7 +2,7 @@ class Consigment < ActiveRecord::Base
   belongs_to :order
 
   # validates_numericality_of :value, :only_integer =>true, :greater_than_or_equal_to => 1, :message => "invalid fundays"
-validates :value, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100 }
+validates :value, :numericality => { :greater_than_or_equal_to => 0, :less_than_or_equal_to => 100000000 }
   # validates :value, numericality: true
   # validates :games_played, numericality: { only_integer: true 
   # validates_numericality_of :foo, :integer_only => true, :gt => 0

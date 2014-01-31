@@ -11,7 +11,9 @@ class OrdersController < ApplicationController
      
 
     # pagos Proximos dentro de 3 dias y hoy 
-     pagos_proximos = Notification.where(nextdate: ((Date.today - 3)..Date.today), revised: false).length
+                      # Notification.where(nextdate: (Date.today..(Date.today + 3)), revised: false)
+     pagos_proximos = Notification.where(nextdate: (Date.today..(Date.today + 3)), revised: false).length
+     # pagos_proximos = Notification.where(nextdate: ((Date.today - 3)..Date.today), revised: false).length
 
      # pedidos con pagos pendientes
      @pagosPendientes = Order.select(:id).where(state_id: 1).length #pagos pendientes

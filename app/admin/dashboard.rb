@@ -32,7 +32,9 @@ h3 section "Notificaciones de Pedidos Proximos a Pagar (3) Dias" do
     # notificaciones pasadas sin ser revizadas
      # @pasadas = Notification.where("nextdate < ? AND revised = 'false'", Date.today)
 
-    table_for Notification.where(nextdate: ((Date.today - 3)..Date.today), revised: false) do |t| 
+      
+
+    table_for (Notification.where(nextdate: (Date.today..(Date.today + 3)), revised: false)) do |t| 
          # table_for current_admin_user.tasks.where('due_date > ? and due_date < ?', Time.now, 1.week.from_now) do |t|   
     # table_for Product.brand.limit(5) do
         t.column "Pedido Numero" do |prov|
@@ -80,7 +82,8 @@ end
 # pagos pendientes
 h3 section "Notificacion de Pedidos con Pagos pendientes ("+ Order.where(state_id: 1).count.to_s + ")"  do
 
-    table_for Order.where(state_id: 1, published: true).limit(5) do |t| 
+    # table_for Order.where(state_id: 1, published: true).limit(5) do |t| 
+    table_for Order.where(state_id: 1, published: true) do |t| 
         t.column "Pedido Numero" do |order|
             link_to order.id, admin_order_path(order)
         end

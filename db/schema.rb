@@ -284,7 +284,7 @@ ActiveRecord::Schema.define(version: 20131229041741) do
 
   create_table "payments_credits", force: true do |t|
     t.date     "date"
-    t.integer  "value",                   default: 0
+    t.integer  "value"
     t.integer  "credit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -312,7 +312,6 @@ ActiveRecord::Schema.define(version: 20131229041741) do
 
   create_table "products", force: true do |t|
     t.string   "name"
-    t.integer  "amount"
     t.text     "description"
     t.integer  "brand_id"
     t.datetime "created_at"

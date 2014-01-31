@@ -1,5 +1,6 @@
 class AdminUser < ActiveRecord::Base
 has_many :credits
+has_many :sales
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,

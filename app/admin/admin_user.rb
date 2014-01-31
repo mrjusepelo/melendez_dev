@@ -1,4 +1,10 @@
 ActiveAdmin.register AdminUser do
+  admin.build_menu do |menu|
+    menu.add :label => 'Custom Menu' do |submenu|
+      submenu.add :label => 'Custom Link', :url => custom_path
+    end
+  end
+
   index do
     column :name
     column :email
