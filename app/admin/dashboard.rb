@@ -26,7 +26,7 @@ ActiveAdmin.register_page "Dashboard" do
 # end
 
 
-h3 section "Notificaciones de Pedidos Proximos a Pagar (3) Dias" do
+h3 section "Notificaciones de Cuentas por Pagar Proximos (3) Dias" do
          # @ultimoPago = Notification.where(nextdate: Date.today)
     
     # notificaciones pasadas sin ser revizadas
@@ -52,12 +52,12 @@ h3 section "Notificaciones de Pedidos Proximos a Pagar (3) Dias" do
         end 
 # t.column("Status") { |task| status_tag (task.is_done ? "Done" : "Pending"), (task.is_done ? :ok : :error) }
     end
-    strong { link_to "Ver Todos los Pedidos", admin_orders_path }
+    strong { link_to "Ver Todos las Compras a Proveedores", admin_orders_path }
 end
 
 
 
-h3 section "Notificacion de Pagos de Pedidos para Hoy" do
+h3 section "Notificacion de Cuentas por Pagar para Hoy" do
 
     table_for Notification.where(nextdate: Date.today, revised: false ).limit(5) do |t| 
         t.column "Pedido Numero" do |prov|
@@ -75,12 +75,12 @@ h3 section "Notificacion de Pagos de Pedidos para Hoy" do
         end 
     end
 
-    strong { link_to "Ver Todos los Pedidos", admin_orders_path }
+    strong { link_to "Ver Todos las Compras a Proveedores", admin_orders_path }
 end
 
 
 # pagos pendientes
-h3 section "Notificacion de Pedidos con Pagos pendientes ("+ Order.where(state_id: 1).count.to_s + ")"  do
+h3 section "Notificacion de Cuentas por Pagar Antiguas ("+ Order.where(state_id: 1).count.to_s + ")"  do
 
     # table_for Order.where(state_id: 1, published: true).limit(5) do |t| 
     table_for Order.where(state_id: 1, published: true) do |t| 
@@ -99,7 +99,7 @@ h3 section "Notificacion de Pedidos con Pagos pendientes ("+ Order.where(state_i
             "Efectua el pago" # para cambiar estado 
         end         
     end
-    strong { link_to "Ver Todos los Pedidos", admin_orders_path }
+    strong { link_to "Ver Todos las Compras a Proveedores", admin_orders_path }
 end
 
 

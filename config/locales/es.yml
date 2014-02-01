@@ -304,8 +304,8 @@ es:
          one: Estado
          other: Estados
        order:
-         one: Pedido
-         other: Pedidos
+         one: Compra a Proveedor
+         other: Compra a Proveedores
        budget:
         one: Presupuesto
         other: Presupuestos

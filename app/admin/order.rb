@@ -185,7 +185,8 @@ end
 	form do |f|
 
       # if @order.id.nil?
-      f.inputs "Pedidos" do
+      # f.inputs "Pedidos" do
+      f.inputs "Compra a Proveedores" do
         f.input :date_arrival, as: :hidden, input_html: {name: "credit_json", id: "credit_json", value: order.products.to_json}
       f.input :supplier
       f.input :payment_mode
