@@ -17,7 +17,7 @@ class Ability
         #   can :manage, User
        
 
-        when "supersuper"
+        when "administrador"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
           can :manage, ActiveAdmin::Comment
           can :manage, AdminUser
@@ -68,7 +68,8 @@ class Ability
           can :manage, Category
           can :manage, Brand
           # can :manage, Credit  
-          can :manage, Inventory  
+          # can :manage, Inventory  
+          can :create, Inventory  
           can :manage, Sale
           can :manage, SupportDocument
           can :manage, StateInventory
@@ -101,7 +102,8 @@ class Ability
           can :manage, Client  
           can :manage, Category
           can :manage, Brand
-          can :manage, Inventory  
+          # can :manage, Inventory  
+          can :create, Inventory  
           can :manage, Sale
           can :manage, SupportDocument
           can :manage, StateInventory

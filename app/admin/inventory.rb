@@ -75,7 +75,7 @@ ActiveAdmin.register Inventory do
         row :supplier_id
         row :barcode
         row :serial
-        if current_admin_user == "super"
+        if current_admin_user.role.to_s == "super" || current_admin_user.role.to_s == "administrador"
           row :vale_buy
         end
         row :vale_sale
@@ -175,7 +175,7 @@ end
           marca = "Sin asignar"
         end
      end 
-    if current_admin_user.role == "super"
+    if current_admin_user.role == "super" || current_admin_user.role.to_s == "administrador"
       column :vale_buy
                
    end         

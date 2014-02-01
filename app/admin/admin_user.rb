@@ -26,7 +26,11 @@ ActiveAdmin.register AdminUser do
       f.input :document
       f.input :password
       f.input :password_confirmation
-      f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Secretario", "secretario"], ["Vendedor", "vendedor"]]
+        if (current_admin_user.role == "super" || current_admin_user.role.to_s == "administrador")
+          f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Administrador", "administrador"], ["Secretario", "secretario"], ["Vendedor", "vendedor"]]
+        else
+          f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Secretario", "secretario"], ["Vendedor", "vendedor"]]
+      end
       # f.input :role, :as => :select, :include_blank => false, :collection => [["Selecciona", nil], ["Super", "Super"], ["Super Lectura", "Super Lectura"], ["Pedidos", "Pedidos"], ["Productos", "Productos"]]
       # f.input :role, :as => :select, :collection => {"Super" => "1", "Productos" => "2"}
       # f.input :role, :as => :string
