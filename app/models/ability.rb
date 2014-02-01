@@ -10,16 +10,76 @@ class Ability
           can :manage, :all
           can :manage, AdminUser
           can :manage, ActiveAdmin::Comment
-        when "super-inscripciones"
-          # CANCAN Users
+
+        # when "super-inscripciones"
+        #   # CANCAN Users
+        #   can :read, ActiveAdmin::Page, :name => "Dashboard" 
+        #   can :manage, User
+       
+        when "secretario"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
-          can :manage, User
-        when "Productos"
-          can :read, ActiveAdmin::Page, :name => "Dashboard" 
+          can :manage, ActiveAdmin::Comment
+          can :manage, City  
           can :manage, Product  
-        when "Ventas"
-          can :read, ActiveAdmin::Page, :name => "Dashboard"
+          can :manage, ProductCategory  
+          can :manage, PaySale  
+          can :manage, PayEfective  
+          can :manage, PayConsigment  
+          can :manage, OrderProduct  
+          can :manage, Order  
+          can :manage, NotificationCredit  
+          can :manage, Notification  
+          can :manage, Image  
+          # can :manage, Dashboard  
+          can :manage, CreditProduct  
+          can :manage, Credit  
+          can :manage, Consigment  
+          can :manage, Client  
+          can :manage, Category
+          can :manage, Brand
+          # can :manage, Credit  
+          can :manage, Inventory  
           can :manage, Sale
+          can :manage, SupportDocument
+          can :manage, StateInventory
+          can :manage, State
+        when "vendedor"
+          can :read, ActiveAdmin::Page, :name => "Dashboard"
+          can :manage, ActiveAdmin::Comment
+          can :manage, Sale
+          can :manage, Product
+          can :manage, Credit
+          can :manage, Order
+
+
+          can :manage, City  
+          can :manage, Product  
+          can :manage, ProductCategory  
+          can :manage, PaySale  
+          can :manage, PayEfective  
+          can :manage, PayConsigment  
+          can :manage, OrderProduct  
+          can :manage, Order  
+          can :manage, NotificationCredit  
+          can :manage, Notification  
+          can :manage, Image  
+          # can :manage, Dashboard  
+          can :manage, CreditProduct  
+          can :manage, Credit  
+          can :manage, Consigment  
+          can :manage, Client  
+          can :manage, Category
+          can :manage, Brand
+          can :manage, Inventory  
+          can :manage, Sale
+          can :manage, SupportDocument
+          can :manage, StateInventory
+          can :manage, State
+
+# Secretarios (creditos, ingresos, egresos, facturas, inventarios)
+# Vendedor (inventario, contratos y creditos y factura) 
+
+
         # when "super-pedidos"
         #   # CANCAN Orders 
         #   can :read, ActiveAdmin::Page, :name => "Dashboard" 

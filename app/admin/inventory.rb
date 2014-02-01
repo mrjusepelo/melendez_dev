@@ -8,7 +8,9 @@ ActiveAdmin.register Inventory do
   filter :barcode
   filter :serial
   filter :iva
-  filter :vale_buy
+  # if current_admin_user.role == "super"
+    # filter :vale_buy
+  # end
   filter :vale_sale
   filter :warranty
   filter :date_in
@@ -73,7 +75,9 @@ ActiveAdmin.register Inventory do
         row :supplier_id
         row :barcode
         row :serial
-        row :vale_buy
+        if current_admin_user == "super"
+          row :vale_buy
+        end
         row :vale_sale
         row :iva
         row :warranty
@@ -170,8 +174,11 @@ end
         else
           marca = "Sin asignar"
         end
-     end         
-    column :vale_buy
+     end 
+    if current_admin_user.role == "super"
+      column :vale_buy
+               
+   end         
     column :vale_sale
     column :iva
     column :warranty
