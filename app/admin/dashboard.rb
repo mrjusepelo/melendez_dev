@@ -128,7 +128,7 @@ h3 section "Notificaciones de Creditos con Pagos para HOY" do
             end     
     end #fin de tabla
 
-            strong { link_to "Ver Todos los Pedidos", admin_orders_path }
+            strong { link_to "Ver Todos los Creditos a Clientes", admin_credits_path }
         # end #if si pedido terminado
     # end #each notify
 end
@@ -158,7 +158,7 @@ h3 section "Notificaciones de Creditos sin Revizar  " do
 
             end     
     end #fin de tabla
-            strong { link_to "Ver Todos los Pedidos", admin_orders_path }
+            strong { link_to "Ver Todos los Creditos a Clientes", admin_credits_path }
 end
 
 
