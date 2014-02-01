@@ -16,6 +16,36 @@ class Ability
         #   can :read, ActiveAdmin::Page, :name => "Dashboard" 
         #   can :manage, User
        
+
+        when "supersuper"
+          can :read, ActiveAdmin::Page, :name => "Dashboard" 
+          can :manage, ActiveAdmin::Comment
+          can :manage, AdminUser
+          can :manage, City  
+          can :manage, Product  
+          can :manage, ProductCategory  
+          can :manage, PaySale  
+          can :manage, PayEfective  
+          can :manage, PayConsigment  
+          can :manage, OrderProduct  
+          can :manage, Order  
+          can :manage, NotificationCredit  
+          can :manage, Notification  
+          can :manage, Image  
+          # can :manage, Dashboard  
+          can :manage, CreditProduct  
+          can :manage, Credit  
+          can :manage, Consigment  
+          can :manage, Client  
+          can :manage, Category
+          can :manage, Brand
+          # can :manage, Credit  
+          can :manage, Inventory  
+          can :manage, Sale
+          can :manage, SupportDocument
+          can :manage, StateInventory
+          can :manage, State
+
         when "secretario"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
           can :manage, ActiveAdmin::Comment
@@ -43,6 +73,7 @@ class Ability
           can :manage, SupportDocument
           can :manage, StateInventory
           can :manage, State
+
         when "vendedor"
           can :read, ActiveAdmin::Page, :name => "Dashboard"
           can :manage, ActiveAdmin::Comment
