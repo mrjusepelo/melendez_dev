@@ -1,0 +1,16 @@
+  <%= javascript_include_tag '1.js' %>
+  <%= stylesheet_link_tag 'file.css' %>
+
+
+<h1>Render Products</h1>
+<script type="text/javascript">
+alert();
+</script>
+
+<% a = Product.all 
+	a.each do |p|
+%>
+
+<%= p.name %>
+<% end %>	
+

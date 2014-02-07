@@ -8,7 +8,7 @@ class Ability
         when "super"
           # CANCAN Todo
           can :manage, :all
-          can :manage, AdminUser
+          can :manage, AdminUser, :id => admin_user.id
           can :manage, ActiveAdmin::Comment
 
         # when "super-inscripciones"
@@ -20,7 +20,7 @@ class Ability
         when "administrador"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
           can :manage, ActiveAdmin::Comment
-          can :manage, AdminUser
+          can :manage, AdminUser, :id => admin_user.id
           can :manage, City  
           can :manage, Product  
           can :manage, ProductCategory  
