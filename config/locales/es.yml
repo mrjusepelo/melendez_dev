@@ -722,6 +722,7 @@ es:
        supplier: Proveedor
        supplier_id: Proveedor
        product_id: Producto
+       product: Producto
        barcode: Codigo de Barras
        vale_buy: Precio de Proveedor
        vale_sale: Precio de Venta
