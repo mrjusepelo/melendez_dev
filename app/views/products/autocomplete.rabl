@@ -4,9 +4,9 @@
 
 	node :value do |p|
 
-         if defined?(p.product.id)
-          marca = p.product.brand.name
-          nombre = p.product.name
+         if defined?(p.id)
+          marca = p.brand.name
+          nombre = p.name
          else
            marca = "Sin asignar"
            nombre = "Sin asignar"
