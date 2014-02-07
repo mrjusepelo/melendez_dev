@@ -115,7 +115,7 @@ ActiveAdmin.register Inventory do
      f.input :supplier, as: :hidden, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product.to_json}
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
-      f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 160px;"}
+      f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 260px;"}
       f.input :product_id, :as => :hidden,   input_html: {id: "product_id", class: "inventory_product_id"}
       # f.input :product_id , as: :hidden,  input_html: {id: "product_id", class: "inventory_product_id"}
 
