@@ -2,6 +2,36 @@
   <%= stylesheet_link_tag 'file.css' %>
 
 
+	<%
+inventories = Inventory.all
+    arrContracts = Array.new
+
+
+# inventories.each do |inventory| 	
+	# id_pro = Inventory.group(:product_id).count
+	id_pro = Inventory.where('product_id > 0').group(:product_id).count
+	# id_pro.each_key { |key| puts key }
+	# id_pro.each_key { |key| 
+	id_pro.each {|key, value|  
+
+    	contract_hash = Hash.new
+
+		@product = Product.find(key.to_i)
+
+        contract_hash["id"] = @product.id
+        contract_hash["name"] = @product.name
+        contract_hash["amount"] = value
+
+        arrContracts.push(contract_hash)
+
+	}
+
+
+	puts "****************"+arrContracts.to_s
+	puts "****************"+arrContracts[0]['name'].to_s
+
+	 %>
+<h1><%= "Cslas deproductos"+@c.to_s %></h1>
 <h1>Render Products</h1>
 <script type="text/javascript">
 alert();

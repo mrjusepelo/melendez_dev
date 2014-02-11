@@ -1,4 +1,7 @@
 ActiveAdmin.register AdminUser do
+actions :all, :except => [:destroy]
+
+
   # admin.build_menu do |menu|
   #   menu.add :label => 'Custom Menu' do |submenu|
   #     submenu.add :label => 'Custom Link', :url => custom_path

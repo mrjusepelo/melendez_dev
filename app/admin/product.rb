@@ -1,4 +1,6 @@
 ActiveAdmin.register Product do
+actions :all, :except => [:destroy]
+
  # menu :label => "Lista de Productos"
   menu :parent => "Inventario"
   
