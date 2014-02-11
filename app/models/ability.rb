@@ -45,6 +45,7 @@ class Ability
           can :manage, SupportDocument
           can :manage, StateInventory
           can :manage, State
+          can :manage, Supplier
 
         when "secretario"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
@@ -74,6 +75,8 @@ class Ability
           can :manage, SupportDocument
           can :manage, StateInventory
           can :manage, State
+          can :manage, Supplier
+
 
         when "vendedor"
           can :read, ActiveAdmin::Page, :name => "Dashboard"
@@ -108,6 +111,8 @@ class Ability
           can :manage, SupportDocument
           can :manage, StateInventory
           can :manage, State
+          can :manage, Supplier
+          
 
 # Secretarios (creditos, ingresos, egresos, facturas, inventarios)
 # Vendedor (inventario, contratos y creditos y factura) 
