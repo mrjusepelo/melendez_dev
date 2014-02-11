@@ -303,7 +303,7 @@ end
             @inventory = Inventory.find(params[:id])
             puts "******************************"+@inventory.to_s
               Inventory.update(@inventory.id, :product_id => params[:product])
-              Inventory.update(27, product_id: 2)
+              # Inventory.update(27, product_id: 2)
 
             puts "****************************************"+params[:product].to_s
 
