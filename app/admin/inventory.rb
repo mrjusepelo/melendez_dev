@@ -112,12 +112,23 @@ ActiveAdmin.register Inventory do
   end
   f.inputs "Datos del Producto" do
       # Campo sobre escrito momentaneo para Json de nombre del Producto
-     f.input :supplier, as: :hidden, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product.to_json}
+     # f.input :supplier, as: :string, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product.to_json}
+     # f.input :supplier, as: :string, input_html: {name: "inventory_json", id: "inventory_json", value: inventory.product + inventory.product.brand.name.to_json}
+     # f.input :supplier, as: :string, input_html: {name: "inventory_json", id: "inventory_json", value:  inventory.product.to_json.push( inventory.product.brand.name)}
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
+      if inventory.id
+        f.input :product, 
+                :as => "string", input_html: {
+                                              onFocus: "mensaje()", onBlur: "salida()",
+                                              value: inventory.product.name.to_s + " Marca: "+ inventory.product.brand.name.to_s, class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 260px;"}
+        f.input :product_id, :as => :string,   input_html: {value: inventory.product.id, id: "product_id", class: "inventory_product_id"}
+     else
       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 260px;"}
       f.input :product_id, :as => :hidden,   input_html: {id: "product_id", class: "inventory_product_id"}
       # f.input :product_id , as: :hidden,  input_html: {id: "product_id", class: "inventory_product_id"}
+      
+      end
 
 
       # f.input :product
@@ -278,7 +289,7 @@ end
               (1..params[:amount].to_i).each do |i|
                   Inventory.create(
                     :product_id => params[:inventory][:product_id], :barcode => timestamp+""+i.to_s,
-                     :supplier => params[:inventory][:supplier],
+                     :supplier_id => params[:inventory][:supplier],
                      :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
                      :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
                      :date_out => params[:inventory][:date_out], :serial => params['serial'.to_s+i.to_s], 
@@ -298,35 +309,35 @@ end
 
       end
 
-        def update
-            # @credit = Credit.find(params[:id])
-            @inventory = Inventory.find(params[:id])
-            puts "******************************"+@inventory.to_s
-              Inventory.update(@inventory.id, :product_id => params[:product])
-              # Inventory.update(27, product_id: 2)
+        # def update
+        #     # @credit = Credit.find(params[:id])
+        #     @inventory = Inventory.find(params[:id])
+        #     puts "******************************"+@inventory.to_s
+        #       Inventory.update(@inventory.id, :product_id => params[:product])
+        #       # Inventory.update(27, product_id: 2)
 
-            puts "****************************************"+params[:product].to_s
+        #     puts "****************************************"+params[:product].to_s
 
-              # Inventory.update(@inventory.id, :product_id => params[:inventory][:product_id], :supplier_id => params[:supplier_id],
-              #                 :barcode => params[:barcode], :vale_buy => params[:vale_buy], :vale_sale => params[:vale_sale],
-              #                 :warranty => params[:warranty], :date_in => params[:date_in], :date_out => params[:date_out],
-              #                 :updated_at => params[:updated_at], :serial => params[:serial]
-              #                 )
+        #       # Inventory.update(@inventory.id, :product_id => params[:inventory][:product_id], :supplier_id => params[:supplier_id],
+        #       #                 :barcode => params[:barcode], :vale_buy => params[:vale_buy], :vale_sale => params[:vale_sale],
+        #       #                 :warranty => params[:warranty], :date_in => params[:date_in], :date_out => params[:date_out],
+        #       #                 :updated_at => params[:updated_at], :serial => params[:serial]
+        #       #                 )
               
-              # credit = Credit.find(2)
-              # credit.update_attribute(:state_id, 3)
-              # Credit.update(credit.id, :state_id => 3)
+        #       # credit = Credit.find(2)
+        #       # credit.update_attribute(:state_id, 3)
+        #       # Credit.update(credit.id, :state_id => 3)
 
-        # #   @inventory = Inventory.find(params[:id])
+        # # #   @inventory = Inventory.find(params[:id])
 
 
-          update! do |format|
-        # #     # sum_payments =  @credit.payments_credits.sum(:value)
-        # #     # Credit.update(@credit.id, :sum_payments => sum_payments)
-        # #     Inventory.update(@inventory.id, :sum_payments => sum_payments)
-            format.html { redirect_to :action => :index }
-          end    
-        end
+        #   update! do |format|
+        # # #     # sum_payments =  @credit.payments_credits.sum(:value)
+        # # #     # Credit.update(@credit.id, :sum_payments => sum_payments)
+        # # #     Inventory.update(@inventory.id, :sum_payments => sum_payments)
+        #     format.html { redirect_to :action => :index }
+        #   end    
+        # end
 
 
           before_filter :protected_attributes
