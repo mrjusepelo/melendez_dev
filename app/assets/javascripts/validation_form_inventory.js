@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	var f21 = new LiveValidation('product');
+	f21.add( Validate.Presence, { failureMessage: "Este campo no puede ser Vacio" } );
+
 	var f21 = new LiveValidation('amount');
 	f21.add( Validate.Presence, { failureMessage: "Este campo no puede ser Vacio" } );
 
@@ -26,8 +29,13 @@ $(document).ready(function(){
 
 
 	
- var field3 = new LiveValidation( 'warranty', {onlyOnSubmit: true } );
+ var field3 = new LiveValidation( 'warranty');
+ // var field3 = new LiveValidation( 'warranty', {onlyOnSubmit: true } );
   field3.add( Validate.Numericality);
+  field3.add( Validate.Presence, { failureMessage: "Este campo no puede ser Vacio" } );
+
+
+
 
 	// var field3 = new LiveValidation( 'inventory_warranty', {onlyOnSubmit: true } );
 	// field3.add( Validate.Presence );

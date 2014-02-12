@@ -587,7 +587,7 @@ var Validate = {
         var minimum = ((paramsObj.minimum) || (paramsObj.minimum == 0)) ? paramsObj.minimum : null;;
         var maximum = ((paramsObj.maximum) || (paramsObj.maximum == 0)) ? paramsObj.maximum : null;
     	var is = ((paramsObj.is) || (paramsObj.is == 0)) ? paramsObj.is : null;
-        var notANumberMessage = paramsObj.notANumberMessage || "Must be a number!";
+        var notANumberMessage = paramsObj.notANumberMessage || "Debe ser un número ";
         var notAnIntegerMessage = paramsObj.notAnIntegerMessage || "Must be an integer!";
     	var wrongNumberMessage = paramsObj.wrongNumberMessage || "Must be " + is + "!";
     	var tooLowMessage = paramsObj.tooLowMessage || "Must not be less than " + minimum + "!";
