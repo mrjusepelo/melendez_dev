@@ -57,6 +57,18 @@ actions :all, :except => [:destroy]
 
 
 
+    show do |product|
+      attributes_table do 
+        row :id
+        row :name
+        row :description
+        row :brand
+        row :created_at
+        row :updated_at
+      end
+      active_admin_comments
+
+    end
 
 
 
