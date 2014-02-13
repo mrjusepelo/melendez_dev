@@ -118,11 +118,31 @@ ActiveAdmin.register Inventory do
 
       # f.input :product, :as => "string", input_html: {id: "product", name: "product_aux"}
       if inventory.id
-        f.input :product, 
-                :as => "string", input_html: {
-                                              onFocus: "mensaje()", onBlur: "salida()",
-                                              value: inventory.product.name.to_s + " Marca: "+ inventory.product.brand.name.to_s, class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 260px;"}
-        f.input :product_id, :as => :string,   input_html: {value: inventory.product.id, id: "product_id", class: "inventory_product_id"}
+
+          if defined?( inventory.product.name) && defined?(inventory.product.brand.name) && defined?(inventory.product.description) 
+           marca = inventory.product.brand.name
+
+            f.input :product, 
+                    :as => "string", input_html: {
+                                                  onFocus: "mensaje()", onBlur: "salida()",
+                                                  value: inventory.product.name.to_s + " Marca: "+ inventory.product.brand.name.to_s + " Descripcion: "+ inventory.product.description.to_s, class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 400px;"}
+            f.input :product_id, :as => :string,   input_html: {value: inventory.product.id, id: "product_id", class: "inventory_product_id"}
+
+
+          else
+            vacio = "Sin asignar"
+
+            f.input :product, 
+                    :as => "string", input_html: {
+                                                  onFocus: "mensaje()", onBlur: "salida()",
+                                                  value: inventory.product.name.to_s + " Marca: "+ inventory.product.brand.name.to_s + " Descripcion: "+ vacio, class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 400px;"}
+            f.input :product_id, :as => :string,   input_html: {value: inventory.product.id, id: "product_id", class: "inventory_product_id"}
+
+
+          end
+
+
+
      else
       f.input :product, :as => "string", input_html: {onFocus: "mensaje()", onBlur: "salida()", class: "cssClass", id: "product", name: "product", :style => "background-color: #E6E6E6; width: 260px;"}
       f.input :product_id, :as => :hidden,   input_html: {id: "product_id", class: "inventory_product_id"}
