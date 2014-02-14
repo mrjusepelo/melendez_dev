@@ -72,6 +72,15 @@ ActiveAdmin.register Inventory do
             marca = "Sin asignar"
           end
         end
+
+        row "Descripcion" do
+          if defined?(inventory.product.description)
+           marca = inventory.product.description
+          else
+            marca = "Sin asignar"
+          end
+        end
+
         row :supplier_id
         row :barcode
         row :serial
