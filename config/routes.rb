@@ -40,6 +40,7 @@ Pencil::Application.routes.draw do
   get "products/search"
   get "publics/view_product"
   get "publics/category"
+  # get "admin/areports/proyear"
   
   resources :payments_credits do
     member do 

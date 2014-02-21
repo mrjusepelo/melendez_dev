@@ -163,7 +163,9 @@ ActiveAdmin.register Inventory do
       # f.input :product
       f.input :barcode, :label => "Cantidad", :input_html => {onBlur: "createSerials(this)", id: "amount", name: "amount", :style => "background-color: #E6E6E6; width: 60px;"} 
       f.input :serial, :input_html => {id: "inventory_serial"}
-      f.input :supplier, :input_html => {id: "inventory_supplier_id"}
+      f.input :supplier_id ,  :as => :select, :include_blank => false, :collection => Supplier.all, :input_html => {id: "inventory_supplier_id", :style => ""}
+            # f.input :state_inventory_id,  :as => :select, :include_blank => false, :collection => StateInventory.where('id < 4'), :input_html => {id: "state_inventory", :style => ""}
+
       f.input :vale_buy, as: :string, :input_html => {id: "inventory_vale_buy", :style => " width: 260px;"}
       f.input :vale_sale, as: :string, :input_html => {id: "inventory_vale_sale", :style => " width: 260px;"}
       f.input :iva, :as => "string", :input_html => {id: "inventory_iva", :style => " width: 60px;", :value => 0}
@@ -215,6 +217,21 @@ end
           marca = "Sin asignar"
         end
      end 
+  column "Descripcion" do |inventory|
+    if defined?(inventory.product.description)
+     marca = inventory.product.description
+    else
+      marca = "Sin asignar"
+    end
+  end
+  column "Proveedor" do |inventory|
+    if defined?(inventory.supplier.name)
+     name = inventory.supplier.name
+    else
+      name = "Sin asignar"
+    end
+  end
+
     if current_admin_user.role == "super" || current_admin_user.role.to_s == "administrador"
       column :vale_buy
                
@@ -317,8 +334,8 @@ end
 
               (1..params[:amount].to_i).each do |i|
                   Inventory.create(
-                    :product_id => params[:inventory][:product_id], :barcode => timestamp+""+i.to_s,
-                     :supplier_id => params[:inventory][:supplier],
+                    :product_id => params[:inventory][:product_id], :barcode => timestamp+""+i.to_s, 
+                    :supplier_id => params[:inventory][:supplier_id],
                      :vale_buy => params[:inventory][:vale_buy],:vale_sale => params[:inventory][:vale_sale],
                      :warranty => params[:inventory][:warranty],:date_in => params[:inventory][:date_in],
                      :date_out => params[:inventory][:date_out], :serial => params['serial'.to_s+i.to_s], 
