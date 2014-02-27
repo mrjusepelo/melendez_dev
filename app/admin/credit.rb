@@ -639,19 +639,25 @@ end
       end
 
 
-      f.has_many :clients do |client|
-            client.inputs 'Clientes' do 
-            client.input :name #, :as => :datepicker  , :input_html => {:name => "date"}
-            client.input :document  #, :input_html => {:name => "value", :style => "width: 60px;"}
-            client.input :phone  #, :input_html => {:name => "value", :style => "width: 60px;"}
-            client.input :city  #, :input_html => {:name => "value", :style => "width: 60px;"}
-            client.input :neihborhood  #, :input_html => {:name => "value", :style => "width: 60px;"}
-            client.input :address #, :input_html => {:name => "value", :style => "width: 60px;"}
+
+      f.has_many :clients, :input_html => {:id => "btn_clients"} do |client|
+            client.inputs 'Clientes' do
+
+            # client.input :name , :input_html => {:id => "cc_client"}#, :as => :datepicker 
+            # client.input :description, :label => 'Verificar C&eacute;dula', as: :string, input_html: {name: "cclient_json", id: "cclient_json", value: "" }
+            client.input :phone, :label => 'Verificar C&eacute;dula', as: :string, input_html: {name: "cclient_json", id: "cclient_json", :style => "width: 190px;", value: "" }
+
+            client.input :name, :input_html => {:id => "field_name"}
+            client.input :document, :input_html => {:id => "field_document"}
+            client.input :phone, :input_html => {:id => "field_phone"}
+            client.input :city  , :input_html => {:id => "field_city"}
+            client.input :neihborhood  , :input_html => {:id => "field_neihborhood"}
+            client.input :address , :input_html => {:id => "field_address"}
 
             # client.input :buyer, :as => :radio, :input_html => {onclick: "javascript:eleccionComprador(this)"}        
             # client.input :bondsman, :as => :radio, :input_html => {onclick: "javascript:eleccionFiador(this)"}
-            client.input :buyer, :input_html => {onclick: "javascript:eleccionComprador(this)"}        
-            client.input :bondsman,  :input_html => {onclick: "javascript:eleccionFiador(this)"}      
+            client.input :buyer, :input_html => {:id => "field_buyer", onclick: "javascript:eleccionComprador(this)"}        
+            client.input :bondsman,  :input_html => {:id => "field_bondsman", onclick: "javascript:eleccionFiador(this)"}      
             # client.input :buyer
             # client.input :bondsman
           end

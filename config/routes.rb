@@ -1,5 +1,6 @@
 Pencil::Application.routes.draw do
 
+
   get "inventories/index"
   get "inventories/show"
   get "orders/index"
@@ -83,6 +84,12 @@ resources :inventories
       get "notification"
     end
   end    
+
+  resources :clients do 
+    collection do
+      get "verify_client"
+    end
+  end
 
   resources :sales do 
     collection do 

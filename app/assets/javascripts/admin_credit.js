@@ -1,6 +1,139 @@
 $(document).ready(function(){
 
+search_client();
+// if ($("div.clients a").click()) {$("#cclient_json").after("<input type='button' value='verificar'>");};
+
+// var elementos = $('.clients a');
+// var size = elementos.size();
+// var arrayID = [];
+ 
+// $.each( elementos, function(i, val){
+//     arrayID.push( $(val).parent().attr('id') );
+// });
+// $(".clients a:last").click()
+
+
+
+
+$(".clients a:last").click(function() {
+  $("input#cclient_json:last").after("<input onclick='search_client(this)' type='button' value='verificar'>");
 });
+});
+
+function create_button (argument) {
+
+}
+
+
+
+
+function search_client(btn_varify){
+  
+  // $( "#cclient_json" ).blur(function() {
+  a = $( btn_varify ).parent().find("#cclient_json").val();
+
+ console.log(a);    
+
+ var cclient = $( btn_varify ).parent().find("#cclient_json").val();
+        $.get("/clients/verify_client.json?cclient="+cclient, function(response_client){
+
+          console.log(response_client);
+
+          // if (response_client.id != undefined) 
+          // if (response_client.id ) 
+         // if (typeof response_client.id !== "undefined" || response_client.id !== null)
+         if( ""+response_client !== "null" && ""+response_client !== "undefined")
+            {
+              // console.log($( btn_varify ).parent().parent());
+              // // $("div.clients a").click();
+              // // $("#field_name").val(response_client.name);
+              // // $("#field_document").val(response_client.document);
+              // // $("#field_city").val(response_client.city_id);
+              // // $("#field_address").val(response_client.address);
+              // // $("#field_neihborhood").val(response_client.neihborhood);
+              // // $("#field_phone").val(response_client.phone);
+              // // $("#field_city").val(response_client.city_id);
+              // // $('#field_buyer').prop('checked', response_client.buyer)
+              // // $("#field_bondsman").prop('checked', response_client.bondsman);
+              // // $("#field_buyer").val();
+
+              // // $( btn_varify ).parent().find("div.clients a").click();
+              $( btn_varify ).parent().parent().find("#field_name").val(response_client.name);
+              $( btn_varify ).parent().parent().find("#field_document").val(response_client.document);
+              $( btn_varify ).parent().parent().find("#field_city").val(response_client.city_id);
+              $( btn_varify ).parent().parent().find("#field_address").val(response_client.address);
+              $( btn_varify ).parent().parent().find("#field_neihborhood").val(response_client.neihborhood);
+              $( btn_varify ).parent().parent().find("#field_phone").val(response_client.phone);
+              $( btn_varify ).parent().parent().find("#field_city").val(response_client.city_id);
+              $( btn_varify ).parent().parent().find('#field_buyer').prop('checked', response_client.buyer)
+              $( btn_varify ).parent().parent().find("#field_bondsman").prop('checked', response_client.bondsman);
+
+
+            };
+
+      
+        //   $('#plan_id').empty()
+        // $.each(data_agreement.plans, function (i, item) {
+        //     $('#plan_id').append($('<option>', { 
+        //         value: item.plan.name,
+        //         text : item.plan.name 
+        //     }));
+        // });
+
+
+        
+        // });
+        // // $.get(location.protocol + '//' + location.host +"/agreements/autocomplete.json?agreement_id="+agreement_id, function(hash_response){
+        //   // console.log(hash_response);
+        // });
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
