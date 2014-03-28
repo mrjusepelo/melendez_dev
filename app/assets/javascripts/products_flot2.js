@@ -21,7 +21,7 @@ console.log(d2);
 // var d1 = [[0, 3], [1, 3], [2, 5], [3, 7], [4, 8], [5, 10], [6, 11], [7, 9], [8, 5], [9, 13]];
 // var d1 = [[0, 3], [1, 3], [2, 5], [3, 7], [4, 8], [5, 10]];
 // var dataset = [{ label: "2012 Average Temperature", data: d1, color: "#5482FF" }];
-var dataset2 = [{ label: "2014 Productos mas Vendidos", data: d2, color: "#5482FF" }];
+var dataset2 = [{ label: "Productos mas Vendidos mes Anterior", data: d2, color: "#5482FF" }];
 // var ticks = [[0, "London"], [1, "New York"], [2, "New Delhi"], [3, "Taipei"],[4, "Beijing"], [5, "Sydney"]];
  
 

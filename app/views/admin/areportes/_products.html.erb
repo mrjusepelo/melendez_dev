@@ -6,12 +6,17 @@
 <%= javascript_include_tag 'products_flot2.js' %>
 <%= javascript_include_tag 'products_flot3.js' %>
 <%= javascript_include_tag 'products_flot4.js' %>
+<%= javascript_include_tag 'clients_real_plot.js' %>
+<%= javascript_include_tag 'clients_month_plot.js' %>
+<%= javascript_include_tag 'clients_sixmonth_plot.js' %>
+<%= javascript_include_tag 'clients_year_plot.js' %>
 <%# javascript_include_tag 'https://raw.github.com/RuiPereira/flot/axislabels/jquery.flot.axislabels.js',
 							'http://www.benjaminbuffet.com/public/js/jquery.flot.orderBars.js'
 
  %>
  <%= javascript_include_tag '1.js' %>
   <%= stylesheet_link_tag 'file.css' %>
+
 
 
 	<%
@@ -114,7 +119,7 @@ inventories = Inventory.all
 
 	puts "****to_json***********"+arrContracts.to_s
 	puts "****to_normal***********"+arrContracts.to_json.to_s
-	puts "****************"+arrContracts[0]['name'].to_s
+	# puts "****************"+arrContracts[0]['name'].to_s
 
 	 %>
 <div style='display:none;'>	 

@@ -5,7 +5,9 @@
 	padding: 10px;
 }
 
-
+div.legend > div {
+	width: 750px !important;
+}
 
 .demo-container {
 	box-sizing: border-box;

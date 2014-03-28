@@ -1,31 +1,31 @@
 $(document).ready(function(){
 
-console.log($('#products_json3').val())
+console.log($('#clients_real_json').val())
 
-var object_json3 = JSON.parse($('#products_json3').val());
+var object_json = JSON.parse($('#clients_real_json').val());
     
     // object_json.each 
-var d3 = [];
-var ticks3 = [];
+var d1 = [];
+var ticks = [];
 
-$.each(object_json3, function(idx, obj) {
+$.each(object_json, function(idx, obj) {
     // alert(obj.tagName);
    var d = [idx, obj.amount] 
    var dname = [idx, obj.name] 
-   d3.push(d);
-   ticks3.push(dname);
+   d1.push(d);
+   ticks.push(dname);
 });
-console.log(d3);
+console.log(d1);
 // JSON.stringify(d1)
 
 // var d1 = [[0, 3], [1, 3], [2, 5], [3, 7], [4, 8], [5, 10], [6, 11], [7, 9], [8, 5], [9, 13]];
 // var d1 = [[0, 3], [1, 3], [2, 5], [3, 7], [4, 8], [5, 10]];
 // var dataset = [{ label: "2012 Average Temperature", data: d1, color: "#5482FF" }];
-var dataset3 = [{ label: "Productos mas Vendidos durante el año Actual", data: d3, color: "#5482FF" }];
+var dataset = [{ label: "Clientes en lo que va del mes", data: d1, color: "#5482FF" }];
 // var ticks = [[0, "London"], [1, "New York"], [2, "New Delhi"], [3, "Taipei"],[4, "Beijing"], [5, "Sydney"]];
  
 
-var options3 = {
+var options = {
     series: {
         bars: {
             show: true
@@ -41,7 +41,7 @@ var options3 = {
         axisLabelFontSizePixels: 12,
         axisLabelFontFamily: 'Verdana, Arial',
         axisLabelPadding: 10,
-        ticks: ticks3
+        ticks: ticks
     },
     yaxis: {
         axisLabel: "Average Temperature",
@@ -80,7 +80,7 @@ $(document).ready(function () {
 //             }
 //         }
 //     ]);
-$.plot($("#placeholder3"), dataset3, options3);
+$.plot($("#placeholder_real"), dataset, options);
 // $.plot($("#placeholder1"), dataset, options);
 
 });
