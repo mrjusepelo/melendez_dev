@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131229041741) do
+ActiveRecord::Schema.define(version: 20140331205327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,26 @@ ActiveRecord::Schema.define(version: 20131229041741) do
   add_index "credits", ["admin_user_id"], name: "index_credits_on_admin_user_id", using: :btree
   add_index "credits", ["payment_mode_id"], name: "index_credits_on_payment_mode_id", using: :btree
   add_index "credits", ["state_id"], name: "index_credits_on_state_id", using: :btree
+
+  create_table "financial_actives", force: true do |t|
+    t.string   "name"
+    t.float    "value"
+    t.date     "date"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "financial_passives", force: true do |t|
+    t.string   "name"
+    t.float    "value"
+    t.date     "date"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "images", force: true do |t|
     t.string   "route"
@@ -284,7 +304,7 @@ ActiveRecord::Schema.define(version: 20131229041741) do
 
   create_table "payments_credits", force: true do |t|
     t.date     "date"
-    t.integer  "value",                   default: 0
+    t.integer  "value"
     t.integer  "credit_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -312,7 +332,6 @@ ActiveRecord::Schema.define(version: 20131229041741) do
 
   create_table "products", force: true do |t|
     t.string   "name"
-    t.integer  "amount"
     t.text     "description"
     t.integer  "brand_id"
     t.datetime "created_at"

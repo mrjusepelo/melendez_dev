@@ -1,13 +1,5 @@
-  ActiveAdmin.register_page "Areportes" do
-# action_item do
-#     link_to "Ver Lista", "areportes/custom"
-#   end
-  # action_item do
-  #    link_to('Import projects', admin_areportes_products_path)
-  # end
-  #  action_item do
-  #     link_to "View Site", "/admin/areportes/products"
-  #   end
+  ActiveAdmin.register_page "Balance General" do
+    menu :parent => "Balance General"
 
           # within @head do
           #      script :src => javascript_path('admin_credit.js'), :type => "text/javascript"
@@ -45,7 +37,8 @@
 
 
   content do
-    render :partial => 'products'
+    render :partial => 'active'
+    render :partial => 'pasive'
   end 
 
 

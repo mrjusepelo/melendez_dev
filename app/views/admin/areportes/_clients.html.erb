@@ -1,0 +1,142 @@
+<br>
+<br>
+<h1>Reporte de Clientes</h1>
+
+<%
+# consulta por cantidad de clientes en lo que va del mes
+clients_real_hash =  Client.where(buyer: true, updated_at: (Date.today.at_beginning_of_month)..Date.today).group(:document).count
+# clients_hash =  Client.where(buyer: true, updated_at: (Date.today - 1.year)..Date.today).maximun(group(:document).limit(10)).count
+clients_real_ordered = Hash[clients_real_hash.sort_by{|k, v| v}.reverse]
+clients_real_hash = Hash[clients_real_ordered.first(10)]
+# toma los registros del hash de mayor a menor
+# clients_hash.sort_by{|k,v| v}.reverse
+ # clients_hash.sort {|a,b| b[1]<=>a[1]}
+# Hash[clients_hash.sort_by{|k, v| v}.reverse]
+
+
+# # cantidad de clientes en el ultimo mes
+clients_month_hash =  Client.where(buyer: true, updated_at: (Date.today.at_beginning_of_month - 1.month)..(Date.today.at_end_of_month - 1.month)).group(:document).count
+    clients_month_ordered = Hash[clients_month_hash.sort_by{|k, v| v}.reverse]
+    clients_month_hash = Hash[clients_month_ordered.first(10)]
+
+# cantidad de clientes de los ultimos 6 meses hasta el mes pasado
+clients_sixmonth_hash =  Client.where(buyer: true, updated_at: (Date.today.at_beginning_of_month - 6.month)..(Date.today.at_beginning_of_month)).group(:document).count
+    clients_sixmonth_ordered = Hash[clients_sixmonth_hash.sort_by{|k, v| v}.reverse]
+    clients_sixmonth_hash = Hash[clients_sixmonth_ordered.first(10)]
+
+# Cantidad de clientes del ultimo ano
+clients_year_hash =  Client.where(buyer: true, updated_at: (Date.today.at_beginning_of_year - 1.year)..(Date.today.at_end_of_year - 1.year)).group(:document).count
+    clients_year_ordered = Hash[clients_year_hash.sort_by{|k, v| v}.reverse]
+    clients_year_hash = Hash[clients_year_ordered.first(10)]
+
+
+
+
+# Client.find(:all, :limit => 3, :order => 'document')
+# Notice.find(:all, :limit => 3, :order => 'particularField')
+
+
+    arrRealClients = Array.new
+    clients_real_hash.each { |key, value|  
+        client_real_hash = Hash.new
+        @client = Client.find_by_document(key.to_s)
+        client_real_hash["id"] = @client.id
+        client_real_hash["name"] = @client.name
+        client_real_hash["amount"] = value
+
+        arrRealClients.push(client_real_hash)
+    }
+
+
+    arrMonthClients = Array.new
+    clients_month_hash.each { |key, value|  
+        client_month_hash = Hash.new
+        @client = Client.find_by_document(key.to_s)
+        client_month_hash["id"] = @client.id
+        client_month_hash["name"] = @client.name
+        client_month_hash["amount"] = value
+
+        arrMonthClients.push(client_month_hash)
+    }
+
+    arrSixmonthClients = Array.new
+	clients_sixmonth_hash.each { |key, value|  
+    	client_sixmonth_hash = Hash.new
+		@client = Client.find_by_document(key.to_s)
+        client_sixmonth_hash["id"] = @client.id
+        client_sixmonth_hash["name"] = @client.name
+        client_sixmonth_hash["amount"] = value
+
+        arrSixmonthClients.push(client_sixmonth_hash)
+	}
+
+
+
+    arrYearClients = Array.new
+    clients_year_hash.each { |key, value|  
+        client_year_hash = Hash.new
+        @client = Client.find_by_document(key.to_s)
+        client_year_hash["id"] = @client.id
+        client_year_hash["name"] = @client.name
+        client_year_hash["amount"] = value
+
+        arrYearClients.push(client_year_hash)
+    }  
+
+
+
+    
+
+
+%>
+
+<div style='display:none;'>  
+
+    <input type="text" id="clients_real_json" value="<%= arrRealClients.to_json %>" style="width:100%;"/>
+    <input type="text" id="clients_month_json" value="<%= arrMonthClients.to_json %>" style="width:100%;"/>
+    <input type="text" id="clients_sixmonth_json" value="<%= arrSixmonthClients.to_json %>" style="width:100%;"/>
+    <input type="text" id="clients_year_json" value="<%= arrYearClients.to_json %>" style="width:100%;"/>
+
+</div>
+
+<script type="text/javascript">
+// alert();
+
+
+
+
+
+
+
+
+$(document).ready(function () {
+//     $.plot($("#placeholder"), [
+//         {
+//             data: d1,
+//             bars: {
+//                 show: true
+//             }
+//         }
+//     ]);
+
+});
+
+
+</script>
+
+
+        <div class="demo-container" style="">Grafica No.xx Mejores clientes en lo que va del mes 
+            <div id="placeholder_real" class="demo-placeholder"></div>
+        </div>  
+
+        <div class="demo-container" style="">Grafica No.xx Mejores clientes del mes Anterior
+            <div id="placeholder_month" class="demo-placeholder"></div>
+        </div>  
+
+		<div class="demo-container" style="">Grafica No.xx Mejores clientes de los ultimos 6 meses
+			<div id="placeholder5" class="demo-placeholder"></div>
+		</div>		
+
+        <div class="demo-container" style="">Grafica No.xx Mejores clientes del ultimo año
+            <div id="placeholder_year" class="demo-placeholder"></div>
+        </div>              

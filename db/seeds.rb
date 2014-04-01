@@ -37,6 +37,7 @@
 # # Modo Prueba
 # Brand.create([{name: "LG"}, {name: 'Sony'}, {name: 'Toshiba'}])
 # Category.create([{name: "Tecnología"}, {name: 'Hogar'}, {name: 'Deporte'}])
+# Category.create([{name: "Tecnología"},{name: "Electromenores"},{name: "Gimnasio"},{name: "Madera"},{name: "Sala"},{name: "Electromayores"},{name: "Plastico"}, {name: 'Hogar'}])
 # Product.create([{name: "Computador portatil"}, {name: 'Mueble sofacama'}, {name: 'Televisor LED 45"'}])
 # Supplier.create([{name: "Nelson Eduardo Bustamante", phone: '314 724 2145 - (091) 617 82 23 - 582 33 71', email: 'nelson@gmail.com', city_id: 1 }])
 

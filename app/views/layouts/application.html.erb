@@ -94,11 +94,13 @@
                 					<li>
                 						<%= link_to "Productos", publics_product_path() %>
                 						<ul>
-                    						<% @categories.each do |category| %>
-                    							<li>
-	                    							<%= link_to category.name, publics_category_path(id_category: category.id) %>
+                  							<li>
+                                  <%= link_to "Electromenores", publics_category_path(id_category: 2) %>
+                    							<%= link_to "Electromayores", publics_category_path(id_category: 6) %>
+                                  <%= link_to "Gimnasio", publics_category_path(id_category: 3) %>
+                                  <%= link_to "Hogar", publics_category_path(id_category: 8) %>
+                                  <%= link_to "Tecnología", publics_category_path(id_category: 1) %>
                     							</li>
-                    						<% end %>
                   						</ul>
                 					</li>
                 					<li>

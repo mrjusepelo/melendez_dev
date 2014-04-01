@@ -219,6 +219,12 @@ es:
        supplier:
           one: Proveedor
           other: Proveedores
+       financial_passive:
+          one: Pasivo 
+          other: Pasivos 
+       financial_active:
+          one: Activo 
+          other: Activos           
        product_category:
           one: Producto de Categoría
           other: Productos de Categorías 

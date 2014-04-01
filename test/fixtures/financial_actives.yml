@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  value: 1.5
+  date: 2014-03-31
+  resource_id: 1
+  resource_type: MyString
+
+two:
+  name: MyString
+  value: 1.5
+  date: 2014-03-31
+  resource_id: 1
+  resource_type: MyString
