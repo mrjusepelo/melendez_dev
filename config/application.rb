@@ -35,6 +35,8 @@ module Pencil
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.exceptions_app = self.routes
+    
   end
 
 # agregado
@@ -44,7 +46,6 @@ module Pencil
 
 
 end
-
 # require 'RMagick'
 # require 'barby/outputter/rmagick_outputter'
 # require 'barby/barcode/code_128'

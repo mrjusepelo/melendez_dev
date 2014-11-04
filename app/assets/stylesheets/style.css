@@ -1280,3 +1280,7 @@ footer {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+#btn_search{
+  margin-bottom: 8px;
+}
