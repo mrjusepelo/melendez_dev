@@ -4,12 +4,16 @@ class RouteUploader < CarrierWave::Uploader::GoogleDrive
 
 # class ImageUploader < CarrierWave::Uploader::GoogleDrive
 
-  # google_login     'creditos.melendez.ptyo@gmail.com' 
-  #   google_password 'creditos.melendez.ptyo123456'  
-  google_login     'sebasnba14@gmail.com' 
-    google_password 'sebastian23'  
+  google_login     'creditos.melendez.ptyo@gmail.com' 
+    google_password 'creditos.melendez.ptyo123456'  
+  # google_login     'sebasnba14@gmail.com' 
+    # google_password 'sebastian23'  
 
-
+def delete
+  if @resource_id.present?
+    file.delete
+  end
+end
 
 
 

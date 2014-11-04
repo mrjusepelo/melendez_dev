@@ -20,35 +20,36 @@
 
 
 
-    <div class="spinner"></div> 
-<div class="bg-content">
+  <!-- <div class="spinner"></div>  -->
+    <div class="loader"></div>
+    <div class="bg-content">
       <div class="container">
-    <div class="row">
+        <div class="row">
           <div class="span12"> 
-        <!--============================== slider =================================-->
-        <div class="flexslider">
-          <ul class="slides">
+            <!--============================== slider =================================-->
+            <div class="flexslider">
+              <ul class="slides">
 
 
-          <% @imagenes.each do |catalog| %>
-                <li>                
-                  <%= image_tag(catalog.route) %>
-                  <%#= link_to image_tag(catalog.route, :class => "cover"), catalog %>
-                </li>
-          <% end %>
+                <% @imagenes.each do |catalog| %>
+                      <li>                
+                        <%= image_tag(catalog.route) %>
+                        <%#= link_to image_tag(catalog.route, :class => "cover"), catalog %>
+                      </li>
+                <% end %>
 
-          </ul>
+              </ul>
             </div>
-        <span id="responsiveFlag"></span>
-        <div class="block-slogan">
-              <h2>Arma tu Hogar!</h2>
-              <div>
-            <p><a href="http://blog.templatemonster.com/free-website-templates/ " target="_blank" class="link-1">Creditos Aquí</a> Conoce nuestro sistema de créditos. Amobla tu hogar con todo lo que necesitas. Ayudaremos a que encuentres todo lo necesario   </p>
+            <span id="responsiveFlag"></span>
+            <div class="block-slogan">
+                <h2>Arma tu Hogar!</h2>
+                <div>
+                   <p><a href="http://blog.templatemonster.com/free-website-templates/ " target="_blank" class="link-1">Creditos Aquí</a> Conoce nuestro sistema de créditos. Amobla tu hogar con todo lo que necesitas. Ayudaremos a que encuentres todo lo necesario   </p>
+                </div>
+            </div>
           </div>
-            </div>
-      </div>
         </div>
-  </div>
+      </div>
       
       <!--============================== content =================================-->
       
@@ -72,7 +73,7 @@
                   <div class="thumbnail thumbnail-1">
                 <h3>Electrodomésticos</h3>
                 <!-- <img  src="img/page1-img2.jpg" alt=""> -->
-              <%= image_tag("http://ahorrarluzygas.com/wp-content/uploads/2013/04/Electrodomesticos1.jpg", :class => 'imgCategoriaIndex' ) %> 
+              <%= image_tag("http://s3files.core77.com/blog/images/2013/05/Braun-Kitchen-00.jpg", :class => 'imgCategoriaIndex' ) %> 
 
                 <section> <strong>Deleniti atque corrupti quos</strong>
                       <p>Dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
@@ -94,7 +95,7 @@
                   <div class="thumbnail thumbnail-1">
                 <h3 class="title-1 extra">Combos</h3>
                 
-              <%= image_tag("http://www.todoenunclick.com/Notas/Imagenes/Combo-cocina-2.jpg", :class => 'imgCategoriaIndex' ) %> 
+              <%= image_tag("http://www.ribafarre.com/castellano/imagesp/varios/BODEGON_PAE.jpg", :class => 'imgCategoriaIndex' ) %> 
 
                 <section> <strong>Similique sunt in culpa qui officia</strong>
                       <p>Deserunt mollitia animi, id est laborum et dolorum fuga.</p>
