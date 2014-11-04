@@ -1,0 +1,19 @@
+psql webde_development < /home/juan/Descargas/b001.dump
+psql webde_development < /home/juan/Descargas/b001.dump -U chevy 
+
+heroku addons:add pgbackups
+heroku pgbackups:capture
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U chevy -d webde_development /home/juan/Descargas/b001.dump
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U chevy -d olivos_development /home/juan/Descargas/b003.dump
+
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U chevy -d codigoes_development /home/juan/Descargas/b004.dump
+
+
+heroku pgbackups:destroy b001
+
+
+
+$ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U myuser -d mydb latest.dump
+
+datos hoken
+pg_restore --verbose --clean --no-acl --no-owner -h ec2-54-225-182-133.compute-1.amazonaws.com -U cydbsshvhzcays -d d25ea08960ohqj /home/juan/bk-hoken.dump

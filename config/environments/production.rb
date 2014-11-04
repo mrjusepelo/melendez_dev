@@ -86,9 +86,11 @@ Pencil::Application.configure do
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
-    domain:               'creditosmelendezq.com',
-    user_name:            'creditosmelendezq@gmail.com',
-    password:             'abcd123456*',
+    # domain:               'creditosmelendezq.com',
+    # user_name:            'creditosmelendezq@gmail.com',
+    # password:             'abcd123456*',
+    user_name:            'sebasnba14@gmail.com',
+    password:             'sebastian23',
     authentication:       :plain,
     enable_starttls_auto: true  
   }

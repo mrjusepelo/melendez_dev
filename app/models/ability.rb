@@ -19,6 +19,7 @@ class Ability
 
         when "administrador"
           can :read, ActiveAdmin::Page, :name => "Dashboard" 
+          can :read, ActiveAdmin::Page, :name => "Areportes" 
           can :manage, ActiveAdmin::Comment
           can :manage, AdminUser, :id => admin_user.id
           can :manage, City  

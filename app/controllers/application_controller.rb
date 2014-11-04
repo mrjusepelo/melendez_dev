@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
   def set_locale
   	  		I18n.locale = :es
   end
+
+	def current_ability
+	   @current_ability ||= Ability.new(current_admin_user)
+	end
+
 end

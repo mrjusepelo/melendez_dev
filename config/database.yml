@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: pencil_development
+  database: melendez_development
   pool: 5
   username: chevy
   password: 123456
@@ -9,7 +9,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: pencil_test
+  database: melendez_test
   pool: 5
   username: chevy
   password: 123456
@@ -17,7 +17,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: pencil_production
+  database: melendez_production
   pool: 5
   username: chevy
   password: 123456
