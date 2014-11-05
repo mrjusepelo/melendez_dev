@@ -1,16 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Categorias</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Your description">
+        <meta name="keywords" content="Your keywords">
+        <meta name="author" content="Your name">
 
-<h1>Error 500 interno</h1>
-<div class="error">
-    <%= image_tag('layouts/error/alert.png', :width => "150") %>
-    <div class="message">
-        <strong>Error!</strong>
-        We're sorry, but our server is experiencing problems :(
-    </div>
-    <div class="contact_info">
-        <%= link_to image_tag('layouts/error/contact/twitter.png'), "", :title => "Follow Updates On Twitter", :target => "_blank" %>
-        <%= link_to image_tag('layouts/error/contact/facebook.png'), "http://www.facebook.com/", :title => "See Progress On Facebook", :target => "_blank" %>
-        <%= link_to image_tag('layouts/error/contact/fusion.png'), "", :title => "Catch Our Fusion Feed Updates", :target => "_blank"  %>
-        <%= link_to image_tag('layouts/error/contact/instagram.png'), "", :title => "See Updates On Instagram", :target => "_blank"  %>
-        <%= link_to image_tag('layouts/error/contact/youtube.png'), "", :title => "See Updates On YouTube", :target => "_blank"  %>
-    </div>
+        <%= content_for :extra_css do %>
+            <%= stylesheet_link_tag 'bootstrap.css' %>
+            <%= stylesheet_link_tag 'responsive.css' %>  
+            <%= stylesheet_link_tag 'style.css' %>
+            <%= stylesheet_link_tag 'touchTouch.css' %>
+            <%= stylesheet_link_tag 'file.css' %>
+            <%= stylesheet_link_tag 'http://fonts.googleapis.com/css?family=Open+Sans:400,300' %>
+            <%= stylesheet_link_tag 'http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css' %>
+            
+            <!--
+                <link rel="stylesheet" href="css/bootstrap.css" type="text/css" media="screen">
+                <link rel="stylesheet" href="css/responsive.css" type="text/css" media="screen">
+                <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+                <link rel="stylesheet" href="css/touchTouch.css" type="text/css" media="screen">
+                <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'> -->
+        <% end %>
+
+        <%= content_for :extra_js do %>
+            <%= javascript_include_tag 'jquery-1.9.1.js' %>
+            <%= javascript_include_tag 'jquery-ui-1.10.3.custom.js' %>
+            <%= javascript_include_tag '4.js' %>
+        <% end %>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+        <%= image_tag("/assets/favicon.ico" ) %>
+        <!--[if lt IE 8]>
+            <div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>  
+            <![endif]-->
+            <!--[if (gt IE 9)|!(IE)]><!-->
+            <!--<![endif]-->
+            <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <link rel="stylesheet" href="css/docs.css" type="text/css" media="screen">
+            <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+        <![endif]-->
+    </head>
+    <div class="bg-content">       
+<!--============================== content =================================-->      
+        <div id="content">
+            <div class="ic">
+                <!-- More Website Templates @ TemplateMonster.com. November19, 2012! -->
+            </div>
+            <div class="container">
+                <div class="row">
+
+<br/><br/>
+
+
+<style type="text/css">
+.construction-message{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.construction{
+    background-image: url(/assets/underconstruction2.jpg);
+    background-size: 460px 174px;
+    background-repeat: no-repeat;
+    height: 140px !important;
+    width: 460px !important;    
+    margin-left: auto;
+    margin-right: auto;
+}
+.content-contruction{
+    width: 100%:;
+    /*background:white;*/
+}
+</style>
+<div class="content-contruction"> 
+    <p class="construction">  </p>
+    <p class="construction-message"> internal_server_error  </p>
 </div>
